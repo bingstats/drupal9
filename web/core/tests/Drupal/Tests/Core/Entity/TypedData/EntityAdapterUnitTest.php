@@ -120,7 +120,7 @@ class EntityAdapterUnitTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     $this->id = 1;
     $values = [
       'id' => $this->id,
@@ -220,7 +220,7 @@ class EntityAdapterUnitTest extends UnitTestCase {
    * @covers ::getConstraints
    */
   public function testGetConstraints() {
-    $this->assertInternalType('array', $this->entityAdapter->getConstraints());
+    $this->assertIsArray($this->entityAdapter->getConstraints());
   }
 
   /**

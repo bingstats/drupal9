@@ -24,7 +24,7 @@ class MenuLinkTest extends ViewTestBase {
    *
    * @var array
    */
-  public static $modules = ['views', 'views_ui', 'user', 'node', 'menu_ui', 'block'];
+  protected static $modules = ['views', 'views_ui', 'user', 'node', 'menu_ui', 'block'];
 
   /**
    * {@inheritdoc}
@@ -41,7 +41,7 @@ class MenuLinkTest extends ViewTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp($import_test_views = TRUE) {
+  protected function setUp($import_test_views = TRUE): void {
     parent::setUp($import_test_views);
 
     $this->enableViewsTestModule();

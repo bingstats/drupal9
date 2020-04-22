@@ -23,7 +23,7 @@ class FileCopyTest extends FileTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['migrate', 'system'];
+  protected static $modules = ['migrate', 'system'];
 
   /**
    * The file system service.
@@ -35,7 +35,7 @@ class FileCopyTest extends FileTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
     $this->fileSystem = $this->container->get('file_system');
     $this->container->get('stream_wrapper_manager')->registerWrapper('temporary', 'Drupal\Core\StreamWrapper\TemporaryStream', StreamWrapperInterface::LOCAL_NORMAL);
@@ -90,7 +90,7 @@ class FileCopyTest extends FileTestBase {
     clearstatcache(TRUE, $destination_path);
 
     $timestamp = (new \SplFileInfo($file_reuse))->getMTime();
-    $this->assertInternalType('int', $timestamp);
+    $this->assertIsInt($timestamp);
 
     // We need to make sure the modified timestamp on the file is sooner than
     // the attempted migration.

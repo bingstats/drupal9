@@ -50,19 +50,20 @@ class Connection extends DatabaseConnection {
   ];
 
   /**
+   * {@inheritdoc}
+   */
+  protected $transactionalDDLSupport = TRUE;
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $identifierQuotes = ['"', '"'];
+
+  /**
    * Constructs a connection object.
    */
   public function __construct(\PDO $connection, array $connection_options) {
     parent::__construct($connection, $connection_options);
-
-    // This driver defaults to transaction support, except if explicitly passed FALSE.
-    $this->transactionSupport = !isset($connection_options['transactions']) || ($connection_options['transactions'] !== FALSE);
-
-    // Transactional DDL is always available in PostgreSQL,
-    // but we'll only enable it if standard transactions are.
-    $this->transactionalDDLSupport = $this->transactionSupport;
-
-    $this->connectionOptions = $connection_options;
 
     // Force PostgreSQL to use the UTF-8 character set by default.
     $this->connection->exec("SET NAMES 'UTF8'");
@@ -199,13 +200,6 @@ class Connection extends DatabaseConnection {
     $tablename = $this->generateTemporaryTableName();
     $this->query('CREATE TEMPORARY TABLE {' . $tablename . '} AS ' . $query, $args, $options);
     return $tablename;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function identifierQuote() {
-    return '"';
   }
 
   public function driver() {

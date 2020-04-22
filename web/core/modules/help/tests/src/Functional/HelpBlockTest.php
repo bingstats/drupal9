@@ -14,7 +14,7 @@ class HelpBlockTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['help', 'help_page_test', 'block', 'more_help_page_test'];
+  protected static $modules = ['help', 'help_page_test', 'block', 'more_help_page_test'];
 
   /**
    * {@inheritdoc}
@@ -28,7 +28,7 @@ class HelpBlockTest extends BrowserTestBase {
    */
   protected $helpBlock;
 
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
     $this->helpBlock = $this->placeBlock('help_block');
   }

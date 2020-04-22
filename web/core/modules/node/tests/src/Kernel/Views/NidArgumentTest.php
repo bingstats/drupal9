@@ -18,7 +18,7 @@ class NidArgumentTest extends ViewsKernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['node', 'field', 'text', 'node_test_config', 'user', 'node_test_views'];
+  protected static $modules = ['node', 'field', 'text', 'node_test_config', 'user', 'node_test_views'];
 
   /**
    * Views used by this test.
@@ -30,7 +30,7 @@ class NidArgumentTest extends ViewsKernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp($import_test_views = TRUE) {
+  protected function setUp($import_test_views = TRUE): void {
     parent::setUp($import_test_views);
 
     $this->installEntitySchema('node');

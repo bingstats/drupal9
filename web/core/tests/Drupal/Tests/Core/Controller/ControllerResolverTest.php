@@ -54,7 +54,7 @@ class ControllerResolverTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $this->container = new ContainerBuilder();
@@ -119,7 +119,7 @@ class ControllerResolverTest extends UnitTestCase {
       $this->assertCallableController($result, $class, $output);
     }
     else {
-      $this->assertSame(FALSE, $result);
+      $this->assertFalse($result);
     }
   }
 

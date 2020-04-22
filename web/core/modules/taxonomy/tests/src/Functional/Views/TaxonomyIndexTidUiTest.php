@@ -36,7 +36,7 @@ class TaxonomyIndexTidUiTest extends UITestBase {
    *
    * @var array
    */
-  public static $modules = ['node', 'taxonomy', 'views', 'views_ui', 'taxonomy_test_views'];
+  protected static $modules = ['node', 'taxonomy', 'views', 'views_ui', 'taxonomy_test_views'];
 
   /**
    * A nested array of \Drupal\taxonomy\TermInterface objects.
@@ -48,7 +48,7 @@ class TaxonomyIndexTidUiTest extends UITestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp($import_test_views = TRUE) {
+  protected function setUp($import_test_views = TRUE): void {
     parent::setUp($import_test_views);
 
     $this->adminUser = $this->drupalCreateUser(['administer taxonomy', 'administer views']);

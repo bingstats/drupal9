@@ -58,14 +58,14 @@ class LanguageUILanguageNegotiationTest extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['locale', 'language_test', 'block', 'user', 'content_translation'];
+  protected static $modules = ['locale', 'language_test', 'block', 'user', 'content_translation'];
 
   /**
    * {@inheritdoc}
    */
   protected $defaultTheme = 'classy';
 
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $this->adminUser = $this->drupalCreateUser(['administer languages', 'translate interface', 'access administration pages', 'administer blocks']);

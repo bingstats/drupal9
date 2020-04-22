@@ -26,14 +26,14 @@ class FieldEntityOperationsTest extends ViewTestBase {
    *
    * @var array
    */
-  public static $modules = ['node', 'language', 'views_ui'];
+  protected static $modules = ['node', 'language', 'views_ui'];
 
   /**
    * {@inheritdoc}
    */
   protected $defaultTheme = 'stark';
 
-  protected function setUp($import_test_views = TRUE) {
+  protected function setUp($import_test_views = TRUE): void {
     parent::setUp($import_test_views);
 
     // Create Article content type.

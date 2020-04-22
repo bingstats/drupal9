@@ -38,12 +38,12 @@ class AttachedAssetsTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['language', 'common_test', 'system'];
+  protected static $modules = ['language', 'common_test', 'system'];
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
     $this->container->get('router.builder')->rebuild();
 
@@ -211,8 +211,8 @@ class AttachedAssetsTest extends KernelTestBase {
     $this->assertTrue(isset($parsed_settings['path']['baseUrl']), 'drupalSettings.path.baseUrl is present.');
     $this->assertIdentical($parsed_settings['path']['pathPrefix'], 'yarhar', 'drupalSettings.path.pathPrefix is present and has the correct (overridden) value.');
     $this->assertIdentical($parsed_settings['path']['currentPath'], '', 'drupalSettings.path.currentPath is present and has the correct value.');
-    $this->assertIdentical($parsed_settings['path']['currentPathIsAdmin'], FALSE, 'drupalSettings.path.currentPathIsAdmin is present and has the correct value.');
-    $this->assertIdentical($parsed_settings['path']['isFront'], FALSE, 'drupalSettings.path.isFront is present and has the correct value.');
+    $this->assertFalse($parsed_settings['path']['currentPathIsAdmin'], 'drupalSettings.path.currentPathIsAdmin is present and has the correct value.');
+    $this->assertFalse($parsed_settings['path']['isFront'], 'drupalSettings.path.isFront is present and has the correct value.');
     $this->assertIdentical($parsed_settings['path']['currentLanguage'], 'en', 'drupalSettings.path.currentLanguage is present and has the correct value.');
 
     // Tests whether altering JavaScript settings via hook_js_settings_alter()
@@ -418,7 +418,7 @@ class AttachedAssetsTest extends KernelTestBase {
     $js = $this->assetResolver->getJsAssets($assets, FALSE)[1];
     $js_render_array = \Drupal::service('asset.js.collection_renderer')->render($js);
     $rendered_js = $this->renderer->renderPlain($js_render_array);
-    $this->assertContains('core/assets/vendor/jquery-form/jquery.form.min.js', (string) $rendered_js, 'Altered library dependencies are added to the page.');
+    $this->assertStringContainsString('core/assets/vendor/jquery-form/jquery.form.min.js', (string) $rendered_js, 'Altered library dependencies are added to the page.');
   }
 
   /**

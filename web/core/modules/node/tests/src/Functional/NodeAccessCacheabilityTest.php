@@ -21,7 +21,7 @@ class NodeAccessCacheabilityTest extends NodeTestBase {
    *
    * @var array
    */
-  public static $modules = ['node_access_test', 'node_access_test_auto_bubbling'];
+  protected static $modules = ['node_access_test', 'node_access_test_auto_bubbling'];
 
   /**
    * {@inheritdoc}
@@ -31,7 +31,7 @@ class NodeAccessCacheabilityTest extends NodeTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     node_access_rebuild();

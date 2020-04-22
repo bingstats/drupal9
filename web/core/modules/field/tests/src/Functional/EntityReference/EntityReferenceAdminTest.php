@@ -28,7 +28,7 @@ class EntityReferenceAdminTest extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['node', 'field_ui', 'path', 'taxonomy', 'block', 'views_ui'];
+  protected static $modules = ['node', 'field_ui', 'path', 'taxonomy', 'block', 'views_ui'];
 
   /**
    * {@inheritdoc}
@@ -45,7 +45,7 @@ class EntityReferenceAdminTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
     $this->drupalPlaceBlock('system_breadcrumb_block');
 
@@ -340,7 +340,7 @@ class EntityReferenceAdminTest extends BrowserTestBase {
     // should be reset (no auto-creation).
     $vocabularies[1]->delete();
     $field_config = FieldConfig::load($field_id);
-    $this->assertSame(FALSE, $field_config->getSetting('handler_settings')['auto_create']);
+    $this->assertFalse($field_config->getSetting('handler_settings')['auto_create']);
     $this->assertFalse(isset($field_config->getSetting('handler_settings')['auto_create_bundle']));
   }
 

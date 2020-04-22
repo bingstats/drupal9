@@ -25,12 +25,12 @@ class ConfigSchemaTest extends KernelTestBase {
    *
    * @var array
    */
-  public static $modules = ['system', 'language', 'field', 'image', 'config_test', 'config_schema_test'];
+  protected static $modules = ['system', 'language', 'field', 'image', 'config_test', 'config_schema_test'];
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
     $this->installConfig(['system', 'image', 'config_schema_test']);
   }
@@ -40,7 +40,7 @@ class ConfigSchemaTest extends KernelTestBase {
    */
   public function testSchemaMapping() {
     // Nonexistent configuration key will have Undefined as metadata.
-    $this->assertSame(FALSE, \Drupal::service('config.typed')->hasConfigSchema('config_schema_test.no_such_key'));
+    $this->assertFalse(\Drupal::service('config.typed')->hasConfigSchema('config_schema_test.no_such_key'));
     $definition = \Drupal::service('config.typed')->getDefinition('config_schema_test.no_such_key');
     $expected = [];
     $expected['label'] = 'Undefined';
@@ -51,12 +51,12 @@ class ConfigSchemaTest extends KernelTestBase {
     $this->assertEqual($definition, $expected, 'Retrieved the right metadata for nonexistent configuration.');
 
     // Configuration file without schema will return Undefined as well.
-    $this->assertSame(FALSE, \Drupal::service('config.typed')->hasConfigSchema('config_schema_test.noschema'));
+    $this->assertFalse(\Drupal::service('config.typed')->hasConfigSchema('config_schema_test.noschema'));
     $definition = \Drupal::service('config.typed')->getDefinition('config_schema_test.noschema');
     $this->assertEqual($definition, $expected, 'Retrieved the right metadata for configuration with no schema.');
 
     // Configuration file with only some schema.
-    $this->assertSame(TRUE, \Drupal::service('config.typed')->hasConfigSchema('config_schema_test.someschema'));
+    $this->assertTrue(\Drupal::service('config.typed')->hasConfigSchema('config_schema_test.someschema'));
     $definition = \Drupal::service('config.typed')->getDefinition('config_schema_test.someschema');
     $expected = [];
     $expected['label'] = 'Schema test data';
@@ -317,20 +317,22 @@ class ConfigSchemaTest extends KernelTestBase {
 
     // Check nested array of properties.
     $list = $meta->get('page')->getElements();
-    $this->assertEqual(count($list), 3, 'Got a list with the right number of properties for site page data');
+    $this->assertCount(3, $list, 'Got a list with the right number of properties for site page data');
     $this->assertTrue(isset($list['front']) && isset($list['403']) && isset($list['404']), 'Got a list with the right properties for site page data.');
     $this->assertEqual($list['front']->getValue(), '/user/login', 'Got the right value for page.front data from the list.');
 
     // And test some TypedConfigInterface methods.
     $properties = $list;
-    $this->assertTrue(count($properties) == 3 && $properties['front'] == $list['front'], 'Got the right properties for site page.');
+    $this->assertCount(3, $properties, 'Got the right number of properties for site page.');
+    $this->assertSame($list['front'], $properties['front']);
     $values = $meta->get('page')->toArray();
-    $this->assertTrue(count($values) == 3 && $values['front'] == '/user/login', 'Got the right property values for site page.');
+    $this->assertCount(3, $values, 'Got the right number of property values for site page.');
+    $this->assertSame($values['front'], '/user/login');
 
     // Now let's try something more complex, with nested objects.
     $wrapper = \Drupal::service('config.typed')->get('image.style.large');
     $effects = $wrapper->get('effects');
-    $this->assertTrue(count($effects->toArray()) == 1, 'Got an array with effects for image.style.large data');
+    $this->assertCount(1, $effects->toArray(), 'Got an array with effects for image.style.large data');
     $uuid = key($effects->getValue());
     $effect = $effects->get($uuid)->getElements();
     $this->assertTrue(!$effect['data']->isEmpty() && $effect['id']->getValue() == 'image_scale', 'Got data for the image scale effect from metadata.');

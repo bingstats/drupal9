@@ -20,7 +20,7 @@ class BookContentModerationTest extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['book', 'block', 'book_test', 'content_moderation'];
+  protected static $modules = ['book', 'block', 'book_test', 'content_moderation'];
 
   /**
    * {@inheritdoc}
@@ -30,7 +30,7 @@ class BookContentModerationTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $this->drupalPlaceBlock('system_breadcrumb_block');

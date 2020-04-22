@@ -36,7 +36,7 @@ class StyleSerializerTest extends ViewTestBase {
    *
    * @var array
    */
-  public static $modules = ['views_ui', 'entity_test', 'hal', 'rest_test_views', 'node', 'text', 'field', 'language', 'basic_auth'];
+  protected static $modules = ['views_ui', 'entity_test', 'hal', 'rest_test_views', 'node', 'text', 'field', 'language', 'basic_auth'];
 
   /**
    * {@inheritdoc}
@@ -62,7 +62,7 @@ class StyleSerializerTest extends ViewTestBase {
    */
   protected $renderer;
 
-  protected function setUp($import_test_views = TRUE) {
+  protected function setUp($import_test_views = TRUE): void {
     parent::setUp($import_test_views);
 
     ViewTestData::createTestViews(get_class($this), ['rest_test_views']);

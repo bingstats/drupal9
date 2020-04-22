@@ -15,7 +15,7 @@ class ManageDisplayTest extends WebDriverTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = [
+  protected static $modules = [
     'node',
     'field_ui',
     'field_test',
@@ -46,7 +46,7 @@ class ManageDisplayTest extends WebDriverTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
     $this->drupalPlaceBlock('system_breadcrumb_block');
 
@@ -143,7 +143,7 @@ class ManageDisplayTest extends WebDriverTestBase {
     $field_test_format_type->setValue('field_test_multiple');
     $assert_session->assertWaitOnAjaxRequest();
     $plugin_summary = $page->find('css', '#field-test .field-plugin-summary');
-    $this->assertContains("test_formatter_setting_multiple: dummy test string", $plugin_summary->getText(), 'The expected summary is displayed.');
+    $this->assertStringContainsString("test_formatter_setting_multiple: dummy test string", $plugin_summary->getText(), 'The expected summary is displayed.');
 
     // Submit the form and assert that
     // hook_field_formatter_settings_summary_alter() is called.

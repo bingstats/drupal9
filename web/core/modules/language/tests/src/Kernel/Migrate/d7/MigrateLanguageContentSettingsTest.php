@@ -16,12 +16,12 @@ class MigrateLanguageContentSettingsTest extends MigrateDrupal7TestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['node', 'text', 'language', 'content_translation', 'menu_ui'];
+  protected static $modules = ['node', 'text', 'language', 'content_translation', 'menu_ui'];
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $this->migrateContentTypes();

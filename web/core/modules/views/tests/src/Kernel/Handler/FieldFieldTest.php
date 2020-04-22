@@ -24,7 +24,7 @@ class FieldFieldTest extends ViewsKernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['field', 'entity_test', 'user', 'views_test_formatter', 'views_entity_test'];
+  protected static $modules = ['field', 'entity_test', 'user', 'views_test_formatter', 'views_entity_test'];
 
   /**
    * {@inheritdoc}
@@ -62,7 +62,7 @@ class FieldFieldTest extends ViewsKernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp($import_test_views = TRUE) {
+  protected function setUp($import_test_views = TRUE): void {
     // First setup the needed entity types before installing the views.
     parent::setUp(FALSE);
 

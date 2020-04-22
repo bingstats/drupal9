@@ -29,7 +29,7 @@ class ContactSitewideTest extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['text', 'contact', 'field_ui', 'contact_test', 'block', 'error_service_test', 'dblog'];
+  protected static $modules = ['text', 'contact', 'field_ui', 'contact_test', 'block', 'error_service_test', 'dblog'];
 
   /**
    * {@inheritdoc}
@@ -39,7 +39,7 @@ class ContactSitewideTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
     $this->drupalPlaceBlock('system_breadcrumb_block');
     $this->drupalPlaceBlock('local_actions_block');
@@ -329,8 +329,8 @@ class ContactSitewideTest extends BrowserTestBase {
     $mails = $this->getMails();
     $mail = array_pop($mails);
     $this->assertEqual($mail['subject'], t('[@label] @subject', ['@label' => $label, '@subject' => $edit['subject[0][value]']]));
-    $this->assertContains($field_label, $mail['body']);
-    $this->assertContains($edit[$field_name . '[0][value]'], $mail['body']);
+    $this->assertStringContainsString($field_label, $mail['body']);
+    $this->assertStringContainsString($edit[$field_name . '[0][value]'], $mail['body']);
 
     // Test messages and redirect.
     /** @var \Drupal\contact\ContactFormInterface $form */

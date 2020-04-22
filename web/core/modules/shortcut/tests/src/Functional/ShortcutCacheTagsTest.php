@@ -21,7 +21,7 @@ class ShortcutCacheTagsTest extends EntityCacheTagsTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['toolbar', 'shortcut', 'test_page_test', 'block'];
+  protected static $modules = ['toolbar', 'shortcut', 'test_page_test', 'block'];
 
   /**
    * {@inheritdoc}
@@ -31,7 +31,7 @@ class ShortcutCacheTagsTest extends EntityCacheTagsTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     // Give anonymous users permission to customize shortcut links, so that we

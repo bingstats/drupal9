@@ -38,7 +38,7 @@ class FileFieldWidgetTest extends FileFieldTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
     $this->drupalPlaceBlock('system_breadcrumb_block');
   }
@@ -166,7 +166,7 @@ class FileFieldWidgetTest extends FileFieldTestBase {
         // Ensure we have the expected number of Remove buttons, and that they
         // are numbered sequentially.
         $buttons = $this->xpath('//input[@type="submit" and @value="Remove"]');
-        $this->assertTrue(is_array($buttons) && count($buttons) === $num_expected_remove_buttons, new FormattableMarkup('There are %n "Remove" buttons displayed.', ['%n' => $num_expected_remove_buttons]));
+        $this->assertCount($num_expected_remove_buttons, $buttons, new FormattableMarkup('There are %n "Remove" buttons displayed.', ['%n' => $num_expected_remove_buttons]));
         foreach ($buttons as $i => $button) {
           $key = $i >= $remaining ? $i - $remaining : $i;
           $check_field_name = $field_name2;
@@ -187,12 +187,12 @@ class FileFieldWidgetTest extends FileFieldTestBase {
         // correct name.
         $upload_button_name = $current_field_name . '_' . $remaining . '_upload_button';
         $buttons = $this->xpath('//input[@type="submit" and @value="Upload" and @name=:name]', [':name' => $upload_button_name]);
-        $this->assertTrue(is_array($buttons) && count($buttons) == 1, 'The upload button is displayed with the correct name.');
+        $this->assertCount(1, $buttons, 'The upload button is displayed with the correct name.');
 
         // Ensure only at most one button per field is displayed.
         $buttons = $this->xpath('//input[@type="submit" and @value="Upload"]');
         $expected = $current_field_name == $field_name ? 1 : 2;
-        $this->assertTrue(is_array($buttons) && count($buttons) == $expected, 'After removing a file, only one "Upload" button for each possible field is displayed.');
+        $this->assertCount($expected, $buttons, 'After removing a file, only one "Upload" button for each possible field is displayed.');
       }
     }
 
@@ -422,7 +422,7 @@ class FileFieldWidgetTest extends FileFieldTestBase {
     ]);
     $this->assertNotEquals(500, $post_request->getStatusCode());
     $body = Json::decode($post_request->getBody());
-    $this->assertContains('Starting upload...', $body['message']);
+    $this->assertStringContainsString('Starting upload...', $body['message']);
   }
 
   /**

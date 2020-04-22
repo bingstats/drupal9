@@ -26,7 +26,7 @@ class QuickEditIntegrationTest extends QuickEditTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['editor', 'editor_test'];
+  protected static $modules = ['editor', 'editor_test'];
 
   /**
    * The manager for editor plug-ins.
@@ -63,7 +63,7 @@ class QuickEditIntegrationTest extends QuickEditTestBase {
    */
   protected $fieldName;
 
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     // Install the Filter module.

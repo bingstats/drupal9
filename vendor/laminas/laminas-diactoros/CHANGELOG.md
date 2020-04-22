@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 2.2.3 - 2020-03-29
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Fixed `replace` version constraint in composer.json so repository can be used as replacement of `zendframework/zend-diactoros:^2.2.1`.
+
 ## 2.2.2 - 2020-01-07
 
 ### Added

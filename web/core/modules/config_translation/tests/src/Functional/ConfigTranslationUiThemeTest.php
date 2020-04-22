@@ -17,7 +17,7 @@ class ConfigTranslationUiThemeTest extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['config_translation', 'config_translation_test'];
+  protected static $modules = ['config_translation', 'config_translation_test'];
 
   /**
    * {@inheritdoc}
@@ -38,7 +38,7 @@ class ConfigTranslationUiThemeTest extends BrowserTestBase {
    */
   protected $adminUser;
 
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $admin_permissions = [

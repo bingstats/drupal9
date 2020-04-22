@@ -20,9 +20,9 @@ class DirectoryTest extends FileTestBase {
    *
    * @var array
    */
-  public static $modules = ['system'];
+  protected static $modules = ['system'];
 
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     // These additional tables are necessary due to the call to system_cron().

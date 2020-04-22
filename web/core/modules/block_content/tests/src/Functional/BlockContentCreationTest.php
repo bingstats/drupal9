@@ -21,7 +21,7 @@ class BlockContentCreationTest extends BlockContentTestBase {
    *
    * @var array
    */
-  public static $modules = ['block_content_test', 'dblog', 'field_ui'];
+  protected static $modules = ['block_content_test', 'dblog', 'field_ui'];
 
   /**
    * {@inheritdoc}
@@ -41,7 +41,7 @@ class BlockContentCreationTest extends BlockContentTestBase {
   /**
    * Sets the test up.
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
     $this->drupalLogin($this->adminUser);
   }
@@ -208,28 +208,14 @@ class BlockContentCreationTest extends BlockContentTestBase {
     }
 
     $connection = Database::getConnection();
-    if ($connection->supportsTransactions()) {
-      // Check that the block does not exist in the database.
-      $id = $connection->select('block_content_field_data', 'b')
-        ->fields('b', ['id'])
-        ->condition('info', 'fail_creation')
-        ->execute()
-        ->fetchField();
-      $this->assertFalse($id, 'Transactions supported, and block not found in database.');
-    }
-    else {
-      // Check that the block exists in the database.
-      $id = $connection->select('block_content_field_data', 'b')
-        ->fields('b', ['id'])
-        ->condition('info', 'fail_creation')
-        ->execute()
-        ->fetchField();
-      $this->assertTrue($id, 'Transactions not supported, and block found in database.');
 
-      // Check that the failed rollback was logged.
-      $records = $connection->query("SELECT wid FROM {watchdog} WHERE message LIKE 'Explicit rollback failed%'")->fetchAll();
-      $this->assertTrue(count($records) > 0, 'Transactions not supported, and rollback error logged to watchdog.');
-    }
+    // Check that the block does not exist in the database.
+    $id = $connection->select('block_content_field_data', 'b')
+      ->fields('b', ['id'])
+      ->condition('info', 'fail_creation')
+      ->execute()
+      ->fetchField();
+    $this->assertFalse($id);
   }
 
   /**

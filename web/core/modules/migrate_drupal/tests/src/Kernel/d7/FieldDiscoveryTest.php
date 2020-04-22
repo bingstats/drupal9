@@ -23,7 +23,7 @@ class FieldDiscoveryTest extends MigrateDrupal7TestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = [
+  protected static $modules = [
     'comment',
     'datetime',
     'file',
@@ -67,7 +67,7 @@ class FieldDiscoveryTest extends MigrateDrupal7TestBase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     parent::setUp();
     $this->installConfig(static::$modules);
     $node_types = [

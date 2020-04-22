@@ -18,12 +18,12 @@ class BookPendingRevisionTest extends KernelTestBase {
    *
    * @var array
    */
-  public static $modules = ['system', 'user', 'field', 'filter', 'text', 'node', 'book'];
+  protected static $modules = ['system', 'user', 'field', 'filter', 'text', 'node', 'book'];
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $this->installEntitySchema('user');

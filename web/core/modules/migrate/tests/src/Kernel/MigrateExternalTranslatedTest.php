@@ -19,12 +19,12 @@ class MigrateExternalTranslatedTest extends MigrateTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['system', 'user', 'language', 'node', 'field', 'migrate_external_translated_test'];
+  protected static $modules = ['system', 'user', 'language', 'node', 'field', 'migrate_external_translated_test'];
 
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     parent::setUp();
     $this->installSchema('system', ['sequences']);
     $this->installSchema('node', ['node_access']);

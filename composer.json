@@ -19,6 +19,7 @@
         "drupal/core-composer-scaffold": "^9",
         "drupal/core-project-message": "^9",
         "drupal/core-recommended": "^9",
+        "drupal/page_load_progress": "^2.0",
         "drush/drush": "^10.2"
     },
     "require-dev": {

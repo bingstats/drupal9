@@ -40,12 +40,12 @@ class ResponsiveImageFieldDisplayTest extends ImageFieldTestBase {
    *
    * @var array
    */
-  protected static $modules = ['field_ui', 'responsive_image', 'responsive_image_test_module'];
+  public static $modules = ['field_ui', 'responsive_image', 'responsive_image_test_module'];
 
   /**
    * Drupal\simpletest\WebTestBase\setUp().
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     // Create user.

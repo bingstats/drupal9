@@ -20,7 +20,7 @@ class NoMultilingualReviewPageTest extends NoMultilingualReviewPageTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = [
+  public static $modules = [
     'language',
     'telephone',
     'aggregator',
@@ -38,7 +38,7 @@ class NoMultilingualReviewPageTest extends NoMultilingualReviewPageTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
     $this->loadFixture(drupal_get_path('module', 'migrate_drupal') . '/tests/fixtures/drupal6.php');
   }

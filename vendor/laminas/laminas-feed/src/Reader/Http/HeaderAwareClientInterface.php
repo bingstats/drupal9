@@ -24,7 +24,8 @@ interface HeaderAwareClientInterface extends ClientInterface
      * ]
      * </code>
      *
-     * @param  string $uri
+     * @param string $uri
+     * @param array $headers
      * @return HeaderAwareResponseInterface
      */
     public function get($uri, array $headers = []);

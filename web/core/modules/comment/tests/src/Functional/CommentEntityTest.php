@@ -23,7 +23,7 @@ class CommentEntityTest extends CommentTestBase {
    *
    * @var array
    */
-  protected static $modules = ['block', 'comment', 'node', 'history', 'field_ui', 'datetime', 'taxonomy'];
+  public static $modules = ['block', 'comment', 'node', 'history', 'field_ui', 'datetime', 'taxonomy'];
 
   /**
    * {@inheritdoc}
@@ -33,7 +33,7 @@ class CommentEntityTest extends CommentTestBase {
   protected $vocab;
   protected $commentType;
 
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     $this->vocab = $this->createVocabulary();

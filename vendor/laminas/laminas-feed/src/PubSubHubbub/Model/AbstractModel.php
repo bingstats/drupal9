@@ -18,13 +18,18 @@ class AbstractModel
      *
      * @var TableGatewayInterface
      */
-    protected $db;
+    protected $db = null;
 
+    /**
+     * Constructor
+     *
+     * @param null|TableGatewayInterface $tableGateway
+     */
     public function __construct(TableGatewayInterface $tableGateway = null)
     {
         if ($tableGateway === null) {
-            $parts    = explode('\\', get_class($this));
-            $table    = strtolower(array_pop($parts));
+            $parts = explode('\\', get_class($this));
+            $table = strtolower(array_pop($parts));
             $this->db = new TableGateway($table, null);
         } else {
             $this->db = $tableGateway;

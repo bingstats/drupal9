@@ -54,7 +54,7 @@ class PluginInstanceTest extends ViewsKernelTestBase {
    */
   protected $definitions;
 
-  protected function setUp($import_test_views = TRUE): void {
+  protected function setUp($import_test_views = TRUE) {
     parent::setUp();
 
     $this->definitions = Views::getPluginDefinitions();

@@ -5,6 +5,7 @@ namespace Drupal\KernelTests\Core\Entity;
 use Drupal\comment\Entity\Comment;
 use Drupal\comment\Plugin\Field\FieldType\CommentItemInterface;
 use Drupal\comment\Tests\CommentTestTrait;
+use Drupal\Core\Database\Database;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\block\Entity\Block;
 use Drupal\entity_test\Entity\EntityTest;
@@ -40,11 +41,11 @@ class EntityCrudHookTest extends EntityKernelTestBase {
    *
    * @var array
    */
-  protected static $modules = ['block', 'block_test', 'entity_crud_hook_test', 'file', 'taxonomy', 'node', 'comment'];
+  public static $modules = ['block', 'block_test', 'entity_crud_hook_test', 'file', 'taxonomy', 'node', 'comment'];
 
   protected $ids = [];
 
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     $this->installSchema('user', ['users_data']);
@@ -546,9 +547,16 @@ class EntityCrudHookTest extends EntityKernelTestBase {
       $this->pass('Expected exception has been thrown.');
     }
 
-    // Check that the block does not exist in the database.
-    $ids = \Drupal::entityQuery('entity_test')->condition('name', 'fail_insert')->execute();
-    $this->assertEmpty($ids);
+    if (Database::getConnection()->supportsTransactions()) {
+      // Check that the block does not exist in the database.
+      $ids = \Drupal::entityQuery('entity_test')->condition('name', 'fail_insert')->execute();
+      $this->assertTrue(empty($ids), 'Transactions supported, and entity not found in database.');
+    }
+    else {
+      // Check that the block exists in the database.
+      $ids = \Drupal::entityQuery('entity_test')->condition('name', 'fail_insert')->execute();
+      $this->assertFalse(empty($ids), 'Transactions not supported, and entity found in database.');
+    }
   }
 
 }

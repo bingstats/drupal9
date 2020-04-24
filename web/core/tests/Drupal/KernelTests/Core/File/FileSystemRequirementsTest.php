@@ -15,7 +15,7 @@ class FileSystemRequirementsTest extends KernelTestBase {
    *
    * @var array
    */
-  protected static $modules = ['system'];
+  public static $modules = ['system'];
 
   /**
    * {@inheritdoc}
@@ -25,7 +25,7 @@ class FileSystemRequirementsTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
     $this->setInstallProfile('standard');
   }

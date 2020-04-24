@@ -19,14 +19,14 @@ class DateTimeTest extends BrowserTestBase {
    *
    * @var array
    */
-  protected static $modules = ['block', 'node', 'language', 'field', 'field_ui', 'datetime', 'options'];
+  public static $modules = ['block', 'node', 'language', 'field', 'field_ui', 'datetime', 'options'];
 
   /**
    * {@inheritdoc}
    */
   protected $defaultTheme = 'stark';
 
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     // Create admin user and log in admin user.

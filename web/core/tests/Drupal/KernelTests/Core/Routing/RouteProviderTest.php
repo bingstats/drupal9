@@ -38,7 +38,7 @@ class RouteProviderTest extends KernelTestBase {
   /**
    * Modules to enable.
    */
-  protected static $modules = ['url_alter_test', 'system', 'language', 'path_alias'];
+  public static $modules = ['url_alter_test', 'system', 'language', 'path_alias'];
 
   /**
    * A collection of shared fixture data for tests.
@@ -82,7 +82,7 @@ class RouteProviderTest extends KernelTestBase {
    */
   protected $cacheTagsInvalidator;
 
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
     $this->fixtures = new RoutingFixtures();
     $this->state = new State(new KeyValueMemoryFactory());
@@ -106,7 +106,7 @@ class RouteProviderTest extends KernelTestBase {
     }
   }
 
-  protected function tearDown(): void {
+  protected function tearDown() {
     $this->fixtures->dropTables(Database::getConnection());
 
     parent::tearDown();
@@ -126,7 +126,7 @@ class RouteProviderTest extends KernelTestBase {
 
     $candidates = array_flip($candidates);
 
-    $this->assertCount(7, $candidates, 'Correct number of candidates found');
+    $this->assertTrue(count($candidates) == 7, 'Correct number of candidates found');
     $this->assertTrue(array_key_exists('/node/5/edit', $candidates), 'First candidate found.');
     $this->assertTrue(array_key_exists('/node/5/%', $candidates), 'Second candidate found.');
     $this->assertTrue(array_key_exists('/node/%/edit', $candidates), 'Third candidate found.');

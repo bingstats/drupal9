@@ -26,14 +26,14 @@ class DisplayTest extends ViewTestBase {
    *
    * @var array
    */
-  protected static $modules = ['views_ui', 'node', 'block'];
+  public static $modules = ['views_ui', 'node', 'block'];
 
   /**
    * {@inheritdoc}
    */
   protected $defaultTheme = 'stark';
 
-  protected function setUp($import_test_views = TRUE): void {
+  protected function setUp($import_test_views = TRUE) {
     parent::setUp();
 
     $this->enableViewsTestModule();
@@ -327,7 +327,8 @@ class DisplayTest extends ViewTestBase {
 
     $this->drupalGet('<front>');
     $this->assertResponse(200);
-    $this->assertCount(1, $this->xpath('//div[@id = :id]', [':id' => 'block-' . $block->id()]));
+    $result = $this->xpath('//div[@id = :id]', [':id' => 'block-' . $block->id()]);
+    $this->assertEquals(1, count($result));
 
     // Change the block plugin ID to an invalid one.
     $config = $this->config('views.view.test_display_invalid');
@@ -339,7 +340,8 @@ class DisplayTest extends ViewTestBase {
     $this->drupalGet('<front>');
     $this->assertResponse(200);
     $this->assertText('The &quot;invalid&quot; plugin does not exist.');
-    $this->assertCount(0, $this->xpath('//div[@id = :id]', [':id' => 'block-' . $block->id()]));
+    $result = $this->xpath('//div[@id = :id]', [':id' => 'block-' . $block->id()]);
+    $this->assertEquals(0, count($result));
   }
 
   /**
@@ -362,7 +364,7 @@ class DisplayTest extends ViewTestBase {
     // Validate display
     $errors = $view->validate();
     // Check that the error messages are shown.
-    $this->assertCount(2, $errors['default'], 'Error messages found for required relationship');
+    $this->assertTrue(count($errors['default']) == 2, 'Error messages found for required relationship');
     $this->assertEqual($errors['default'][0], t('The %handler_type %handler uses a relationship that has been removed.', ['%handler_type' => 'field', '%handler' => 'User: Last login']));
     $this->assertEqual($errors['default'][1], t('The %handler_type %handler uses a relationship that has been removed.', ['%handler_type' => 'field', '%handler' => 'User: Created']));
   }

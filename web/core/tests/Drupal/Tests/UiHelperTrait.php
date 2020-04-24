@@ -267,8 +267,7 @@ trait UiHelperTrait {
     // idea being if you were properly logged out you should be seeing a login
     // screen.
     $assert_session = $this->assertSession();
-    $destination = Url::fromRoute('user.page')->toString();
-    $this->drupalGet(Url::fromRoute('user.logout', [], ['query' => ['destination' => $destination]]));
+    $this->drupalGet(Url::fromRoute('user.logout', [], ['query' => ['destination' => 'user']]));
     $assert_session->fieldExists('name');
     $assert_session->fieldExists('pass');
 

@@ -76,7 +76,7 @@ class EntityTypeManagerTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     $this->moduleHandler = $this->prophesize(ModuleHandlerInterface::class);
@@ -243,12 +243,13 @@ class EntityTypeManagerTest extends UnitTestCase {
 
     $apple_form = $this->entityTypeManager->getFormObject('apple', 'default');
     $this->assertInstanceOf(TestEntityForm::class, $apple_form);
-    $this->assertInstanceOf(ModuleHandlerInterface::class, $apple_form->moduleHandler);
-    $this->assertInstanceOf(TranslationInterface::class, $apple_form->stringTranslation);
+    $this->assertAttributeInstanceOf(ModuleHandlerInterface::class, 'moduleHandler', $apple_form);
+    $this->assertAttributeInstanceOf(TranslationInterface::class, 'stringTranslation', $apple_form);
 
     $banana_form = $this->entityTypeManager->getFormObject('banana', 'default');
     $this->assertInstanceOf(TestEntityFormInjected::class, $banana_form);
-    $this->assertEquals('yellow', $banana_form->color);
+    $this->assertAttributeEquals('yellow', 'color', $banana_form);
+
   }
 
   /**
@@ -271,7 +272,7 @@ class EntityTypeManagerTest extends UnitTestCase {
    * @covers ::getHandler
    */
   public function testGetHandler() {
-    $class = get_class($this->getMockForAbstractClass(TestEntityHandlerBase::class));
+    $class = $this->getTestHandlerClass();
     $apple = $this->prophesize(EntityTypeInterface::class);
     $apple->getHandlerClass('storage')->willReturn($class);
 
@@ -281,8 +282,8 @@ class EntityTypeManagerTest extends UnitTestCase {
 
     $apple_controller = $this->entityTypeManager->getHandler('apple', 'storage');
     $this->assertInstanceOf($class, $apple_controller);
-    $this->assertInstanceOf(ModuleHandlerInterface::class, $apple_controller->moduleHandler);
-    $this->assertInstanceOf(TranslationInterface::class, $apple_controller->stringTranslation);
+    $this->assertAttributeInstanceOf(ModuleHandlerInterface::class, 'moduleHandler', $apple_controller);
+    $this->assertAttributeInstanceOf(TranslationInterface::class, 'stringTranslation', $apple_controller);
   }
 
   /**
@@ -311,8 +312,8 @@ class EntityTypeManagerTest extends UnitTestCase {
 
     $apple_route_provider = $this->entityTypeManager->getRouteProviders('apple');
     $this->assertInstanceOf(TestRouteProvider::class, $apple_route_provider['default']);
-    $this->assertInstanceOf(ModuleHandlerInterface::class, $apple_route_provider['default']->moduleHandler);
-    $this->assertInstanceOf(TranslationInterface::class, $apple_route_provider['default']->stringTranslation);
+    $this->assertAttributeInstanceOf(ModuleHandlerInterface::class, 'moduleHandler', $apple_route_provider['default']);
+    $this->assertAttributeInstanceOf(TranslationInterface::class, 'stringTranslation', $apple_route_provider['default']);
   }
 
   /**
@@ -395,26 +396,6 @@ class EntityTypeManagerTest extends UnitTestCase {
 
 }
 
-/**
- * Provides a test entity handler.
- */
-abstract class TestEntityHandlerBase extends EntityHandlerBase {
-
-  /**
-   * {@inheritdoc}
-   */
-  public $moduleHandler;
-
-  /**
-   * {@inheritdoc}
-   */
-  public $stringTranslation;
-
-}
-
-/**
- * Provides a test entity type manager.
- */
 class TestEntityTypeManager extends EntityTypeManager {
 
   /**
@@ -433,16 +414,6 @@ class TestEntityTypeManager extends EntityTypeManager {
  * Provides a test entity form.
  */
 class TestEntityForm extends EntityHandlerBase {
-
-  /**
-   * {@inheritdoc}
-   */
-  public $moduleHandler;
-
-  /**
-   * {@inheritdoc}
-   */
-  public $stringTranslation;
 
   /**
    * The entity type manager.
@@ -499,7 +470,7 @@ class TestEntityFormInjected extends TestEntityForm implements ContainerInjectio
    *
    * @var string
    */
-  public $color;
+  protected $color;
 
   /**
    * Constructs a new TestEntityFormInjected.
@@ -524,15 +495,5 @@ class TestEntityFormInjected extends TestEntityForm implements ContainerInjectio
  * Provides a test entity route provider.
  */
 class TestRouteProvider extends EntityHandlerBase {
-
-  /**
-   * {@inheritdoc}
-   */
-  public $moduleHandler;
-
-  /**
-   * {@inheritdoc}
-   */
-  public $stringTranslation;
 
 }

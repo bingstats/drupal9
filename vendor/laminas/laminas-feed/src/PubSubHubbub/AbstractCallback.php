@@ -21,7 +21,7 @@ abstract class AbstractCallback implements CallbackInterface
      *
      * @var Model\SubscriptionPersistenceInterface
      */
-    protected $storage;
+    protected $storage = null;
 
     /**
      * An instance of a class handling Http Responses. This is implemented in
@@ -30,7 +30,7 @@ abstract class AbstractCallback implements CallbackInterface
      *
      * @var HttpResponse|PhpResponse
      */
-    protected $httpResponse;
+    protected $httpResponse = null;
 
     /**
      * The input stream to use when retrieving the request body. Defaults to
@@ -38,7 +38,7 @@ abstract class AbstractCallback implements CallbackInterface
      * of another input method. This should primarily be used for testing
      * purposes.
      *
-     * @var resource|string String indicates a filename or stream to open;
+     * @var string|resource String indicates a filename or stream to open;
      *     resource indicates an already created stream to use.
      */
     protected $inputStream = 'php://input';
@@ -55,7 +55,7 @@ abstract class AbstractCallback implements CallbackInterface
      * options for the Subscriber without calling all supported setter
      * methods in turn.
      *
-     * @param null|array|Traversable $options Options array or Traversable object
+     * @param  array|Traversable $options Options array or Traversable object
      */
     public function __construct($options = null)
     {
@@ -68,7 +68,7 @@ abstract class AbstractCallback implements CallbackInterface
      * Process any injected configuration options
      *
      * @param  array|Traversable $options Options array or Traversable object
-     * @return $this
+     * @return AbstractCallback
      * @throws Exception\InvalidArgumentException
      */
     public function setOptions($options)
@@ -78,9 +78,8 @@ abstract class AbstractCallback implements CallbackInterface
         }
 
         if (! is_array($options)) {
-            throw new Exception\InvalidArgumentException(
-                'Array or Traversable object expected, got ' . gettype($options)
-            );
+            throw new Exception\InvalidArgumentException('Array or Traversable object'
+            . 'expected, got ' . gettype($options));
         }
 
         if (is_array($options)) {
@@ -111,7 +110,8 @@ abstract class AbstractCallback implements CallbackInterface
      * to background save any verification tokens associated with a subscription
      * or other.
      *
-     * @return $this
+     * @param  Model\SubscriptionPersistenceInterface $storage
+     * @return AbstractCallback
      */
     public function setStorage(Model\SubscriptionPersistenceInterface $storage)
     {
@@ -130,10 +130,8 @@ abstract class AbstractCallback implements CallbackInterface
     public function getStorage()
     {
         if ($this->storage === null) {
-            throw new Exception\RuntimeException(
-                'No storage object has been set that subclasses'
-                . ' Laminas\Feed\Pubsubhubbub\Model\SubscriptionPersistence'
-            );
+            throw new Exception\RuntimeException('No storage object has been'
+                . ' set that subclasses Laminas\Feed\Pubsubhubbub\Model\SubscriptionPersistence');
         }
         return $this->storage;
     }
@@ -144,17 +142,15 @@ abstract class AbstractCallback implements CallbackInterface
      * (i.e. not inherited from) Laminas\Controller\Response\Http.
      *
      * @param  HttpResponse|PhpResponse $httpResponse
-     * @return $this
+     * @return AbstractCallback
      * @throws Exception\InvalidArgumentException
      */
     public function setHttpResponse($httpResponse)
     {
         if (! $httpResponse instanceof HttpResponse && ! $httpResponse instanceof PhpResponse) {
-            throw new Exception\InvalidArgumentException(
-                'HTTP Response object must'
+            throw new Exception\InvalidArgumentException('HTTP Response object must'
                 . ' implement one of Laminas\Feed\Pubsubhubbub\HttpResponse or'
-                . ' Laminas\Http\PhpEnvironment\Response'
-            );
+                . ' Laminas\Http\PhpEnvironment\Response');
         }
         $this->httpResponse = $httpResponse;
         return $this;
@@ -170,7 +166,7 @@ abstract class AbstractCallback implements CallbackInterface
     public function getHttpResponse()
     {
         if ($this->httpResponse === null) {
-            $this->httpResponse = new HttpResponse();
+            $this->httpResponse = new HttpResponse;
         }
         return $this->httpResponse;
     }
@@ -180,18 +176,16 @@ abstract class AbstractCallback implements CallbackInterface
      * In other words, is this class serving one or more subscribers? How many?
      * Defaults to 1 if left unchanged.
      *
-     * @param  int|string $count
-     * @return $this
+     * @param  string|int $count
+     * @return AbstractCallback
      * @throws Exception\InvalidArgumentException
      */
     public function setSubscriberCount($count)
     {
         $count = intval($count);
         if ($count <= 0) {
-            throw new Exception\InvalidArgumentException(
-                'Subscriber count must be'
-                . ' greater than zero'
-            );
+            throw new Exception\InvalidArgumentException('Subscriber count must be'
+                . ' greater than zero');
         }
         $this->subscriberCount = $count;
         return $this;
@@ -210,7 +204,6 @@ abstract class AbstractCallback implements CallbackInterface
 
     /**
      * Attempt to detect the callback URL (specifically the path forward)
-     *
      * @return string
      */
     // @codingStandardsIgnoreStart
@@ -274,7 +267,7 @@ abstract class AbstractCallback implements CallbackInterface
     /**
      * Retrieve a Header value from either $_SERVER or Apache
      *
-     * @param  string $header
+     * @param string $header
      * @return bool|string
      */
     // @codingStandardsIgnoreStart
@@ -301,7 +294,7 @@ abstract class AbstractCallback implements CallbackInterface
     /**
      * Return the raw body of the request
      *
-     * @return false|string Raw body, or false if not present
+     * @return string|false Raw body, or false if not present
      */
     // @codingStandardsIgnoreStart
     protected function _getRawBody()
@@ -322,8 +315,8 @@ abstract class AbstractCallback implements CallbackInterface
     private function buildCallbackUrlFromRequestUri()
     {
         $callbackUrl = $_SERVER['REQUEST_URI'];
-        $https       = isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : null;
-        $scheme      = $https === 'on' ? 'https' : 'http';
+        $https = isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : null;
+        $scheme = $https === 'on' ? 'https' : 'http';
         if ($https === 'on') {
             $scheme = 'https';
         }

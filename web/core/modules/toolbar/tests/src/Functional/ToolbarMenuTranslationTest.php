@@ -23,14 +23,14 @@ class ToolbarMenuTranslationTest extends BrowserTestBase {
    *
    * @var array
    */
-  protected static $modules = ['toolbar', 'toolbar_test', 'locale', 'locale_test'];
+  public static $modules = ['toolbar', 'toolbar_test', 'locale', 'locale_test'];
 
   /**
    * {@inheritdoc}
    */
   protected $defaultTheme = 'stark';
 
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     // Create an administrative user and log it in.

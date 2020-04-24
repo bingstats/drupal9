@@ -18,7 +18,7 @@ class MigrateFieldInstanceLabelDescriptionTest extends MigrateDrupal7TestBase im
   /**
    * {@inheritdoc}
    */
-  protected static $modules = [
+  public static $modules = [
     'comment',
     'config_translation',
     'datetime',
@@ -39,7 +39,7 @@ class MigrateFieldInstanceLabelDescriptionTest extends MigrateDrupal7TestBase im
   /**
    * {@inheritdoc}
    */
-  public function setUp(): void {
+  public function setUp() {
     parent::setUp();
 
     $this->installEntitySchema('node');

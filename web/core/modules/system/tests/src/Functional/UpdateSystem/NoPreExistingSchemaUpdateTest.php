@@ -20,7 +20,7 @@ class NoPreExistingSchemaUpdateTest extends BrowserTestBase {
    */
   protected $defaultTheme = 'stark';
 
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
     $connection = Database::getConnection();
 

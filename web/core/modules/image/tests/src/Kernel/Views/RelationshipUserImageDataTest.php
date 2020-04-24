@@ -22,7 +22,7 @@ class RelationshipUserImageDataTest extends ViewsKernelTestBase {
    *
    * @var array
    */
-  protected static $modules = ['file', 'field', 'image', 'image_test_views', 'system', 'user'];
+  public static $modules = ['file', 'field', 'image', 'image_test_views', 'system', 'user'];
 
   /**
    * Views used by this test.
@@ -31,7 +31,7 @@ class RelationshipUserImageDataTest extends ViewsKernelTestBase {
    */
   public static $testViews = ['test_image_user_image_data'];
 
-  protected function setUp($import_test_views = TRUE): void {
+  protected function setUp($import_test_views = TRUE) {
     parent::setUp($import_test_views);
 
     $this->installEntitySchema('file');

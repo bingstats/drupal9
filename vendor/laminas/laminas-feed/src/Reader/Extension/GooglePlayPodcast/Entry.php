@@ -82,6 +82,7 @@ class Entry extends Extension\AbstractEntry
 
     /**
      * Register googleplay namespace
+     *
      */
     protected function registerNamespaces()
     {

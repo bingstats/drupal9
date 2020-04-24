@@ -15,7 +15,7 @@ class NoJavaScriptAnonymousTest extends BrowserTestBase {
 
   protected $profile = 'standard';
 
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     // Grant the anonymous user the permission to look at user profiles.

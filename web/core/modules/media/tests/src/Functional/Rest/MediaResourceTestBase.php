@@ -19,7 +19,7 @@ abstract class MediaResourceTestBase extends EntityResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['media'];
+  public static $modules = ['media'];
 
   /**
    * {@inheritdoc}

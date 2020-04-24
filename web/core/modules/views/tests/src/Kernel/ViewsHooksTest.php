@@ -52,7 +52,7 @@ class ViewsHooksTest extends ViewsKernelTestBase {
    */
   protected $moduleHandler;
 
-  protected function setUp($import_test_views = TRUE): void {
+  protected function setUp($import_test_views = TRUE) {
     parent::setUp();
 
     $this->moduleHandler = $this->container->get('module_handler');

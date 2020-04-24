@@ -19,7 +19,7 @@ class HandlerTest extends UITestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['node_test_views'];
+  public static $modules = ['node_test_views'];
 
   /**
    * {@inheritdoc}
@@ -36,7 +36,7 @@ class HandlerTest extends UITestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp($import_test_views = TRUE): void {
+  protected function setUp($import_test_views = TRUE) {
     parent::setUp($import_test_views);
 
     $this->placeBlock('page_title_block');
@@ -219,7 +219,7 @@ class HandlerTest extends UITestBase {
 
       $this->drupalGet($href);
       $result = $this->xpath('//h1[@class="page-title"]');
-      $this->assertStringContainsString($text, $result[0]->getText(), 'Ensure the broken handler text was found.');
+      $this->assertContains($text, $result[0]->getText(), 'Ensure the broken handler text was found.');
 
       $original_configuration = [
         'field' => 'id_broken',

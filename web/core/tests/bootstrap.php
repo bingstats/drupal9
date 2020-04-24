@@ -45,7 +45,7 @@ function drupal_phpunit_find_extension_directories($scan_directory) {
  */
 function drupal_phpunit_contrib_extension_directory_roots($root = NULL) {
   if ($root === NULL) {
-    $root = dirname(__DIR__, 2);
+    $root = dirname(dirname(__DIR__));
   }
   $paths = [
     $root . '/core/modules',

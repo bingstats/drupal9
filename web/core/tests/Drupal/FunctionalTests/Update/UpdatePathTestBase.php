@@ -118,6 +118,18 @@ abstract class UpdatePathTestBase extends BrowserTestBase {
   protected $strictConfigSchema = FALSE;
 
   /**
+   * Constructs an UpdatePathTestCase object.
+   *
+   * @param $test_id
+   *   (optional) The ID of the test. Tests with the same id are reported
+   *   together.
+   */
+  public function __construct($test_id = NULL) {
+    parent::__construct($test_id);
+    $this->zlibInstalled = function_exists('gzopen');
+  }
+
+  /**
    * Overrides WebTestBase::setUp() for update testing.
    *
    * The main difference in this method is that rather than performing the
@@ -126,9 +138,6 @@ abstract class UpdatePathTestBase extends BrowserTestBase {
    * container that would normally be done via the installer.
    */
   protected function setUp() {
-    parent::setUpAppRoot();
-    $this->zlibInstalled = function_exists('gzopen');
-
     $request = Request::createFromGlobals();
 
     // Boot up Drupal into a state where calling the database API is possible.
@@ -287,10 +296,8 @@ abstract class UpdatePathTestBase extends BrowserTestBase {
     \Drupal::setContainer($container);
 
     require_once __DIR__ . '/../../../../includes/install.inc';
-    $connection_info = Database::getConnectionInfo();
-    $driver = $connection_info['default']['driver'];
-    $namespace = $connection_info['default']['namespace'] ?? NULL;
-    $errors = db_installer_object($driver, $namespace)->runTasks();
+    $connection = Database::getConnection();
+    $errors = db_installer_object($connection->driver())->runTasks();
     if (!empty($errors)) {
       $this->fail('Failed to run installer database tasks: ' . implode(', ', $errors));
     }

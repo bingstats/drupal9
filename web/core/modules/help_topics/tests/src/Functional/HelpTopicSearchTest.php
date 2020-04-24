@@ -31,7 +31,7 @@ class HelpTopicSearchTest extends HelpTopicTranslatedTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     // Log in.

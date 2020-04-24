@@ -27,7 +27,7 @@ class ManageFieldsFunctionalTest extends BrowserTestBase {
    *
    * @var array
    */
-  protected static $modules = ['node', 'field_ui', 'field_test', 'taxonomy', 'image', 'block'];
+  public static $modules = ['node', 'field_ui', 'field_test', 'taxonomy', 'image', 'block'];
 
   /**
    * {@inheritdoc}
@@ -65,7 +65,7 @@ class ManageFieldsFunctionalTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     $this->drupalPlaceBlock('system_breadcrumb_block');

@@ -265,7 +265,7 @@ class DbDumpCommand extends DbCommandBase {
    */
   protected function getTableCollation(Connection $connection, $table, &$definition) {
     // Remove identifier quotes from the table name. See
-    // \Drupal\Core\Database\Driver\mysql\Connection::$identifierQuotes.
+    // \Drupal\Core\Database\Driver\mysql\Connection::identifierQuote().
     $table = trim($connection->prefixTables('{' . $table . '}'), '"');
     $query = $connection->query("SHOW TABLE STATUS WHERE NAME = :table_name", [':table_name' => $table]);
     $data = $query->fetchAssoc();

@@ -21,7 +21,7 @@ class ViewsDataIntegrationTest extends ViewsKernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = [
+  public static $modules = [
     'content_moderation_test_views',
     'node',
     'content_moderation',
@@ -32,7 +32,7 @@ class ViewsDataIntegrationTest extends ViewsKernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp($import_test_views = TRUE): void {
+  protected function setUp($import_test_views = TRUE) {
     parent::setUp($import_test_views);
 
     $this->installEntitySchema('node');

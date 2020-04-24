@@ -39,7 +39,7 @@ class EntityReferenceItemTest extends FieldKernelTestBase {
    *
    * @var array
    */
-  protected static $modules = ['node', 'comment', 'file', 'taxonomy', 'text', 'filter', 'views', 'field'];
+  public static $modules = ['node', 'comment', 'file', 'taxonomy', 'text', 'filter', 'views', 'field'];
 
   /**
    * The taxonomy vocabulary to test with.
@@ -65,7 +65,7 @@ class EntityReferenceItemTest extends FieldKernelTestBase {
   /**
    * Sets up the test.
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     $this->installEntitySchema('entity_test_string_id');

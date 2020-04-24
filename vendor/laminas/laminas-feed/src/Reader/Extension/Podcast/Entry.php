@@ -306,6 +306,7 @@ class Entry extends Extension\AbstractEntry
 
     /**
      * Register iTunes namespace
+     *
      */
     protected function registerNamespaces()
     {

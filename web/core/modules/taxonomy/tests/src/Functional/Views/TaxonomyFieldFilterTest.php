@@ -22,7 +22,7 @@ class TaxonomyFieldFilterTest extends ViewTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['language', 'taxonomy', 'taxonomy_test_views', 'text', 'views', 'node'];
+  public static $modules = ['language', 'taxonomy', 'taxonomy_test_views', 'text', 'views', 'node'];
 
   /**
    * {@inheritdoc}
@@ -50,7 +50,7 @@ class TaxonomyFieldFilterTest extends ViewTestBase {
    */
   public $termNames = [];
 
-  public function setUp($import_test_views = TRUE): void {
+  public function setUp($import_test_views = TRUE) {
     parent::setUp($import_test_views);
 
     // Add two new languages.

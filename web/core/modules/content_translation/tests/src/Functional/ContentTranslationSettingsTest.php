@@ -25,14 +25,14 @@ class ContentTranslationSettingsTest extends BrowserTestBase {
    *
    * @var array
    */
-  protected static $modules = ['language', 'content_translation', 'node', 'comment', 'field_ui', 'entity_test'];
+  public static $modules = ['language', 'content_translation', 'node', 'comment', 'field_ui', 'entity_test'];
 
   /**
    * {@inheritdoc}
    */
   protected $defaultTheme = 'classy';
 
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     // Set up two content types to test fields shared between different

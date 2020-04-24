@@ -40,7 +40,7 @@ class ModuleRequiredByThemesUninstallValidatorTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
     $this->moduleExtensionList = $this->prophesize(ModuleExtensionList::class);
     $this->themeExtensionList = $this->prophesize(ThemeExtensionList::class);

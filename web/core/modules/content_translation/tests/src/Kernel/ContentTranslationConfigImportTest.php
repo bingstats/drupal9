@@ -25,12 +25,12 @@ class ContentTranslationConfigImportTest extends KernelTestBase {
    *
    * @var array
    */
-  protected static $modules = ['system', 'user', 'entity_test', 'language', 'content_translation'];
+  public static $modules = ['system', 'user', 'entity_test', 'language', 'content_translation'];
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     $this->installConfig(['system']);
@@ -67,7 +67,7 @@ class ContentTranslationConfigImportTest extends KernelTestBase {
     $sync = $this->container->get('config.storage.sync');
 
     // Verify the configuration to create does not exist yet.
-    $this->assertFalse($storage->exists($config_name), $config_name . ' not found.');
+    $this->assertIdentical($storage->exists($config_name), FALSE, $config_name . ' not found.');
 
     // Create new config entity.
     $data = [
@@ -87,7 +87,7 @@ class ContentTranslationConfigImportTest extends KernelTestBase {
       ],
     ];
     $sync->write($config_name, $data);
-    $this->assertTrue($sync->exists($config_name), $config_name . ' found.');
+    $this->assertIdentical($sync->exists($config_name), TRUE, $config_name . ' found.');
 
     // Import.
     $this->configImporter->reset()->import();

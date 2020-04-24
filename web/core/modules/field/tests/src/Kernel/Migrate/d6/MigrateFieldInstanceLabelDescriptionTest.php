@@ -18,7 +18,7 @@ class MigrateFieldInstanceLabelDescriptionTest extends MigrateDrupal6TestBase im
   /**
    * {@inheritdoc}
    */
-  protected static $modules = [
+  public static $modules = [
     'config_translation',
     'locale',
     'language',
@@ -30,7 +30,7 @@ class MigrateFieldInstanceLabelDescriptionTest extends MigrateDrupal6TestBase im
   /**
    * {@inheritdoc}
    */
-  public function setUp(): void {
+  public function setUp() {
     parent::setUp();
     $this->migrateFields();
 

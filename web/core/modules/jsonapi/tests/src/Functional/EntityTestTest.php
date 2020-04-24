@@ -18,7 +18,7 @@ class EntityTestTest extends ResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['entity_test'];
+  public static $modules = ['entity_test'];
 
   /**
    * {@inheritdoc}

@@ -29,7 +29,7 @@ class DisplayFeedTranslationTest extends ViewTestBase {
    *
    * @var array
    */
-  protected static $modules = ['node', 'views', 'language', 'content_translation'];
+  public static $modules = ['node', 'views', 'language', 'content_translation'];
 
   /**
    * {@inheritdoc}
@@ -43,7 +43,7 @@ class DisplayFeedTranslationTest extends ViewTestBase {
    */
   protected $langcodes;
 
-  protected function setUp($import_test_views = TRUE): void {
+  protected function setUp($import_test_views = TRUE) {
     parent::setUp($import_test_views);
 
     $this->enableViewsTestModule();

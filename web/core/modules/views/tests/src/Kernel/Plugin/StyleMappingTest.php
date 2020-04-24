@@ -13,7 +13,7 @@ use Drupal\views\ViewExecutable;
  */
 class StyleMappingTest extends StyleTestBase {
 
-  protected static $modules = ['system'];
+  public static $modules = ['system'];
 
   /**
    * Views used by this test.

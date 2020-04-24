@@ -19,7 +19,7 @@ class Callback extends PubSubHubbub\AbstractCallback
      *
      * @var string
      */
-    protected $feedUpdate;
+    protected $feedUpdate = null;
 
     /**
      * Holds a manually set subscription key (i.e. identifies a unique
@@ -29,21 +29,21 @@ class Callback extends PubSubHubbub\AbstractCallback
      *
      * @var string
      */
-    protected $subscriptionKey;
+    protected $subscriptionKey = null;
 
     /**
      * After verification, this is set to the verified subscription's data.
      *
      * @var array
      */
-    protected $currentSubscriptionData;
+    protected $currentSubscriptionData = null;
 
     /**
      * Set a subscription key to use for the current callback request manually.
      * Required if usePathParameter is enabled for the Subscriber.
      *
      * @param  string $key
-     * @return $this
+     * @return \Laminas\Feed\PubSubHubbub\Subscriber\Callback
      */
     public function setSubscriptionKey($key)
     {
@@ -56,8 +56,8 @@ class Callback extends PubSubHubbub\AbstractCallback
      * unsubscription request. This should be the Hub Server confirming the
      * the request prior to taking action on it.
      *
-     * @param  null|array $httpGetData     GET data if available and not in $_GET
-     * @param  bool       $sendResponseNow Whether to send response now or when asked
+     * @param  array $httpGetData GET data if available and not in $_GET
+     * @param  bool $sendResponseNow Whether to send response now or when asked
      * @return void
      */
     public function handle(array $httpGetData = null, $sendResponseNow = false)
@@ -74,7 +74,7 @@ class Callback extends PubSubHubbub\AbstractCallback
          * to avoid holding up responses to the Hub.
          */
         $contentType = $this->_getHeader('Content-Type');
-        if (strtolower($_SERVER['REQUEST_METHOD']) === 'post'
+        if (strtolower($_SERVER['REQUEST_METHOD']) == 'post'
             && $this->_hasValidVerifyToken(null, false)
             && (stripos($contentType, 'application/atom+xml') === 0
                 || stripos($contentType, 'application/rss+xml') === 0
@@ -92,7 +92,7 @@ class Callback extends PubSubHubbub\AbstractCallback
 
             switch (strtolower($httpGetData['hub_mode'])) {
                 case 'subscribe':
-                    $data                       = $this->currentSubscriptionData;
+                    $data = $this->currentSubscriptionData;
                     $data['subscription_state'] = PubSubHubbub\PubSubHubbub::SUBSCRIPTION_VERIFIED;
                     if (isset($httpGetData['hub_lease_seconds'])) {
                         $data['lease_seconds'] = $httpGetData['hub_lease_seconds'];
@@ -125,6 +125,7 @@ class Callback extends PubSubHubbub\AbstractCallback
      * Checks validity of the request simply by making a quick pass and
      * confirming the presence of all REQUIRED parameters.
      *
+     * @param  array $httpGetData
      * @return bool
      */
     public function isValidHubVerification(array $httpGetData)
@@ -154,7 +155,7 @@ class Callback extends PubSubHubbub\AbstractCallback
         ) {
             return false;
         }
-        if ($httpGetData['hub_mode'] === 'subscribe'
+        if ($httpGetData['hub_mode'] == 'subscribe'
             && ! array_key_exists('hub_lease_seconds', $httpGetData)
         ) {
             return false;
@@ -178,7 +179,7 @@ class Callback extends PubSubHubbub\AbstractCallback
      * Topic we've subscribed to.
      *
      * @param  string $feed
-     * @return $this
+     * @return \Laminas\Feed\PubSubHubbub\Subscriber\Callback
      */
     public function setFeedUpdate($feed)
     {
@@ -231,7 +232,7 @@ class Callback extends PubSubHubbub\AbstractCallback
             return false;
         }
         if ($checkValue) {
-            $data        = $this->getStorage()->getSubscription($verifyTokenKey);
+            $data = $this->getStorage()->getSubscription($verifyTokenKey);
             $verifyToken = $data['verify_token'];
             if ($verifyToken !== hash('sha256', $httpGetData['hub_verify_token'])) {
                 return false;

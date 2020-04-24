@@ -16,6 +16,11 @@ use Laminas\Feed\Writer\Renderer;
 
 class Deleted extends Renderer\AbstractRenderer implements Renderer\RendererInterface
 {
+    /**
+     * Constructor
+     *
+     * @param  Writer\Deleted $container
+     */
     public function __construct(Writer\Deleted $container)
     {
         parent::__construct($container);
@@ -24,13 +29,13 @@ class Deleted extends Renderer\AbstractRenderer implements Renderer\RendererInte
     /**
      * Render atom entry
      *
-     * @return $this
+     * @return Writer\Renderer\Entry\Atom
      */
     public function render()
     {
-        $this->dom               = new DOMDocument('1.0', $this->container->getEncoding());
+        $this->dom = new DOMDocument('1.0', $this->container->getEncoding());
         $this->dom->formatOutput = true;
-        $entry                   = $this->dom->createElement('at:deleted-entry');
+        $entry = $this->dom->createElement('at:deleted-entry');
         $this->dom->appendChild($entry);
 
         $entry->setAttribute('ref', $this->container->getReference());
@@ -75,11 +80,11 @@ class Deleted extends Renderer\AbstractRenderer implements Renderer\RendererInte
     {
         // @codingStandardsIgnoreEnd
         $data = $this->container->getBy();
-        if (! $data || empty($data)) {
+        if ((! $data || empty($data))) {
             return;
         }
         $author = $this->dom->createElement('at:by');
-        $name   = $this->dom->createElement('name');
+        $name = $this->dom->createElement('name');
         $author->appendChild($name);
         $root->appendChild($author);
         $text = $dom->createTextNode($data['name']);

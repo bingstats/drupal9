@@ -19,12 +19,12 @@ class HalLinkManagerTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['hal', 'hal_test', 'serialization', 'system', 'node', 'user', 'field'];
+  public static $modules = ['hal', 'hal_test', 'serialization', 'system', 'node', 'user', 'field'];
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     $this->installEntitySchema('node');

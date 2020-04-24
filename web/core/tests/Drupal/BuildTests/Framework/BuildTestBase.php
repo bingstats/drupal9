@@ -268,7 +268,7 @@ abstract class BuildTestBase extends TestCase {
    *   Text we expect to find in the error output of the command.
    */
   public function assertErrorOutputContains($expected) {
-    $this->assertStringContainsString($expected, $this->commandProcess->getErrorOutput());
+    $this->assertContains($expected, $this->commandProcess->getErrorOutput());
   }
 
   /**
@@ -278,7 +278,7 @@ abstract class BuildTestBase extends TestCase {
    *   Text we expect to find in the output of the command.
    */
   public function assertCommandOutputContains($expected) {
-    $this->assertStringContainsString($expected, $this->commandProcess->getOutput());
+    $this->assertContains($expected, $this->commandProcess->getOutput());
   }
 
   /**

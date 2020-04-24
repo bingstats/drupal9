@@ -16,7 +16,7 @@ class FieldRenderedEntityTranslationTest extends ViewTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['language', 'locale', 'content_translation', 'node'];
+  public static $modules = ['language', 'locale', 'content_translation', 'node'];
 
   /**
    * {@inheritdoc}
@@ -38,7 +38,7 @@ class FieldRenderedEntityTranslationTest extends ViewTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp($import_test_views = TRUE): void {
+  protected function setUp($import_test_views = TRUE) {
     parent::setUp($import_test_views);
 
     $this->entityTypeManager = $this->container->get('entity_type.manager');

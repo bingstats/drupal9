@@ -26,12 +26,12 @@ class LinkUriTest extends KernelTestBase {
    *
    * @var array
    */
-  protected static $modules = ['node', 'user'];
+  public static $modules = ['node', 'user'];
 
   /**
    * {@inheritdoc}
    */
-  public function setUp(): void {
+  public function setUp() {
     parent::setUp();
     $this->setUpCurrentUser();
     $this->installEntitySchema('node');

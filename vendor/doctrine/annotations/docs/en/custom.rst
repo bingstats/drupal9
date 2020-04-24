@@ -1,10 +1,8 @@
 Custom Annotation Classes
 =========================
 
-If you want to define your own annotations, you just have to group them
-in a namespace and register this namespace in the ``AnnotationRegistry``.
-Annotation classes have to contain a class-level docblock with the text
-``@Annotation``:
+If you want to define your own annotations you just have to group them in a namespace and register this namespace
+in the AnnotationRegistry. Annotation classes have to contain a class-level docblock with the text ``@Annotation``:
 
 .. code-block:: php
 
@@ -19,9 +17,8 @@ Annotation classes have to contain a class-level docblock with the text
 Inject annotation values
 ------------------------
 
-The annotation parser checks if the annotation constructor has arguments,
-if so then it will pass the value array, otherwise it will try to inject
-values into public properties directly:
+The annotation parser check if the annotation constructor has arguments,
+if so then we will pass the value array, otherwise will try to inject values into public properties directly:
 
 
 .. code-block:: php
@@ -56,17 +53,16 @@ values into public properties directly:
 Annotation Target
 -----------------
 
-``@Target`` indicates the kinds of class elements to which an annotation
-type is applicable. Then you could define one or more targets:
+``@Target`` indicates the kinds of class element to which an annotation type is applicable.
+Then you could define one or more targets:
 
--  ``CLASS`` Allowed in class docblocks
--  ``PROPERTY`` Allowed in property docblocks
--  ``METHOD`` Allowed in the method docblocks
--  ``ALL`` Allowed in class, property and method docblocks
+-  ``CLASS`` Allowed in the class docblock
+-  ``PROPERTY`` Allowed in the property docblock
+-  ``METHOD`` Allowed in the method docblock
+-  ``ALL`` Allowed in the class, property and method docblock
 -  ``ANNOTATION`` Allowed inside other annotations
 
-If the annotations is not allowed in the current context, an
-``AnnotationException`` is thrown.
+If the annotations is not allowed in the current context you got an ``AnnotationException``
 
 .. code-block:: php
 
@@ -93,12 +89,11 @@ If the annotations is not allowed in the current context, an
 Attribute types
 ---------------
 
-The annotation parser checks the given parameters using the phpdoc
-annotation ``@var``, The data type could be validated using the ``@var``
-annotation on the annotation properties or using the ``@Attributes`` and
-``@Attribute`` annotations.
+Annotation parser check the given parameters using the phpdoc annotation ``@var``,
+The data type could be validated using the ``@var`` annotation on the annotation properties
+or using the annotations ``@Attributes`` and ``@Attribute``.
 
-If the data type does not match you get an ``AnnotationException``
+If the data type not match you got an ``AnnotationException``
 
 .. code-block:: php
 
@@ -163,9 +158,8 @@ If the data type does not match you get an ``AnnotationException``
 Annotation Required
 -------------------
 
-``@Required`` indicates that the field must be specified when the
-annotation is used. If it is not used you get an ``AnnotationException``
-stating that this value can not be null.
+``@Required`` indicates that the field must be specified when the annotation is used.
+If it is not used you get an ``AnnotationException`` stating that this value can not be null.
 
 Declaring a required field:
 
@@ -195,12 +189,9 @@ Usage:
 Enumerated values
 -----------------
 
-- An annotation property marked with ``@Enum`` is a field that accepts a
-  fixed set of scalar values.
-- You should use ``@Enum`` fields any time you need to represent fixed
-  values.
-- The annotation parser checks the given value and throws an
-  ``AnnotationException`` if the value does not match.
+- An annotation property marked with ``@Enum`` is a field that accept a fixed set of scalar values.
+- You should use ``@Enum`` fields any time you need to represent fixed values.
+- The annotation parser check the given value and throws an ``AnnotationException`` if the value not match.
 
 
 Declaring an enumerated property:
@@ -233,10 +224,9 @@ Annotation usage:
 Constants
 ---------
 
-The use of constants and class constants is available on the annotations
-parser.
+The use of constants and class constants are available on the annotations parser.
 
-The following usages are allowed:
+The following usage are allowed:
 
 .. code-block:: php
 
@@ -261,17 +251,15 @@ Be careful with constants and the cache !
 
 .. note::
 
-    The cached reader will not re-evaluate each time an annotation is
-    loaded from cache. When a constant is changed the cache must be
-    cleaned.
+    The cached reader will not re-evaluate each time an annotation is loaded from cache.
+    When a constant is changed the cache must be cleaned.
 
 
 Usage
 -----
 
-Using the library API is simple. Using the annotations described in the
-previous section, you can now annotate other classes with your
-annotations:
+Using the library API is simple. Using the annotations described in the previous section
+you can now annotate other classes with your annotations:
 
 .. code-block:: php
 
@@ -303,8 +291,8 @@ Now we can write a script to get the annotations above:
         }
     }
 
-You have a complete API for retrieving annotation class instances from a
-class, property or method docblock:
+You have a complete API for retrieving annotation class instances
+from a class, property or method docblock:
 
 
 Reader API

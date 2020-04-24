@@ -27,7 +27,7 @@ class EntityQueryTest extends EntityKernelTestBase {
    *
    * @var array
    */
-  protected static $modules = ['field_test', 'language'];
+  public static $modules = ['field_test', 'language'];
 
   /**
    * @var array
@@ -62,7 +62,7 @@ class EntityQueryTest extends EntityKernelTestBase {
    */
   protected $storage;
 
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     $this->installEntitySchema('entity_test_mulrev');
@@ -703,7 +703,7 @@ class EntityQueryTest extends EntityKernelTestBase {
     for ($i = 1; $i <= 15; $i += 2) {
       $ok = TRUE;
       $index1 = array_search($i, $this->queryResults);
-      $this->assertNotFalse($index1, "$i found at $index1.");
+      $this->assertNotIdentical($index1, FALSE, "$i found at $index1.");
       // This loop is for bundle2 entities.
       for ($j = 2; $j <= 15; $j += 2) {
         if ($ok) {

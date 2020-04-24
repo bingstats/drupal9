@@ -22,7 +22,7 @@ class DefaultTableMappingTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     $this->entityType = $this->createMock('\Drupal\Core\Entity\ContentEntityTypeInterface');

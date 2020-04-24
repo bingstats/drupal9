@@ -30,7 +30,7 @@ class AjaxRendererTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     $element_info_manager = $this->createMock('Drupal\Core\Render\ElementInfoManagerInterface');
     $element_info_manager->expects($this->any())
       ->method('getInfo')

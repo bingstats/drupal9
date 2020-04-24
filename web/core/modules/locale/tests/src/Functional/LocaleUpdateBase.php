@@ -47,12 +47,12 @@ abstract class LocaleUpdateBase extends BrowserTestBase {
    *
    * @var array
    */
-  protected static $modules = ['locale', 'locale_test'];
+  public static $modules = ['locale', 'locale_test'];
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     // Setup timestamps to identify old and new translation sources.

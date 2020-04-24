@@ -18,14 +18,14 @@ class TranslationStringTest extends KernelTestBase {
    *
    * @var array
    */
-  protected static $modules = [
+  public static $modules = [
     'language',
   ];
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
     ConfigurableLanguage::createFromLangcode('de')->save();
   }

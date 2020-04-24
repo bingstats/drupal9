@@ -112,7 +112,7 @@ class ConfigEntityBaseUnitTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     $this->id = $this->randomMachineName();
     $values = [
       'id' => $this->id,
@@ -175,8 +175,8 @@ class ConfigEntityBaseUnitTest extends UnitTestCase {
     // dependencies.
     $this->entity->set('dependencies', ['module' => ['node'], 'enforced' => ['module' => 'views']]);
     $dependencies = $this->entity->calculateDependencies()->getDependencies();
-    $this->assertStringContainsString('views', $dependencies['module']);
-    $this->assertStringNotContainsString('node', $dependencies['module']);
+    $this->assertContains('views', $dependencies['module']);
+    $this->assertNotContains('node', $dependencies['module']);
   }
 
   /**
@@ -564,7 +564,7 @@ class ConfigEntityBaseUnitTest extends UnitTestCase {
       ->method('getPropertiesToExport')
       ->willReturn(['id' => 'configId', 'dependencies' => 'dependencies']);
     $properties = $this->entity->toArray();
-    $this->assertIsArray($properties);
+    $this->assertInternalType('array', $properties);
     $this->assertEquals(['configId' => $this->entity->id(), 'dependencies' => []], $properties);
   }
 
@@ -590,7 +590,7 @@ class ConfigEntityBaseUnitTest extends UnitTestCase {
       ->with('id')
       ->willReturn('id');
     $properties = $entity->toArray();
-    $this->assertIsArray($properties);
+    $this->assertInternalType('array', $properties);
     $this->assertEquals(['configId' => $entity->id(), 'dependencies' => []], $properties);
   }
 

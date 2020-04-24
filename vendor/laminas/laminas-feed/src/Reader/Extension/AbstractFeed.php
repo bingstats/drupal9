@@ -26,14 +26,14 @@ abstract class AbstractFeed
      *
      * @var DOMDocument
      */
-    protected $domDocument;
+    protected $domDocument = null;
 
     /**
      * The base XPath query used to retrieve feed data
      *
      * @var DOMXPath
      */
-    protected $xpath;
+    protected $xpath = null;
 
     /**
      * The XPath prefix
@@ -45,7 +45,8 @@ abstract class AbstractFeed
     /**
      * Set the DOM document
      *
-     * @return $this
+     * @param  DOMDocument $dom
+     * @return AbstractFeed
      */
     public function setDomDocument(DOMDocument $dom)
     {
@@ -78,7 +79,7 @@ abstract class AbstractFeed
      * Set the feed type
      *
      * @param  string $type
-     * @return $this
+     * @return AbstractFeed
      */
     public function setType($type)
     {
@@ -116,7 +117,8 @@ abstract class AbstractFeed
     /**
      * Set the XPath query
      *
-     * @return $this
+     * @param  DOMXPath $xpath
+     * @return AbstractFeed
      */
     public function setXpath(DOMXPath $xpath = null)
     {

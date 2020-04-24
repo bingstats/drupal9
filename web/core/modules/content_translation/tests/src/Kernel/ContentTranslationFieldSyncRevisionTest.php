@@ -26,7 +26,7 @@ class ContentTranslationFieldSyncRevisionTest extends EntityKernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['file', 'image', 'language', 'content_translation', 'content_translation_test'];
+  public static $modules = ['file', 'image', 'language', 'content_translation', 'content_translation_test'];
 
   /**
    * The synchronized field name.
@@ -52,7 +52,7 @@ class ContentTranslationFieldSyncRevisionTest extends EntityKernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     $entity_type_id = 'entity_test_mulrev';

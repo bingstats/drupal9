@@ -32,7 +32,7 @@ class SystemMenuBlockTest extends KernelTestBase {
    *
    * @var array
    */
-  protected static $modules = [
+  public static $modules = [
     'system',
     'block',
     'menu_test',
@@ -80,7 +80,7 @@ class SystemMenuBlockTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
     $this->installSchema('system', 'sequences');
     $this->installEntitySchema('user');

@@ -29,7 +29,7 @@ class TrackerTest extends BrowserTestBase {
    *
    * @var array
    */
-  protected static $modules = ['block', 'comment', 'tracker', 'history', 'node_test'];
+  public static $modules = ['block', 'comment', 'tracker', 'history', 'node_test'];
 
   /**
    * {@inheritdoc}
@@ -50,7 +50,7 @@ class TrackerTest extends BrowserTestBase {
    */
   protected $otherUser;
 
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     $this->drupalCreateContentType(['type' => 'page', 'name' => 'Basic page']);

@@ -20,7 +20,7 @@ class StringFieldTest extends BrowserTestBase {
    *
    * @var array
    */
-  protected static $modules = ['entity_test', 'file'];
+  public static $modules = ['entity_test', 'file'];
 
   /**
    * {@inheritdoc}
@@ -34,7 +34,7 @@ class StringFieldTest extends BrowserTestBase {
    */
   protected $webUser;
 
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     $this->webUser = $this->drupalCreateUser(['view test entity', 'administer entity_test content', 'access content']);
@@ -105,7 +105,7 @@ class StringFieldTest extends BrowserTestBase {
     $display = $display_repository->getViewDisplay($entity->getEntityTypeId(), $entity->bundle(), 'full');
     $content = $display->build($entity);
     $rendered_entity = \Drupal::service('renderer')->renderRoot($content);
-    $this->assertStringContainsString($value, (string) $rendered_entity);
+    $this->assertContains($value, (string) $rendered_entity);
   }
 
 }

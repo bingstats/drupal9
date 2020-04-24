@@ -21,12 +21,12 @@ class PathAliasMenuLinkContentTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['menu_link_content', 'system', 'link', 'path_alias', 'test_page_test', 'user'];
+  public static $modules = ['menu_link_content', 'system', 'link', 'path_alias', 'test_page_test', 'user'];
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     $this->installEntitySchema('user');

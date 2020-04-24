@@ -22,7 +22,7 @@ class IntegrationTest extends ViewsKernelTestBase {
    *
    * @var array
    */
-  protected static $modules = ['aggregator', 'aggregator_test_views', 'system', 'field', 'options', 'user'];
+  public static $modules = ['aggregator', 'aggregator_test_views', 'system', 'field', 'options', 'user'];
 
   /**
    * Views used by this test.
@@ -48,7 +48,7 @@ class IntegrationTest extends ViewsKernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp($import_test_views = TRUE): void {
+  protected function setUp($import_test_views = TRUE) {
     parent::setUp();
 
     $this->installEntitySchema('aggregator_item');

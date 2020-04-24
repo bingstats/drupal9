@@ -44,7 +44,7 @@ class DefaultsSectionStorageTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     entity_test_create_bundle('bundle_with_extra_fields');

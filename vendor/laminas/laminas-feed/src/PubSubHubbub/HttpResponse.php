@@ -80,7 +80,7 @@ class HttpResponse
      * @param  string $name
      * @param  string $value
      * @param  bool $replace
-     * @return $this
+     * @return \Laminas\Feed\PubSubHubbub\HttpResponse
      */
     public function setHeader($name, $value, $replace = false)
     {
@@ -150,13 +150,14 @@ class HttpResponse
      * Set HTTP response code to use with headers
      *
      * @param  int $code
-     * @return $this
+     * @return HttpResponse
      * @throws Exception\InvalidArgumentException
      */
     public function setStatusCode($code)
     {
         if (! is_int($code) || (100 > $code) || (599 < $code)) {
-            throw new Exception\InvalidArgumentException('Invalid HTTP response code: ' . $code);
+            throw new Exception\InvalidArgumentException('Invalid HTTP response'
+            . ' code:' . $code);
         }
         $this->statusCode = $code;
         return $this;
@@ -176,7 +177,7 @@ class HttpResponse
      * Set body content
      *
      * @param  string $content
-     * @return $this
+     * @return \Laminas\Feed\PubSubHubbub\HttpResponse
      */
     public function setContent($content)
     {

@@ -155,7 +155,7 @@ abstract class EntityResourceTestBase extends ResourceTestBase {
    *
    * @var array
    */
-  protected static $modules = ['rest_test', 'text'];
+  public static $modules = ['rest_test', 'text'];
 
   /**
    * Provides an entity resource.
@@ -540,10 +540,9 @@ abstract class EntityResourceTestBase extends ResourceTestBase {
     // contain a flattened response. Otherwise performance suffers.
     // @see \Drupal\rest\EventSubscriber\ResourceResponseSubscriber::flattenResponse()
     $cache_items = $this->container->get('database')
-      ->select('cache_dynamic_page_cache', 'c')
-      ->fields('c', ['cid', 'data'])
-      ->condition('c.cid', '%[route]=rest.%', 'LIKE')
-      ->execute()
+      ->query("SELECT cid, data FROM {cache_dynamic_page_cache} WHERE cid LIKE :pattern", [
+        ':pattern' => '%[route]=rest.%',
+      ])
       ->fetchAllAssoc('cid');
     if (!$is_cacheable_by_dynamic_page_cache) {
       $this->assertCount(0, $cache_items);
@@ -752,7 +751,7 @@ abstract class EntityResourceTestBase extends ResourceTestBase {
     $response = $this->request('POST', $url, $request_options);
     $this->assertSame(415, $response->getStatusCode());
     $this->assertSame(['text/html; charset=UTF-8'], $response->getHeader('Content-Type'));
-    $this->assertStringContainsString('A client error happened', (string) $response->getBody());
+    $this->assertContains('A client error happened', (string) $response->getBody());
 
     $url->setOption('query', ['_format' => static::$format]);
 
@@ -858,7 +857,7 @@ abstract class EntityResourceTestBase extends ResourceTestBase {
 
       $response = $this->request('POST', $url, $request_options);
       $this->assertSame(500, $response->getStatusCode());
-      $this->assertStringContainsString('Internal Server Error', (string) $response->getBody());
+      $this->assertContains('Internal Server Error', (string) $response->getBody());
 
       // 201 when successfully creating an entity with a new UUID.
       $normalized_entity = $this->getModifiedEntityForPostTesting();
@@ -920,7 +919,7 @@ abstract class EntityResourceTestBase extends ResourceTestBase {
       $this->assertSame(405, $response->getStatusCode());
       $this->assertSame(['GET, POST, HEAD'], $response->getHeader('Allow'));
       $this->assertSame(['text/html; charset=UTF-8'], $response->getHeader('Content-Type'));
-      $this->assertStringContainsString('A client error happened', (string) $response->getBody());
+      $this->assertContains('A client error happened', (string) $response->getBody());
     }
     else {
       $this->assertSame(404, $response->getStatusCode());
@@ -946,7 +945,7 @@ abstract class EntityResourceTestBase extends ResourceTestBase {
     $response = $this->request('PATCH', $url, $request_options);
     $this->assertSame(415, $response->getStatusCode());
     $this->assertSame(['text/html; charset=UTF-8'], $response->getHeader('Content-Type'));
-    $this->assertStringContainsString('A client error happened', (string) $response->getBody());
+    $this->assertContains('A client error happened', (string) $response->getBody());
 
     $url->setOption('query', ['_format' => static::$format]);
 
@@ -1146,7 +1145,7 @@ abstract class EntityResourceTestBase extends ResourceTestBase {
       $this->assertSame(405, $response->getStatusCode());
       $this->assertSame(['GET, POST, HEAD'], $response->getHeader('Allow'));
       $this->assertSame(['text/html; charset=UTF-8'], $response->getHeader('Content-Type'));
-      $this->assertStringContainsString('A client error happened', (string) $response->getBody());
+      $this->assertContains('A client error happened', (string) $response->getBody());
     }
     else {
       $this->assertSame(404, $response->getStatusCode());
@@ -1368,8 +1367,8 @@ abstract class EntityResourceTestBase extends ResourceTestBase {
       if ($actual_link_header) {
         $this->assertTrue(is_array($actual_link_header));
         $expected_type = explode(';', static::$mimeType)[0];
-        $this->assertStringContainsString('?_format=' . static::$format . '>; rel="alternate"; type="' . $expected_type . '"', $actual_link_header[0]);
-        $this->assertStringContainsString('?_format=foobar>; rel="alternate"', $actual_link_header[0]);
+        $this->assertContains('?_format=' . static::$format . '>; rel="alternate"; type="' . $expected_type . '"', $actual_link_header[0]);
+        $this->assertContains('?_format=foobar>; rel="alternate"', $actual_link_header[0]);
       }
     }
   }
@@ -1439,29 +1438,10 @@ abstract class EntityResourceTestBase extends ResourceTestBase {
           // as strings in PHP memory.
           $expected_stored_data = static::castToString($expected_stored_data);
         }
-        $this->assertEntityArraySubset($expected_stored_data, $modified_entity->get($field_name)->getValue());
-      }
-    }
-  }
-
-  /**
-   * Recursively asserts that the expected items are set in the tested entity.
-   *
-   * A response may include more properties, we only need to ensure that all
-   * items in the request exist in the response.
-   *
-   * @param $expected
-   *   An array of expected values, may contain further nested arrays.
-   * @param $actual
-   *   The object to test.
-   */
-  protected function assertEntityArraySubset($expected, $actual) {
-    foreach ($expected as $key => $value) {
-      if (is_array($value)) {
-        $this->assertEntityArraySubset($value, $actual[$key]);
-      }
-      else {
-        $this->assertSame($value, $actual[$key]);
+        // Subset, not same, because we can e.g. send just the target_id for the
+        // bundle in a PATCH or POST request; the response will include more
+        // properties.
+        $this->assertArraySubset($expected_stored_data, $modified_entity->get($field_name)->getValue(), TRUE);
       }
     }
   }

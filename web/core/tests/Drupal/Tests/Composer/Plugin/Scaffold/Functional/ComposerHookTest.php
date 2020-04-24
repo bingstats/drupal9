@@ -60,7 +60,7 @@ class ComposerHookTest extends TestCase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     $this->fileSystem = new Filesystem();
     $this->fixtures = new Fixtures();
     $this->fixtures->createIsolatedComposerCacheDir();
@@ -70,7 +70,7 @@ class ComposerHookTest extends TestCase {
   /**
    * {@inheritdoc}
    */
-  protected function tearDown(): void {
+  protected function tearDown() {
     // Remove any temporary directories et. al. that were created.
     $this->fixtures->tearDown();
   }
@@ -96,7 +96,7 @@ class ComposerHookTest extends TestCase {
     $this->assertScaffoldedFile($sut . '/sites/default/default.settings.php', FALSE, 'scaffolded from the scaffold-override-fixture');
     // Make sure that the appropriate notice informing us that scaffolding
     // is allowed was printed.
-    $this->assertStringContainsString('Package fixtures/scaffold-override-fixture has scaffold operations, and is already allowed in the root-level composer.json file.', $stdout);
+    $this->assertContains('Package fixtures/scaffold-override-fixture has scaffold operations, and is already allowed in the root-level composer.json file.', $stdout);
     // Delete one scaffold file, just for test purposes, then run
     // 'composer update' and see if the scaffold file is replaced.
     @unlink($sut . '/sites/default/default.settings.php');
@@ -123,7 +123,7 @@ class ComposerHookTest extends TestCase {
     $filesystem->remove($sut);
     $stdout = $this->mustExec("composer create-project --repository=packages.json fixtures/drupal-drupal {$sut}", $this->fixturesDir, ['COMPOSER_MIRROR_PATH_REPOS' => 1]);
     $this->assertDirectoryExists($sut);
-    $this->assertStringContainsString('Scaffolding files for fixtures/drupal-drupal', $stdout);
+    $this->assertContains('Scaffolding files for fixtures/drupal-drupal', $stdout);
     $this->assertScaffoldedFile($sut . '/index.php', FALSE, 'Test version of index.php from drupal/core');
     $topLevelProjectDir = 'composer-hooks-nothing-allowed-fixture';
     $sut = $this->fixturesDir . '/' . $topLevelProjectDir;
@@ -133,7 +133,7 @@ class ComposerHookTest extends TestCase {
     // get a warning, and it does not scaffold.
     $stdout = $this->mustExec("composer require --no-ansi --no-interaction fixtures/scaffold-override-fixture:dev-master", $sut);
     $this->assertFileNotExists($sut . '/sites/default/default.settings.php');
-    $this->assertStringContainsString("Not scaffolding files for fixtures/scaffold-override-fixture, because it is not listed in the element 'extra.drupal-scaffold.allowed-packages' in the root-level composer.json file.", $stdout);
+    $this->assertContains("Not scaffolding files for fixtures/scaffold-override-fixture, because it is not listed in the element 'extra.drupal-scaffold.allowed-packages' in the root-level composer.json file.", $stdout);
   }
 
 }

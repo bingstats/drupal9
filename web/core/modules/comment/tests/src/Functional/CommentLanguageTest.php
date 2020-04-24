@@ -27,14 +27,14 @@ class CommentLanguageTest extends BrowserTestBase {
    *
    * @var array
    */
-  protected static $modules = ['node', 'language', 'language_test', 'comment_test'];
+  public static $modules = ['node', 'language', 'language_test', 'comment_test'];
 
   /**
    * {@inheritdoc}
    */
   protected $defaultTheme = 'stark';
 
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     $this->drupalCreateContentType(['type' => 'article', 'name' => 'Article']);

@@ -65,7 +65,7 @@ class ContentModerationStateTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     $this->installSchema('node', 'node_access');

@@ -22,7 +22,7 @@ abstract class MediaKernelTestBase extends KernelTestBase {
    *
    * @var array
    */
-  protected static $modules = [
+  public static $modules = [
     'media',
     'media_test_source',
     'image',
@@ -85,7 +85,7 @@ abstract class MediaKernelTestBase extends KernelTestBase {
    * @param string $filename
    *   String filename with extension.
    * @param \Drupal\media\MediaTypeInterface $media_type
-   *   The media type.
+   *   The the media type.
    *
    * @return \Drupal\media\Entity\Media
    *   A media item.

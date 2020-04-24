@@ -21,14 +21,14 @@ class NodeCreationTest extends NodeTestBase {
    *
    * @var array
    */
-  protected static $modules = ['node_test_exception', 'dblog', 'test_page_test'];
+  public static $modules = ['node_test_exception', 'dblog', 'test_page_test'];
 
   /**
    * {@inheritdoc}
    */
   protected $defaultTheme = 'stark';
 
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     $web_user = $this->drupalCreateUser(['create page content', 'edit own page content']);
@@ -108,9 +108,20 @@ class NodeCreationTest extends NodeTestBase {
       $this->pass('Expected exception has been thrown.');
     }
 
-    // Check that the node does not exist in the database.
-    $node = $this->drupalGetNodeByTitle($edit['title']);
-    $this->assertFalse($node);
+    if (Database::getConnection()->supportsTransactions()) {
+      // Check that the node does not exist in the database.
+      $node = $this->drupalGetNodeByTitle($edit['title']);
+      $this->assertFalse($node, 'Transactions supported, and node not found in database.');
+    }
+    else {
+      // Check that the node exists in the database.
+      $node = $this->drupalGetNodeByTitle($edit['title']);
+      $this->assertTrue($node, 'Transactions not supported, and node found in database.');
+
+      // Check that the failed rollback was logged.
+      $records = static::getWatchdogIdsForFailedExplicitRollback();
+      $this->assertTrue(count($records) > 0, 'Transactions not supported, and rollback error logged to watchdog.');
+    }
 
     // Check that the rollback error was logged.
     $records = static::getWatchdogIdsForTestExceptionRollback();
@@ -276,6 +287,17 @@ class NodeCreationTest extends NodeTestBase {
       }
     }
     return $matches;
+  }
+
+  /**
+   * Gets the log records with the explicit rollback failed exception message.
+   *
+   * @return \Drupal\Core\Database\StatementInterface
+   *   A prepared statement object (already executed), which contains the log
+   *   records with the explicit rollback failed exception message.
+   */
+  protected static function getWatchdogIdsForFailedExplicitRollback() {
+    return Database::getConnection()->query("SELECT wid FROM {watchdog} WHERE message LIKE 'Explicit rollback failed%'")->fetchAll();
   }
 
 }

@@ -37,7 +37,7 @@ class EntityTestDateRangeTest extends EntityTestResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['datetime_range', 'entity_test'];
+  public static $modules = ['datetime_range', 'entity_test'];
 
   /**
    * {@inheritdoc}
@@ -47,7 +47,7 @@ class EntityTestDateRangeTest extends EntityTestResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  public function setUp(): void {
+  public function setUp() {
     parent::setUp();
 
     // Add datetime_range field.

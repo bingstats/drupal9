@@ -18,12 +18,12 @@ class EntityDisplayBaseTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['entity_test', 'entity_test_third_party', 'field', 'system', 'comment', 'user'];
+  public static $modules = ['entity_test', 'entity_test_third_party', 'field', 'system', 'comment', 'user'];
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
     $this->installEntitySchema('comment');
     $this->installEntitySchema('entity_test');

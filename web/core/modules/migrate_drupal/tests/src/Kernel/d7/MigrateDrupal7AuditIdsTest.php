@@ -24,7 +24,7 @@ class MigrateDrupal7AuditIdsTest extends MigrateDrupal7TestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     // Enable all modules.
     self::$modules = array_keys($this->coreModuleListDataProvider());
     parent::setUp();

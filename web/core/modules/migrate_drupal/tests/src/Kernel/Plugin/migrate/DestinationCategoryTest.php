@@ -2,7 +2,7 @@
 
 namespace Drupal\Tests\migrate_drupal\Kernel\Plugin\migrate;
 
-use Drupal\ban\Plugin\migrate\destination\BlockedIp;
+use Drupal\ban\Plugin\migrate\destination\BlockedIP;
 use Drupal\color\Plugin\migrate\destination\Color;
 use Drupal\KernelTests\FileSystemModuleDiscoveryDataProviderTrait;
 use Drupal\migrate\Plugin\migrate\destination\ComponentEntityDisplayBase;
@@ -37,7 +37,7 @@ class DestinationCategoryTest extends MigrateDrupalTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     // Enable all modules.
     self::$modules = array_keys($this->coreModuleListDataProvider());
     parent::setUp();
@@ -121,7 +121,7 @@ class DestinationCategoryTest extends MigrateDrupalTestBase {
     return [
       EntityContentBase::class,
       UrlAlias::class,
-      BlockedIp::class,
+      BlockedIP::class,
       NodeCounter::class,
       UserData::class,
     ];

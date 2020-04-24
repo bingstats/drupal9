@@ -18,7 +18,7 @@ class ThemeTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['theme_test', 'node'];
+  public static $modules = ['theme_test', 'node'];
 
   /**
    * {@inheritdoc}
@@ -28,7 +28,7 @@ class ThemeTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
     \Drupal::service('theme_installer')->install(['test_theme']);
   }
@@ -37,7 +37,7 @@ class ThemeTest extends BrowserTestBase {
    * Ensures preprocess functions run even for suggestion implementations.
    *
    * The theme hook used by this test has its base preprocess function in a
-   * separate file, so this test also ensures that the file is correctly loaded
+   * separate file, so this test also ensures that that file is correctly loaded
    * when needed.
    */
   public function testPreprocessForSuggestions() {
@@ -150,7 +150,7 @@ class ThemeTest extends BrowserTestBase {
   public function testPreprocessHtml() {
     $this->drupalGet('');
     $attributes = $this->xpath('/body[@theme_test_page_variable="Page variable is an array."]');
-    $this->assertCount(1, $attributes, 'In template_preprocess_html(), the page variable is still an array (not rendered yet).');
+    $this->assertTrue(count($attributes) == 1, 'In template_preprocess_html(), the page variable is still an array (not rendered yet).');
     $this->assertText('theme test page bottom markup', 'Modules are able to set the page bottom region.');
   }
 
@@ -171,7 +171,7 @@ class ThemeTest extends BrowserTestBase {
    * Ensures suggestion preprocess functions run for default implementations.
    *
    * The theme hook used by this test has its base preprocess function in a
-   * separate file, so this test also ensures that the file is correctly loaded
+   * separate file, so this test also ensures that that file is correctly loaded
    * when needed.
    */
   public function testSuggestionPreprocessForDefaults() {

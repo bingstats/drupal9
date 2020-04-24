@@ -18,12 +18,12 @@ class BookUninstallTest extends KernelTestBase {
    *
    * @var array
    */
-  protected static $modules = ['system', 'user', 'field', 'filter', 'text', 'node', 'book'];
+  public static $modules = ['system', 'user', 'field', 'filter', 'text', 'node', 'book'];
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
     $this->installEntitySchema('user');
     $this->installEntitySchema('node');

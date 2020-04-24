@@ -20,9 +20,9 @@ class NodeOwnerTest extends EntityKernelTestBase {
    *
    * @var array
    */
-  protected static $modules = ['node', 'language'];
+  public static $modules = ['node', 'language'];
 
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     // Create the node bundles required for testing.

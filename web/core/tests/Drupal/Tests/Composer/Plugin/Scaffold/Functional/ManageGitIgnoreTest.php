@@ -55,7 +55,7 @@ class ManageGitIgnoreTest extends TestCase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     $this->fileSystem = new Filesystem();
     $this->fixtures = new Fixtures();
     $this->fixtures->createIsolatedComposerCacheDir();
@@ -65,7 +65,7 @@ class ManageGitIgnoreTest extends TestCase {
   /**
    * {@inheritdoc}
    */
-  protected function tearDown(): void {
+  protected function tearDown() {
     // Remove any temporary directories et. al. that were created.
     $this->fixtures->tearDown();
   }

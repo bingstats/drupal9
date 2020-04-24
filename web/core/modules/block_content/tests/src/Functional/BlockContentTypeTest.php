@@ -21,7 +21,7 @@ class BlockContentTypeTest extends BlockContentTestBase {
    *
    * @var array
    */
-  protected static $modules = ['field_ui'];
+  public static $modules = ['field_ui'];
 
   /**
    * {@inheritdoc}
@@ -45,7 +45,7 @@ class BlockContentTypeTest extends BlockContentTestBase {
    */
   protected $autoCreateBasicBlockType = FALSE;
 
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     $this->drupalPlaceBlock('page_title_block');

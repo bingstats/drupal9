@@ -30,7 +30,7 @@ class InfoParserUnitTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
     // Use a fake DRUPAL_ROOT.
     $this->infoParser = new InfoParser('vfs:/');

@@ -37,7 +37,7 @@ class PubSubHubbub
      *
      * @var Http\Client
      */
-    protected static $httpClient;
+    protected static $httpClient = null;
 
     /**
      * Simple utility function which imports any feed URL and
@@ -45,7 +45,7 @@ class PubSubHubbub
      * best if directly given an instance of Laminas\Feed\Reader\Atom|Rss
      * to leverage off.
      *
-     * @param  string|Reader\Feed\AbstractFeed $source
+     * @param  \Laminas\Feed\Reader\Feed\AbstractFeed|string $source
      * @return array
      * @throws Exception\InvalidArgumentException
      */
@@ -56,11 +56,9 @@ class PubSubHubbub
         } elseif ($source instanceof Reader\Feed\AbstractFeed) {
             $feed = $source;
         } else {
-            throw new Exception\InvalidArgumentException(
-                'The source parameter was'
-                . ' invalid, i.e. not a URL string or an instance of type'
-                . ' Laminas\Feed\Reader\Feed\AbstractFeed'
-            );
+            throw new Exception\InvalidArgumentException('The source parameter was'
+            . ' invalid, i.e. not a URL string or an instance of type'
+            . ' Laminas\Feed\Reader\Feed\AbstractFeed');
         }
         return $feed->getHubs();
     }
@@ -69,6 +67,7 @@ class PubSubHubbub
      * Allows the external environment to make laminas-oauth use a specific
      * Client instance.
      *
+     * @param  Http\Client $httpClient
      * @return void
      */
     public static function setHttpClient(Http\Client $httpClient)
@@ -86,7 +85,7 @@ class PubSubHubbub
     public static function getHttpClient()
     {
         if (! isset(static::$httpClient)) {
-            static::$httpClient = new Http\Client();
+            static::$httpClient = new Http\Client;
         } else {
             static::$httpClient->resetParameters();
         }
@@ -108,6 +107,8 @@ class PubSubHubbub
      * Set the Escaper instance
      *
      * If null, resets the instance
+     *
+     * @param  null|Escaper $escaper
      */
     public static function setEscaper(Escaper $escaper = null)
     {

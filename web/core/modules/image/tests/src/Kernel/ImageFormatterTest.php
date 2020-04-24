@@ -23,7 +23,7 @@ class ImageFormatterTest extends FieldKernelTestBase {
    *
    * @var array
    */
-  protected static $modules = ['file', 'image'];
+  public static $modules = ['file', 'image'];
 
   /**
    * @var string
@@ -48,7 +48,7 @@ class ImageFormatterTest extends FieldKernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     $this->installConfig(['field']);
@@ -196,7 +196,7 @@ class ImageFormatterTest extends FieldKernelTestBase {
     $renderer = $this->container->get('renderer');
 
     $output = $renderer->renderRoot($build[$this->fieldName][0]);
-    $this->assertStringContainsString('<a href="' . $entity->toUrl()->toString() . '" data-attributes-test="test123"', (string) $output);
+    $this->assertContains('<a href="' . $entity->toUrl()->toString() . '" data-attributes-test="test123"', (string) $output);
   }
 
   /**

@@ -12,6 +12,8 @@ use DOMDocument;
 use DOMElement;
 use Laminas\Feed\Writer\Extension;
 
+/**
+*/
 class Entry extends Extension\AbstractRenderer
 {
     /**
@@ -30,7 +32,7 @@ class Entry extends Extension\AbstractRenderer
      */
     public function render()
     {
-        if (strtolower($this->getType()) === 'atom') {
+        if (strtolower($this->getType()) == 'atom') {
             return; // RSS 2.0 only
         }
         $this->_setCommentCount($this->dom, $this->base);
@@ -69,7 +71,7 @@ class Entry extends Extension\AbstractRenderer
         if (! $count) {
             $count = 0;
         }
-        $tcount            = $this->dom->createElement('slash:comments');
+        $tcount = $this->dom->createElement('slash:comments');
         $tcount->nodeValue = $count;
         $root->appendChild($tcount);
         $this->called = true;

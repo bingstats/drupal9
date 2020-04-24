@@ -28,12 +28,12 @@ class TextFormatElementFormTest extends KernelTestBase implements FormInterface 
    *
    * @var array
    */
-  protected static $modules = ['system', 'user', 'filter', 'filter_test', 'editor'];
+  public static $modules = ['system', 'user', 'filter', 'filter_test', 'editor'];
 
   /**
    * Sets up the test.
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
     $this->installEntitySchema('user');
     $this->installSchema('system', ['sequences']);

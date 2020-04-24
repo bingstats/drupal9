@@ -33,7 +33,7 @@ class ContentPreviewToggleTest extends WebDriverTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     $this->createContentType(['type' => 'bundle_for_this_particular_test']);

@@ -17,14 +17,14 @@ class ForumNodeAccessTest extends BrowserTestBase {
    *
    * @var array
    */
-  protected static $modules = ['node', 'comment', 'forum', 'taxonomy', 'tracker', 'node_access_test', 'block'];
+  public static $modules = ['node', 'comment', 'forum', 'taxonomy', 'tracker', 'node_access_test', 'block'];
 
   /**
    * {@inheritdoc}
    */
   protected $defaultTheme = 'stark';
 
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
     node_access_rebuild();
     node_access_test_add_field(NodeType::load('forum'));

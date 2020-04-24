@@ -41,7 +41,7 @@ class EntityReferenceRelationshipTest extends ViewsKernelTestBase {
    *
    * @var array
    */
-  protected static $modules = ['user', 'field', 'entity_test', 'views', 'entity_reference_test_views'];
+  public static $modules = ['user', 'field', 'entity_test', 'views', 'entity_reference_test_views'];
 
   /**
    * The entity_test entities used by the test.
@@ -53,7 +53,7 @@ class EntityReferenceRelationshipTest extends ViewsKernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp($import_test_views = TRUE): void {
+  protected function setUp($import_test_views = TRUE) {
     parent::setUp();
 
     $this->installEntitySchema('user');

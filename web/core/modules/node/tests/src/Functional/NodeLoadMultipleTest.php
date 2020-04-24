@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\node\Functional;
 
+use Drupal\Component\Render\FormattableMarkup;
 use Drupal\node\Entity\Node;
 
 /**
@@ -16,14 +17,14 @@ class NodeLoadMultipleTest extends NodeTestBase {
    *
    * @var array
    */
-  protected static $modules = ['views'];
+  public static $modules = ['views'];
 
   /**
    * {@inheritdoc}
    */
   protected $defaultTheme = 'stark';
 
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
     $web_user = $this->drupalCreateUser(['create article content', 'create page content']);
     $this->drupalLogin($web_user);
@@ -49,11 +50,13 @@ class NodeLoadMultipleTest extends NodeTestBase {
       ->loadByProperties(['promote' => 0]);
     $this->assertEqual($node3->label(), $nodes[$node3->id()]->label(), 'Node was loaded.');
     $this->assertEqual($node4->label(), $nodes[$node4->id()]->label(), 'Node was loaded.');
-    $this->assertCount(2, $nodes);
+    $count = count($nodes);
+    $this->assertTrue($count == 2, new FormattableMarkup('@count nodes loaded.', ['@count' => $count]));
 
     // Load nodes by nid. Nodes 1, 2 and 4 will be loaded.
     $nodes = Node::loadMultiple([1, 2, 4]);
-    $this->assertCount(3, $nodes);
+    $count = count($nodes);
+    $this->assertTrue(count($nodes) == 3, new FormattableMarkup('@count nodes loaded', ['@count' => $count]));
     $this->assertTrue(isset($nodes[$node1->id()]), 'Node is correctly keyed in the array');
     $this->assertTrue(isset($nodes[$node2->id()]), 'Node is correctly keyed in the array');
     $this->assertTrue(isset($nodes[$node4->id()]), 'Node is correctly keyed in the array');

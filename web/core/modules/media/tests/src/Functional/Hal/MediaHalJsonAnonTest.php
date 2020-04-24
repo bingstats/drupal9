@@ -19,7 +19,7 @@ class MediaHalJsonAnonTest extends MediaResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['hal'];
+  public static $modules = ['hal'];
 
   /**
    * {@inheritdoc}

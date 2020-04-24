@@ -78,7 +78,7 @@ class ConnectionTest extends UnitTestCase {
         'SELECT * FROM test_table',
         'test_',
         'SELECT * FROM {table}',
-        ['', ''],
+        '',
       ],
       [
         'SELECT * FROM "first_table" JOIN "second"."thingie"',
@@ -88,16 +88,6 @@ class ConnectionTest extends UnitTestCase {
         ],
         'SELECT * FROM {table} JOIN {thingie}',
       ],
-      [
-        'SELECT * FROM [first_table] JOIN [second].[thingie]',
-        [
-          'table' => 'first_',
-          'thingie' => 'second.',
-        ],
-        'SELECT * FROM {table} JOIN {thingie}',
-        ['[', ']'],
-      ],
-
     ];
   }
 
@@ -106,7 +96,7 @@ class ConnectionTest extends UnitTestCase {
    *
    * @dataProvider providerTestPrefixTables
    */
-  public function testPrefixTables($expected, $prefix_info, $query, array $quote_identifier = ['"', '"']) {
+  public function testPrefixTables($expected, $prefix_info, $query, $quote_identifier = '"') {
     $mock_pdo = $this->createMock('Drupal\Tests\Core\Database\Stub\StubPDO');
     $connection = new StubConnection($mock_pdo, ['prefix' => $prefix_info], $quote_identifier);
     $this->assertEquals($expected, $connection->prefixTables($query));
@@ -198,10 +188,7 @@ class ConnectionTest extends UnitTestCase {
       $connection->schema()
     );
     $connection->destroy();
-
-    $reflected_schema = (new \ReflectionObject($connection))->getProperty('schema');
-    $reflected_schema->setAccessible(TRUE);
-    $this->assertNull($reflected_schema->getValue($connection));
+    $this->assertAttributeEquals(NULL, 'schema', $connection);
   }
 
   /**
@@ -288,8 +275,7 @@ class ConnectionTest extends UnitTestCase {
     return [
       ['nocase', 'nocase'],
       ['camelCase', 'camelCase'],
-      ['backtick', '`backtick`', ['`', '`']],
-      ['brackets', '[brackets]', ['[', ']']],
+      ['backtick', '`backtick`', '`'],
       ['camelCase', '"camelCase"'],
       ['camelCase', 'camel/Case'],
       // Sometimes, table names are following the pattern database.schema.table.
@@ -304,7 +290,7 @@ class ConnectionTest extends UnitTestCase {
    * @covers ::escapeTable
    * @dataProvider providerEscapeTables
    */
-  public function testEscapeTable($expected, $name, array $identifier_quote = ['"', '"']) {
+  public function testEscapeTable($expected, $name, $identifier_quote = '"') {
     $mock_pdo = $this->createMock(StubPDO::class);
     $connection = new StubConnection($mock_pdo, [], $identifier_quote);
 
@@ -321,10 +307,9 @@ class ConnectionTest extends UnitTestCase {
    */
   public function providerEscapeAlias() {
     return [
-      ['!nocase!', 'nocase', ['!', '!']],
-      ['`backtick`', 'backtick', ['`', '`']],
-      ['nocase', 'nocase', ['', '']],
-      ['[brackets]', 'brackets', ['[', ']']],
+      ['!nocase!', 'nocase', '!'],
+      ['`backtick`', 'backtick', '`'],
+      ['nocase', 'nocase', ''],
       ['"camelCase"', '"camelCase"'],
       ['"camelCase"', 'camelCase'],
       ['"camelCase"', 'camel.Case'],
@@ -335,7 +320,7 @@ class ConnectionTest extends UnitTestCase {
    * @covers ::escapeAlias
    * @dataProvider providerEscapeAlias
    */
-  public function testEscapeAlias($expected, $name, array $identifier_quote = ['"', '"']) {
+  public function testEscapeAlias($expected, $name, $identifier_quote = '"') {
     $mock_pdo = $this->createMock(StubPDO::class);
     $connection = new StubConnection($mock_pdo, [], $identifier_quote);
 
@@ -352,16 +337,15 @@ class ConnectionTest extends UnitTestCase {
    */
   public function providerEscapeFields() {
     return [
-      ['/title/', 'title', ['/', '/']],
-      ['`backtick`', 'backtick', ['`', '`']],
-      ['test.title', 'test.title', ['', '']],
+      ['/title/', 'title', '/'],
+      ['`backtick`', 'backtick', '`'],
+      ['test.title', 'test.title', ''],
       ['"isDefaultRevision"', 'isDefaultRevision'],
       ['"isDefaultRevision"', '"isDefaultRevision"'],
       ['"entity_test"."isDefaultRevision"', 'entity_test.isDefaultRevision'],
       ['"entity_test"."isDefaultRevision"', '"entity_test"."isDefaultRevision"'],
       ['"entityTest"."isDefaultRevision"', '"entityTest"."isDefaultRevision"'],
       ['"entityTest"."isDefaultRevision"', 'entityTest.isDefaultRevision'],
-      ['[entityTest].[isDefaultRevision]', 'entityTest.isDefaultRevision', ['[', ']']],
     ];
   }
 
@@ -369,7 +353,7 @@ class ConnectionTest extends UnitTestCase {
    * @covers ::escapeField
    * @dataProvider providerEscapeFields
    */
-  public function testEscapeField($expected, $name, array $identifier_quote = ['"', '"']) {
+  public function testEscapeField($expected, $name, $identifier_quote = '"') {
     $mock_pdo = $this->createMock(StubPDO::class);
     $connection = new StubConnection($mock_pdo, [], $identifier_quote);
 
@@ -386,11 +370,10 @@ class ConnectionTest extends UnitTestCase {
    */
   public function providerEscapeDatabase() {
     return [
-      ['/name/', 'name', ['/', '/']],
-      ['`backtick`', 'backtick', ['`', '`']],
-      ['testname', 'test.name', ['', '']],
+      ['/name/', 'name', '/'],
+      ['`backtick`', 'backtick', '`'],
+      ['testname', 'test.name', ''],
       ['"name"', 'name'],
-      ['[name]', 'name', ['[', ']']],
     ];
   }
 
@@ -398,50 +381,11 @@ class ConnectionTest extends UnitTestCase {
    * @covers ::escapeDatabase
    * @dataProvider providerEscapeDatabase
    */
-  public function testEscapeDatabase($expected, $name, array $identifier_quote = ['"', '"']) {
+  public function testEscapeDatabase($expected, $name, $identifier_quote = '"') {
     $mock_pdo = $this->createMock(StubPDO::class);
     $connection = new StubConnection($mock_pdo, [], $identifier_quote);
 
     $this->assertEquals($expected, $connection->escapeDatabase($name));
-  }
-
-  /**
-   * @covers ::__construct
-   * @expectedDeprecation In drupal:10.0.0 not setting the $identifierQuotes property in the concrete Connection class will result in an RuntimeException. See https://www.drupal.org/node/2986894
-   * @group legacy
-   */
-  public function testIdentifierQuotesDeprecation() {
-    $mock_pdo = $this->createMock(StubPDO::class);
-    new StubConnection($mock_pdo, [], NULL);
-  }
-
-  /**
-   * @covers ::__construct
-   */
-  public function testIdentifierQuotesAssertCount() {
-    $this->expectException(\AssertionError::class);
-    $this->expectExceptionMessage('\Drupal\Core\Database\Connection::$identifierQuotes must contain 2 string values');
-    $mock_pdo = $this->createMock(StubPDO::class);
-    new StubConnection($mock_pdo, [], ['"']);
-  }
-
-  /**
-   * @covers ::__construct
-   */
-  public function testIdentifierQuotesAssertString() {
-    $this->expectException(\AssertionError::class);
-    $this->expectExceptionMessage('\Drupal\Core\Database\Connection::$identifierQuotes must contain 2 string values');
-    $mock_pdo = $this->createMock(StubPDO::class);
-    new StubConnection($mock_pdo, [], [0, '1']);
-  }
-
-  /**
-   * @covers ::__construct
-   */
-  public function testNamespaceDefault() {
-    $mock_pdo = $this->createMock(StubPDO::class);
-    $connection = new StubConnection($mock_pdo, []);
-    $this->assertSame('Drupal\Tests\Core\Database\Stub', $connection->getConnectionOptions()['namespace']);
   }
 
 }

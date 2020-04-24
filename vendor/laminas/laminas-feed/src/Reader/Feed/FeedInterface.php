@@ -9,17 +9,17 @@
 namespace Laminas\Feed\Reader\Feed;
 
 use Countable;
-use DateTime;
 use Iterator;
-use Laminas\Feed\Reader\Collection\Category;
 
+/**
+*/
 interface FeedInterface extends Iterator, Countable
 {
     /**
      * Get a single author
      *
      * @param  int $index
-     * @return null|string
+     * @return string|null
      */
     public function getAuthor($index = 0);
 
@@ -33,77 +33,77 @@ interface FeedInterface extends Iterator, Countable
     /**
      * Get the copyright entry
      *
-     * @return null|string
+     * @return string|null
      */
     public function getCopyright();
 
     /**
      * Get the feed creation date
      *
-     * @return null|DateTime
+     * @return \DateTime|null
      */
     public function getDateCreated();
 
     /**
      * Get the feed modification date
      *
-     * @return null|DateTime
+     * @return \DateTime|null
      */
     public function getDateModified();
 
     /**
      * Get the feed description
      *
-     * @return null|string
+     * @return string|null
      */
     public function getDescription();
 
     /**
      * Get the feed generator entry
      *
-     * @return null|string
+     * @return string|null
      */
     public function getGenerator();
 
     /**
      * Get the feed ID
      *
-     * @return null|string
+     * @return string|null
      */
     public function getId();
 
     /**
      * Get the feed language
      *
-     * @return null|string
+     * @return string|null
      */
     public function getLanguage();
 
     /**
      * Get a link to the HTML source
      *
-     * @return null|string
+     * @return string|null
      */
     public function getLink();
 
     /**
      * Get a link to the XML feed
      *
-     * @return null|string
+     * @return string|null
      */
     public function getFeedLink();
 
     /**
      * Get the feed title
      *
-     * @return null|string
+     * @return string|null
      */
     public function getTitle();
 
     /**
      * Get all categories
      *
-     * @return Category
+     * @return \Laminas\Feed\Reader\Collection\Category
      */
     public function getCategories();
 }

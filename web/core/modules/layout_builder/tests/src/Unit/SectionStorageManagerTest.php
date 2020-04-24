@@ -63,7 +63,7 @@ class SectionStorageManagerTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     $cache = $this->prophesize(CacheBackendInterface::class);

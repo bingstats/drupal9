@@ -35,7 +35,7 @@ class JsonTest extends TestCase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     // Setup a string with the full ASCII table.

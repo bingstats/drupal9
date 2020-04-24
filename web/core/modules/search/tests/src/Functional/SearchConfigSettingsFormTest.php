@@ -39,7 +39,7 @@ class SearchConfigSettingsFormTest extends BrowserTestBase {
    */
   protected $searchNode;
 
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     $this->drupalCreateContentType(['type' => 'page', 'name' => 'Basic page']);

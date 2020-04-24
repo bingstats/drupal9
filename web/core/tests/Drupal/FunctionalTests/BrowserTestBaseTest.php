@@ -24,7 +24,7 @@ class BrowserTestBaseTest extends BrowserTestBase {
    *
    * @var array
    */
-  protected static $modules = ['test_page_test', 'form_test', 'system_test', 'node'];
+  public static $modules = ['test_page_test', 'form_test', 'system_test', 'node'];
 
   /**
    * {@inheritdoc}
@@ -47,8 +47,8 @@ class BrowserTestBaseTest extends BrowserTestBase {
 
     // Check that returned plain text is correct.
     $text = $this->getTextContent();
-    $this->assertStringContainsString('Test page text.', $text);
-    $this->assertStringNotContainsString('</html>', $text);
+    $this->assertContains('Test page text.', $text);
+    $this->assertNotContains('</html>', $text);
 
     // Response includes cache tags that we can assert.
     $this->assertSession()->responseHeaderEquals('X-Drupal-Cache-Tags', 'http_response rendered');
@@ -164,13 +164,13 @@ class BrowserTestBaseTest extends BrowserTestBase {
   public function testClickLink() {
     $this->drupalGet('test-page');
     $this->clickLink('Visually identical test links');
-    $this->assertStringContainsString('user/login', $this->getSession()->getCurrentUrl());
+    $this->assertContains('user/login', $this->getSession()->getCurrentUrl());
     $this->drupalGet('test-page');
     $this->clickLink('Visually identical test links', 0);
-    $this->assertStringContainsString('user/login', $this->getSession()->getCurrentUrl());
+    $this->assertContains('user/login', $this->getSession()->getCurrentUrl());
     $this->drupalGet('test-page');
     $this->clickLink('Visually identical test links', 1);
-    $this->assertStringContainsString('user/register', $this->getSession()->getCurrentUrl());
+    $this->assertContains('user/register', $this->getSession()->getCurrentUrl());
   }
 
   public function testError() {

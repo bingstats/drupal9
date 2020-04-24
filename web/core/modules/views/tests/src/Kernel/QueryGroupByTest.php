@@ -28,7 +28,7 @@ class QueryGroupByTest extends ViewsKernelTestBase {
    *
    * @var array
    */
-  protected static $modules = ['entity_test', 'system', 'field', 'user', 'language'];
+  public static $modules = ['entity_test', 'system', 'field', 'user', 'language'];
 
   /**
    * The storage for the test entity type.
@@ -40,7 +40,7 @@ class QueryGroupByTest extends ViewsKernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp($import_test_views = TRUE): void {
+  protected function setUp($import_test_views = TRUE) {
     parent::setUp();
 
     $this->installEntitySchema('user');
@@ -187,8 +187,8 @@ class QueryGroupByTest extends ViewsKernelTestBase {
     $view = Views::getView('test_group_by_in_filters');
     $this->executeView($view);
 
-    $this->assertStringContainsString('GROUP BY', (string) $view->build_info['query'], 'Make sure that GROUP BY is in the query');
-    $this->assertStringContainsString('HAVING', (string) $view->build_info['query'], 'Make sure that HAVING is in the query');
+    $this->assertContains('GROUP BY', (string) $view->build_info['query'], 'Make sure that GROUP BY is in the query');
+    $this->assertContains('HAVING', (string) $view->build_info['query'], 'Make sure that HAVING is in the query');
   }
 
   /**
@@ -204,7 +204,7 @@ class QueryGroupByTest extends ViewsKernelTestBase {
     $view->displayHandlers->get('default')->options['fields']['name']['group_type'] = 'min';
     unset($view->displayHandlers->get('default')->options['fields']['id']['group_type']);
     $this->executeView($view);
-    $this->assertStringContainsString('GROUP BY entity_test.id', (string) $view->build_info['query'], 'GROUP BY field includes the base table name when grouping on the base field.');
+    $this->assertContains('GROUP BY entity_test.id', (string) $view->build_info['query'], 'GROUP BY field includes the base table name when grouping on the base field.');
   }
 
   /**

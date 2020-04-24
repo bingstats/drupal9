@@ -22,7 +22,7 @@ class Feed extends Extension\AbstractFeed
      */
     public function getUpdatePeriod()
     {
-        $name   = 'updatePeriod';
+        $name = 'updatePeriod';
         $period = $this->getData($name);
 
         if ($period === null) {
@@ -37,10 +37,8 @@ class Feed extends Extension\AbstractFeed
             case 'yearly':
                 return $period;
             default:
-                throw new Reader\Exception\InvalidArgumentException(
-                    "Feed specified invalid update period: '$period'."
-                    . ' Must be one of hourly, daily, weekly or yearly'
-                );
+                throw new Reader\Exception\InvalidArgumentException("Feed specified invalid update period: '$period'."
+                    .  " Must be one of hourly, daily, weekly or yearly");
         }
     }
 
@@ -74,11 +72,11 @@ class Feed extends Extension\AbstractFeed
 
         if (! $freq || $freq < 1) {
             $this->data[$name] = 1;
-            $freq              = 1;
+            $freq = 1;
         }
 
         $period = $this->getUpdatePeriod();
-        $ticks  = 1;
+        $ticks = 1;
 
         switch ($period) {
             case 'yearly':
@@ -103,12 +101,12 @@ class Feed extends Extension\AbstractFeed
     /**
      * Get update base
      *
-     * @return null|DateTime
+     * @return DateTime|null
      */
     public function getUpdateBase()
     {
         $updateBase = $this->getData('updateBase');
-        $date       = null;
+        $date = null;
         if ($updateBase) {
             $date = DateTime::createFromFormat(DateTime::W3C, $updateBase);
         }
@@ -118,9 +116,9 @@ class Feed extends Extension\AbstractFeed
     /**
      * Get the entry data specified by name
      *
-     * @param  string $name
-     * @param  string $type
-     * @return null|mixed
+     * @param string $name
+     * @param string $type
+     * @return mixed|null
      */
     private function getData($name, $type = 'string')
     {

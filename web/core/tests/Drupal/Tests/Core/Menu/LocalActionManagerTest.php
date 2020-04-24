@@ -106,7 +106,7 @@ class LocalActionManagerTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     $this->argumentResolver = $this->createMock('\Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface');
     $this->request = $this->createMock('Symfony\Component\HttpFoundation\Request');
     $this->routeProvider = $this->createMock('Drupal\Core\Routing\RouteProviderInterface');

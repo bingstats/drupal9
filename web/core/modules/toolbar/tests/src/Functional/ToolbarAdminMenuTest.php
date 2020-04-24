@@ -54,14 +54,14 @@ class ToolbarAdminMenuTest extends BrowserTestBase {
    *
    * @var array
    */
-  protected static $modules = ['node', 'block', 'menu_ui', 'user', 'taxonomy', 'toolbar', 'language', 'test_page_test', 'locale'];
+  public static $modules = ['node', 'block', 'menu_ui', 'user', 'taxonomy', 'toolbar', 'language', 'test_page_test', 'locale'];
 
   /**
    * {@inheritdoc}
    */
   protected $defaultTheme = 'stark';
 
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     $perms = [

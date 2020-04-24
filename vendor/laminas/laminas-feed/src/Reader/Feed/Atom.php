@@ -8,14 +8,18 @@
 
 namespace Laminas\Feed\Reader\Feed;
 
-use DateTime;
 use DOMDocument;
 use Laminas\Feed\Reader;
 
+/**
+*/
 class Atom extends AbstractFeed
 {
     /**
-     * @param null|string $type
+     * Constructor
+     *
+     * @param  DOMDocument $dom
+     * @param  string $type
      */
     public function __construct(DOMDocument $dom, $type = null)
     {
@@ -43,7 +47,7 @@ class Atom extends AbstractFeed
      * Get a single author
      *
      * @param  int $index
-     * @return null|string
+     * @return string|null
      */
     public function getAuthor($index = 0)
     {
@@ -77,7 +81,7 @@ class Atom extends AbstractFeed
     /**
      * Get the copyright entry
      *
-     * @return null|string
+     * @return string|null
      */
     public function getCopyright()
     {
@@ -99,7 +103,7 @@ class Atom extends AbstractFeed
     /**
      * Get the feed creation date
      *
-     * @return null|DateTime
+     * @return \DateTime|null
      */
     public function getDateCreated()
     {
@@ -121,7 +125,7 @@ class Atom extends AbstractFeed
     /**
      * Get the feed modification date
      *
-     * @return null|DateTime
+     * @return \DateTime|null
      */
     public function getDateModified()
     {
@@ -143,7 +147,7 @@ class Atom extends AbstractFeed
     /**
      * Get the feed lastBuild date. This is not implemented in Atom.
      *
-     * @return null|string
+     * @return string|null
      */
     public function getLastBuildDate()
     {
@@ -153,7 +157,7 @@ class Atom extends AbstractFeed
     /**
      * Get the feed description
      *
-     * @return null|string
+     * @return string|null
      */
     public function getDescription()
     {
@@ -175,7 +179,7 @@ class Atom extends AbstractFeed
     /**
      * Get the feed generator entry
      *
-     * @return null|string
+     * @return string|null
      */
     public function getGenerator()
     {
@@ -193,7 +197,7 @@ class Atom extends AbstractFeed
     /**
      * Get the feed ID
      *
-     * @return null|string
+     * @return string|null
      */
     public function getId()
     {
@@ -211,7 +215,7 @@ class Atom extends AbstractFeed
     /**
      * Get the feed language
      *
-     * @return null|string
+     * @return string|null
      */
     public function getLanguage()
     {
@@ -237,7 +241,7 @@ class Atom extends AbstractFeed
     /**
      * Get a link to the source website
      *
-     * @return null|string
+     * @return string|null
      */
     public function getBaseUrl()
     {
@@ -255,7 +259,7 @@ class Atom extends AbstractFeed
     /**
      * Get a link to the source website
      *
-     * @return null|string
+     * @return string|null
      */
     public function getLink()
     {
@@ -273,7 +277,7 @@ class Atom extends AbstractFeed
     /**
      * Get feed image data
      *
-     * @return null|array
+     * @return array|null
      */
     public function getImage()
     {
@@ -291,7 +295,7 @@ class Atom extends AbstractFeed
     /**
      * Get a link to the feed's XML Url
      *
-     * @return null|string
+     * @return string|null
      */
     public function getFeedLink()
     {
@@ -313,7 +317,7 @@ class Atom extends AbstractFeed
     /**
      * Get the feed title
      *
-     * @return null|string
+     * @return string|null
      */
     public function getTitle()
     {
@@ -331,7 +335,7 @@ class Atom extends AbstractFeed
     /**
      * Get an array of any supported Pusubhubbub endpoints
      *
-     * @return null|array
+     * @return array|null
      */
     public function getHubs()
     {
@@ -359,7 +363,7 @@ class Atom extends AbstractFeed
 
         $categoryCollection = $this->getExtension('Atom')->getCategories();
 
-        if (count($categoryCollection) === 0) {
+        if (count($categoryCollection) == 0) {
             $categoryCollection = $this->getExtension('DublinCore')->getCategories();
         }
 
@@ -375,9 +379,8 @@ class Atom extends AbstractFeed
      */
     protected function indexEntries()
     {
-        if ($this->getType() === Reader\Reader::TYPE_ATOM_10
-            || $this->getType() === Reader\Reader::TYPE_ATOM_03
-        ) {
+        if ($this->getType() == Reader\Reader::TYPE_ATOM_10 ||
+            $this->getType() == Reader\Reader::TYPE_ATOM_03) {
             $entries = $this->xpath->evaluate('//atom:entry');
 
             foreach ($entries as $index => $entry) {
@@ -388,6 +391,7 @@ class Atom extends AbstractFeed
 
     /**
      * Register the default namespaces for the current feed format
+     *
      */
     protected function registerNamespaces()
     {

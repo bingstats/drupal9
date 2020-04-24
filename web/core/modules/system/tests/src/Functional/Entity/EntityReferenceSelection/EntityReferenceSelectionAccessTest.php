@@ -36,12 +36,12 @@ class EntityReferenceSelectionAccessTest extends KernelTestBase {
    *
    * @var array
    */
-  protected static $modules = ['comment', 'field', 'file', 'image', 'node', 'media', 'system', 'taxonomy', 'text', 'user'];
+  public static $modules = ['comment', 'field', 'file', 'image', 'node', 'media', 'system', 'taxonomy', 'text', 'user'];
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     $this->installSchema('system', 'sequences');

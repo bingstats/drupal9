@@ -16,12 +16,12 @@ class UninstallKernelTest extends KernelTestBase {
    *
    * @var array
    */
-  protected static $modules = ['system', 'user', 'field', 'file', 'image', 'media'];
+  public static $modules = ['system', 'user', 'field', 'file', 'image', 'media'];
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     $this->installSchema('user', ['users_data']);

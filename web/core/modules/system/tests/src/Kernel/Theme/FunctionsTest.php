@@ -22,12 +22,12 @@ class FunctionsTest extends KernelTestBase {
    *
    * @var array
    */
-  protected static $modules = ['router_test', 'system'];
+  public static $modules = ['router_test', 'system'];
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     // Enable the Classy theme.

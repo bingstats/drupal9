@@ -40,7 +40,7 @@ class LayoutBuilderDisableInteractionsTest extends WebDriverTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     $this->createContentType(['type' => 'bundle_with_section_field']);
@@ -179,7 +179,7 @@ class LayoutBuilderDisableInteractionsTest extends WebDriverTestBase {
       $this->fail(new FormattableMarkup("@tag_name was clickable when it shouldn't have been", ['@tag_name' => $tag_name]));
     }
     catch (\Exception $e) {
-      $this->assertStringContainsString('is not clickable at point', $e->getMessage());
+      $this->assertContains('is not clickable at point', $e->getMessage());
     }
   }
 

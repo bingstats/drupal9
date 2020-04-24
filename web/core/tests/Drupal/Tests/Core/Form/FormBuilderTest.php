@@ -42,7 +42,7 @@ class FormBuilderTest extends FormTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     $this->container = new ContainerBuilder();

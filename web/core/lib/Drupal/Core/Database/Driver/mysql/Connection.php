@@ -64,9 +64,19 @@ class Connection extends DatabaseConnection {
   const MIN_MAX_ALLOWED_PACKET = 1024;
 
   /**
-   * {@inheritdoc}
+   * Constructs a Connection object.
    */
-  protected $identifierQuotes = ['"', '"'];
+  public function __construct(\PDO $connection, array $connection_options = []) {
+    parent::__construct($connection, $connection_options);
+
+    // This driver defaults to transaction support, except if explicitly passed FALSE.
+    $this->transactionSupport = !isset($connection_options['transactions']) || ($connection_options['transactions'] !== FALSE);
+
+    // MySQL never supports transactional DDL.
+    $this->transactionalDDLSupport = FALSE;
+
+    $this->connectionOptions = $connection_options;
+  }
 
   /**
    * {@inheritdoc}
@@ -216,6 +226,15 @@ class Connection extends DatabaseConnection {
     $tablename = $this->generateTemporaryTableName();
     $this->query('CREATE TEMPORARY TABLE {' . $tablename . '} Engine=MEMORY ' . $query, $args, $options);
     return $tablename;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function identifierQuote() {
+    // The database is using the ANSI option on set up so use ANSI quotes and
+    // not MySQL's custom backtick quote.
+    return '"';
   }
 
   public function driver() {

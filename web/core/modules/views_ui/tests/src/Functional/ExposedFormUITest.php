@@ -21,7 +21,7 @@ class ExposedFormUITest extends UITestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['node', 'views_ui', 'block', 'taxonomy', 'field_ui', 'datetime'];
+  public static $modules = ['node', 'views_ui', 'block', 'taxonomy', 'field_ui', 'datetime'];
 
   /**
    * {@inheritdoc}
@@ -37,7 +37,7 @@ class ExposedFormUITest extends UITestBase {
    */
   protected $groupFormUiErrors = [];
 
-  protected function setUp($import_test_views = TRUE): void {
+  protected function setUp($import_test_views = TRUE) {
     parent::setUp($import_test_views);
 
     $this->drupalCreateContentType(['type' => 'article']);

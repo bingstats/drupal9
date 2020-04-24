@@ -20,7 +20,7 @@ class LocaleTranslatedSchemaDefinitionTest extends BrowserTestBase {
    *
    * @var array
    */
-  protected static $modules = ['language', 'locale', 'node'];
+  public static $modules = ['language', 'locale', 'node'];
 
   /**
    * {@inheritdoc}
@@ -30,7 +30,7 @@ class LocaleTranslatedSchemaDefinitionTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
     ConfigurableLanguage::createFromLangcode('fr')->save();
     $this->config('system.site')->set('default_langcode', 'fr')->save();

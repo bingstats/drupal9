@@ -21,7 +21,7 @@ class FieldStorageCrudTest extends FieldKernelTestBase {
    *
    * @var array
    */
-  protected static $modules = [];
+  public static $modules = [];
 
   // TODO : test creation with
   // - a full fledged $field structure, check that all the values are there
@@ -215,13 +215,11 @@ class FieldStorageCrudTest extends FieldKernelTestBase {
     // Check that 'single column' criteria works.
     $field_storage_config_storage = \Drupal::entityTypeManager()->getStorage('field_storage_config');
     $fields = $field_storage_config_storage->loadByProperties(['field_name' => $field_storage_definition['field_name']]);
-    $this->assertCount(1, $fields, 'The field was properly read.');
-    $this->assertArrayHasKey($id, $fields, 'The field has the correct key.');
+    $this->assertTrue(count($fields) == 1 && isset($fields[$id]), 'The field was properly read.');
 
     // Check that 'multi column' criteria works.
     $fields = $field_storage_config_storage->loadByProperties(['field_name' => $field_storage_definition['field_name'], 'type' => $field_storage_definition['type']]);
-    $this->assertCount(1, $fields, 'The field was properly read.');
-    $this->assertArrayHasKey($id, $fields, 'The field has the correct key.');
+    $this->assertTrue(count($fields) == 1 && isset($fields[$id]), 'The field was properly read.');
     $fields = $field_storage_config_storage->loadByProperties(['field_name' => $field_storage_definition['field_name'], 'type' => 'foo']);
     $this->assertTrue(empty($fields), 'No field was found.');
 

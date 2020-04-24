@@ -16,7 +16,7 @@ class OverriddenConfigurationTest extends SettingsTrayTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = [
+  public static $modules = [
     'settings_tray_override_test',
     'menu_ui',
     'menu_link_content',
@@ -30,7 +30,7 @@ class OverriddenConfigurationTest extends SettingsTrayTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     $user = $this->createUser([
@@ -166,7 +166,7 @@ class OverriddenConfigurationTest extends SettingsTrayTestBase {
     $contextual_links = $page->findAll('css', "$block_selector .contextual-links li a");
     $this->assertNotEmpty($contextual_links);
     foreach ($contextual_links as $link) {
-      $this->assertStringNotContainsString("/admin/structure/block/manage/$block_id/off-canvas", $link->getAttribute('href'));
+      $this->assertNotContains("/admin/structure/block/manage/$block_id/off-canvas", $link->getAttribute('href'));
     }
     // Confirm the block is not marked as Settings Tray editable.
     $this->assertFalse($page->find('css', $block_selector)

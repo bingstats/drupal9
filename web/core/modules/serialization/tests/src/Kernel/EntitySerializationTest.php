@@ -21,7 +21,7 @@ class EntitySerializationTest extends NormalizerTestBase {
    *
    * @var array
    */
-  protected static $modules = ['serialization', 'system', 'field', 'entity_test', 'text', 'filter', 'user', 'entity_serialization_test'];
+  public static $modules = ['serialization', 'system', 'field', 'entity_test', 'text', 'filter', 'user', 'entity_serialization_test'];
 
   /**
    * The test values.
@@ -58,7 +58,7 @@ class EntitySerializationTest extends NormalizerTestBase {
    */
   protected $entityClass = 'Drupal\entity_test\Entity\EntityTest';
 
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     // User create needs sequence table.

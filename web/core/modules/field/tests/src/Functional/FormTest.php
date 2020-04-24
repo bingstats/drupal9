@@ -25,7 +25,7 @@ class FormTest extends FieldTestBase {
    *
    * @var array
    */
-  protected static $modules = ['node', 'field_test', 'options', 'entity_test', 'locale'];
+  public static $modules = ['node', 'field_test', 'options', 'entity_test', 'locale'];
 
   /**
    * {@inheritdoc}
@@ -60,7 +60,7 @@ class FormTest extends FieldTestBase {
    */
   protected $field;
 
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     $web_user = $this->drupalCreateUser(['view test entity', 'administer entity_test content']);

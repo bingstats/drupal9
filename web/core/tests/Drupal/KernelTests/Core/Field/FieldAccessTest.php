@@ -19,7 +19,7 @@ class FieldAccessTest extends KernelTestBase {
    *
    * @var array
    */
-  protected static $modules = ['entity_test', 'field', 'system', 'text', 'filter', 'user'];
+  public static $modules = ['entity_test', 'field', 'system', 'text', 'filter', 'user'];
 
   /**
    * Holds the currently active global user ID that initiated the test run.
@@ -31,7 +31,7 @@ class FieldAccessTest extends KernelTestBase {
    */
   protected $activeUid;
 
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
     // Install field configuration.
     $this->installConfig(['field']);

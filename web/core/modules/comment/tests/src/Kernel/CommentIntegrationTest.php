@@ -24,12 +24,12 @@ class CommentIntegrationTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['comment', 'field', 'entity_test', 'user', 'system', 'dblog'];
+  public static $modules = ['comment', 'field', 'entity_test', 'user', 'system', 'dblog'];
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
     $this->installEntitySchema('entity_test');
     $this->installEntitySchema('user');

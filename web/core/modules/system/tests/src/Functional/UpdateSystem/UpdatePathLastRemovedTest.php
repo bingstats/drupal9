@@ -41,7 +41,7 @@ class UpdatePathLastRemovedTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
     require_once $this->root . '/core/includes/update.inc';
 

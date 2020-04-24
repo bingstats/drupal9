@@ -36,7 +36,7 @@ class DefaultPluginManagerTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     $this->expectedDefinitions = [
       'apple' => [
         'id' => 'apple',
@@ -333,7 +333,7 @@ class DefaultPluginManagerTest extends UnitTestCase {
     $this->expectedDefinitions['banana']['provider'] = 'plugin_test';
 
     $plugin_manager = new TestPluginManager($this->namespaces, $this->expectedDefinitions, $module_handler, NULL);
-    $this->assertIsArray($plugin_manager->getDefinitions());
+    $this->assertInternalType('array', $plugin_manager->getDefinitions());
   }
 
   /**
@@ -343,9 +343,9 @@ class DefaultPluginManagerTest extends UnitTestCase {
     $module_handler = $this->prophesize(ModuleHandlerInterface::class);
     $plugin_manager = new TestPluginManager($this->namespaces, $this->expectedDefinitions, $module_handler->reveal(), NULL);
     $cache_contexts = $plugin_manager->getCacheContexts();
-    $this->assertIsArray($cache_contexts);
+    $this->assertInternalType('array', $cache_contexts);
     array_map(function ($cache_context) {
-      $this->assertIsString($cache_context);
+      $this->assertInternalType('string', $cache_context);
     }, $cache_contexts);
   }
 
@@ -356,9 +356,9 @@ class DefaultPluginManagerTest extends UnitTestCase {
     $module_handler = $this->prophesize(ModuleHandlerInterface::class);
     $plugin_manager = new TestPluginManager($this->namespaces, $this->expectedDefinitions, $module_handler->reveal(), NULL);
     $cache_tags = $plugin_manager->getCacheTags();
-    $this->assertIsArray($cache_tags);
+    $this->assertInternalType('array', $cache_tags);
     array_map(function ($cache_tag) {
-      $this->assertIsString($cache_tag);
+      $this->assertInternalType('string', $cache_tag);
     }, $cache_tags);
   }
 
@@ -369,7 +369,7 @@ class DefaultPluginManagerTest extends UnitTestCase {
     $module_handler = $this->prophesize(ModuleHandlerInterface::class);
     $plugin_manager = new TestPluginManager($this->namespaces, $this->expectedDefinitions, $module_handler->reveal(), NULL);
     $cache_max_age = $plugin_manager->getCacheMaxAge();
-    $this->assertIsInt($cache_max_age);
+    $this->assertInternalType('int', $cache_max_age);
   }
 
   /**

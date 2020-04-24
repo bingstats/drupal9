@@ -33,7 +33,7 @@ class TextFieldTest extends StringFieldTest {
    */
   protected $defaultTheme = 'stark';
 
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     $this->adminUser = $this->drupalCreateUser(['administer filters']);
@@ -214,8 +214,8 @@ class TextFieldTest extends StringFieldTest {
     $display = $display_repository->getViewDisplay($entity->getEntityTypeId(), $entity->bundle(), 'full');
     $content = $display->build($entity);
     $rendered_entity = \Drupal::service('renderer')->renderRoot($content);
-    $this->assertStringNotContainsString($value, (string) $rendered_entity);
-    $this->assertStringContainsString(Html::escape($value), (string) $rendered_entity);
+    $this->assertNotContains($value, (string) $rendered_entity);
+    $this->assertContains(Html::escape($value), (string) $rendered_entity);
 
     // Create a new text format that does not escape HTML, and grant the user
     // access to it.
@@ -253,7 +253,7 @@ class TextFieldTest extends StringFieldTest {
     $display = $display_repository->getViewDisplay($entity->getEntityTypeId(), $entity->bundle(), 'full');
     $content = $display->build($entity);
     $rendered_entity = \Drupal::service('renderer')->renderRoot($content);
-    $this->assertStringContainsString($value, (string) $rendered_entity);
+    $this->assertContains($value, (string) $rendered_entity);
   }
 
 }

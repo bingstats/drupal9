@@ -63,7 +63,7 @@ class TwigExtensionTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  public function setUp(): void {
+  public function setUp() {
     parent::setUp();
 
     $this->renderer = $this->createMock('\Drupal\Core\Render\RendererInterface');

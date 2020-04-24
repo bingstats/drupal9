@@ -20,14 +20,14 @@ class LanguageConfigurationElementTest extends BrowserTestBase {
    *
    * @var array
    */
-  protected static $modules = ['taxonomy', 'node', 'language', 'language_elements_test', 'field_ui'];
+  public static $modules = ['taxonomy', 'node', 'language', 'language_elements_test', 'field_ui'];
 
   /**
    * {@inheritdoc}
    */
   protected $defaultTheme = 'stark';
 
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
     $user = $this->drupalCreateUser(['access administration pages', 'administer languages', 'administer content types']);
     $this->drupalLogin($user);

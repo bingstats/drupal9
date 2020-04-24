@@ -19,7 +19,7 @@ class FileSystemTempDirectoryTest extends KernelTestBase {
    *
    * @var array
    */
-  protected static $modules = ['system'];
+  public static $modules = ['system'];
 
   /**
    * The file system under test.
@@ -31,7 +31,7 @@ class FileSystemTempDirectoryTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
     $stream_wrapper_manager = $this->container->get('stream_wrapper_manager');
     $logger = $this->container->get('logger.channel.file');

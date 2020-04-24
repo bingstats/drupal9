@@ -11,6 +11,8 @@ namespace Laminas\Feed\Writer;
 use Countable;
 use Iterator;
 
+/**
+*/
 class Feed extends AbstractFeed implements Iterator, Countable
 {
     /**
@@ -32,11 +34,11 @@ class Feed extends AbstractFeed implements Iterator, Countable
      * added to the current feed automatically, but is necessary to create a
      * container with some initial values preset based on the current feed data.
      *
-     * @return Entry
+     * @return \Laminas\Feed\Writer\Entry
      */
     public function createEntry()
     {
-        $entry = new Entry();
+        $entry = new Entry;
         if ($this->getEncoding()) {
             $entry->setEncoding($this->getEncoding());
         }
@@ -48,6 +50,7 @@ class Feed extends AbstractFeed implements Iterator, Countable
      * Appends a Laminas\Feed\Writer\Deleted object representing a new entry tombstone
      * to the feed data container's internal group of entries.
      *
+     * @param Deleted $deleted
      * @return void
      */
     public function addTombstone(Deleted $deleted)
@@ -64,7 +67,7 @@ class Feed extends AbstractFeed implements Iterator, Countable
      */
     public function createTombstone()
     {
-        $deleted = new Deleted();
+        $deleted = new Deleted;
         if ($this->getEncoding()) {
             $deleted->setEncoding($this->getEncoding());
         }
@@ -76,7 +79,8 @@ class Feed extends AbstractFeed implements Iterator, Countable
      * Appends a Laminas\Feed\Writer\Entry object representing a new entry/item
      * the feed data container's internal group of entries.
      *
-     * @return $this
+     * @param Entry $entry
+     * @return Feed
      */
     public function addEntry(Entry $entry)
     {
@@ -88,9 +92,9 @@ class Feed extends AbstractFeed implements Iterator, Countable
      * Removes a specific indexed entry from the internal queue. Entries must be
      * added to a feed container in order to be indexed.
      *
-     * @param  int $index
-     * @return $this
+     * @param int $index
      * @throws Exception\InvalidArgumentException
+     * @return Feed
      */
     public function removeEntry($index)
     {
@@ -106,7 +110,7 @@ class Feed extends AbstractFeed implements Iterator, Countable
      * Retrieve a specific indexed entry from the internal queue. Entries must be
      * added to a feed container in order to be indexed.
      *
-     * @param  int $index
+     * @param int $index
      * @return Entry
      * @throws Exception\InvalidArgumentException
      */
@@ -125,7 +129,7 @@ class Feed extends AbstractFeed implements Iterator, Countable
      *
      * Using this method will alter the original indexation.
      *
-     * @return $this
+     * @return Feed
      */
     public function orderByDate()
     {
@@ -133,7 +137,7 @@ class Feed extends AbstractFeed implements Iterator, Countable
          * Could do with some improvement for performance perhaps
          */
         $timestamp = time();
-        $entries   = [];
+        $entries = [];
         foreach ($this->entries as $entry) {
             if ($entry->getDateModified()) {
                 $timestamp = (int) $entry->getDateModified()->getTimestamp();
@@ -212,22 +216,21 @@ class Feed extends AbstractFeed implements Iterator, Countable
     /**
      * Attempt to build and return the feed resulting from the data set
      *
-     * @param  string $type The feed type "rss" or "atom" to export as
-     * @param  bool $ignoreExceptions
-     * @return string
+     * @param  string  $type The feed type "rss" or "atom" to export as
+     * @param  bool    $ignoreExceptions
      * @throws Exception\InvalidArgumentException
+     * @return string
      */
     public function export($type, $ignoreExceptions = false)
     {
         $this->setType(strtolower($type));
         $type = ucfirst($this->getType());
         if ($type !== 'Rss' && $type !== 'Atom') {
-            throw new Exception\InvalidArgumentException(
-                'Invalid feed type specified: ' . $type . '. Should be one of "rss" or "atom".'
-            );
+            throw new Exception\InvalidArgumentException('Invalid feed type specified: ' . $type . '.'
+            . ' Should be one of "rss" or "atom".');
         }
         $renderClass = 'Laminas\\Feed\\Writer\\Renderer\\Feed\\' . $type;
-        $renderer    = new $renderClass($this);
+        $renderer = new $renderClass($this);
         if ($ignoreExceptions) {
             $renderer->ignoreExceptions();
         }

@@ -20,7 +20,7 @@ class FilterAdminTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['block', 'filter', 'node', 'filter_test_plugin', 'dblog'];
+  public static $modules = ['block', 'filter', 'node', 'filter_test_plugin', 'dblog'];
 
   /**
    * {@inheritdoc}
@@ -44,7 +44,7 @@ class FilterAdminTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     $this->drupalCreateContentType(['type' => 'page', 'name' => 'Basic page']);

@@ -5,7 +5,7 @@ namespace Drupal\Core\EventSubscriber;
 use Drupal\Core\Cache\CacheableDependencyInterface;
 use Drupal\Core\Cache\CacheableJsonResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 
 /**
  * Default handling for JSON errors.
@@ -31,10 +31,10 @@ class ExceptionJsonSubscriber extends HttpExceptionSubscriberBase {
   /**
    * Handles all 4xx errors for JSON.
    *
-   * @param \Symfony\Component\HttpKernel\Event\ExceptionEvent $event
+   * @param \Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent $event
    *   The event to process.
    */
-  public function on4xx(ExceptionEvent $event) {
+  public function on4xx(GetResponseForExceptionEvent $event) {
     /** @var \Symfony\Component\HttpKernel\Exception\HttpExceptionInterface $exception */
     $exception = $event->getThrowable();
 

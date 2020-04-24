@@ -8,7 +8,7 @@
 
 namespace Laminas\Feed\Writer\Renderer\Feed\Atom;
 
-use DateTime;
+use Datetime;
 use DOMDocument;
 use DOMElement;
 use Laminas\Feed;
@@ -17,7 +17,9 @@ use Laminas\Feed\Writer\Version;
 class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
 {
     /**
-     * @param Feed\Writer\Feed $container
+     * Constructor
+     *
+     * @param  \Laminas\Feed\Writer\Feed $container
      */
     public function __construct($container)
     {
@@ -36,7 +38,8 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
     {
         // @codingStandardsIgnoreEnd
         if ($this->getDataContainer()->getLanguage()) {
-            $root->setAttribute('xml:lang', $this->getDataContainer()->getLanguage());
+            $root->setAttribute('xml:lang', $this->getDataContainer()
+                ->getLanguage());
         }
     }
 
@@ -53,7 +56,7 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
     {
         // @codingStandardsIgnoreEnd
         if (! $this->getDataContainer()->getTitle()) {
-            $message   = 'Atom 1.0 feed elements MUST contain exactly one'
+            $message = 'Atom 1.0 feed elements MUST contain exactly one'
                 . ' atom:title element but a title has not been set';
             $exception = new Feed\Exception\InvalidArgumentException($message);
             if (! $this->ignoreExceptions) {
@@ -105,7 +108,7 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
     {
         // @codingStandardsIgnoreEnd
         if (! $this->getDataContainer()->getDateModified()) {
-            $message   = 'Atom 1.0 feed elements MUST contain exactly one'
+            $message = 'Atom 1.0 feed elements MUST contain exactly one'
                 . ' atom:updated element but a modification date has not been set';
             $exception = new Feed\Exception\InvalidArgumentException($message);
             if (! $this->ignoreExceptions) {
@@ -143,7 +146,7 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
             );
         }
 
-        $gdata     = $this->getDataContainer()->getGenerator();
+        $gdata = $this->getDataContainer()->getGenerator();
         $generator = $dom->createElement('generator');
         $root->appendChild($generator);
         $text = $dom->createTextNode($gdata['name']);
@@ -191,7 +194,7 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
         // @codingStandardsIgnoreEnd
         $flinks = $this->getDataContainer()->getFeedLinks();
         if (! $flinks || ! array_key_exists('atom', $flinks)) {
-            $message   = 'Atom 1.0 feed elements SHOULD contain one atom:link '
+            $message = 'Atom 1.0 feed elements SHOULD contain one atom:link '
                 . 'element with a rel attribute value of "self".  This is the '
                 . 'preferred URI for retrieving Atom Feed Documents representing '
                 . 'this Atom feed but a feed link has not been set';
@@ -205,7 +208,7 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
         }
 
         foreach ($flinks as $type => $href) {
-            $mime  = 'application/' . strtolower($type) . '+xml';
+            $mime = 'application/' . strtolower($type) . '+xml';
             $flink = $dom->createElement('link');
             $root->appendChild($flink);
             $flink->setAttribute('rel', 'self');
@@ -236,7 +239,7 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
         }
         foreach ($authors as $data) {
             $author = $this->dom->createElement('author');
-            $name   = $this->dom->createElement('name');
+            $name = $this->dom->createElement('name');
             $author->appendChild($name);
             $root->appendChild($author);
             $text = $dom->createTextNode($data['name']);
@@ -269,9 +272,8 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
     {
         // @codingStandardsIgnoreEnd
         if (! $this->getDataContainer()->getId()
-            && ! $this->getDataContainer()->getLink()
-        ) {
-            $message   = 'Atom 1.0 feed elements MUST contain exactly one '
+        && ! $this->getDataContainer()->getLink()) {
+            $message = 'Atom 1.0 feed elements MUST contain exactly one '
                 . 'atom:id element, or as an alternative, we can use the same '
                 . 'value as atom:link however neither a suitable link nor an '
                 . 'id have been set';

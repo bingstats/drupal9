@@ -80,12 +80,12 @@ class FieldableEntityDefinitionUpdateTest extends EntityKernelTestBase {
    *
    * @var array
    */
-  protected static $modules = ['content_translation', 'entity_test_update', 'language'];
+  public static $modules = ['content_translation', 'entity_test_update', 'language'];
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
     $this->entityDefinitionUpdateManager = $this->container->get('entity.definition_update_manager');
     $this->lastInstalledSchemaRepository = $this->container->get('entity.last_installed_schema.repository');

@@ -52,7 +52,7 @@ class ResourceObjectNormalizerCacherTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
     $this->resourceTypeRepository = $this->container->get('jsonapi.resource_type.repository');
     $this->serializer = $this->container->get('jsonapi.serializer');

@@ -35,12 +35,12 @@ class TwigWhiteListTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['node', 'taxonomy', 'user', 'system', 'text', 'field', 'entity_reference'];
+  public static $modules = ['node', 'taxonomy', 'user', 'system', 'text', 'field', 'entity_reference'];
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
     \Drupal::service('theme_installer')->install(['test_theme']);
     $this->installSchema('system', ['sequences']);

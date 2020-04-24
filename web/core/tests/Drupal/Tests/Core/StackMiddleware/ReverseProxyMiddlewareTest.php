@@ -24,7 +24,7 @@ class ReverseProxyMiddlewareTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     $this->mockHttpKernel = $this->createMock('Symfony\Component\HttpKernel\HttpKernelInterface');
   }
 

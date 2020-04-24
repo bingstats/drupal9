@@ -63,7 +63,7 @@ class UpdateScriptTest extends BrowserTestBase {
    */
   private $updateUser;
 
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
     $this->updateUrl = Url::fromRoute('system.db_update');
     $this->statusReportUrl = Url::fromRoute('system.status');

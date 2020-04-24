@@ -21,7 +21,7 @@ class BaseThemeMissingTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['system'];
+  public static $modules = ['system'];
 
   /**
    * The theme installer.
@@ -33,7 +33,7 @@ class BaseThemeMissingTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     $this->themeInstaller = $this->container->get('theme_installer');

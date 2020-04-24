@@ -93,7 +93,7 @@ abstract class ResourceTestBase extends BrowserTestBase {
    *
    * @var array
    */
-  protected static $modules = ['rest'];
+  public static $modules = ['rest'];
 
   /**
    * {@inheritdoc}
@@ -383,7 +383,7 @@ abstract class ResourceTestBase extends BrowserTestBase {
       // sets it to 'text/html' by default. We also cannot detect the presence
       // of Apache either here in the CLI. For now having this documented here
       // is all we can do.
-      // $this->assertFalse($response->hasHeader('Content-Type'));
+      // $this->assertSame(FALSE, $response->hasHeader('Content-Type'));
       $this->assertSame('', (string) $response->getBody());
     }
     else {

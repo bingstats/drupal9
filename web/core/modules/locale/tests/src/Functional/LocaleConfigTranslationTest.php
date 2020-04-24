@@ -24,7 +24,7 @@ class LocaleConfigTranslationTest extends BrowserTestBase {
    *
    * @var array
    */
-  protected static $modules = ['locale', 'contact', 'contact_test'];
+  public static $modules = ['locale', 'contact', 'contact_test'];
 
   /**
    * {@inheritdoc}
@@ -34,7 +34,7 @@ class LocaleConfigTranslationTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
     // Add a default locale storage for all these tests.
     $this->storage = $this->container->get('locale.storage');
@@ -158,9 +158,7 @@ class LocaleConfigTranslationTest extends BrowserTestBase {
     // Check the right single translation has been created.
     $translations = $this->storage->getTranslations(['language' => $this->langcode, 'type' => 'configuration', 'name' => 'image.style.medium']);
     $translation = reset($translations);
-    $this->assertCount(1, $translations, 'Got only one translation for image configuration.');
-    $this->assertEquals($string->source, $translation->source);
-    $this->assertEquals($image_style_label, $translation->translation);
+    $this->assertTrue(count($translations) == 1 && $translation->source == $string->source && $translation->translation == $image_style_label, 'Got only one translation for image configuration.');
 
     // Try more complex configuration data.
     $translation = \Drupal::languageManager()->getLanguageConfigOverride($this->langcode, 'image.style.medium')->get();

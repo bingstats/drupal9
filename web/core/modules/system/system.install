@@ -1060,6 +1060,14 @@ function system_requirements($phase) {
     case 'mbstring.encoding_translation':
       $requirements['unicode']['description'] = t('Multibyte string input conversion in PHP is active and must be disabled. Check the php.ini <em>mbstring.encoding_translation</em> setting. Please refer to the <a href="http://php.net/mbstring">PHP mbstring documentation</a> for more information.');
       break;
+
+    case 'mbstring.http_input':
+      $requirements['unicode']['description'] = t('Multibyte string input conversion in PHP is active and must be disabled. Check the php.ini <em>mbstring.http_input</em> setting. Please refer to the <a href="http://php.net/mbstring">PHP mbstring documentation</a> for more information.');
+      break;
+
+    case 'mbstring.http_output':
+      $requirements['unicode']['description'] = t('Multibyte string output conversion in PHP is active and must be disabled. Check the php.ini <em>mbstring.http_output</em> setting. Please refer to the <a href="http://php.net/mbstring">PHP mbstring documentation</a> for more information.');
+      break;
   }
 
   if ($phase == 'runtime') {
@@ -1209,6 +1217,23 @@ function system_requirements($phase) {
         'value' => t("Drupal 9 no longer uses the \$settings['install_profile'] value in settings.php and it should be removed."),
         'severity' => REQUIREMENT_WARNING,
       ];
+    }
+  }
+
+  // Prevent installation or update if the Pathauto module is installed and its
+  // version is less than 1.6.
+  if ($phase === 'install' || $phase === 'update') {
+    if (\Drupal::moduleHandler()->moduleExists('pathauto')) {
+      $info = \Drupal::service('extension.list.module')->getExtensionInfo('pathauto');
+      if (version_compare($info['version'], '8.x-1.5') <= 0) {
+        $requirements['pathauto_module_incompatibility'] = [
+          'title' => t('Pathauto'),
+          'description' => t('The Pathauto module is not compatible with the current version of Drupal core. Update the <a href=":url">Pathauto</a> module to 8.x-1.6 or later.', [
+            ':url' => 'https://drupal.org/project/pathauto',
+          ]),
+          'severity' => REQUIREMENT_ERROR,
+        ];
+      }
     }
   }
 

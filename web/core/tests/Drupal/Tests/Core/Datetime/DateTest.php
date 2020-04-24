@@ -58,7 +58,7 @@ class DateTest extends UnitTestCase {
    */
   protected $dateFormatterStub;
 
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     $entity_storage = $this->createMock('Drupal\Core\Entity\EntityStorageInterface');

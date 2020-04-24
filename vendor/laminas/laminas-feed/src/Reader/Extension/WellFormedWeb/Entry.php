@@ -10,12 +10,14 @@ namespace Laminas\Feed\Reader\Extension\WellFormedWeb;
 
 use Laminas\Feed\Reader\Extension;
 
+/**
+*/
 class Entry extends Extension\AbstractEntry
 {
     /**
      * Get the entry comment Uri
      *
-     * @return null|string
+     * @return string|null
      */
     public function getCommentFeedLink()
     {

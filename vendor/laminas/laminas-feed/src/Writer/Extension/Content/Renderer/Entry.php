@@ -12,6 +12,8 @@ use DOMDocument;
 use DOMElement;
 use Laminas\Feed\Writer\Extension;
 
+/**
+*/
 class Entry extends Extension\AbstractRenderer
 {
     /**
@@ -30,7 +32,7 @@ class Entry extends Extension\AbstractRenderer
      */
     public function render()
     {
-        if (strtolower($this->getType()) === 'atom') {
+        if (strtolower($this->getType()) == 'atom') {
             return;
         }
         $this->_setContent($this->dom, $this->base);

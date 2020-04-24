@@ -21,7 +21,7 @@ class TaxonomyFieldTidTest extends ViewsKernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['taxonomy', 'taxonomy_test_views', 'text', 'filter'];
+  public static $modules = ['taxonomy', 'taxonomy_test_views', 'text', 'filter'];
 
   /**
    * {@inheritdoc}
@@ -38,7 +38,7 @@ class TaxonomyFieldTidTest extends ViewsKernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp($import_test_views = TRUE): void {
+  protected function setUp($import_test_views = TRUE) {
     parent::setUp($import_test_views);
 
     $this->installEntitySchema('taxonomy_term');

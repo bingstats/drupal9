@@ -55,7 +55,7 @@ class EntityResolverManagerTest extends UnitTestCase {
    *
    * @covers ::__construct
    */
-  protected function setUp(): void {
+  protected function setUp() {
     $this->entityTypeManager = $this->createMock('Drupal\Core\Entity\EntityTypeManagerInterface');
     $this->container = $this->createMock('Symfony\Component\DependencyInjection\ContainerInterface');
     $this->classResolver = $this->getClassResolverStub();

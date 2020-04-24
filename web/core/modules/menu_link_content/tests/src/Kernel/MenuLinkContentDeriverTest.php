@@ -18,12 +18,12 @@ class MenuLinkContentDeriverTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['menu_link_content', 'link', 'system', 'menu_link_content_dynamic_route', 'user'];
+  public static $modules = ['menu_link_content', 'link', 'system', 'menu_link_content_dynamic_route', 'user'];
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     $this->installEntitySchema('user');

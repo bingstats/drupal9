@@ -16,7 +16,7 @@ class AjaxPageStateTest extends BrowserTestBase {
    *
    * @var array
    */
-  protected static $modules = ['node', 'views'];
+  public static $modules = ['node', 'views'];
 
   /**
    * {@inheritdoc}
@@ -30,7 +30,7 @@ class AjaxPageStateTest extends BrowserTestBase {
    */
   protected $adminUser;
 
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
     // Create an administrator with all permissions.
     $this->adminUser = $this->drupalCreateUser(array_keys(\Drupal::service('user.permissions')

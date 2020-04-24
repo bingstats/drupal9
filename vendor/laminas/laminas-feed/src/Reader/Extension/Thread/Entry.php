@@ -10,6 +10,8 @@ namespace Laminas\Feed\Reader\Extension\Thread;
 
 use Laminas\Feed\Reader\Extension;
 
+/**
+*/
 class Entry extends Extension\AbstractEntry
 {
     /**
@@ -27,7 +29,7 @@ class Entry extends Extension\AbstractEntry
     /**
      * Get the total number of threaded responses (i.e comments)
      *
-     * @return null|int
+     * @return int|null
      */
     public function getCommentCount()
     {
@@ -38,7 +40,7 @@ class Entry extends Extension\AbstractEntry
      * Get the entry data specified by name
      *
      * @param  string $name
-     * @return null|mixed
+     * @return mixed|null
      */
     protected function getData($name)
     {

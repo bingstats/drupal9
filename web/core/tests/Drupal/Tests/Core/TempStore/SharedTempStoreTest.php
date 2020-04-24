@@ -68,7 +68,7 @@ class SharedTempStoreTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     $this->keyValue = $this->createMock('Drupal\Core\KeyValueStore\KeyValueStoreExpirableInterface');
@@ -376,9 +376,7 @@ class SharedTempStoreTest extends UnitTestCase {
     $store = unserialize(serialize($this->tempStore));
     $this->assertInstanceOf(SharedTempStore::class, $store);
 
-    $reflected_request_stack = (new \ReflectionObject($store))->getProperty('requestStack');
-    $reflected_request_stack->setAccessible(TRUE);
-    $request_stack = $reflected_request_stack->getValue($store);
+    $request_stack = $this->getObjectAttribute($store, 'requestStack');
     $this->assertEquals($this->requestStack, $request_stack);
     $this->assertSame($unserializable_request, $request_stack->pop());
   }

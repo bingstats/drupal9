@@ -14,7 +14,7 @@ class InstallerDependenciesResolutionTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['system'];
+  public static $modules = ['system'];
 
   /**
    * Verifies that the exception message in the profile step is correct.
@@ -32,11 +32,11 @@ class InstallerDependenciesResolutionTest extends KernelTestBase {
     ]);
 
     $message = $info['required_modules']['description']->render();
-    $this->assertStringContainsString('Fictional', $message);
-    $this->assertStringContainsString('Missing_module1', $message);
-    $this->assertStringContainsString('Missing_module2', $message);
-    $this->assertStringNotContainsString('Block', $message);
-    $this->assertStringNotContainsString('Node', $message);
+    $this->assertContains('Fictional', $message);
+    $this->assertContains('Missing_module1', $message);
+    $this->assertContains('Missing_module2', $message);
+    $this->assertNotContains('Block', $message);
+    $this->assertNotContains('Node', $message);
   }
 
 }

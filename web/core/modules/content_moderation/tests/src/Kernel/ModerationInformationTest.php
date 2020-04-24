@@ -19,7 +19,7 @@ class ModerationInformationTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = [
+  public static $modules = [
     'content_moderation',
     'entity_test',
     'user',
@@ -38,7 +38,7 @@ class ModerationInformationTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     $this->installEntitySchema('entity_test_rev');

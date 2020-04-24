@@ -37,12 +37,12 @@ class ContentTranslationOperationsTest extends NodeTestBase {
    *
    * @var array
    */
-  protected static $modules = ['language', 'content_translation', 'node', 'views', 'block'];
+  public static $modules = ['language', 'content_translation', 'node', 'views', 'block'];
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     // Enable additional languages.

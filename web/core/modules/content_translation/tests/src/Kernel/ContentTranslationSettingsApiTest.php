@@ -17,12 +17,12 @@ class ContentTranslationSettingsApiTest extends KernelTestBase {
    *
    * @var array
    */
-  protected static $modules = ['language', 'content_translation', 'user', 'entity_test'];
+  public static $modules = ['language', 'content_translation', 'user', 'entity_test'];
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
     $this->installEntitySchema('entity_test_mul');
   }

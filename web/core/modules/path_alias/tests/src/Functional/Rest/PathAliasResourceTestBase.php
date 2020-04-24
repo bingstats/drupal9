@@ -14,7 +14,7 @@ abstract class PathAliasResourceTestBase extends EntityResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['path_alias'];
+  public static $modules = ['path_alias'];
 
   /**
    * {@inheritdoc}

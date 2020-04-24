@@ -13,8 +13,15 @@ use DOMElement;
 use Laminas\Feed\Writer;
 use Laminas\Feed\Writer\Renderer;
 
+/**
+*/
 class AtomSource extends AbstractAtom implements Renderer\RendererInterface
 {
+    /**
+     * Constructor
+     *
+     * @param  Writer\Source $container
+     */
     public function __construct(Writer\Source $container)
     {
         parent::__construct($container);
@@ -23,16 +30,16 @@ class AtomSource extends AbstractAtom implements Renderer\RendererInterface
     /**
      * Render Atom Feed Metadata (Source element)
      *
-     * @return $this
+     * @return \Laminas\Feed\Writer\Renderer\Feed\AbstractAtom
      */
     public function render()
     {
         if (! $this->container->getEncoding()) {
             $this->container->setEncoding('UTF-8');
         }
-        $this->dom               = new DOMDocument('1.0', $this->container->getEncoding());
+        $this->dom = new DOMDocument('1.0', $this->container->getEncoding());
         $this->dom->formatOutput = true;
-        $root                    = $this->dom->createElement('source');
+        $root = $this->dom->createElement('source');
         $this->setRootElement($root);
         $this->dom->appendChild($root);
         $this->_setLanguage($this->dom, $root);
@@ -73,7 +80,7 @@ class AtomSource extends AbstractAtom implements Renderer\RendererInterface
             return;
         }
 
-        $gdata     = $this->getDataContainer()->getGenerator();
+        $gdata = $this->getDataContainer()->getGenerator();
         $generator = $dom->createElement('generator');
         $root->appendChild($generator);
         $text = $dom->createTextNode($gdata['name']);

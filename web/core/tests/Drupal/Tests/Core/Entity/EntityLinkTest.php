@@ -38,7 +38,7 @@ class EntityLinkTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     $this->entityTypeManager = $this->createMock(EntityTypeManagerInterface::class);

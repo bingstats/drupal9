@@ -76,7 +76,7 @@ class SqlContentEntityStorageSchemaTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     $this->entityTypeManager = $this->createMock(EntityTypeManager::class);
     $this->entityFieldManager = $this->createMock(EntityFieldManager::class);
     $this->entityLastInstalledSchemaRepository = $this->createMock(EntityLastInstalledSchemaRepositoryInterface::class);

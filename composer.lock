@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bfca0d5d1fc957cc3129320905aa0262",
+    "content-hash": "eecac93b77fd700cb0dc96283a74d6d9",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1622,6 +1622,59 @@
             ],
             "description": "Locked core dependencies; require this project INSTEAD OF drupal/core.",
             "time": "2020-05-15T23:57:43+00:00"
+        },
+        {
+            "name": "drupal/olivero",
+            "version": "1.0.0-alpha1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/olivero.git",
+                "reference": "8.x-1.0-alpha1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/olivero-8.x-1.0-alpha1.zip",
+                "reference": "8.x-1.0-alpha1",
+                "shasum": "5090833aba54cc91ce862d132a5f3a92695b9a21"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9"
+            },
+            "type": "drupal-theme",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.0-alpha1",
+                    "datestamp": "1589571702",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "mherchel",
+                    "homepage": "https://www.drupal.org/user/118428"
+                },
+                {
+                    "name": "mtift",
+                    "homepage": "https://www.drupal.org/user/751908"
+                },
+                {
+                    "name": "proeung",
+                    "homepage": "https://www.drupal.org/user/1785940"
+                }
+            ],
+            "description": "A clean, modern, and accessible Drupal default theme.",
+            "homepage": "https://www.drupal.org/project/olivero",
+            "support": {
+                "source": "https://git.drupalcode.org/project/olivero",
+                "issues": "https://www.drupal.org/project/issues/olivero"
+            }
         },
         {
             "name": "drupal/page_load_progress",

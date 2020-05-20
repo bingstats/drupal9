@@ -1,0 +1,65 @@
+# This theme is marked as @internal. It is intended to evolve and change over
+# minor releases.
+# As the UI of Drupal improves between minor versions, the mark up and assets
+# in the Olivero theme will change. The Olivero theme is not backwards
+# compatible. If you wish to modify the output or assets of Olivero you can:
+# 1. Copy the whole of Olivero and rename it as your own theme. You will need to
+# manually manage your own updates if you want to stay up to date with Olivero's
+# bug fixes and feature support.
+#
+# 2. Sub-theme Olivero. This is only recommended if you want to make minor
+# tweaks and understand that Olivero could break your modifications as it
+# changes.
+name: Olivero
+type: theme
+base theme: false
+description: 'A clean, modern, and accessible Drupal default theme.'
+package: Core
+# version: VERSION
+core: 8.x
+core_version_requirement: ^8 || ^9
+libraries:
+  - olivero/global-styling
+regions:
+  header: Header
+  primary_menu: 'Primary menu'
+  secondary_menu: 'Secondary menu'
+  page_top: 'Page top'
+  page_bottom: 'Page bottom'
+  highlighted: Highlighted
+  breadcrumb: Breadcrumb
+  content_above: Content Above
+  content: Content
+  sidebar: 'Sidebar'
+  featured_bottom: 'Featured bottom'
+  footer: 'Footer'
+  footer_first: 'Footer first'
+  footer_second: 'Footer second'
+libraries-override:
+  system/base:
+    css:
+      component:
+        css/components/autocomplete-loading.module.css: css/dist/components/autocomplete-loading.module.css
+  core/drupal.checkbox: false
+  core/drupal.vertical-tabs:
+    css:
+      component:
+        misc/vertical-tabs.css: css/dist/components/vertical-tabs.css
+  media/oembed.formatter: false
+libraries-extend:
+  core/drupal.message:
+    - olivero/messages
+  core/drupal.collapse:
+    - olivero/details
+ckeditor_stylesheets:
+  - css/dist/base/fonts.css
+  - css/dist/base/base.css
+  - css/dist/components/embedded-media.css
+  - css/dist/components/table.css
+  - css/dist/components/text-content.css
+  - css/dist/theme/ckeditor-frame.css
+
+# Information added by Drupal.org packaging script on 2020-05-15
+version: '8.x-1.0-alpha1'
+project: 'olivero'
+datestamp: 1589571704

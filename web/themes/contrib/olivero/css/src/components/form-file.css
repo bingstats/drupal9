@@ -1,0 +1,51 @@
+/**
+ * @file
+ * File input elements.
+ */
+
+@import "../base/variables.css";
+
+input[type="file"],
+.form-element--type-file {
+  max-width: 100%;
+  padding: var(--sp);
+  color: var(--color--gray-10);
+  border: 0;
+  border-left: solid 4px var(--color--gray-30);
+  outline: solid 1px transparent;
+  background-color: var(--color--gray-95);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-s);
+  appearance: none;
+
+  &:hover,
+  &:focus {
+    padding: calc(var(--sp) - 2px);
+    border: solid 2px var(--color--blue-70);
+    border-left-width: 6px;
+  }
+
+  &:focus {
+    outline: var(--outline--base);
+    box-shadow: var(--shadow-focusable);
+  }
+
+  &.error {
+    border-color: var(--color--red);
+
+    &:hover,
+    &:focus {
+      border-color: var(--color--blue-70);
+    }
+
+    &:focus {
+      box-shadow: var(--shadow-focusable);
+    }
+  }
+
+  &[disabled] {
+    color: var(--color--gray-30);
+    border-color: transparent;
+    background: linear-gradient(to right, var(--color--gray-70) var(--form-element-border-size-left), transparent var(--form-element-border-size-left), transparent 100%) var(--color--gray-95);
+  }
+}

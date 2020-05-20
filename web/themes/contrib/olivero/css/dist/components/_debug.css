@@ -1,0 +1,45 @@
+.olivero-debug{
+  position:fixed;
+  bottom:0;
+  overflow:auto;
+  max-width:100%;
+  max-height:30%;
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+  color:white;
+}[dir] .olivero-debug{
+  padding:18px 27px;
+  background-color:rgba(0, 0, 0, 0.5);
+}[dir=ltr] .olivero-debug{
+  right:0;
+}[dir=rtl] .olivero-debug{
+  left:0;
+}
+
+.olivero-debug label{
+    display:inline-block;
+    width:200px;
+  }
+
+[dir] .olivero-debug label{
+    padding:5px 0;
+    cursor:pointer;
+  }
+
+[dir] .olivero-debug input[type="checkbox"]{
+    cursor:pointer;
+  }
+
+[dir=ltr] .olivero-debug input[type="checkbox"]{
+  margin-right:10px;
+  }
+
+[dir=rtl] .olivero-debug input[type="checkbox"]{
+    margin-left:10px;
+  }
+
+[dir] .olivero-debug .description{
+    margin-top:18px;
+  }

@@ -1,0 +1,100 @@
+input[type="text"],
+input[type="search"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="tel"],
+textarea,
+.form-text{
+  max-width:100%;
+  min-height:54px;
+  color:#313637;
+  outline:solid 1px transparent;
+  font-size:16px;
+  line-height:18px;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  appearance:none;
+}[dir] input[type="text"], [dir] input[type="search"], [dir] input[type="email"], [dir] input[type="password"], [dir] input[type="number"], [dir] input[type="tel"], [dir] textarea, [dir] .form-text{
+  border:0;
+  background-color:#f7f9fa;
+}[dir=ltr] input[type="text"], [dir=ltr] input[type="search"], [dir=ltr] input[type="email"], [dir=ltr] input[type="password"], [dir=ltr] input[type="number"], [dir=ltr] input[type="tel"], [dir=ltr] textarea, [dir=ltr] .form-text{
+  padding-left:18px;
+  border-left:solid 6px #7e96a7;
+}[dir=rtl] input[type="text"], [dir=rtl] input[type="search"], [dir=rtl] input[type="email"], [dir=rtl] input[type="password"], [dir=rtl] input[type="number"], [dir=rtl] input[type="tel"], [dir=rtl] textarea, [dir=rtl] .form-text{
+  padding-right:18px;
+  border-right:solid 6px #7e96a7;
+}
+
+[dir] input[type="text"]:hover, [dir] input[type="text"]:focus, [dir] input[type="search"]:hover, [dir] input[type="search"]:focus, [dir] input[type="email"]:hover, [dir] input[type="email"]:focus, [dir] input[type="password"]:hover, [dir] input[type="password"]:focus, [dir] input[type="number"]:hover, [dir] input[type="number"]:focus, [dir] input[type="tel"]:hover, [dir] input[type="tel"]:focus, [dir] textarea:hover, [dir] textarea:focus, [dir] .form-text:hover, [dir] .form-text:focus{
+    border:solid 2px #53b0eb;
+  }
+
+[dir=ltr] input[type="text"]:hover, [dir=ltr] input[type="text"]:focus, [dir=ltr] input[type="search"]:hover, [dir=ltr] input[type="search"]:focus, [dir=ltr] input[type="email"]:hover, [dir=ltr] input[type="email"]:focus, [dir=ltr] input[type="password"]:hover, [dir=ltr] input[type="password"]:focus, [dir=ltr] input[type="number"]:hover, [dir=ltr] input[type="number"]:focus, [dir=ltr] input[type="tel"]:hover, [dir=ltr] input[type="tel"]:focus, [dir=ltr] textarea:hover, [dir=ltr] textarea:focus, [dir=ltr] .form-text:hover, [dir=ltr] .form-text:focus{
+  border-left-width:6px;
+  }
+
+[dir=rtl] input[type="text"]:hover, [dir=rtl] input[type="text"]:focus, [dir=rtl] input[type="search"]:hover, [dir=rtl] input[type="search"]:focus, [dir=rtl] input[type="email"]:hover, [dir=rtl] input[type="email"]:focus, [dir=rtl] input[type="password"]:hover, [dir=rtl] input[type="password"]:focus, [dir=rtl] input[type="number"]:hover, [dir=rtl] input[type="number"]:focus, [dir=rtl] input[type="tel"]:hover, [dir=rtl] input[type="tel"]:focus, [dir=rtl] textarea:hover, [dir=rtl] textarea:focus, [dir=rtl] .form-text:hover, [dir=rtl] .form-text:focus{
+    border-right-width:6px;
+  }
+
+input[type="text"]:focus, input[type="search"]:focus, input[type="email"]:focus, input[type="password"]:focus, input[type="number"]:focus, input[type="tel"]:focus, textarea:focus, .form-text:focus{
+    outline:2px
+dotted
+transparent;
+  }
+
+[dir] input[type="text"]:focus, [dir] input[type="search"]:focus, [dir] input[type="email"]:focus, [dir] input[type="password"]:focus, [dir] input[type="number"]:focus, [dir] input[type="tel"]:focus, [dir] textarea:focus, [dir] .form-text:focus{
+    box-shadow:0
+0
+36px
+rgba(83, 176, 235, 0.25);
+  }
+
+input[type="text"]::-ms-clear, input[type="search"]::-ms-clear, input[type="email"]::-ms-clear, input[type="password"]::-ms-clear, input[type="number"]::-ms-clear, input[type="tel"]::-ms-clear, textarea::-ms-clear, .form-text::-ms-clear{
+    display:none;
+  }
+
+[dir] input[type="text"].error, [dir] input[type="search"].error, [dir] input[type="email"].error, [dir] input[type="password"].error, [dir] input[type="number"].error, [dir] input[type="tel"].error, [dir] textarea.error, [dir] .form-text.error{
+    border-color:#e33f1e;
+  }
+
+[dir] input[type="text"].error:hover, [dir] input[type="search"].error:hover, [dir] input[type="email"].error:hover, [dir] input[type="password"].error:hover, [dir] input[type="number"].error:hover, [dir] input[type="tel"].error:hover, [dir] textarea.error:hover, [dir] .form-text.error:hover{
+      border-color:#53b0eb;
+    }
+
+[dir] input[type="text"].error:focus, [dir] input[type="search"].error:focus, [dir] input[type="email"].error:focus, [dir] input[type="password"].error:focus, [dir] input[type="number"].error:focus, [dir] input[type="tel"].error:focus, [dir] textarea.error:focus, [dir] .form-text.error:focus{
+      border-color:#53b0eb;
+      box-shadow:0
+0
+36px
+rgba(83, 176, 235, 0.25);
+    }
+
+input[type="text"][disabled], input[type="search"][disabled], input[type="email"][disabled], input[type="password"][disabled], input[type="number"][disabled], input[type="tel"][disabled], textarea[disabled], .form-text[disabled]{
+    color:#7e96a7;
+  }
+
+[dir] input[type="text"][disabled], [dir] input[type="search"][disabled], [dir] input[type="email"][disabled], [dir] input[type="password"][disabled], [dir] input[type="number"][disabled], [dir] input[type="tel"][disabled], [dir] textarea[disabled], [dir] .form-text[disabled]{
+    border-color:transparent;
+  }
+
+[dir=ltr] input[type="text"][disabled], [dir=ltr] input[type="search"][disabled], [dir=ltr] input[type="email"][disabled], [dir=ltr] input[type="password"][disabled], [dir=ltr] input[type="number"][disabled], [dir=ltr] input[type="tel"][disabled], [dir=ltr] textarea[disabled], [dir=ltr] .form-text[disabled]{
+  background:linear-gradient(to right, #d7e1e8 6px, transparent 6px, transparent 100%) #f7f9fa;
+  }
+
+[dir=rtl] input[type="text"][disabled], [dir=rtl] input[type="search"][disabled], [dir=rtl] input[type="email"][disabled], [dir=rtl] input[type="password"][disabled], [dir=rtl] input[type="number"][disabled], [dir=rtl] input[type="tel"][disabled], [dir=rtl] textarea[disabled], [dir=rtl] .form-text[disabled]{
+    background:linear-gradient(to left, #d7e1e8 6px, transparent 6px, transparent 100%) #f7f9fa;
+  }
+
+.form-element--small{
+  min-height:45px;
+}
+
+textarea{
+  max-height:none;
+}
+
+[dir] textarea{
+  padding:18px;
+}

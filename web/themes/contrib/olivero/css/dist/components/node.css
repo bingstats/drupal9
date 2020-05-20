@@ -1,0 +1,39 @@
+.node__meta{
+  display:flex;
+  align-items:center;
+  color:#6e7172;
+  font-size:14px;
+  line-height:18px;
+}[dir] .node__meta{
+  margin-bottom:18px;
+}
+
+.node__meta .field--name-user-picture img{
+    width:45px;
+    height:45px;
+    -o-object-fit:cover;
+    object-fit:cover;
+  }
+
+[dir] .node__meta .field--name-user-picture img{
+    border-radius:50%;
+  }
+
+[dir=ltr] .node__meta .field--name-user-picture img{
+  margin-right:9px;
+  }
+
+[dir=rtl] .node__meta .field--name-user-picture img{
+    margin-left:9px;
+  }
+
+.node__meta a{
+    font-weight:bold;
+  }
+
+@media (min-width: 500px){
+
+[dir] .node__meta{
+    margin-bottom:36px
+}
+  }

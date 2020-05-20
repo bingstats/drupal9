@@ -1,0 +1,159 @@
+/**
+ * @file
+ * Select input elements.
+ */
+
+@import "../base/variables.css";
+
+:root {
+  --form-element-select-icon: url("../../../images/chevron-down.svg");
+  --form-element-select-icon-right-offset: var(--sp1);
+  --form-element-select-icon-right-offset--small: var(--sp0-75);
+  --form-element-select-icon-top-offset: calc(var(--sp1) + var(--form-element-border-size-base));
+  --form-element-select-icon-top-offset--small: calc(var(--sp0-75) + var(--form-element-border-size-base));
+  --form-element-select-border-size-right: var(--sp3);
+  --form-element-select-border-size-right--small: var(--sp2-5);
+  --form-element-select-border-size-y: 2px;
+}
+
+/* Disables border of select specifically for ms browser */
+.form-element--type-select::-ms-expand {
+  display: none;
+}
+
+/* Default select */
+select,
+.form-element--type-select {
+  max-width: 100%;
+  min-height: var(--sp3);
+  padding: var(--sp) calc(var(--sp) + var(--form-element-select-border-size-right)) var(--sp) var(--sp);
+  color: var(--color--gray-10);
+  border: 0;
+  border-left: solid 6px var(--color--gray-30);
+  border-radius: 0;
+  outline: solid 1px transparent;
+  background:
+    var(--form-element-select-icon) no-repeat right var(--form-element-select-icon-right-offset) top calc(var(--form-element-select-icon-top-offset) + var(--form-element-select-border-size-y)),
+    linear-gradient(to left, var(--color--gray-30) var(--form-element-select-border-size-right), transparent var(--form-element-select-border-size-right), transparent 100%) var(--color--gray-95);
+  background-color: var(--color--gray-95);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-s);
+  appearance: none;
+
+  &:hover,
+  &:focus {
+    padding-top: calc(var(--sp) - var(--form-element-select-border-size-y));
+    padding-bottom: calc(var(--sp) - var(--form-element-select-border-size-y));
+    border: solid var(--form-element-select-border-size-y) var(--color--blue-70);
+    border-right: 0;
+    border-left: solid 6px var(--color--blue-70);
+    background:
+      var(--form-element-select-icon) no-repeat right var(--form-element-select-icon-right-offset) top var(--form-element-select-icon-top-offset),
+      linear-gradient(to left, var(--color--blue-70) var(--form-element-select-border-size-right), transparent var(--form-element-select-border-size-right), transparent 100%) var(--color--gray-95);
+  }
+
+  &:focus {
+    outline: var(--outline--base);
+    box-shadow: var(--shadow-focusable);
+  }
+
+  &[disabled] {
+    color: var(--color--gray-30);
+    border-color: transparent;
+    background: linear-gradient(to right, var(--color--gray-70) var(--form-element-border-size-left), transparent var(--form-element-border-size-left), transparent 100%) var(--color--gray-95);
+  }
+}
+
+/* Default select, error case */
+.form-element--type-select.error {
+  border-color: var(--color--red);
+  background:
+    var(--form-element-select-icon) no-repeat right var(--form-element-select-icon-right-offset) top calc(var(--form-element-select-icon-top-offset) + var(--form-element-select-border-size-y)),
+    linear-gradient(to right, var(--color--red) var(--form-element-border-size-left), transparent var(--form-element-border-size-left), transparent 100%),
+    linear-gradient(to left, var(--color--red) var(--form-element-select-border-size-right), transparent var(--form-element-select-border-size-right), transparent 100%) var(--color--gray-95);
+
+  &:hover {
+    border-color: var(--color--blue-70);
+    background:
+      var(--form-element-select-icon) no-repeat right var(--form-element-select-icon-right-offset) top var(--form-element-select-icon-top-offset),
+      linear-gradient(to right, var(--color--blue-70) var(--form-element-border-size-left), transparent var(--form-element-border-size-left), transparent 100%),
+      linear-gradient(to left, var(--color--blue-70) var(--form-element-select-border-size-right), transparent var(--form-element-select-border-size-right), transparent 100%) var(--color--gray-95);
+  }
+
+  &:focus {
+    border-color: var(--color--blue-70);
+    background:
+      var(--form-element-select-icon) no-repeat right var(--form-element-select-icon-right-offset) top var(--form-element-select-icon-top-offset),
+      linear-gradient(to right, var(--color--blue-70) var(--form-element-border-size-left), transparent var(--form-element-border-size-left), transparent 100%),
+      linear-gradient(to left, var(--color--blue-70) var(--form-element-select-border-size-right), transparent var(--form-element-select-border-size-right), transparent 100%) var(--color--gray-95);
+    box-shadow: var(--shadow-focusable);
+  }
+}
+
+/* Default select, disabled case */
+.form-element--type-select[disabled] {
+  background:
+    var(--form-element-select-icon) no-repeat right var(--form-element-select-icon-right-offset) top calc(var(--form-element-select-icon-top-offset) + var(--form-element-select-border-size-y)),
+    linear-gradient(to right, var(--color--gray-70) var(--form-element-border-size-left), transparent var(--form-element-border-size-left), transparent 100%),
+    linear-gradient(to left, var(--color--gray-70) var(--form-element-select-border-size-right), transparent var(--form-element-select-border-size-right), transparent 100%) var(--color--gray-95);
+}
+
+/* Small select */
+.form-element--type-select.form-element--small {
+  min-height: var(--sp2-5);
+  padding: var(--sp0-75) calc(var(--sp0-75) + var(--form-element-select-border-size-right)) var(--sp0-75) var(--sp0-75);
+  background:
+    var(--form-element-select-icon) no-repeat right var(--form-element-select-icon-right-offset--small) top calc(var(--form-element-select-icon-top-offset--small) + var(--form-element-select-border-size-y)),
+    linear-gradient(to right, var(--color--gray-30) var(--form-element-border-size-left), transparent var(--form-element-border-size-left), transparent 100%),
+    linear-gradient(to left, var(--color--gray-30) var(--form-element-select-border-size-right--small), transparent var(--form-element-select-border-size-right--small), transparent 100%) var(--color--gray-95);
+
+  &:hover,
+  &:focus {
+    padding: calc(var(--sp0-75) - var(--form-element-select-border-size-y)) calc(var(--sp0-75) + var(--form-element-select-border-size-right)) calc(var(--sp0-75) - var(--form-element-select-border-size-y)) var(--sp0-75);
+    background:
+      var(--form-element-select-icon) no-repeat right var(--form-element-select-icon-right-offset--small) top var(--form-element-select-icon-top-offset--small),
+      linear-gradient(to right, var(--color--blue-70) var(--form-element-border-size-left), transparent var(--form-element-border-size-left), transparent 100%),
+      linear-gradient(to left, var(--color--blue-70) var(--form-element-select-border-size-right--small), transparent var(--form-element-select-border-size-right--small), transparent 100%) var(--color--gray-95);
+  }
+}
+
+/* Small select, error case */
+.form-element--type-select.form-element--small.error {
+  background:
+    var(--form-element-select-icon) no-repeat right var(--form-element-select-icon-right-offset--small) top calc(var(--form-element-select-icon-top-offset--small) + var(--form-element-select-border-size-y)),
+    linear-gradient(to right, var(--color--red) var(--form-element-border-size-left), transparent var(--form-element-border-size-left), transparent 100%),
+    linear-gradient(to left, var(--color--red) var(--form-element-select-border-size-right--small), transparent var(--form-element-select-border-size-right--small), transparent 100%) var(--color--gray-95);
+
+  &:hover {
+    background:
+      var(--form-element-select-icon) no-repeat right var(--form-element-select-icon-right-offset--small) top var(--form-element-select-icon-top-offset--small),
+      linear-gradient(to right, var(--color--blue-70) var(--form-element-border-size-left), transparent var(--form-element-border-size-left), transparent 100%),
+      linear-gradient(to left, var(--color--blue-70) var(--form-element-select-border-size-right--small), transparent var(--form-element-select-border-size-right--small), transparent 100%) var(--color--gray-95);
+  }
+
+  &:focus {
+    background:
+      var(--form-element-select-icon) no-repeat right var(--form-element-select-icon-right-offset--small) top var(--form-element-select-icon-top-offset--small),
+      linear-gradient(to right, var(--color--blue-70) var(--form-element-border-size-left), transparent var(--form-element-border-size-left), transparent 100%),
+      linear-gradient(to left, var(--color--blue-70) var(--form-element-select-border-size-right--small), transparent var(--form-element-select-border-size-right--small), transparent 100%) var(--color--gray-95);
+  }
+}
+
+/* Small select, disabled case */
+.form-element--type-select.form-element--small[disabled] {
+  background:
+    var(--form-element-select-icon) no-repeat right var(--form-element-select-icon-right-offset--small) top calc(var(--form-element-select-icon-top-offset--small) + var(--form-element-select-border-size-y)),
+    linear-gradient(to right, var(--color--gray-70) var(--form-element-border-size-left), transparent var(--form-element-border-size-left), transparent 100%),
+    linear-gradient(to left, var(--color--gray-70) var(--form-element-select-border-size-right--small), transparent var(--form-element-select-border-size-right--small), transparent 100%) var(--color--gray-95);
+}
+
+@media screen and (-ms-high-contrast: active) {
+  select,
+  .form-element--type-select {
+    background: var(--form-element-select-icon) no-repeat right var(--form-element-select-icon-right-offset) top calc(var(--form-element-select-icon-top-offset) + var(--form-element-select-border-size-y));
+  }
+
+  .form-element--type-select.form-element--small {
+    background: var(--form-element-select-icon) no-repeat right var(--form-element-select-icon-right-offset--small) top calc(var(--form-element-select-icon-top-offset--small) + var(--form-element-select-border-size-y));
+  }
+}

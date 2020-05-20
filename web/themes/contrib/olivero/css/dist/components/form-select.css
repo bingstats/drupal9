@@ -1,0 +1,246 @@
+.form-element--type-select::-ms-expand{
+  display:none;
+}
+
+select,
+.form-element--type-select{
+  max-width:100%;
+  min-height:54px;
+  color:#313637;
+  outline:solid 1px transparent;
+  font-size:16px;
+  line-height:18px;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  appearance:none;
+}
+
+[dir] select, [dir] .form-element--type-select{
+  border:0;
+  border-radius:0;
+  background-color:#f7f9fa;
+}
+
+[dir=ltr] select, [dir=ltr] .form-element--type-select{
+  padding:18px 72px 18px 18px;
+  border-left:solid 6px #7e96a7;
+  background:url("../../../images/chevron-down.svg") no-repeat right 18px top 22px,
+    linear-gradient(to left, #7e96a7 54px, transparent 54px, transparent 100%) #f7f9fa;
+}
+
+[dir=rtl] select, [dir=rtl] .form-element--type-select{
+  padding:18px 18px 18px 72px;
+  border-right:solid 6px #7e96a7;
+  background:url("../../../images/chevron-down.svg") no-repeat left 18px top 22px,
+    linear-gradient(to right, #7e96a7 54px, transparent 54px, transparent 100%) #f7f9fa;
+}
+
+[dir] select:hover, [dir] select:focus, [dir] .form-element--type-select:hover, [dir] .form-element--type-select:focus{
+    padding-top:16px;
+    padding-bottom:16px;
+    border:solid 2px #53b0eb;
+  }
+
+[dir=ltr] select:hover, [dir=ltr] select:focus, [dir=ltr] .form-element--type-select:hover, [dir=ltr] .form-element--type-select:focus{
+  border-right:0;
+  border-left:solid 6px #53b0eb;
+  background:url("../../../images/chevron-down.svg") no-repeat right 18px top 20px,
+      linear-gradient(to left, #53b0eb 54px, transparent 54px, transparent 100%) #f7f9fa;
+  }
+
+[dir=rtl] select:hover, [dir=rtl] select:focus, [dir=rtl] .form-element--type-select:hover, [dir=rtl] .form-element--type-select:focus{
+    border-left:0;
+    border-right:solid 6px #53b0eb;
+    background:url("../../../images/chevron-down.svg") no-repeat left 18px top 20px,
+      linear-gradient(to right, #53b0eb 54px, transparent 54px, transparent 100%) #f7f9fa;
+  }
+
+select:focus, .form-element--type-select:focus{
+    outline:2px
+dotted
+transparent;
+  }
+
+[dir] select:focus, [dir] .form-element--type-select:focus{
+    box-shadow:0
+0
+36px
+rgba(83, 176, 235, 0.25);
+  }
+
+select[disabled], .form-element--type-select[disabled]{
+    color:#7e96a7;
+  }
+
+[dir] select[disabled], [dir] .form-element--type-select[disabled]{
+    border-color:transparent;
+  }
+
+[dir=ltr] select[disabled], [dir=ltr] .form-element--type-select[disabled]{
+  background:linear-gradient(to right, #d7e1e8 6px, transparent 6px, transparent 100%) #f7f9fa;
+  }
+
+[dir=rtl] select[disabled], [dir=rtl] .form-element--type-select[disabled]{
+    background:linear-gradient(to left, #d7e1e8 6px, transparent 6px, transparent 100%) #f7f9fa;
+  }
+
+[dir] .form-element--type-select.error{
+  border-color:#e33f1e;
+}
+
+[dir=ltr] .form-element--type-select.error{
+  background:url("../../../images/chevron-down.svg") no-repeat right 18px top 22px,
+    linear-gradient(to right, #e33f1e 6px, transparent 6px, transparent 100%),
+    linear-gradient(to left, #e33f1e 54px, transparent 54px, transparent 100%) #f7f9fa;
+}
+
+[dir=rtl] .form-element--type-select.error{
+  background:url("../../../images/chevron-down.svg") no-repeat left 18px top 22px,
+    linear-gradient(to left, #e33f1e 6px, transparent 6px, transparent 100%),
+    linear-gradient(to right, #e33f1e 54px, transparent 54px, transparent 100%) #f7f9fa;
+}
+
+[dir] .form-element--type-select.error:hover{
+    border-color:#53b0eb;
+  }
+
+[dir=ltr] .form-element--type-select.error:hover{
+  background:url("../../../images/chevron-down.svg") no-repeat right 18px top 20px,
+      linear-gradient(to right, #53b0eb 6px, transparent 6px, transparent 100%),
+      linear-gradient(to left, #53b0eb 54px, transparent 54px, transparent 100%) #f7f9fa;
+  }
+
+[dir=rtl] .form-element--type-select.error:hover{
+    background:url("../../../images/chevron-down.svg") no-repeat left 18px top 20px,
+      linear-gradient(to left, #53b0eb 6px, transparent 6px, transparent 100%),
+      linear-gradient(to right, #53b0eb 54px, transparent 54px, transparent 100%) #f7f9fa;
+  }
+
+[dir] .form-element--type-select.error:focus{
+    border-color:#53b0eb;
+    box-shadow:0
+0
+36px
+rgba(83, 176, 235, 0.25);
+  }
+
+[dir=ltr] .form-element--type-select.error:focus{
+  background:url("../../../images/chevron-down.svg") no-repeat right 18px top 20px,
+      linear-gradient(to right, #53b0eb 6px, transparent 6px, transparent 100%),
+      linear-gradient(to left, #53b0eb 54px, transparent 54px, transparent 100%) #f7f9fa;
+  }
+
+[dir=rtl] .form-element--type-select.error:focus{
+    background:url("../../../images/chevron-down.svg") no-repeat left 18px top 20px,
+      linear-gradient(to left, #53b0eb 6px, transparent 6px, transparent 100%),
+      linear-gradient(to right, #53b0eb 54px, transparent 54px, transparent 100%) #f7f9fa;
+  }
+
+[dir=ltr] .form-element--type-select[disabled]{
+  background:url("../../../images/chevron-down.svg") no-repeat right 18px top 22px,
+    linear-gradient(to right, #d7e1e8 6px, transparent 6px, transparent 100%),
+    linear-gradient(to left, #d7e1e8 54px, transparent 54px, transparent 100%) #f7f9fa;
+}
+
+[dir=rtl] .form-element--type-select[disabled]{
+  background:url("../../../images/chevron-down.svg") no-repeat left 18px top 22px,
+    linear-gradient(to left, #d7e1e8 6px, transparent 6px, transparent 100%),
+    linear-gradient(to right, #d7e1e8 54px, transparent 54px, transparent 100%) #f7f9fa;
+}
+
+.form-element--type-select.form-element--small{
+  min-height:45px;
+}
+
+[dir=ltr] .form-element--type-select.form-element--small{
+  padding:13.5px 67.5px 13.5px 13.5px;
+  background:url("../../../images/chevron-down.svg") no-repeat right 13.5px top 17.5px,
+    linear-gradient(to right, #7e96a7 6px, transparent 6px, transparent 100%),
+    linear-gradient(to left, #7e96a7 45px, transparent 45px, transparent 100%) #f7f9fa;
+}
+
+[dir=rtl] .form-element--type-select.form-element--small{
+  padding:13.5px 13.5px 13.5px 67.5px;
+  background:url("../../../images/chevron-down.svg") no-repeat left 13.5px top 17.5px,
+    linear-gradient(to left, #7e96a7 6px, transparent 6px, transparent 100%),
+    linear-gradient(to right, #7e96a7 45px, transparent 45px, transparent 100%) #f7f9fa;
+}
+
+[dir=ltr] .form-element--type-select.form-element--small:hover, [dir=ltr] .form-element--type-select.form-element--small:focus{
+  padding:11.5px 67.5px 11.5px 13.5px;
+  background:url("../../../images/chevron-down.svg") no-repeat right 13.5px top 15.5px,
+      linear-gradient(to right, #53b0eb 6px, transparent 6px, transparent 100%),
+      linear-gradient(to left, #53b0eb 45px, transparent 45px, transparent 100%) #f7f9fa;
+  }
+
+[dir=rtl] .form-element--type-select.form-element--small:hover, [dir=rtl] .form-element--type-select.form-element--small:focus{
+    padding:11.5px 13.5px 11.5px 67.5px;
+    background:url("../../../images/chevron-down.svg") no-repeat left 13.5px top 15.5px,
+      linear-gradient(to left, #53b0eb 6px, transparent 6px, transparent 100%),
+      linear-gradient(to right, #53b0eb 45px, transparent 45px, transparent 100%) #f7f9fa;
+  }
+
+[dir=ltr] .form-element--type-select.form-element--small.error{
+  background:url("../../../images/chevron-down.svg") no-repeat right 13.5px top 17.5px,
+    linear-gradient(to right, #e33f1e 6px, transparent 6px, transparent 100%),
+    linear-gradient(to left, #e33f1e 45px, transparent 45px, transparent 100%) #f7f9fa;
+}
+
+[dir=rtl] .form-element--type-select.form-element--small.error{
+  background:url("../../../images/chevron-down.svg") no-repeat left 13.5px top 17.5px,
+    linear-gradient(to left, #e33f1e 6px, transparent 6px, transparent 100%),
+    linear-gradient(to right, #e33f1e 45px, transparent 45px, transparent 100%) #f7f9fa;
+}
+
+[dir=ltr] .form-element--type-select.form-element--small.error:hover{
+  background:url("../../../images/chevron-down.svg") no-repeat right 13.5px top 15.5px,
+      linear-gradient(to right, #53b0eb 6px, transparent 6px, transparent 100%),
+      linear-gradient(to left, #53b0eb 45px, transparent 45px, transparent 100%) #f7f9fa;
+  }
+
+[dir=rtl] .form-element--type-select.form-element--small.error:hover{
+    background:url("../../../images/chevron-down.svg") no-repeat left 13.5px top 15.5px,
+      linear-gradient(to left, #53b0eb 6px, transparent 6px, transparent 100%),
+      linear-gradient(to right, #53b0eb 45px, transparent 45px, transparent 100%) #f7f9fa;
+  }
+
+[dir=ltr] .form-element--type-select.form-element--small.error:focus{
+  background:url("../../../images/chevron-down.svg") no-repeat right 13.5px top 15.5px,
+      linear-gradient(to right, #53b0eb 6px, transparent 6px, transparent 100%),
+      linear-gradient(to left, #53b0eb 45px, transparent 45px, transparent 100%) #f7f9fa;
+  }
+
+[dir=rtl] .form-element--type-select.form-element--small.error:focus{
+    background:url("../../../images/chevron-down.svg") no-repeat left 13.5px top 15.5px,
+      linear-gradient(to left, #53b0eb 6px, transparent 6px, transparent 100%),
+      linear-gradient(to right, #53b0eb 45px, transparent 45px, transparent 100%) #f7f9fa;
+  }
+
+[dir=ltr] .form-element--type-select.form-element--small[disabled]{
+  background:url("../../../images/chevron-down.svg") no-repeat right 13.5px top 17.5px,
+    linear-gradient(to right, #d7e1e8 6px, transparent 6px, transparent 100%),
+    linear-gradient(to left, #d7e1e8 45px, transparent 45px, transparent 100%) #f7f9fa;
+}
+
+[dir=rtl] .form-element--type-select.form-element--small[disabled]{
+  background:url("../../../images/chevron-down.svg") no-repeat left 13.5px top 17.5px,
+    linear-gradient(to left, #d7e1e8 6px, transparent 6px, transparent 100%),
+    linear-gradient(to right, #d7e1e8 45px, transparent 45px, transparent 100%) #f7f9fa;
+}
+
+@media screen and (-ms-high-contrast: active){
+  [dir=ltr] select, [dir=ltr] .form-element--type-select{
+    background:url("../../../images/chevron-down.svg") no-repeat right 18px top 22px;
+  }
+  [dir=rtl] select, [dir=rtl] .form-element--type-select{
+    background:url("../../../images/chevron-down.svg") no-repeat left 18px top 22px;
+  }
+
+  [dir=ltr] .form-element--type-select.form-element--small{
+    background:url("../../../images/chevron-down.svg") no-repeat right 13.5px top 17.5px;
+  }
+
+  [dir=rtl] .form-element--type-select.form-element--small{
+    background:url("../../../images/chevron-down.svg") no-repeat left 13.5px top 17.5px;
+  }
+}

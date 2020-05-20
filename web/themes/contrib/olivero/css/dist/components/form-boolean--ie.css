@@ -1,0 +1,66 @@
+.form-boolean::-ms-check{
+    display:inline-block;
+    box-sizing:border-box;
+    width:27px;
+    height:27px;
+    vertical-align:text-bottom;
+    color:transparent;
+    outline:none;
+  }[dir] .form-boolean::-ms-check{
+    border:2px solid #7e96a7;
+    border-radius:2px;
+    background-color:#f7f9fa;
+    background-image:url("data:image/svg+xml,%3Csvg width='18' height='14' viewBox='0 0 18 14' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23FFFFFF' d='M14.8232 0.176777C14.9209 0.0791457 15.0791 0.0791455 15.1768 0.176777L16.9445 1.94454C17.0422 2.04217 17.0422 2.20047 16.9445 2.2981L6.23744 13.0052C6.13981 13.1028 5.98151 13.1028 5.88388 13.0052L0.176777 7.2981C0.0791456 7.20047 0.0791456 7.04218 0.176777 6.94454L1.94454 5.17678C2.04217 5.07915 2.20047 5.07915 2.2981 5.17678L5.88388 8.76256C5.98151 8.86019 6.13981 8.86019 6.23744 8.76256L14.8232 0.176777Z'/%3E%3C/svg%3E%0A");
+    background-repeat:no-repeat;
+    background-position:50% 50%;
+    background-size:18px 18px;
+  }
+
+[dir] .form-boolean:hover::-ms-check, [dir] .form-boolean:focus::-ms-check{
+      border-color:#53b0eb;
+    }
+
+[dir] .form-boolean:focus::-ms-check{
+    box-shadow:0
+0
+36px
+rgba(83, 176, 235, 0.25);
+  }
+
+[dir] .form-boolean[disabled]::-ms-check{
+    border-color:transparent;
+  }
+
+[dir] .form-boolean.error::-ms-check{
+    border-color:#e33f1e;
+  }
+
+[dir] .form-boolean.error:hover::-ms-check, [dir] .form-boolean.error:focus::-ms-check{
+      border-color:#53b0eb;
+    }
+
+[dir] .form-boolean--type-checkbox::-ms-check{
+    background-image:url("data:image/svg+xml,%3Csvg width='18' height='14' viewBox='0 0 18 14' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23F7F9FA' d='M14.8232 0.176777C14.9209 0.0791457 15.0791 0.0791455 15.1768 0.176777L16.9445 1.94454C17.0422 2.04217 17.0422 2.20047 16.9445 2.2981L6.23744 13.0052C6.13981 13.1028 5.98151 13.1028 5.88388 13.0052L0.176777 7.2981C0.0791456 7.20047 0.0791456 7.04218 0.176777 6.94454L1.94454 5.17678C2.04217 5.07915 2.20047 5.07915 2.2981 5.17678L5.88388 8.76256C5.98151 8.86019 6.13981 8.86019 6.23744 8.76256L14.8232 0.176777Z'/%3E%3C/svg%3E%0A");
+  }
+
+[dir] .form-boolean--type-checkbox:checked::-ms-check{
+    background-image:url("data:image/svg+xml,%3Csvg width='18' height='14' viewBox='0 0 18 14' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%232494DB' d='M14.8232 0.176777C14.9209 0.0791457 15.0791 0.0791455 15.1768 0.176777L16.9445 1.94454C17.0422 2.04217 17.0422 2.20047 16.9445 2.2981L6.23744 13.0052C6.13981 13.1028 5.98151 13.1028 5.88388 13.0052L0.176777 7.2981C0.0791456 7.20047 0.0791456 7.04218 0.176777 6.94454L1.94454 5.17678C2.04217 5.07915 2.20047 5.07915 2.2981 5.17678L5.88388 8.76256C5.98151 8.86019 6.13981 8.86019 6.23744 8.76256L14.8232 0.176777Z'/%3E%3C/svg%3E%0A");
+  }
+
+[dir] .form-boolean--type-checkbox[disabled]:checked::-ms-check{
+    background-image:url("data:image/svg+xml,%3Csvg width='18' height='14' viewBox='0 0 18 14' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23D7E1E8' d='M14.8232 0.176777C14.9209 0.0791457 15.0791 0.0791455 15.1768 0.176777L16.9445 1.94454C17.0422 2.04217 17.0422 2.20047 16.9445 2.2981L6.23744 13.0052C6.13981 13.1028 5.98151 13.1028 5.88388 13.0052L0.176777 7.2981C0.0791456 7.20047 0.0791456 7.04218 0.176777 6.94454L1.94454 5.17678C2.04217 5.07915 2.20047 5.07915 2.2981 5.17678L5.88388 8.76256C5.98151 8.86019 6.13981 8.86019 6.23744 8.76256L14.8232 0.176777Z'/%3E%3C/svg%3E%0A");
+  }
+
+[dir] .form-boolean--type-radio::-ms-check{
+    border-radius:50%;
+    background-image:url("data:image/svg+xml,%3Csvg width='17' height='17' viewBox='0 0 17 17' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='8.5' cy='8.5' r='8.5' fill='%23F7F9FA'/%3E%3C/svg%3E%0A");
+    background-size:17px 17px;
+  }
+
+[dir] .form-boolean--type-radio:checked::-ms-check{
+    background-image:url("data:image/svg+xml,%3Csvg width='17' height='17' viewBox='0 0 17 17' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='8.5' cy='8.5' r='8.5' fill='%232494DB'/%3E%3C/svg%3E%0A");
+  }
+
+[dir] .form-boolean--type-radio[disabled]:checked::-ms-check{
+    background-image:url("data:image/svg+xml,%3Csvg width='17' height='17' viewBox='0 0 17 17' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='8.5' cy='8.5' r='8.5' fill='%23D7E1E8'/%3E%3C/svg%3E%0A");
+  }

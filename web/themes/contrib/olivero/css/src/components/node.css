@@ -1,0 +1,31 @@
+/**
+ * @file
+ * Node specific styles.
+ */
+
+@import "../base/variables.css";
+
+.node__meta {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--sp1);
+  color: var(--color--gray-20);
+  font-size: 14px;
+  line-height: var(--sp);
+
+  .field--name-user-picture img {
+    width: var(--sp2-5);
+    height: var(--sp2-5);
+    margin-right: var(--sp0-5);
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  a {
+    font-weight: bold;
+  }
+
+  @media (--sm) {
+    margin-bottom: var(--sp2);
+  }
+}

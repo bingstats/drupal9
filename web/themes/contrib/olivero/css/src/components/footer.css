@@ -1,0 +1,79 @@
+/**
+ * @file
+ * Footer region.
+ *
+ * TODO:
+ * - Determine the design treatment of the Footer First and Second regions.
+ * - What does this area looks like when different blocks are placed there?
+ *
+ */
+
+@import "../base/variables.css";
+
+.site-footer {
+  position: relative; /* stack above left social bar */
+  color: var(--color--gray-40);
+  background-color: black;
+
+  h2 {
+    color: var(--color--gray-95);
+  }
+
+  @media (--nav) {
+    body:not(.is-always-mobile-nav) & {
+      padding-left: var(--content-left);
+    }
+  }
+}
+
+.site-footer__inner {
+  padding: var(--sp2) 0;
+  background: linear-gradient(180deg, #0c0d0e 0%, #171e23 100%);
+
+  @media (--nav) {
+    padding-top: var(--sp4);
+    padding-bottom: calc(13 * var(--sp));
+  }
+}
+
+/*
+   Temporary displaying two-column grid count until we have an approved design for placing blocks into the First and Second regions.
+*/
+.site-footer__top {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-column-gap: var(--grid-gap);
+  max-width: 1046px;
+  margin: 0 auto var(--sp2);
+
+  @media (--grid-md) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: var(--grid-gap--md);
+  }
+}
+
+/*
+  Powered by Drupal Block.
+*/
+.block-system-powered-by-block {
+  letter-spacing: 0.02em;
+  font-size: 14px;
+  line-height: var(--sp);
+
+  a {
+    text-decoration: underline;
+    color: white;
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+  }
+
+  svg {
+    display: inline-block;
+    margin-top: calc(- var(--sp) / 4);
+    margin-left: calc(var(--sp) / 4);
+    vertical-align: middle;
+  }
+}

@@ -1,0 +1,14 @@
+/**
+ * @file
+ * Region default layout.
+ */
+
+@import "../base/variables.css";
+
+.region > * {
+  margin-bottom: var(--sp);
+
+  @media (--lg) {
+    margin-bottom: var(--sp2);
+  }
+}

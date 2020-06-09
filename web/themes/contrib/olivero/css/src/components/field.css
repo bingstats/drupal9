@@ -3,6 +3,12 @@
  * Visual styles for fields.
  */
 
+@import "../base/variables.css";
+
+.field:not(:last-child) {
+  margin-bottom: var(--sp2);
+}
+
 .field__label {
   font-weight: bold;
 }

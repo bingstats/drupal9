@@ -29,12 +29,23 @@
     padding: 0;
     list-style: none;
 
-    li:not(:last-child) {
-      margin-right: var(--sp1-5);
+    li {
+      /* Parent element is set to flex-basis: 0. We
+       * don't want text to wrap unless it goes over a
+       * certain arbitrary width.
+      */
 
-      @media (--nav) {
-        body:not(.is-always-mobile-nav) & {
-          margin-right: var(--sp2);
+      /* @todo should this be scoped to desktop nav? */
+      width: max-content;
+      max-width: 200px;
+
+      &:not(:last-child) {
+        margin-right: var(--sp1-5);
+
+        @media (--nav) {
+          body:not(.is-always-mobile-nav) & {
+            margin-right: var(--sp2);
+          }
         }
       }
     }

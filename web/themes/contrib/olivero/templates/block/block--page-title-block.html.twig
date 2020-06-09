@@ -40,11 +40,9 @@
   ]
 %}
 
-{# Only render if the title is a string. #}
-{% if not content['#title'] is iterable %}
-  <div{{ attributes.addClass(classes) }}>
-    {{ title_prefix }}
-    {{ content }}
-    {{ title_suffix }}
-  </div>
-{% endif %}
+
+<div{{ attributes.addClass(classes) }}>
+  {{ title_prefix }}
+  {{ content }}
+  {{ title_suffix }}
+</div>

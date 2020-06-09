@@ -11,8 +11,9 @@
 
 .button {
   display: inline-block;
+  height: var(--sp3);
   margin: var(--sp1) var(--sp1) var(--sp1) 0;
-  padding: calc(var(--sp0-5) - (var(--button-border-width) / 2)) var(--sp1);
+  padding: calc((var(--sp3) - var(--line-height-s)) / 2) var(--sp1-5);
   cursor: pointer;
   text-align: center;
   text-decoration: none;
@@ -22,6 +23,7 @@
   border: var(--button-border-width) solid var(--color--blue-20);
   border-radius: var(--border-radius-base);
   background-color: var(--color--white);
+  font-family: inherit;
   font-size: var(--font-size-s);
   font-weight: 700;
   line-height: var(--line-height-s);
@@ -37,6 +39,7 @@
 
   &:focus {
     outline: var(--outline--base);
+    outline-offset: var(--outline-offset);
     box-shadow: var(--shadow-focusable-with-outline);
   }
 
@@ -56,6 +59,19 @@
   /* No margin if is part of a menu. */
   .menu & {
     margin: 0;
+  }
+
+  /*
+    IE11 doesn't work properly on button elements so we only do
+    inline-flex on modern browsers.
+  */
+  @supports (display: inline-flex) {
+    display: inline-flex;
+    align-items: center;
+
+    /* Top padding accounts for font not being vertically centered within line-height. */
+    padding: 1px var(--sp1-5) 0;
+    line-height: var(--line-height-s);
   }
 }
 

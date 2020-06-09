@@ -20,8 +20,18 @@
     &.has-children {
       display: flex;
       flex-wrap: wrap;
-      align-items: center;
       justify-content: space-between;
+
+      a {
+        /* Ensure that long text doesn't make the mobile expand button wrap. */
+        max-width: calc(100% - var(--sp3));
+
+        @media (--nav) {
+          body:not(.is-always-mobile-nav) & {
+            max-width: none;
+          }
+        }
+      }
 
       @media (--nav) {
         body:not(.is-always-mobile-nav) & {
@@ -44,6 +54,7 @@
       body:not(.is-always-mobile-nav) & {
         letter-spacing: 0.02em;
         font-size: 16px;
+        line-height: var(--sp1-5);
       }
     }
   }
@@ -109,6 +120,8 @@
         position: relative; /* Anchor secondary menu */
         display: flex;
         align-items: center;
+        width: max-content;
+        max-width: 200px;
         margin: 0;
 
         &:not(:last-child) {
@@ -209,7 +222,7 @@
       margin-top: 0;
       margin-left: 0;
       padding: calc(3 * var(--sp)) var(--sp2);
-      transition: all 0.2s;
+      transition: none;
       transform: translate(-50%, -20px);
       opacity: 0;
       border-top: solid var(--color--blue-50) var(--sp0-5);
@@ -238,6 +251,14 @@
         visibility: visible;
         transform: translate(-50%, 0);
         opacity: 1;
+      }
+
+      /*
+       * Only apply transition styles to menu when JS is loaded. This
+       * works around https://bugs.chromium.org/p/chromium/issues/detail?id=332189
+       */
+      html.js & {
+        transition: visibility 0.2s, transform 0.2s, opacity 0.2s;
       }
     }
   }

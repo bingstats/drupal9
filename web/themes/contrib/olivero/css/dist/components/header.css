@@ -52,19 +52,16 @@
     }
 
 .site-header__inner{
-  width:100%;
+  flex-grow:1;
+  width:calc(100vw - 90px);
   transition:all 0.3s;
 }
 
+[dir] .site-header__inner{
+  background:white;
+}
+
 @media (min-width: 1200px){
-
-.site-header__fixable.js-fixed .site-header__inner{
-      width:calc(100vw - 90px)
-  }
-
-[dir] .site-header__fixable.js-fixed .site-header__inner{
-      background:white
-  }
 
 [dir=ltr] .site-header__fixable.js-fixed .site-header__inner{
     box-shadow:-36px 1px 36px rgba(0, 0, 0, 0.08)

@@ -95,10 +95,24 @@ function olivero_preprocess_node(&$variables) {
  * Implements hook_preprocess_HOOK() for block.html.twig.
  */
 function olivero_preprocess_block(&$variables) {
+  if (!empty($variables['elements']['#id'])) {
+    /** @var \Drupal\block\BlockInterface $block */
+    $block = \Drupal::entityTypeManager()
+      ->getStorage('block')
+      ->load($variables['elements']['#id']);
+    if ($block) {
+      $region = $block->getRegion();
+
+      if ($region == 'primary_menu' && $variables['base_plugin_id'] == 'system_menu_block') {
+        $variables['content']['#attributes']['region'] = $region;
+      }
+    }
+  }
+
   // Add a clearfix class to system branding blocks.
   if ($variables['plugin_id'] == 'system_branding_block') {
     $variables['attributes']['class'][] = 'clearfix';
-    if (theme_get_setting('site_branding_bg_color')) {
+    if (theme_get_setting('site_branding_bg_color') && theme_get_setting('site_branding_bg_color') !== 'default') {
       $variables['attributes']['class'][] = 'site-branding--bg-' . theme_get_setting('site_branding_bg_color');
     }
   }
@@ -109,6 +123,15 @@ function olivero_preprocess_block(&$variables) {
  */
 function olivero_preprocess_menu(&$variables) {
   $variables['attributes']['class'][] = 'clearfix';
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for menu.
+ */
+function olivero_theme_suggestions_menu_alter(&$suggestions, array $variables) {
+  if (isset($variables['attributes']['region']) && $variables['attributes']['region'] == 'primary_menu') {
+    $suggestions[] = 'menu' . '__' . $variables['attributes']['region'];
+  }
 }
 
 /**
@@ -127,7 +150,7 @@ function olivero_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   switch ($form_id) {
     case 'search_block_form':
       // Add placeholder text to keys input.
-      $form['keys']['#attributes']['placeholder'][] = t('Search by keyword or phrase.');
+      $form['keys']['#attributes']['placeholder'] = t('Search by keyword or phrase.');
 
       // Add classes to the search form submit input.
       $form['actions']['submit']['#attributes']['class'][] = 'search-form__submit';
@@ -136,7 +159,7 @@ function olivero_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 
     case 'search_form':
       // Add placeholder text to keys input.
-      $form['basic']['keys']['#attributes']['placeholder'][] = t('Search by keyword or phrase.');
+      $form['basic']['keys']['#attributes']['placeholder'] = t('Search by keyword or phrase.');
       break;
   }
 }
@@ -296,6 +319,17 @@ function olivero_preprocess_radios(&$variables) {
 /**
  * Implements hook_preprocess_HOOK().
  */
+function olivero_preprocess_field(&$variables) {
+  $rich_field_types = ['text_with_summary', 'text', 'text_long'];
+
+  if (in_array($variables['field_type'], $rich_field_types)) {
+    $variables['attributes']['class'][] = 'text-content';
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
 function olivero_preprocess_field_multiple_value_form(&$variables) {
   // Make disabled available for the template.
   $variables['disabled'] = !empty($variables['element']['#disabled']);
@@ -437,7 +471,14 @@ function olivero_preprocess_filter_caption(&$variables) {
  * Implements hook_form_FORM_ID_alter().
  */
 function olivero_form_comment_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  $form['actions']['submit']['#value'] = t('Post comment');
+  $comment = $form_state->getFormObject()
+    ->getEntity();
+  /* @var \Drupal\comment\Entity\Comment $comment */
+  if ($comment->hasParentComment()){
+    $form['actions']['submit']['#value']=t('Reply to comment');
+  }else{
+    $form['actions']['submit']['#value'] = t('Post comment');
+  }
 }
 
 /**
@@ -492,4 +533,14 @@ function olivero_preprocess_text_format_wrapper(&$variables) {
     unset($variables['attributes']['id']);
   }
   $variables['description_attributes'] = new Attribute($description_attributes);
+}
+
+/**
+ * Implements HOOK_preprocess_search_result().
+ */
+function olivero_preprocess_search_result(&$variables) {
+  // Apply custom date formatter to "date" field.
+  if (!empty($variables['result']['date'])) {
+   $variables['info_date'] = \Drupal::service('date.formatter')->format($variables['result']['node']->getCreatedTime(), 'custom', 'j  F,  Y');
+  }
 }

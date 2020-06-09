@@ -1,6 +1,6 @@
 services:
   php:
-    image: quay.io/q0rban/drupal:8.8
+    image: tugboatqa/drupal:8.8
     default: true
     http: false
     depends: mysql
@@ -11,12 +11,11 @@ services:
     commands:
       init:
         - cp .tugboat/sites.php $DRUPAL_DOCROOT/sites/sites.php
-
-      update: |
-        set -eux
         # Check out a branch using the unique Tugboat ID for this repository, to
         # ensure we don't clobber an existing branch.
-        git checkout -b $TUGBOAT_REPO_ID
+        - git checkout -b $TUGBOAT_REPO_ID
+      update: |
+        set -eux
         # Composer is hungry. You need a Tugboat project with a pretty sizeable
         # chunk of memory.
         export COMPOSER_MEMORY_LIMIT=-1
@@ -32,6 +31,7 @@ services:
         composer require drupal/webform -vvv
         composer require drupal/admin_toolbar -vvv
         composer require drupal/metatag -vvv
+        composer require drupal/devel -vvv
 
         # Install Drupal on the minimal site.
         vendor/bin/drush \

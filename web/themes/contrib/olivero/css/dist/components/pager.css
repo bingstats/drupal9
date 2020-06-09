@@ -1,17 +1,10 @@
-[dir] .pager{
-  margin-top:36px;
-  margin-bottom:36px;
-}
-
 .pager__items{
   display:flex;
   flex-wrap:wrap;
   align-items:flex-end;
   list-style:none;
   font-weight:bold;
-}
-
-[dir] .pager__items{
+}[dir] .pager__items{
   margin:0;
   padding:0;
 }

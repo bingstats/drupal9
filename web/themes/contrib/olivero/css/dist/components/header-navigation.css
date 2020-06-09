@@ -4,6 +4,8 @@
   top:0;
   visibility:hidden;
   overflow:auto;
+  flex-basis:0;
+  flex-grow:1;
   width:100%;
   max-width:500px;
   height:100%;
@@ -31,6 +33,13 @@
 
 [dir] .header-nav.is-active{
     transform:translateX(0);
+  }
+
+@supports (flex-basis: max-content){
+
+.header-nav{
+    flex-basis:max-content
+}
   }
 
 @media (min-width: 500px){

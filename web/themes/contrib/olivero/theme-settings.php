@@ -13,18 +13,18 @@ function olivero_form_system_theme_settings_alter(&$form, Drupal\Core\Form\FormS
   $form['olivero_settings']['olivero_utilities']['mobile_menu_all_widths'] = [
     '#type' => 'checkbox',
     '#title' => t('Enable mobile menu at all widths'),
-    '#default_value' => theme_get_setting('mobile_menu_all_widths', 'olivero'),
+    '#default_value' => theme_get_setting('mobile_menu_all_widths'),
     '#description' => 'Enables the mobile menu toggle at all widths.',
   ];
   $form['olivero_settings']['olivero_utilities']['site_branding_bg_color'] = [
     '#type' => 'select',
     '#title' => t('Header site branding background color'),
     '#options' => [
-      'blue' => 'Blue',
+      'default' => 'Blue',
       'gray' => 'Gray',
       'white' => 'White',
     ],
-    '#default_value' => theme_get_setting('site_branding_bg_color', 'olivero'),
+    '#default_value' => theme_get_setting('site_branding_bg_color'),
   ];
   $form['olivero_settings']['olivero_utilities']['debug'] = [
     '#type' => 'checkbox',

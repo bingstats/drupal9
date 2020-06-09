@@ -6,6 +6,7 @@
   text-indent:-999px;
   -webkit-appearance:none;
 }[dir] .primary-nav__button-toggle{
+  margin-top:2px;
   padding:0;
   cursor:pointer;
   border:0;
@@ -122,16 +123,20 @@
         }
       }
 
-html:not(.js) .primary-nav__button-toggle{
-    display:none;
+.primary-nav__button-toggle[aria-hidden="true"]{
+    pointer-events:none;
   }
 
 @media (min-width: 1200px){
     body:not(.is-always-mobile-nav) .primary-nav__button-toggle{
+      flex-shrink:0;
       -ms-grid-row-align:stretch;
       align-self:stretch;
       width:44px;
       height:auto;
+    }
+    [dir] body:not(.is-always-mobile-nav) .primary-nav__button-toggle{
+      margin-top:0;
     }
     [dir=ltr] body:not(.is-always-mobile-nav) .primary-nav__button-toggle{
     margin-right:-36px;

@@ -5,11 +5,6 @@
 
 @import "../base/variables.css";
 
-.pager {
-  margin-top: var(--sp2);
-  margin-bottom: var(--sp2);
-}
-
 .pager__items {
   display: flex;
   flex-wrap: wrap;

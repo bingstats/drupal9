@@ -136,13 +136,15 @@
 
   /* Shadows */
   --shadow-focusable: 0 0 36px rgba(83, 176, 235, 0.25);
+  --shadow-focusable-secondary: 0 0 0 2px #fff, 0 0 0 5px var(--color--blue-70);
   --shadow-focusable-with-outline: 0 0 36px rgba(83, 176, 235, 0.25), 0 0 0 2px var(--color--white), 0 0 0 4px var(--color--blue-70);
 
   /* Radius */
   --border-radius-base: 2px;
 
   /* Outlines */
-  --outline--base: 2px dotted transparent;
+  --outline--thin: 1px solid transparent;
+  --outline--thick: 6px dashed transparent;
 
   /* Header */
   --header-height-wide-when-fixed: calc(6 * var(--sp));

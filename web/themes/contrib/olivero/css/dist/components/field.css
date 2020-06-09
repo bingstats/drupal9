@@ -1,3 +1,7 @@
+[dir] .field:not(:last-child){
+  margin-bottom:36px;
+}
+
 .field__label{
   font-weight:bold;
 }

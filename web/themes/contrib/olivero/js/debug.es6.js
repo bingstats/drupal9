@@ -21,6 +21,27 @@
     sessionStorage.setItem('olivero.debug.toggleLogo', isChecked);
   }
 
+  function toggleRequiredAttr(isChecked) {
+    const requiredFormElements = document.querySelectorAll('[required]');
+
+    if (isChecked) {
+      requiredFormElements.forEach(el => {
+        el.removeAttribute('required');
+        el.setAttribute('data-required', 'true');
+      });
+    } else {
+      document.querySelectorAll('[data-required="true"]').forEach(el => {
+        el.removeAttribute('data-required');
+        el.setAttribute('required', 'true');
+      });
+    }
+
+    sessionStorage.setItem(
+      'olivero.debug.toggleRequiredAttr',
+      isChecked,
+    );
+  }
+
   function toggleEditableSiteName(isChecked) {
     const siteNameText = document.querySelector('.site-branding__name a');
     siteNameText.contentEditable = isChecked;
@@ -74,6 +95,9 @@
       case 'nav-toggle':
         toggleAlwaysOnMobileNav(e.target.checked);
         break;
+      case 'required-toggle':
+        toggleRequiredAttr(e.target.checked);
+        break;
     }
   }
 
@@ -87,6 +111,7 @@
       <div><input id="edit-name-toggle" type="checkbox"><label for="edit-name-toggle">Editable Site Name</label></div>
       <div><input id="rtl-toggle" type="checkbox"><label for="rtl-toggle">RTL</label></div>
       <div><input id="nav-toggle" type="checkbox"><label for="nav-toggle">Always on mobile nav</label></div>
+      <div><input id="required-toggle" type="checkbox"><label for="required-toggle">Clear required attribute on form elements</label></div>
       <div class="description">Disable debug in <a href="${window.drupalSettings.path.baseUrl}admin/appearance/settings/olivero">Theme Settings</a>.</div>
     `;
     document.querySelector('body').appendChild(debugElement);
@@ -97,6 +122,10 @@
     // Get values from sessionStorage, and make changes to DOM.
     if (sessionStorage.getItem('olivero.debug.toggleLogo') != null) {
       toggleLogo(sessionStorage.getItem('olivero.debug.toggleLogo') === 'true');
+    }
+
+    if (sessionStorage.getItem('olivero.debug.toggleRequiredAttr') === 'true') {
+      toggleRequiredAttr(true);
     }
 
     if (
@@ -124,6 +153,10 @@
     // Ensure that the initial value of the checkboxes matches what's in the DOM.
     if (document.querySelector('.site-branding__logo')) {
       document.getElementById('logo-toggle').checked = true;
+    }
+
+    if (sessionStorage.getItem('olivero.debug.toggleRequiredAttr') === 'true') {
+      document.getElementById('required-toggle').checked = true;
     }
 
     if (

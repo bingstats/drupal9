@@ -8,6 +8,7 @@
 
 .messages{
   min-height:68px;
+  outline:solid 1px transparent;
 }
 
 [dir] .messages{

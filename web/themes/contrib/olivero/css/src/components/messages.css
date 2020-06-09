@@ -19,6 +19,7 @@
 .messages {
   min-height: calc(var(--messages-icon-size) + 2 * var(--sp1));
   padding: var(--sp1) var(--sp1-5);
+  outline: solid 1px transparent;
   background-color: var(--color--gray-0);
 
   /* Additional specificity to override contrib modules. */

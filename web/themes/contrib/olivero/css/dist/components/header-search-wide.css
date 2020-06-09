@@ -37,6 +37,11 @@
     max-height:144px;
   }
 
+html:not(.js) .search-block-form:focus-within .search-wide__wrapper{
+    visibility:visible;
+    max-height:144px;
+  }
+
 .search-wide__wrapper form{
     display:flex;
     -ms-grid-column:1;

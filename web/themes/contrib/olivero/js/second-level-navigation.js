@@ -27,6 +27,10 @@
 
   secondLevelNavMenus.forEach(function (el) {
     var button = el.querySelector('.primary-nav__button-toggle');
+
+    button.removeAttribute('aria-hidden');
+    button.removeAttribute('tabindex');
+
     button.addEventListener('click', function (e) {
       var topLevelMenuITem = e.currentTarget.parentNode;
       toggleSubNav(topLevelMenuITem);

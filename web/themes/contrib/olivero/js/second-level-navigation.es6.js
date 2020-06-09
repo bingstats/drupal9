@@ -37,6 +37,10 @@
   // Add hover and click event listeners onto each subnav parent and it's button.
   secondLevelNavMenus.forEach(el => {
     const button = el.querySelector('.primary-nav__button-toggle');
+
+    button.removeAttribute('aria-hidden');
+    button.removeAttribute('tabindex');
+
     button.addEventListener('click', e => {
       const topLevelMenuITem = e.currentTarget.parentNode;
       toggleSubNav(topLevelMenuITem);

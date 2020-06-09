@@ -1,9 +1,11 @@
 .button{
   display:inline-block;
+  height:54px;
   text-decoration:none;
   letter-spacing:0.07em;
   text-transform:uppercase;
   color:#0d77b5;
+  font-family:inherit;
   font-size:14px;
   font-weight:700;
   line-height:18px;
@@ -12,7 +14,7 @@
   appearance:none;
   -webkit-font-smoothing:antialiased;
 }[dir] .button{
-  padding:8px 18px;
+  padding:18px 27px;
   cursor:pointer;
   text-align:center;
   border:2px solid #0d77b5;
@@ -35,9 +37,8 @@
   }
 
 .button:focus{
-    outline:2px
-dotted
-transparent;
+    outline:var(--outline--base);
+    outline-offset:var(--outline-offset);
   }
 
 [dir] .button:focus{
@@ -80,6 +81,19 @@ rgba(83, 176, 235, 0.25)
 
 [dir] .menu .button{
     margin:0;
+  }
+
+@supports (display: inline-flex){
+
+.button{
+    display:inline-flex;
+    align-items:center;
+    line-height:18px
+}
+
+[dir] .button{
+    padding:1px 27px 0
+}
   }
 
 .button--primary{

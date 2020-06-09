@@ -6,154 +6,102 @@
 @import "../base/variables.css";
 
 :root {
+  --form-element-select-height: var(--sp3);
+  --form-element-select-height--small: var(--sp2-5);
   --form-element-select-icon: url("../../../images/chevron-down.svg");
-  --form-element-select-icon-right-offset: var(--sp1);
-  --form-element-select-icon-right-offset--small: var(--sp0-75);
-  --form-element-select-icon-top-offset: calc(var(--sp1) + var(--form-element-border-size-base));
-  --form-element-select-icon-top-offset--small: calc(var(--sp0-75) + var(--form-element-border-size-base));
+  --form-element-select-bg: url("../../../images/select-chevron-bg-default.svg");
+  --form-element-select-bg--highlight: url("../../../images/select-chevron-bg-highlight.svg");
+  --form-element-select-bg--error: url("../../../images/select-chevron-bg-error.svg");
   --form-element-select-border-size-right: var(--sp3);
   --form-element-select-border-size-right--small: var(--sp2-5);
-  --form-element-select-border-size-y: 2px;
 }
 
-/* Disables border of select specifically for ms browser */
-.form-element--type-select::-ms-expand {
-  display: none;
-}
-
-/* Default select */
-select,
-.form-element--type-select {
+select {
   max-width: 100%;
-  min-height: var(--sp3);
-  padding: var(--sp) calc(var(--sp) + var(--form-element-select-border-size-right)) var(--sp) var(--sp);
+  height: var(--form-element-select-height);
+  padding: 0 calc(var(--sp1) + var(--form-element-select-border-size-right)) 0 calc(var(--sp1) + var(--form-element-border-size-left));
   color: var(--color--gray-10);
-  border: 0;
-  border-left: solid 6px var(--color--gray-30);
-  border-radius: 0;
-  outline: solid 1px transparent;
-  background:
-    var(--form-element-select-icon) no-repeat right var(--form-element-select-icon-right-offset) top calc(var(--form-element-select-icon-top-offset) + var(--form-element-select-border-size-y)),
-    linear-gradient(to left, var(--color--gray-30) var(--form-element-select-border-size-right), transparent var(--form-element-select-border-size-right), transparent 100%) var(--color--gray-95);
+  border-width: var(--form-element-border-size-base) 0;
+  border-style: solid;
+  border-color: transparent;
+  border-radius: 0 var(--border-radius-base) var(--border-radius-base) 0;
+  outline: var(--outline--thin);
+  /*
+    Couple of notes here:
+
+    The select element is styled with external images so it's visible in Firefox in Windows high contrast
+    mode. There's a number of browser bugs that limit what we can do including not linear-gradients negating the
+    entire ruleset. To work around this, we split off the various backgrounds into separate SVG images, and
+    call them as appropriate. We cannot use the background CSS property because we split off the background-color.
+    We also cannot use a left border because it angles at the end to blend in with the top and bottom
+    transparent borders, so we re-use the background SVG image for this.
+
+    @todo - look at inlining some of the SVGs with an eye on CSS filesize.
+  */
   background-color: var(--color--gray-95);
+  background-image: var(--form-element-select-icon), var(--form-element-select-bg), var(--form-element-select-bg);
+  background-repeat: no-repeat;
+  background-position:
+    right var(--sp1) center,
+    right 0 top calc(-1 * var(--form-element-border-size-base)),
+    left -48px top calc(-1 * var(--form-element-border-size-base));
+  font-family: inherit;
   font-size: var(--font-size-base);
-  line-height: var(--line-height-s);
+  line-height: calc(var(--form-element-select-height) - var(--form-element-border-size-base));
   appearance: none;
 
   &:hover,
   &:focus {
-    padding-top: calc(var(--sp) - var(--form-element-select-border-size-y));
-    padding-bottom: calc(var(--sp) - var(--form-element-select-border-size-y));
-    border: solid var(--form-element-select-border-size-y) var(--color--blue-70);
-    border-right: 0;
-    border-left: solid 6px var(--color--blue-70);
-    background:
-      var(--form-element-select-icon) no-repeat right var(--form-element-select-icon-right-offset) top var(--form-element-select-icon-top-offset),
-      linear-gradient(to left, var(--color--blue-70) var(--form-element-select-border-size-right), transparent var(--form-element-select-border-size-right), transparent 100%) var(--color--gray-95);
+    border-color: var(--color--blue-70);
+    background-image:
+      var(--form-element-select-icon),
+      var(--form-element-select-bg--highlight),
+      var(--form-element-select-bg--highlight);
   }
 
   &:focus {
-    outline: var(--outline--base);
+    outline: var(--outline--thick);
     box-shadow: var(--shadow-focusable);
+
+    @supports (outline-style: double) {
+      outline-style: double;
+    }
+  }
+
+  /* Disables border of select specifically for ms browser */
+  &::-ms-expand {
+    display: none;
   }
 
   &[disabled] {
-    color: var(--color--gray-30);
-    border-color: transparent;
-    background: linear-gradient(to right, var(--color--gray-70) var(--form-element-border-size-left), transparent var(--form-element-border-size-left), transparent 100%) var(--color--gray-95);
-  }
-}
-
-/* Default select, error case */
-.form-element--type-select.error {
-  border-color: var(--color--red);
-  background:
-    var(--form-element-select-icon) no-repeat right var(--form-element-select-icon-right-offset) top calc(var(--form-element-select-icon-top-offset) + var(--form-element-select-border-size-y)),
-    linear-gradient(to right, var(--color--red) var(--form-element-border-size-left), transparent var(--form-element-border-size-left), transparent 100%),
-    linear-gradient(to left, var(--color--red) var(--form-element-select-border-size-right), transparent var(--form-element-select-border-size-right), transparent 100%) var(--color--gray-95);
-
-  &:hover {
-    border-color: var(--color--blue-70);
-    background:
-      var(--form-element-select-icon) no-repeat right var(--form-element-select-icon-right-offset) top var(--form-element-select-icon-top-offset),
-      linear-gradient(to right, var(--color--blue-70) var(--form-element-border-size-left), transparent var(--form-element-border-size-left), transparent 100%),
-      linear-gradient(to left, var(--color--blue-70) var(--form-element-select-border-size-right), transparent var(--form-element-select-border-size-right), transparent 100%) var(--color--gray-95);
+    pointer-events: none;
+    opacity: 0.6;
   }
 
-  &:focus {
-    border-color: var(--color--blue-70);
-    background:
-      var(--form-element-select-icon) no-repeat right var(--form-element-select-icon-right-offset) top var(--form-element-select-icon-top-offset),
-      linear-gradient(to right, var(--color--blue-70) var(--form-element-border-size-left), transparent var(--form-element-border-size-left), transparent 100%),
-      linear-gradient(to left, var(--color--blue-70) var(--form-element-select-border-size-right), transparent var(--form-element-select-border-size-right), transparent 100%) var(--color--gray-95);
-    box-shadow: var(--shadow-focusable);
-  }
-}
+  &.error {
+    background-image:
+      var(--form-element-select-icon),
+      var(--form-element-select-bg--error),
+      var(--form-element-select-bg--error);
 
-/* Default select, disabled case */
-.form-element--type-select[disabled] {
-  background:
-    var(--form-element-select-icon) no-repeat right var(--form-element-select-icon-right-offset) top calc(var(--form-element-select-icon-top-offset) + var(--form-element-select-border-size-y)),
-    linear-gradient(to right, var(--color--gray-70) var(--form-element-border-size-left), transparent var(--form-element-border-size-left), transparent 100%),
-    linear-gradient(to left, var(--color--gray-70) var(--form-element-select-border-size-right), transparent var(--form-element-select-border-size-right), transparent 100%) var(--color--gray-95);
-}
-
-/* Small select */
-.form-element--type-select.form-element--small {
-  min-height: var(--sp2-5);
-  padding: var(--sp0-75) calc(var(--sp0-75) + var(--form-element-select-border-size-right)) var(--sp0-75) var(--sp0-75);
-  background:
-    var(--form-element-select-icon) no-repeat right var(--form-element-select-icon-right-offset--small) top calc(var(--form-element-select-icon-top-offset--small) + var(--form-element-select-border-size-y)),
-    linear-gradient(to right, var(--color--gray-30) var(--form-element-border-size-left), transparent var(--form-element-border-size-left), transparent 100%),
-    linear-gradient(to left, var(--color--gray-30) var(--form-element-select-border-size-right--small), transparent var(--form-element-select-border-size-right--small), transparent 100%) var(--color--gray-95);
-
-  &:hover,
-  &:focus {
-    padding: calc(var(--sp0-75) - var(--form-element-select-border-size-y)) calc(var(--sp0-75) + var(--form-element-select-border-size-right)) calc(var(--sp0-75) - var(--form-element-select-border-size-y)) var(--sp0-75);
-    background:
-      var(--form-element-select-icon) no-repeat right var(--form-element-select-icon-right-offset--small) top var(--form-element-select-icon-top-offset--small),
-      linear-gradient(to right, var(--color--blue-70) var(--form-element-border-size-left), transparent var(--form-element-border-size-left), transparent 100%),
-      linear-gradient(to left, var(--color--blue-70) var(--form-element-select-border-size-right--small), transparent var(--form-element-select-border-size-right--small), transparent 100%) var(--color--gray-95);
-  }
-}
-
-/* Small select, error case */
-.form-element--type-select.form-element--small.error {
-  background:
-    var(--form-element-select-icon) no-repeat right var(--form-element-select-icon-right-offset--small) top calc(var(--form-element-select-icon-top-offset--small) + var(--form-element-select-border-size-y)),
-    linear-gradient(to right, var(--color--red) var(--form-element-border-size-left), transparent var(--form-element-border-size-left), transparent 100%),
-    linear-gradient(to left, var(--color--red) var(--form-element-select-border-size-right--small), transparent var(--form-element-select-border-size-right--small), transparent 100%) var(--color--gray-95);
-
-  &:hover {
-    background:
-      var(--form-element-select-icon) no-repeat right var(--form-element-select-icon-right-offset--small) top var(--form-element-select-icon-top-offset--small),
-      linear-gradient(to right, var(--color--blue-70) var(--form-element-border-size-left), transparent var(--form-element-border-size-left), transparent 100%),
-      linear-gradient(to left, var(--color--blue-70) var(--form-element-select-border-size-right--small), transparent var(--form-element-select-border-size-right--small), transparent 100%) var(--color--gray-95);
+    &:hover,
+    &:focus {
+      background-image:
+        var(--form-element-select-icon),
+        var(--form-element-select-bg--highlight),
+        var(--form-element-select-bg--highlight);
+    }
   }
 
-  &:focus {
-    background:
-      var(--form-element-select-icon) no-repeat right var(--form-element-select-icon-right-offset--small) top var(--form-element-select-icon-top-offset--small),
-      linear-gradient(to right, var(--color--blue-70) var(--form-element-border-size-left), transparent var(--form-element-border-size-left), transparent 100%),
-      linear-gradient(to left, var(--color--blue-70) var(--form-element-select-border-size-right--small), transparent var(--form-element-select-border-size-right--small), transparent 100%) var(--color--gray-95);
-  }
-}
-
-/* Small select, disabled case */
-.form-element--type-select.form-element--small[disabled] {
-  background:
-    var(--form-element-select-icon) no-repeat right var(--form-element-select-icon-right-offset--small) top calc(var(--form-element-select-icon-top-offset--small) + var(--form-element-select-border-size-y)),
-    linear-gradient(to right, var(--color--gray-70) var(--form-element-border-size-left), transparent var(--form-element-border-size-left), transparent 100%),
-    linear-gradient(to left, var(--color--gray-70) var(--form-element-select-border-size-right--small), transparent var(--form-element-select-border-size-right--small), transparent 100%) var(--color--gray-95);
-}
-
-@media screen and (-ms-high-contrast: active) {
-  select,
-  .form-element--type-select {
-    background: var(--form-element-select-icon) no-repeat right var(--form-element-select-icon-right-offset) top calc(var(--form-element-select-icon-top-offset) + var(--form-element-select-border-size-y));
+  &.form-element--small {
+    height: var(--form-element-select-height--small);
+    padding-right: var(--form-element-select-border-size-right--small);
+    background-position: right var(--sp0-75) center, right -10px top 0, left -48px top 0;
+    line-height: calc(var(--form-element-select-height--small) - var(--form-element-border-size-base));
   }
 
-  .form-element--type-select.form-element--small {
-    background: var(--form-element-select-icon) no-repeat right var(--form-element-select-icon-right-offset--small) top calc(var(--form-element-select-icon-top-offset--small) + var(--form-element-select-border-size-y));
+  /* Necessary for IE11 to show chevron. */
+  @media screen and (-ms-high-contrast: active) {
+    background-image: var(--form-element-select-icon);
   }
 }

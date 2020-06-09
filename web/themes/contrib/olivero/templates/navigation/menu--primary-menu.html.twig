@@ -54,7 +54,12 @@
               @see https://www.drupal.org/project/drupal/issues/3115445
             #}
             {% set aria_id = (item.title ~ '-submenu')|clean_id %}
-            <button class="primary-nav__button-toggle" aria-controls="{{ aria_id }}" aria-expanded="false">
+
+            {#
+              Aria-hidden  and tabindex attributes are removed via JS. Button is non-functional,
+              but still visible in non-JS environments.
+            #}
+            <button class="primary-nav__button-toggle" aria-controls="{{ aria_id }}" aria-expanded="false" aria-hidden="true" tabindex="-1">
               <span class="visually-hidden">{{ 'Toggle sub-navigation'|t }}</span>
               <span class="icon--menu-toggle"></span>
             </button>

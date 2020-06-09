@@ -58,14 +58,14 @@
 }
 
 .site-header__inner {
-  width: 100%;
+  flex-grow: 1;
+  width: calc(100vw - var(--content-left));
   transition: all 0.3s;
+  background: white;
 
   .site-header__fixable.js-fixed & {
     @media (--nav) {
-      background: white;
       box-shadow: -36px 1px 36px rgba(0, 0, 0, 0.08);
-      width: calc(100vw - var(--content-left));
     }
   }
 

@@ -12,6 +12,7 @@ global-styling:
       css/dist/layout/layout-content-narrow.css: {}
       css/dist/layout/layout-content-medium.css: {}
       css/dist/layout/region.css: {}
+      css/dist/layout/views.css: {}
     component:
       css/dist/components/breadcrumb.css: {}
       css/dist/components/embedded-media.css: {}
@@ -23,8 +24,6 @@ global-styling:
       css/dist/components/field-image.css: {}
       css/dist/components/form.css: {}
       css/dist/components/form-boolean.css: {}
-      css/dist/components/form-boolean--ie.css: {}
-      css/dist/components/form-file.css: {}
       css/dist/components/form-text.css: {}
       css/dist/components/form-textarea.css: {}
       css/dist/components/form-select.css: {}
@@ -48,6 +47,7 @@ global-styling:
       css/dist/components/social-container.css: {}
       css/dist/components/table.css: {}
       css/dist/components/text-content.css: {}
+
   js:
     js/checkbox.js: {}
     js/polyfills.js: {}
@@ -105,3 +105,9 @@ debug:
       css/dist/components/_debug.css: {}
   js:
     js/debug.js: {}
+
+
+search-results:
+  css:
+    theme:
+      css/dist/components/search-results.css: {}

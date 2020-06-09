@@ -23,6 +23,7 @@
 .comments__title {
   display: flex;
   align-items: center;
+  margin-top: 0;
 }
 
 .comments__count {

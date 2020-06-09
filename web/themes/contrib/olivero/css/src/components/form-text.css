@@ -5,52 +5,58 @@
 
 @import "../base/variables.css";
 
-input[type="text"],
-input[type="search"],
-input[type="email"],
-input[type="password"],
-input[type="number"],
-input[type="tel"],
-textarea,
-.form-text {
+[type="color"],
+[type="date"],
+[type="datetime-local"],
+[type="email"],
+[type="file"],
+[type="month"],
+[type="number"],
+[type="password"],
+[type="search"],
+[type="tel"],
+[type="text"],
+[type="time"],
+[type="url"],
+[type="week"],
+textarea {
   max-width: 100%;
   min-height: var(--sp3);
-  padding-left: var(--sp);
+  padding:
+    calc((var(--sp3) - (var(--font-size-base) * 1.5) - (var(--form-element-border-size-base) * 2)) / 2)
+    calc(var(--sp1) + var(--form-element-border-size-base))
+    calc((var(--sp3) - (var(--font-size-base) * 1.5) - (var(--form-element-border-size-base) * 2)) / 2)
+    calc(var(--sp1) + var(--form-element-border-size-left));
   color: var(--color--gray-10);
-  border: 0;
-  border-left: solid 6px var(--color--gray-30);
-  outline: solid 1px transparent;
-  background-color: var(--color--gray-95);
+  border-width: var(--form-element-border-size-base) 0;
+  border-style: solid;
+  border-color: transparent;
+  border-radius: 0 var(--border-radius-base) var(--border-radius-base) 0;
+  outline: var(--outline--thin);
+  background: linear-gradient(to right, var(--color--gray-30) var(--form-element-border-size-left), transparent var(--form-element-border-size-left), transparent 100%) var(--color--gray-95);
+  font-family: inherit;
   font-size: var(--font-size-base);
-  line-height: var(--line-height-s);
+  line-height: calc(var(--font-size-base) * 1.5);
   appearance: none;
 
-  &:hover,
-  &:focus {
-    border: solid 2px var(--color--blue-70);
-    border-left-width: 6px;
+  &:hover {
+    border-color: var(--color--blue-70);
+    background: linear-gradient(to right, var(--color--blue-70) var(--form-element-border-size-left), transparent var(--form-element-border-size-left), transparent 100%), linear-gradient(to left, var(--color--blue-70) var(--form-element-border-size-base), transparent var(--form-element-border-size-base), transparent 100%) var(--color--gray-95);
   }
 
   &:focus {
-    outline: var(--outline--base);
+    border-color: var(--color--blue-70);
+    outline: var(--outline--thick);
+    background: linear-gradient(to right, var(--color--blue-70) var(--form-element-border-size-left), transparent var(--form-element-border-size-left), transparent 100%), linear-gradient(to left, var(--color--blue-70) var(--form-element-border-size-base), transparent var(--form-element-border-size-base), transparent 100%) var(--color--gray-95);
     box-shadow: var(--shadow-focusable);
+
+    @supports (outline-style: double) {
+      outline-style: double;
+    }
   }
 
   &::-ms-clear {
     display: none;
-  }
-
-  &.error {
-    border-color: var(--color--red);
-
-    &:hover {
-      border-color: var(--color--blue-70);
-    }
-
-    &:focus {
-      border-color: var(--color--blue-70);
-      box-shadow: var(--shadow-focusable);
-    }
   }
 
   &[disabled] {
@@ -58,13 +64,32 @@ textarea,
     border-color: transparent;
     background: linear-gradient(to right, var(--color--gray-70) var(--form-element-border-size-left), transparent var(--form-element-border-size-left), transparent 100%) var(--color--gray-95);
   }
+
+  &.error {
+    border-color: var(--color--red);
+    background: linear-gradient(to right, var(--color--red) var(--form-element-border-size-left), transparent var(--form-element-border-size-left), transparent 100%), linear-gradient(to left, var(--color--red) var(--form-element-border-size-base), transparent var(--form-element-border-size-base), transparent 100%) var(--color--gray-95);
+
+    &:hover {
+      border-color: var(--color--blue-70);
+      background: linear-gradient(to right, var(--color--blue-70) var(--form-element-border-size-left), transparent var(--form-element-border-size-left), transparent 100%), linear-gradient(to left, var(--color--blue-70) var(--form-element-border-size-base), transparent var(--form-element-border-size-base), transparent 100%) var(--color--gray-95);
+    }
+
+    &:focus {
+      border-color: var(--color--blue-70);
+      background: linear-gradient(to right, var(--color--blue-70) var(--form-element-border-size-left), transparent var(--form-element-border-size-left), transparent 100%), linear-gradient(to left, var(--color--blue-70) var(--form-element-border-size-base), transparent var(--form-element-border-size-base), transparent 100%) var(--color--gray-95);
+      box-shadow: var(--shadow-focusable);
+    }
+  }
+
+  &.form-element--small {
+    min-height: var(--sp2-5);
+    padding: calc((var(--sp2-5) - (var(--font-size-base) * 1.5) - (var(--form-element-border-size-base) * 2)) / 2) calc(var(--sp0-75) + var(--form-element-border-size-base)) calc((var(--sp2-5) - (var(--font-size-base) * 1.5) - (var(--form-element-border-size-base) * 2)) / 2) calc(var(--sp0-75) + var(--form-element-border-size-left));
+  }
 }
 
-.form-element--small {
-  min-height: var(--sp2-5);
-}
-
-textarea {
-  max-height: none;
-  padding: var(--sp);
+[type="date"] {
+  /* Ensure that date field isn't larger than other fields. */
+  &::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
 }

@@ -59,7 +59,7 @@ ckeditor_stylesheets:
   - css/dist/components/text-content.css
   - css/dist/theme/ckeditor-frame.css
 
-# Information added by Drupal.org packaging script on 2020-05-15
-version: '8.x-1.0-alpha1'
+# Information added by Drupal.org packaging script on 2020-06-02
+version: '8.x-1.0-alpha2'
 project: 'olivero'
-datestamp: 1589571704
+datestamp: 1591106479

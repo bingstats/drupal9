@@ -33,6 +33,12 @@
     max-height: var(--sp8);
   }
 
+  /* Provide rudimentary access to site search if JS is disabled. */
+  html:not(.js) .search-block-form:focus-within & {
+    visibility: visible;
+    max-height: var(--sp8);
+  }
+
   form {
     display: flex;
     grid-column: 1 / 14;

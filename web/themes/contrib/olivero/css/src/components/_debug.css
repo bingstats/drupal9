@@ -15,16 +15,21 @@
   padding: var(--sp) var(--sp1-5);
   user-select: none;
   color: white;
+  border: solid 1px transparent;
   background-color: rgba(0, 0, 0, 0.5);
 
   label {
     display: inline-block;
-    width: 200px;
+    width: 300px;
+    margin-top: 5px;
     padding: 5px 0;
     cursor: pointer;
+    vertical-align: top;
+    font-size: 18px;
   }
 
   input[type="checkbox"] {
+    margin-top: 10px;
     margin-right: 10px;
     cursor: pointer;
   }

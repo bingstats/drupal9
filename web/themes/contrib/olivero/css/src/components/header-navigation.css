@@ -12,6 +12,10 @@
   right: 0;
   visibility: hidden;
   overflow: auto;
+  /* Ensure that header nav not use additional space and force
+     system branding block text to unnecessarily wrap. */
+  flex-basis: 0;
+  flex-grow: 1; /* Necessary for IE11. */
   width: 100%;
   max-width: var(--mobile-nav-width);
   height: 100%;
@@ -30,6 +34,10 @@
   &.is-active {
     visibility: visible;
     transform: translateX(0);
+  }
+
+  @supports (flex-basis: max-content) {
+    flex-basis: max-content;
   }
 
   @media (--sm) {

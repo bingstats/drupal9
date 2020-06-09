@@ -5,7 +5,7 @@
 
 @import "../base/variables.css";
 
-.form-element--type-textarea {
+textarea {
   display: block;
   width: 100%;
   min-height: var(--sp8);

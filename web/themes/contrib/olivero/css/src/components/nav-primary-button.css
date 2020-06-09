@@ -10,6 +10,7 @@
   overflow: hidden;
   width: var(--sp2);
   height: var(--sp2);
+  margin-top: 2px; /* Visually align button with menu link text. */
   padding: 0;
   cursor: pointer;
   text-indent: -999px;
@@ -86,15 +87,20 @@
     }
   }
 
-  html:not(.js) & {
-    display: none; /* Hide if JS is disabled */
+  /* aria-hidden attribute is removed by JS. Button is non-functional
+     until JS is enabled.
+  */
+  &[aria-hidden="true"] {
+    pointer-events: none;
   }
 
   @media (--nav) {
     body:not(.is-always-mobile-nav) & {
+      flex-shrink: 0;
       align-self: stretch;
       width: calc(var(--sp2) + 8px);
       height: auto;
+      margin-top: 0;
       margin-right: calc(-1 * var(--sp2));
 
       &:focus {

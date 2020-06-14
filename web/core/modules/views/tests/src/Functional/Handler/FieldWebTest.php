@@ -67,7 +67,7 @@ class FieldWebTest extends ViewTestBase {
    */
   public function testClickSorting() {
     $this->drupalGet('test_click_sort');
-    $this->assertResponse(200);
+    $this->assertSession()->statusCodeEquals(200);
 
     // Only the id and name should be click sortable, but not the name.
     $this->assertLinkByHref(Url::fromRoute('<none>', [], ['query' => ['order' => 'id', 'sort' => 'asc']])->toString());
@@ -125,6 +125,7 @@ class FieldWebTest extends ViewTestBase {
    *   The message to display along with the assertion.
    * @param string $group
    *   The type of assertion - examples are "Browser", "PHP".
+   *
    * @return bool
    *   TRUE if the assertion succeeded, FALSE otherwise.
    */
@@ -143,6 +144,7 @@ class FieldWebTest extends ViewTestBase {
    *   The message to display along with the assertion.
    * @param string $group
    *   The type of assertion - examples are "Browser", "PHP".
+   *
    * @return bool
    *   TRUE if the assertion succeeded, FALSE otherwise.
    */

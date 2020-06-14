@@ -115,7 +115,7 @@ class UncaughtExceptionTest extends BrowserTestBase {
       '%function' => 'Drupal\error_test\Controller\ErrorTestController->Drupal\error_test\Controller\{closure}()',
     ];
     $this->drupalGet('error-test/generate-fatals');
-    $this->assertResponse(500, 'Received expected HTTP status code.');
+    $this->assertResponse(500);
     $message = new FormattableMarkup('%type: @message in %function (line ', $fatal_error);
     $this->assertRaw((string) $message);
     $this->assertRaw('<pre class="backtrace">');
@@ -237,6 +237,7 @@ class UncaughtExceptionTest extends BrowserTestBase {
       case 'mysql':
         $this->expectedExceptionMessage = $incorrect_username;
         break;
+
       default:
         // We can not carry out this test.
         $this->pass('Unable to run \Drupal\system\Tests\System\UncaughtExceptionTest::testLostDatabaseConnection for this database type.');

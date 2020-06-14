@@ -1,0 +1,13 @@
+# @file
+# Routes for the Layout Builder BGColor module.
+
+# Settings form.
+layout_builder_bgcolor.settings:
+  path: '/admin/config/user-interface/layout-builder-bgcolor'
+  defaults:
+    _form: '\Drupal\layout_builder_bgcolor\Form\Settings'
+    _title: 'Layout Builder BGColor settings'
+  requirements:
+    _permission: 'administer site'
+  options:
+    _admin_route: TRUE

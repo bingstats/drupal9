@@ -1,0 +1,9 @@
+# @file
+# Routes for the Layout Builder BGColor module.
+
+# Settings form.
+layout_builder_bgcolor.settings:
+  title: 'Layout Builder BGColor'
+  route_name: layout_builder_bgcolor.settings
+  description: 'Configure various options for the Layout Builder BGColor module.'
+  parent: system.admin_config_ui

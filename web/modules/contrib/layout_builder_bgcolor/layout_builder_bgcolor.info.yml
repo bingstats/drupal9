@@ -1,0 +1,13 @@
+name: Layout Builder BGColor
+description: Provides a means to assign a background color on a given layout section.
+type: module
+core_version_requirement: ^8 || ^9
+package: Layout Builder
+configure: layout_builder_bgcolor.settings
+dependencies:
+  - drupal:layout_builder
+
+# Information added by Drupal.org packaging script on 2020-04-24
+version: '8.x-1.0-rc2'
+project: 'layout_builder_bgcolor'
+datestamp: 1587755806

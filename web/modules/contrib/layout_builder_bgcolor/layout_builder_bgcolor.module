@@ -1,0 +1,29 @@
+<?php
+
+/**
+ * @file
+ * Primary hook implementations for the Layout Builder BGColor module.
+ */
+
+use Drupal\Core\Layout\LayoutDefault;
+use Drupal\bootstrap_layouts\Plugin\Layout\BootstrapLayoutsBase;
+
+/**
+ * Implements hook_layout_alter().
+ */
+function layout_builder_bgcolor_layout_alter(&$definitions) {
+  /**
+   * @var \Drupal\Core\Layout\LayoutDefinition $definition
+   */
+  foreach ($definitions as &$definition) {
+    // This is a core-provided layout.
+    if ($definition->getClass() == LayoutDefault::class) {
+      $definition->setClass('Drupal\layout_builder_bgcolor\Plugin\Layout\LayoutBase');
+    }
+
+    // Layouts provided by Bootstrap_Layouts.
+    if ($definition->getClass() == BootstrapLayoutsBase::class) {
+      $definition->setClass('Drupal\layout_builder_bgcolor\Plugin\Layout\BootstrapLayoutBase');
+    }
+  }
+}

@@ -1,0 +1,16 @@
+layout_builder_bgcolor 8.x-1.0-rc2, 2020-04-24
+----------------------------------------------
+#3130673 by DamienMcKenna: Fix tests on 8.x-1.x branch.
+#3123037 by DamienMcKenna, kuldeep_mehra27, volkswagenchick: Add README.txt.
+#3130695 by DamienMcKenna: Colors list is hardcoded.
+#3130690 by DamienMcKenna: Filter output.
+
+
+layout_builder_bgcolor 8.x-1.0-rc1, 2020-04-20
+----------------------------------------------
+#3123034 by joshua.boltz, DamienMcKenna: Support core layouts.
+#3123035 by DamienMcKenna, joshua.boltz: Allow Bootstrap Layouts to assign a
+  background color.
+#3123234 by prabha1997, DamienMcKenna: Drupal 9 compatibility fixes.
+#3123363 by neelam_wadhwani, DamienMcKenna: Undefined variable and unused use
+  statement.

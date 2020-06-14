@@ -1,0 +1,10 @@
+name: layout_section_classes_test
+type: module
+core: 8.x
+dependencies:
+  layout_section_classes:layout_section_classes
+
+# Information added by Drupal.org packaging script on 2020-01-15
+version: '8.x-1.0-rc6'
+project: 'layout_section_classes'
+datestamp: 1579065499

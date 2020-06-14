@@ -1,0 +1,24 @@
+test_layout:
+  label: Test
+  category: 'LSC'
+  template: templates/test-layout
+  classes:
+    style:
+      label: 'Style'
+      multiple: true
+      required: false
+      options:
+        'background--primary-light': 'Light background'
+        'background--wave-dark background--primary-light': 'Wave background'
+      description: 'Select the visual style for this region.'
+    spacing:
+      label: 'Spacing'
+      multiple: false
+      required: true
+      default: 'section--bottom-l section--top-l'
+      options:
+        'section--bottom-l section--top-l': 'Standard'
+        '': 'Tight'
+  regions:
+    content:
+      label: Content

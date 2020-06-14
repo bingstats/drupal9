@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "94bd583a1a0cf461ffdb246968e39586",
+    "content-hash": "fd21b374eecf8a0224ba905b06d2f2d4",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1966,6 +1966,50 @@
             "homepage": "https://www.drupal.org/project/layout_builder_styles",
             "support": {
                 "source": "https://git.drupalcode.org/project/layout_builder_styles"
+            }
+        },
+        {
+            "name": "drupal/layout_section_classes",
+            "version": "1.0.0-rc6",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/layout_section_classes.git",
+                "reference": "8.x-1.0-rc6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/layout_section_classes-8.x-1.0-rc6.zip",
+                "reference": "8.x-1.0-rc6",
+                "shasum": "c250d176ba57b8c20cba729be2183a26a89cf806"
+            },
+            "require": {
+                "drupal/core": "^8.8 || ^9"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.0-rc6",
+                    "datestamp": "1579065492",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "RC releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Sam152",
+                    "homepage": "https://www.drupal.org/user/1485048"
+                }
+            ],
+            "description": "Allow you to add classes to layout builder sections.",
+            "homepage": "https://www.drupal.org/project/layout_section_classes",
+            "support": {
+                "source": "https://git.drupalcode.org/project/layout_section_classes"
             }
         },
         {

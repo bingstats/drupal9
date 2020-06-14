@@ -1,0 +1,13 @@
+name: Layout Section Classes
+type: module
+description: Allow you to add classes to layout builder sections.
+
+core_version_requirement: ^8.8 || ^9
+
+dependencies:
+  - drupal:layout_discovery
+
+# Information added by Drupal.org packaging script on 2020-01-15
+version: '8.x-1.0-rc6'
+project: 'layout_section_classes'
+datestamp: 1579065499

@@ -35,6 +35,7 @@
         "drupal/layout_section_classes": "^1.0",
         "drupal/olivero": "^1.0",
         "drupal/page_load_progress": "^2.0",
+        "drupal/paragraphs_previewer": "^1.5",
         "drush/drush": "^10.2"
     },
     "require-dev": {

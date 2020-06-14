@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+  enforced:
+    module:
+      - layout_bg_article_teaser
+id: node.layout_bg_teaser
+label: 'Layout BG Teaser'
+targetEntityType: node
+cache: true

@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - layout_bg_thumb_over_thumb
+name: thumb_under_thumb
+label: 'Thumb Under Thumb'
+effects:
+  45deb033-44af-425b-90b4-4a9490ee29eb:
+    uuid: 45deb033-44af-425b-90b4-4a9490ee29eb
+    id: image_desaturate
+    weight: -10
+    data: {  }
+  246525d2-65b5-497b-938f-5aa8a2bd96e3:
+    uuid: 246525d2-65b5-497b-938f-5aa8a2bd96e3
+    id: image_rotate
+    weight: -8
+    data:
+      degrees: 180
+      bgcolor: ''
+      random: false
+  683afe5d-78ff-4b20-b56d-ff38b2254643:
+    uuid: 683afe5d-78ff-4b20-b56d-ff38b2254643
+    id: image_scale_and_crop
+    weight: 3
+    data:
+      width: 600
+      height: 400
+      anchor: center-center

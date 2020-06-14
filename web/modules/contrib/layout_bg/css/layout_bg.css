@@ -1,0 +1,86 @@
+.layout-bg-edit {
+  background-color: #eeeeaa;
+  padding: 1rem;
+}
+
+.layout-bg-preview,
+.layout-bg-preview-text {
+  position: relative;
+}
+.layout-bg-preview-text.center-content {
+  text-align: center;
+}
+
+.layout-bg-overlay {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.layout-bg-section {
+  overflow: hidden;
+}
+
+.layout-bg-section,
+.layout-bg-section * {
+  box-sizing: border-box;
+}
+
+.layout-bg-row {
+  width: 200%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.layout-bg-row > * {
+  position: relative;
+  width: 50%;
+  min-height: 1px;
+}
+
+.layout-bg-content-container {
+  transform: translateX(-100%);
+}
+
+.layout-bg-content-container.center-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.layout-bg-content-container.set-text-color a,
+.layout-bg-content-container.set-text-color a:hover,
+.layout-bg-content-container.set-text-color a:active,
+.layout-bg-content-container.set-text-color a:visited {
+  color: inherit;
+  text-decoration: underline;
+}
+
+
+.layout-bg-bg-container * {
+  height: 100% !important;
+  float: none !important;
+}
+.layout-bg-bg-container *:after,
+.layout-bg-bg-container *:before {
+  content: none;
+}
+
+.layout-bg-bg-wrapper img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* No minimum height. BG acts like CSS bg. */
+.layout-bg-bg-wrapper.absolute-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}

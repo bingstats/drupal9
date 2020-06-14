@@ -1,0 +1,15 @@
+{#
+  A very simple template that allows us to make the whole
+  teaser into a link. It also allows us to attach a little
+  library that makes this example a little prettier.
+#}
+
+{{ attach_library('layout_bg_article_teaser/layout-bg-teaser') }}
+
+<div{{ attributes.addClass('layout-bg-teaser') }}>
+  <a href="{{ url }}">
+    <div{{ content_attributes }}>
+      {{ content }}
+    </div>
+  </a>
+</div>

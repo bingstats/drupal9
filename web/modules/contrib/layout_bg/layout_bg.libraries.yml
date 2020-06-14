@@ -1,0 +1,15 @@
+layout_bg:
+  css:
+    theme:
+      css/layout_bg.css: {}
+
+layout_bg_onecol:
+  dependencies:
+    - layout_discovery/onecol
+    - layout_bg/layout_bg
+
+layout_bg_twocol:
+  dependencies:
+    - layout_builder/twocol_section
+    - layout_bg/layout_bg
+

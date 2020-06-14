@@ -1,0 +1,55 @@
+layout_plugin.settings.layout_bg_twocol:
+  type: layout_plugin.settings.layout_twocol_section
+  mapping:
+    background_color:
+      type: string
+      label: 'Background Color'
+    static_image:
+      type: boolean
+      label: 'Static Image'
+    center_content:
+      type: boolean
+      label: 'Center Content'
+    add_overlay:
+      type: boolean
+      label: 'Add Overlay'
+    overlay_color:
+      type: string
+      label: 'Overlay Color'
+    overlay_opacity:
+      type: string
+      label: 'Overlay Opacity'
+    set_text_color:
+      type: boolean
+      label: 'Set Text Color'
+    text_color:
+      type: string
+      label: 'Text Color'
+
+layout_plugin.settings.layout_bg_onecol:
+  type: layout_plugin.settings
+  mapping:
+    background_color:
+      type: string
+      label: 'Background Color'
+    static_image:
+      type: boolean
+      label: 'Static Image'
+    center_content:
+      type: boolean
+      label: 'Center Content'
+    add_overlay:
+      type: boolean
+      label: 'Add Overlay'
+    overlay_color:
+      type: string
+      label: 'Overlay Color'
+    overlay_opacity:
+      type: string
+      label: 'Overlay Opacity'
+    set_text_color:
+      type: boolean
+      label: 'Set Text Color'
+    text_color:
+      type: string
+      label: 'Text Color'

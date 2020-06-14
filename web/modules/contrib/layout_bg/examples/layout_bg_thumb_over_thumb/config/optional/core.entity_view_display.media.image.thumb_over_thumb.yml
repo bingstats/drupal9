@@ -1,0 +1,85 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.thumb_over_thumb
+    - field.field.media.image.field_media_image
+    - media.type.image
+  module:
+    - image
+    - layout_bg
+    - layout_builder
+  enforced:
+    module:
+      - layout_bg_thumb_over_thumb
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: true
+    sections:
+      -
+        layout_id: layout_bg_onecol
+        layout_settings:
+          label: Main
+          background_color: '#ffffff'
+          static_image: true
+          center_content: true
+          add_overlay: true
+          overlay_color: '#000000'
+          overlay_opacity: '0.7'
+          set_text_color: false
+          text_color: '#ffffff'
+        components:
+          b6a51801-145d-41c7-a36b-c5953d0adf80:
+            uuid: b6a51801-145d-41c7-a36b-c5953d0adf80
+            region: content
+            configuration:
+              id: 'field_block:media:image:thumbnail'
+              label: Thumbnail
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: image
+                settings:
+                  image_style: thumb_over_thumb
+                  image_link: ''
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 0
+          d22543d7-4471-440d-ab25-2b8658b5e451:
+            uuid: d22543d7-4471-440d-ab25-2b8658b5e451
+            region: background
+            configuration:
+              id: 'field_block:media:image:thumbnail'
+              label: Thumbnail
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: image
+                settings:
+                  image_style: thumb_under_thumb
+                  image_link: ''
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 0
+        third_party_settings: {  }
+id: media.image.thumb_over_thumb
+targetEntityType: media
+bundle: image
+mode: thumb_over_thumb
+content: {  }
+hidden:
+  field_media_image: true
+  created: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true

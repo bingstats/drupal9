@@ -1,0 +1,7 @@
+# layout_bg/layout_bg hands all of the background region stuff.
+# layout_discovery/twocol_bricks is the library set for the
+# twocol_bricks layout in layout_discovery.layouts.yml.
+layout_bg_bricks:
+  dependencies:
+    - layout_bg/layout_bg
+    - layout_discovery/twocol_bricks

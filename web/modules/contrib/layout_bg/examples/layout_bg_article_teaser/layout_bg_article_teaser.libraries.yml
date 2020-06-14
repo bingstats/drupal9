@@ -1,0 +1,4 @@
+layout-bg-teaser:
+  css:
+    theme:
+      css/style.css: {}

@@ -1,0 +1,57 @@
+<?php
+
+/**
+ * @file
+ * Install hook for layout_bg_tests.
+ */
+
+use Drupal\file\Entity\File;
+use Drupal\node\Entity\Node;
+
+/**
+ * Implements hook_install().
+ *
+ * The idea is to create some test nodes and just check that the markup
+ * looks ok and there aren't any fatal errors.
+ */
+function layout_bg_tests_install() {
+
+  // Make a couple images.
+  $image_path = drupal_get_path('theme', 'stable') . '/images/core/druplicon.png';
+  file_put_contents('public://first.png', file_get_contents($image_path));
+  $first_image = File::create([
+    'uri' => 'public://first.png',
+    'filename' => 'first.png',
+  ]);
+  $first_image->save();
+  file_put_contents('public://second.png', file_get_contents($image_path));
+  $second_image = File::create([
+    'uri' => 'public://second.png',
+    'filename' => 'second.png',
+  ]);
+  $second_image->save();
+
+  // Create a few nodes.
+  // Node one does not have a teaser image.
+  $first = Node::create(['type' => 'layout_bg_test_node']);
+  $first->set('title', 'This is the first node');
+  $first->set('body', 'Here is a short bit of text.');
+  $first->set('field_layout_bg_hero_image', ['target_id' => $first_image->id(), 'alt' => 'Node one should have alt text.']);
+  $first->save();
+
+  // Node two does not have a hero image.
+  $second = Node::create(['type' => 'layout_bg_test_node']);
+  $second->set('title', 'Another node please!');
+  $second->set('body', 'Another node, another bit of text.');
+  $second->set('field_layout_bg_teaser_image', ['target_id' => $second_image->id(), 'alt' => 'Node two should have alt text.']);
+  $second->save();
+
+  // Node three has both images.
+  $third = Node::create(['type' => 'layout_bg_test_node']);
+  $third->set('title', 'One more!');
+  $third->set('body', 'All for one and one for all.');
+  $third->set('field_layout_bg_hero_image', ['target_id' => $first_image->id(), 'alt' => 'I do not want this text.']);
+  $third->set('field_layout_bg_teaser_image', ['target_id' => $second_image->id(), 'alt' => 'I want this alt text.']);
+  $third->save();
+
+}

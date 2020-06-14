@@ -1,0 +1,50 @@
+<?php
+
+/**
+ * @file
+ * Hooks for the layout_bg module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements template_preprocess_hook().
+ */
+function template_preprocess_layout__layout_bg(&$variables) {
+  if (isset($variables['content']['#base_layout_template'])) {
+    $variables['base_layout_template'] = $variables['content']['#base_layout_template'];
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function layout_bg_theme() {
+  return [
+    'layout__layout_bg' => [
+      'template' => 'layout--layout-bg',
+      'render element' => 'content',
+      'base hook' => 'layout',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_help().
+ */
+function layout_bg_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.layout_bg':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Provides Layout plugins that feature
+        a background region.') . '</p>';
+      $output .= '<h3>' . t('Documentation') . '</h3>';
+      $output .= '<p>' . t('For tips, examples, screenshots, use cases, etc: 
+        <a href="https://www.drupal.org/docs/8/modules/layout-bg" target="_blank">
+        Layout BG on Drupal.org</a>') . '</p>';
+      return $output;
+
+    default:
+  }
+}

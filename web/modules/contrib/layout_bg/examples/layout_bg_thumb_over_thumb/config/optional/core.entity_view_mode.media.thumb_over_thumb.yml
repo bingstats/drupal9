@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+  enforced:
+    module:
+      - layout_bg_thumb_over_thumb
+id: media.thumb_over_thumb
+label: 'Thumb Over Thumb'
+targetEntityType: media
+cache: true

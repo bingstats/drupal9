@@ -1,0 +1,23 @@
+/*
+  Minor styling to make the title bigger and add padding.
+  Notice that there's nothing in here related to the layout
+  or the images or the overlay. This just makes our teaser
+  a little prettier.
+*/
+
+/* Selecting the title without knowing for sure what classes it will have. */
+.layout-bg-teaser .layout__region--content .block-layout-builder:first-child {
+  font-size: 2rem;
+  line-height: 1.2em;
+  margin-bottom: 1rem;
+}
+
+/* Padding inside the teaser tile. */
+.layout-bg-teaser .layout-bg-content-container {
+  padding: 1rem;
+}
+
+/* Padding outside the teaser tile. */
+.layout-bg-teaser {
+  padding: 0.5rem;
+}

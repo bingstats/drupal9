@@ -1,0 +1,13 @@
+name: Layout BG Bricks
+description: "Provides an example of how to extend existing layouts to include a background region."
+package: Layout
+type: module
+core: 8.x
+core_version_requirement: ^8 || ^9
+dependencies:
+  - layout_bg:layout_bg
+
+# Information added by Drupal.org packaging script on 2020-06-09
+version: '8.x-1.0-beta1'
+project: 'layout_bg'
+datestamp: 1591736977

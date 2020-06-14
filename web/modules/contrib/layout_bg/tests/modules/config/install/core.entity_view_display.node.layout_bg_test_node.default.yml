@@ -1,0 +1,223 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.layout_bg_test_node.body
+    - field.field.node.layout_bg_test_node.field_layout_bg_hero_image
+    - field.field.node.layout_bg_test_node.field_layout_bg_teaser_image
+    - node.type.layout_bg_test_node
+  module:
+    - layout_bg
+    - layout_builder
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: true
+    sections:
+      -
+        layout_id: layout_bg_onecol
+        layout_settings:
+          label: ''
+          background_color: '#aaaaaa'
+          static_image: true
+          center_content: true
+          add_overlay: true
+          overlay_color: '#000000'
+          overlay_opacity: '0.3'
+          set_text_color: true
+          text_color: '#ffffff'
+        components:
+          b1eaf946-da91-4401-a14c-4ab118196f26:
+            uuid: b1eaf946-da91-4401-a14c-4ab118196f26
+            region: background
+            configuration:
+              id: 'field_block:node:layout_bg_test_node:field_layout_bg_teaser_image'
+              label: 'Layout BG Teaser Image'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: image
+                settings:
+                  image_style: ''
+                  image_link: ''
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 0
+          9a95b2bb-2da3-4878-bd19-2cad83890891:
+            uuid: 9a95b2bb-2da3-4878-bd19-2cad83890891
+            region: background
+            configuration:
+              id: 'field_block:node:layout_bg_test_node:field_layout_bg_hero_image'
+              label: 'Layout BG Hero Image'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: image
+                settings:
+                  image_style: ''
+                  image_link: ''
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 1
+          5dd71fec-cae9-468e-9cef-4b63421c9fb5:
+            uuid: 5dd71fec-cae9-468e-9cef-4b63421c9fb5
+            region: content
+            configuration:
+              id: 'field_block:node:layout_bg_test_node:title'
+              label: Title
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: string
+                settings:
+                  link_to_entity: true
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 0
+          48a4ba96-441f-4189-9010-a877d685674d:
+            uuid: 48a4ba96-441f-4189-9010-a877d685674d
+            region: content
+            configuration:
+              id: 'field_block:node:layout_bg_test_node:body'
+              label: Body
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: text_summary_or_trimmed
+                settings:
+                  trim_length: 200
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 1
+        third_party_settings: {  }
+      -
+        layout_id: layout_bg_twocol
+        layout_settings:
+          label: ''
+          column_widths: 50-50
+          background_color: '#aaaaaa'
+          static_image: true
+          center_content: true
+          add_overlay: true
+          overlay_color: '#000000'
+          overlay_opacity: '0.3'
+          set_text_color: true
+          text_color: '#ffffff'
+        components:
+          0789e2b1-d612-4d21-af74-51b20c7b5f79:
+            uuid: 0789e2b1-d612-4d21-af74-51b20c7b5f79
+            region: background
+            configuration:
+              id: 'field_block:node:layout_bg_test_node:field_layout_bg_teaser_image'
+              label: 'Layout BG Teaser Image'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: image
+                settings:
+                  image_style: ''
+                  image_link: ''
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 0
+          24f0d11f-9c52-4bad-bb7c-00bb2d708999:
+            uuid: 24f0d11f-9c52-4bad-bb7c-00bb2d708999
+            region: first
+            configuration:
+              id: 'field_block:node:layout_bg_test_node:title'
+              label: Title
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: string
+                settings:
+                  link_to_entity: false
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 0
+          c5c080ed-6d55-4ec5-8718-af91a82c3b8e:
+            uuid: c5c080ed-6d55-4ec5-8718-af91a82c3b8e
+            region: second
+            configuration:
+              id: 'field_block:node:layout_bg_test_node:body'
+              label: Body
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: text_default
+                settings: {  }
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 0
+          96de82e9-fdf6-4c61-b80b-b3f462431f5a:
+            uuid: 96de82e9-fdf6-4c61-b80b-b3f462431f5a
+            region: background
+            configuration:
+              id: 'field_block:node:layout_bg_test_node:field_layout_bg_hero_image'
+              label: 'Layout BG Hero Image'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: image
+                settings:
+                  image_style: ''
+                  image_link: ''
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 1
+        third_party_settings: {  }
+id: node.layout_bg_test_node.default
+targetEntityType: node
+bundle: layout_bg_test_node
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_layout_bg_hero_image: true
+  field_layout_bg_teaser_image: true

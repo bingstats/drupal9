@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - layout_bg_thumb_over_thumb
+name: thumb_over_thumb
+label: 'Thumb Over Thumb'
+effects:
+  afe161ff-bfe2-4f94-b1ad-5b40c0e0cde9:
+    uuid: afe161ff-bfe2-4f94-b1ad-5b40c0e0cde9
+    id: image_scale
+    weight: 1
+    data:
+      width: 600
+      height: null
+      upscale: false
+  8ac7969a-d66a-4bb6-88b3-df8e49957028:
+    uuid: 8ac7969a-d66a-4bb6-88b3-df8e49957028
+    id: image_scale
+    weight: 2
+    data:
+      width: null
+      height: 400
+      upscale: false

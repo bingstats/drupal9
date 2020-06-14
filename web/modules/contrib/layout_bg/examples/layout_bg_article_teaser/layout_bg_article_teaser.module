@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * Hooks for layout_bg_article_teaser.
+ */
+
+/**
+ * Implements hook_theme().
+ *
+ * If you were templating the teaser, you would probably put the
+ * template in your theme. In this example, we are working within
+ * a module so we need to use this hook.
+ */
+function layout_bg_article_teaser_theme() {
+  $theme['node__article__layout_bg_teaser'] = [
+    'template' => 'node--article--layout-bg-teaser',
+    'base hook' => 'node',
+  ];
+  return $theme;
+}

@@ -22,6 +22,7 @@
         "drupal/core-recommended": "9.0.0",
         "drupal/field_group": "^3.0",
         "drupal/layout_builder_restrictions": "^2.7",
+        "drupal/layout_builder_styles": "^1.0",
         "drupal/olivero": "^1.0",
         "drupal/page_load_progress": "^2.0",
         "drush/drush": "^10.2"

@@ -1,0 +1,15 @@
+# Layout Builder Kit controller
+layout_builder_kit.layout_builder_kit_controller:
+  title: 'Layout Builder Kit'
+  route_name: layout_builder_kit.layout_builder_kit_settings
+  description: 'Layout Builder Kit Settings'
+  parent: system.admin
+  weight: 10
+
+# Layout Builder Kit settings form
+layout_builder_kit.layout_builder_kit_settings:
+  title: 'Layout Builder Kit Settings'
+  route_name: layout_builder_kit.layout_builder_kit_settings
+  description: 'Layout Builder Kit Settings'
+  parent: layout_builder_kit.layout_builder_kit_controller
+  weight: 20

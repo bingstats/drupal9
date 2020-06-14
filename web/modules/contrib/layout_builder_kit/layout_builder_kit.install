@@ -1,0 +1,36 @@
+<?php
+
+/**
+ * @file
+ * Contains layout_builder_kit.install.
+ */
+
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_requirements().
+ *
+ * For the Status Report, return information about CK statuses.
+ *
+ * @param $phase
+ *
+ * @return array
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+ */
+function layout_builder_kit_requirements($phase) {
+  $requirements = [];
+  if ($phase == 'runtime') {
+    // Check if Book module is enabled for Layout Builder Kit module, specially for Book Navigation Component.
+    if (!Drupal::moduleHandler()->moduleExists('book')) {
+      $requirements['book'] = [
+        'title' => t('Layout Builder Kit'),
+        'description' => t('Book Navigation component requires Book module to be enabled. Enable it <a href="/admin/modules">here</a>.'),
+        'severity' => REQUIREMENT_INFO,
+        'weight' => 1,
+      ];
+    }
+
+  }
+  return $requirements;
+}

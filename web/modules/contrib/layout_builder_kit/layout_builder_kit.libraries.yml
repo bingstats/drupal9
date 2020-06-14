@@ -1,0 +1,53 @@
+# Rich Text Component styling.
+rich-text-styling:
+  version: 1.x
+  css:
+    component:
+      src/Plugin/Block/LBKRichText/LBKRichText.css: {}
+
+# Image Component styling.
+image-styling:
+  version: 1.x
+  css:
+    component:
+      src/Plugin/Block/LBKImage/LBKImage.css: {}
+
+# Icon Component styling.
+icon-text-styling:
+  version: 1.x
+  css:
+    component:
+      src/Plugin/Block/LBKIconText/LBKIconText.css: {}
+
+# Tab Component styling.
+tab-styling:
+  version: 1.x
+  css:
+    component:
+      src/Plugin/Block/LBKTab/LBKTab.css: {}
+  js:
+    src/Plugin/Block/LBKTab/LBKTab.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+
+# Video Component styling.
+video-styling:
+  version: 1.x
+  css:
+    component:
+      src/Plugin/Block/LBKVideo/LBKVideo.css: {}
+
+# Book Navigation Component styling.
+book-navigation-styling:
+  version: 1.x
+  css:
+    component:
+      src/Plugin/Block/LBKBookNavigation/LBKBookNavigation.css: {}
+
+# Render Component styling.
+render-styling:
+  version: 1.x
+  css:
+    component:
+      src/Plugin/Block/LBKRender/LBKRender.css: {}

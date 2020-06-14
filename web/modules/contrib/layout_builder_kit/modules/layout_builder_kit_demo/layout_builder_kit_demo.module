@@ -1,0 +1,42 @@
+<?php
+
+/**
+ * @file
+ * Contains layout_builder_kit_demo.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function layout_builder_kit_demo_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the layout_builder_kit_demo module.
+    case 'help.page.layout_builder_kit_demo':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Examples of components in the kit.') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_install().
+ */
+function layout_builder_kit_demo_install() {
+  $database = \Drupal::database();
+  $query = $database->query(
+    "INSERT INTO `book` (`nid`, `bid`, `pid`, `has_children`, `weight`, `depth`, `p1`, `p2`, `p3`, `p4`, `p5`, `p6`, `p7`, `p8`, `p9`)
+VALUES
+	(1,1,0,1,0,1,1,0,0,0,0,0,0,0,0),
+	(2,1,1,1,0,2,1,2,0,0,0,0,0,0,0),
+	(3,1,1,1,0,2,1,3,0,0,0,0,0,0,0),
+	(4,1,2,0,0,3,1,2,4,0,0,0,0,0,0),
+	(5,1,2,0,0,3,1,2,5,0,0,0,0,0,0),
+	(6,1,3,0,0,3,1,3,6,0,0,0,0,0,0),
+	(7,1,3,0,0,3,1,3,7,0,0,0,0,0,0);
+");
+}

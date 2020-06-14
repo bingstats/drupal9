@@ -1,0 +1,19 @@
+uuid: ee715663-7d1a-42a7-bb7f-bb4876e433cc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_video_text_plain
+    - node.type.lbk_example
+id: node.lbk_example.field_video_text_plain
+field_name: field_video_text_plain
+entity_type: node
+bundle: lbk_example
+label: 'Video Text Plain'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

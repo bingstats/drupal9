@@ -1,0 +1,12 @@
+layout_builder_kit.lbk_image_entity_type.*:
+  type: config_entity
+  label: 'LBKImage Entity type config'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    uuid:
+      type: string

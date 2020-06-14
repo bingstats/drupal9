@@ -1,0 +1,27 @@
+name: 'Layout Builder Kit Demo'
+type: module
+description: 'Examples of components in the kit.'
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: 'Layout Builder Kit'
+dependencies:
+  - drupal:default_content
+  - layout_builder_kit:layout_builder_kit
+  - book:book
+default_content:
+  node:
+    - 9ad91630-dcc1-4fe9-aaf8-bb7f20db0d14
+    - f75716d6-2df1-485b-a79d-ce62d111bfd9
+    - 77c67a35-27a7-4bc8-ac71-b04794a01f29
+    - b3dc47d4-1dd9-42f7-a91d-b0665e8d19cc
+    - 5112989e-4ef4-4fad-b9ce-864a59ade000
+    - 423c2146-a537-4d5b-b257-f5129cdf91f8
+    - 31b367b9-0ca1-42a4-ab4d-2efc01456f1e
+    - c37000f0-5af7-4a19-b997-455c56cff3ca
+
+# version: '8.x-1.0-beta3'
+
+# Information added by Drupal.org packaging script on 2020-03-27
+version: '8.x-1.0-beta3'
+project: 'layout_builder_kit'
+datestamp: 1585329944

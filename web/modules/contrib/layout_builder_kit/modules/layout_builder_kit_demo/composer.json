@@ -1,0 +1,17 @@
+{
+  "name": "drupal/layout_builder_kit_demo",
+  "type": "drupal-module",
+  "description": "Examples of components in the kit.'",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "minimum-stability": "dev",
+  "repositories": {
+    "drupal": {
+      "type": "composer",
+      "url": "https://packages.drupal.org/8"
+    }
+  },
+  "require": {
+    "drupal/default_content": "^1.0"
+  }
+}

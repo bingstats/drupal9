@@ -1,0 +1,71 @@
+{#
+/**
+ * @file
+ * LBKImage Component Template.
+ *
+ * Available variables:
+ * - title: The block title.
+ * - display_title: Display the title (boolean).
+ * - title_position: Display the title above or below the image.
+ * - image: The image.
+ * - image_alignment: The position of the image (CSS class).
+ * - overlay_position: Possible values: none or bottom.
+ * - overlay_text: Overlay text.
+ * - classes: Classes to be added to component (array).
+ */
+#}
+
+<div class="lbk-image-component {{ overlay_position == "bottom" ? 'lbk-image-overlay--component' : 'lbk-image-no--overlay' }} {{ classes }}">
+  <div class="{{ image_alignment }}">
+    {% if title_position == 'title_on_bottom' %}
+      <div class="image-component">
+        {{ image }}
+        {% if overlay_position == "bottom" %}
+          <div id="image-component-overlay-text">
+            <div class="lbk-image-overlay--content">
+              {% set complete_text = {
+                '#type': 'processed_text',
+                '#text': overlay_text,
+                '#format': overlay_text_format,
+              } %}
+              {{ complete_text }}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+      {% if display_title %}
+        <h2>{{ title }}</h2>
+      {% endif %}
+    {% else %}
+      {% if display_title %}
+        <h2>{{ title }}</h2>
+      {% endif %}
+
+      <div class="image-component">
+        {{ image }}
+          {% if overlay_position == "bottom" %}
+            <div id="image-component-overlay-text">
+              <div class="lbk-image-overlay--content">
+                {% set complete_text = {
+                  '#type': 'processed_text',
+                  '#text': overlay_text,
+                  '#format': overlay_text_format,
+                } %}
+                {{ complete_text }}
+              </div>
+            </div>
+          {% endif %}
+      </div>
+    {% endif %}
+  </div>
+    {% if overlay_position == "none" %}
+      <div>
+        {% set complete_text = {
+          '#type': 'processed_text',
+          '#text': overlay_text,
+          '#format': overlay_text_format,
+        } %}
+        {{ complete_text }}
+      </div>
+    {% endif %}
+</div>

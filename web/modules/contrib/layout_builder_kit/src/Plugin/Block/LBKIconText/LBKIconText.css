@@ -1,0 +1,116 @@
+/**
+ * @file
+ * LBK Icon Text Component CSS file.
+ *
+ * Custom styles for LBK Icon Text Component.
+ */
+.lbk-icon-text-component {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin: 0 15px 30px;
+}
+.lbk-icon-text-component .lbk-icon-text--content {
+  color: #777;
+  font-size: 15px;
+  font-size: 0.9375rem;
+  text-align: left;
+  width: calc(100% - 40px);
+}
+.lbk-icon-text-component .lbk-icon-text--image img {
+  width: 40px;
+}
+.lbk-icon-text-component .lbk-icon-text--image a {
+  border: 0;
+}
+.lbk-icon-text--left .lbk-icon-text--content {
+  padding-left: 16px;
+}
+.lbk-icon-text--right .lbk-icon-text--content {
+  padding-right: 16px;
+  text-align: right;
+}
+.lbk-icon-text-component .lbk-icon-text--title {
+  color: #212529;
+  font-size: 16px;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.1;
+  margin: 0 0 16px;
+}
+.lbk-icon-text-component .lbk-icon-text--title a {
+  display: block;
+}
+.lbk-icon-text-component .has-no--image {
+  flex: 0 0 100%;
+  max-width: 100%;
+  padding-left: 0;
+}
+.lbk-icon-text-component.lbk-icon-text--right .lbk-icon-text--image {
+  order: 1;
+}
+.lbk-icon-text-component.lbk-icon-text--right .lbk-icon-text--content {
+  order: 0;
+}
+.lbk-icon-text--alignment_left,
+.lbk-icon-text--alignment_center,
+.lbk-icon-text--alignment_right {
+  display: flex;
+  flex-direction: row;
+}
+.lbk-icon-text--alignment_left {
+  justify-content: flex-start;
+}
+.lbk-icon-text--alignment_center {
+  justify-content: center;
+}
+.lbk-icon-text--alignment_right {
+  justify-content: flex-end;
+}
+
+/* LBK Icon Text styles for the form into Layout Builder. */
+.layout-builder-configure-block .lbk-header--component .form-item-settings-display-title label.control-label {
+  padding-left: 27px !important;
+}
+
+/* Layout Builder Canvas dialog on OS */
+#drupal-off-canvas .layout-builder-remove-block .card {
+  box-shadow: none;
+}
+
+#drupal-off-canvas .layout-builder-remove-block .form-actions {
+  display: flex;
+  flex-direction: column;
+}
+
+#drupal-off-canvas .layout-builder-remove-block button,
+#drupal-off-canvas .layout-builder-block-move button.button {
+  background: #277abd;
+  padding: 4px 20px;
+  width: 100%;
+}
+
+.js-off-canvas-dialog-open .ui-dialog.ui-dialog-off-canvas .ui-dialog-title {
+  position: relative;
+}
+
+.js-off-canvas-dialog-open .ui-dialog.ui-dialog-off-canvas .ui-dialog-title:before {
+  left: 0;
+}
+
+.js-off-canvas-dialog-open .ui-dialog.ui-dialog-off-canvas button.ui-dialog-titlebar-close {
+  position: relative;
+}
+
+.js-off-canvas-dialog-open .ui-dialog.ui-dialog-off-canvas button.ui-dialog-titlebar-close:before {
+  content: '';
+}
+
+.js-off-canvas-dialog-open .layout-builder-block-move .responsive-enabled tr td {
+  padding-left: 45px !important;
+}
+
+.js-off-canvas-dialog-open .layout-builder-block-move .responsive-enabled tr td a.tabledrag-handle {
+  left: 0;
+  width: 20px;
+}

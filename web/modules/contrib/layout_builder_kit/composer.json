@@ -1,0 +1,23 @@
+{
+  "name": "drupal/layout_builder_kit",
+  "type": "drupal-module",
+  "description": "This module has different ECK Paragraphs into Blocks/Components",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/layout_builder_kit",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/layout_builder_kit",
+    "source": "http://cgit.drupalcode.org/layout_builder_kit"
+  },
+  "repositories": {
+    "drupal": {
+      "type": "composer",
+      "url": "https://packages.drupal.org/8"
+    }
+  },
+  "require": {
+    "drupal/default_content": "^1.0",
+    "drupal/hook_event_dispatcher": "^1.0"
+  }
+}

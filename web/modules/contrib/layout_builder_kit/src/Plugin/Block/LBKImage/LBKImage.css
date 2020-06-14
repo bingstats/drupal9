@@ -1,0 +1,92 @@
+/**
+ * @file
+ * LBK Image Component CSS file.
+ *
+ * Custom styles for LBK Image Component.
+ */
+.lbk-image-no--overlay {
+  margin-bottom: 30px;
+}
+.lbk-image-overlay--component {
+  display: flex;
+  margin-bottom: 20px;
+}
+.image-component {
+  margin-bottom: 25px;
+  position: relative;
+}
+.image-component img {
+  display: inline-block;
+}
+.lbk-image-overlay--component .image-component img {
+  display: block;
+}
+.left,
+.left .image-component >  div {
+  text-align: left;
+}
+.center,
+.center .image-component >  div {
+  text-align: center;
+}
+.right,
+.right .image-component >  div {
+  text-align: right;
+}
+#image-component-overlay-text {
+  background: rgba(0, 0, 0, 0.7);
+  bottom: 0px;
+  color: #fff;
+  position: absolute;
+  width: 100%;
+}
+.lbk-image-overlay--content {
+  padding: 20px 30px;
+}
+
+/* LBK Image styles for the form into Layout Builder. */
+.layout-builder-configure-block .lbk-header--component .form-item-settings-display-title label.control-label {
+  padding-left: 27px !important;
+}
+
+/* Layout Builder Canvas dialog on OS */
+#drupal-off-canvas .layout-builder-remove-block .card {
+  box-shadow: none;
+}
+
+#drupal-off-canvas .layout-builder-remove-block .form-actions {
+  display: flex;
+  flex-direction: column;
+}
+
+#drupal-off-canvas .layout-builder-remove-block button,
+#drupal-off-canvas .layout-builder-block-move button.button {
+  background: #277abd;
+  padding: 4px 20px;
+  width: 100%;
+}
+
+.js-off-canvas-dialog-open .ui-dialog.ui-dialog-off-canvas .ui-dialog-title {
+  position: relative;
+}
+
+.js-off-canvas-dialog-open .ui-dialog.ui-dialog-off-canvas .ui-dialog-title:before {
+  left: 0;
+}
+
+.js-off-canvas-dialog-open .ui-dialog.ui-dialog-off-canvas button.ui-dialog-titlebar-close {
+  position: relative;
+}
+
+.js-off-canvas-dialog-open .ui-dialog.ui-dialog-off-canvas button.ui-dialog-titlebar-close:before {
+  content: '';
+}
+
+.js-off-canvas-dialog-open .layout-builder-block-move .responsive-enabled tr td {
+  padding-left: 45px !important;
+}
+
+.js-off-canvas-dialog-open .layout-builder-block-move .responsive-enabled tr td a.tabledrag-handle {
+  left: 0;
+  width: 20px;
+}

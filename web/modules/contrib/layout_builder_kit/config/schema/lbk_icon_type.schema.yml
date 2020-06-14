@@ -1,0 +1,12 @@
+layout_builder_kit.lbk_icon_type.*:
+  type: config_entity
+  label: 'LBKIcon type config'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    uuid:
+      type: string

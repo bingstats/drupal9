@@ -1,0 +1,46 @@
+{#
+/**
+ * @file
+ * LBK Icon Text Component Template.
+ *
+ * Available variables:
+ * - title: The block title.
+ * - display_title: Display the title (boolean).
+ * - image: The image.
+ * - media_position: Media on left or right.
+ * - alignment: Component on left, center, or right.
+ * - text: The text.
+ * - link: The url.
+ * - classes: Array, classes to be added to component.
+ */
+#}
+
+<div class="lbk-icon-text--{{ alignment }}">
+  <div class="lbk-icon-text-component {{ media_position == "media_on_left" ? 'lbk-icon-text--left' : 'lbk-icon-text--right' }} {{ classes }}">
+    {% if image %}
+      <div class="lbk-icon-text--image">
+        {% if link %}
+          <a href="{{ link }}">{{ image }}</a>
+        {% else %}
+          {{ image }}
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="lbk-icon-text--content {{ image|render is not empty ? 'has-image' : 'has-no--image' }}">
+      {% if display_title %}
+        {% if link %}
+          <h3 class="lbk-icon-text--title">{{ link(title, link, {'class': ['title-link']}) }}</h3>
+        {% else %}
+          <h3 class="lbk-icon-text--title">{{ title }}</h3>
+        {% endif %}
+      {% endif %}
+      {% set complete_text = {
+        '#type':   'processed_text',
+        '#text':    text,
+        '#format': text_format,
+      } %}
+      {{ complete_text }}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+Layout Builder Kit 1.0.0-beta3, 2020-03-27
+------------------------------------------
+Changes since 1.0.0-beta2:
+- Added EntityTypeBundleInfo class as a dependency for all components
+
+Layout Builder Kit 1.0.0-beta2, 2020-03-26
+------------------------------------
+Changes since 1.0.0-beta1:
+- Code ready for Drupal 9, core_version_requirement: ^8 || ^9
+- All instances for "image_grid" change to "icon_text" in layout_builder_kit.services.yml
+- Drupalci.yml file added to indicate Layout Builder Kit is Drupal 9 ready!
+- Book module dependency added for Layout Builder Kit Demo module
+- Permissions for 'Layout Builder Kit Settings' form changed from 'access administration pages' to 'access layout builder kit components'
+- New status check added for Book Navigation Component about Book module as is required for it
+- Added new Render component
+- Moved getField() out of components and into LBKBaseComponent

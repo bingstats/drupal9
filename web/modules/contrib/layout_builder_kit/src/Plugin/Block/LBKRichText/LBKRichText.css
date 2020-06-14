@@ -1,0 +1,56 @@
+/**
+ * @file
+ * LBK Rich Text Component CSS file.
+ *
+ * Custom styles for LBK Rich Text Component.
+ */
+.block-layout-builder-kit {
+  margin-bottom: 40px;
+}
+
+/* LBK Rich Text styles for the form into Layout Builder */
+.layout-builder-configure-block .lbk-header--component .form-item-settings-display-title label.control-label {
+  padding-left: 27px !important;
+}
+
+/* Layout Builder Canvas dialog on OS */
+#drupal-off-canvas .layout-builder-remove-block .card {
+  box-shadow: none;
+}
+
+#drupal-off-canvas .layout-builder-remove-block .form-actions {
+  display: flex;
+  flex-direction: column;
+}
+
+#drupal-off-canvas .layout-builder-remove-block button,
+#drupal-off-canvas .layout-builder-block-move button.button {
+  background: #277abd;
+  padding: 4px 20px;
+  width: 100%;
+}
+
+.js-off-canvas-dialog-open .ui-dialog.ui-dialog-off-canvas .ui-dialog-title {
+  position: relative;
+}
+
+.js-off-canvas-dialog-open .ui-dialog.ui-dialog-off-canvas .ui-dialog-title:before {
+  left: 0;
+}
+
+.js-off-canvas-dialog-open .ui-dialog.ui-dialog-off-canvas button.ui-dialog-titlebar-close {
+  position: relative;
+}
+
+.js-off-canvas-dialog-open .ui-dialog.ui-dialog-off-canvas button.ui-dialog-titlebar-close:before {
+  content: '';
+}
+
+.js-off-canvas-dialog-open .layout-builder-block-move .responsive-enabled tr td {
+  padding-left: 45px !important;
+}
+
+.js-off-canvas-dialog-open .layout-builder-block-move .responsive-enabled tr td a.tabledrag-handle {
+  left: 0;
+  width: 20px;
+}

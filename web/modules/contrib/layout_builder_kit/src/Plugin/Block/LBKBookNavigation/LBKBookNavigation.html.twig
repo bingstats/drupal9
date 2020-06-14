@@ -1,0 +1,51 @@
+{#
+/**
+ * @file
+ * LBKBookNavigation Component Template.
+ *
+ * Available variables:
+ * - title: The block title.
+ * - display_title: Display the title (boolean).
+ * - classes: Classes to be added to component (array).
+ */
+#}
+
+{% if content['lbk_book_navigation_block'] != null %}
+  {{ content['lbk_book_navigation_block'] }}
+{% endif %}
+
+<div class="lbk-book--navigation--head {{ classes }}">
+
+  {% if display_title %}
+    <h2 class="lbk-block--title">{{ title }}</h2>
+  {% endif %}
+
+  <div class="lbk-book--navigation--title">{{ content['table_of_contents'] }}</div>
+
+  {% if book_description %}
+    <div class="lbk-book--navigation--description">{{ book_description }}</div>
+  {% endif %}
+
+  {% if content['parent_title'] != null %}
+    <h3>{{ content['parent_title'] }}</h3>
+  {% endif %}
+
+  <div class="lbk-book--navigation--list">
+    <ul>
+      {% for key, val in content['child_link'] %}
+        {% if content['class'][key] == 'active' %}
+          <li class="active">{{ val }}</li>
+        {% else %}
+          <li class="active">{{ val }}</li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+  {% if content['next_link'] != null %}
+    <div class="lbk-book--navigation--bottom">
+      <p>{{ 'NEXT SECTION'|t }}:</p>
+        {{ content['next_link'] }}
+      </div>
+  {% endif %}
+
+</div>

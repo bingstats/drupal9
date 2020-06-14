@@ -1,0 +1,17 @@
+name: 'Layout Builder Kit'
+type: module
+description: 'Contains components useful when building pages in Layout Builder.'
+core: 8.x
+core_version_requirement: ^8 || ^9
+configure: layout_builder_kit.layout_builder_kit_settings
+package: 'Layout Builder Kit'
+dependencies:
+  - drupal:hook_event_dispatcher
+  - drupal:layout_builder
+
+# version: '8.x-1.0-beta3'
+
+# Information added by Drupal.org packaging script on 2020-03-27
+version: '8.x-1.0-beta3'
+project: 'layout_builder_kit'
+datestamp: 1585329944

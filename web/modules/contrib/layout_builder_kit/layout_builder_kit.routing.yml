@@ -1,0 +1,9 @@
+layout_builder_kit.layout_builder_kit_settings:
+  path: '/admin/config/content/layout_builder_kit/settings'
+  defaults:
+    _form: '\Drupal\layout_builder_kit\Form\LayoutBuilderKitSettingsForm'
+    _title: 'Layout Builder Kit Settings'
+  requirements:
+    _permission: 'access layout builder kit components'
+  options:
+    _admin_route: TRUE

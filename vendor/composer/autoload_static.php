@@ -133,6 +133,8 @@ class ComposerStaticInit3c7512ac09b5f77f87f811a90611a2dd
         array (
             'Drush\\Internal\\' => 15,
             'Drush\\' => 6,
+            'Drupal\\webform_event_dispatcher\\' => 32,
+            'Drupal\\hook_event_dispatcher\\' => 29,
             'Drupal\\Driver\\' => 14,
             'Drupal\\Core\\' => 12,
             'Drupal\\Composer\\Plugin\\Scaffold\\' => 32,
@@ -391,6 +393,14 @@ class ComposerStaticInit3c7512ac09b5f77f87f811a90611a2dd
         'Drush\\' => 
         array (
             0 => __DIR__ . '/..' . '/drush/drush/src',
+        ),
+        'Drupal\\webform_event_dispatcher\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/web/modules/contrib/hook_event_dispatcher/modules/webform_event_dispatcher/src',
+        ),
+        'Drupal\\hook_event_dispatcher\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/web/modules/contrib/hook_event_dispatcher/src',
         ),
         'Drupal\\Driver\\' => 
         array (

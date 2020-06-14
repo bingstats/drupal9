@@ -1,0 +1,62 @@
+{#
+/**
+ * @file
+ * LBK Tab Component Template.
+ *
+ * Available variables:
+ * - title: The block title.
+ * - display_title: Display the title (boolean).
+ * - tabs_default_text: Default text when there is no tab content.
+ * - tabs: Tabs content (array).
+ * - classes: Classes to be added to component (array).
+ */
+#}
+
+{% if tabs %}
+  <div class="lbk-tab-component {{ classes }}">
+    {% if display_title %}
+      <h2 class="lbk-block--title">{{ title }}</h2>
+    {% endif %}
+    <div class="tabs-nav">
+      <ul>
+        {% for key, tab in tabs %}
+          {% if tab.type == 'custom_text' %}
+            <li>
+              <a href="#lbk-tab-{{ key }}" data-id="tab-{{ key }}" id="tab-{{ key }}"
+                 class="{{ (loop.first) ? 'tab-active' : '' }}">{{ tab.name_tab }}</a>
+            </li>
+          {% endif %}
+
+          {% if tab.type == 'block' %}
+            <li>
+              <a href="#lbk-tab-{{ key }}" data-id="tab-{{ key }}"
+                   id="tab-{{ key }}">{{ tab.name_tab }}</a>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="tabs-panel">
+      {% for key, tab in tabs %}
+        {% if tab.type == 'custom_text' %}
+          <div class="tab-list {{ (loop.first) ? 'tab-active' : '' }}" id="lbk-tab-{{ key }}">
+            {% set complete_text = {
+              '#type': 'processed_text',
+              '#text': tab.text_format.value,
+              '#format': tab.text_format.format,
+            } %}
+            {{ complete_text }}
+          </div>
+        {% endif %}
+
+        {% if tab.type == 'block' %}
+          <div class="tab-list" id="lbk-tab-{{ key }}">
+            {{ tab.name }}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+{% else %}
+  <h3>{{ tabs_default_text }}</h3>
+{% endif %}

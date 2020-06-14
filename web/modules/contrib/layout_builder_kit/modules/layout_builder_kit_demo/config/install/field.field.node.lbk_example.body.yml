@@ -1,0 +1,22 @@
+uuid: 314dde3e-d146-4ea0-a9e2-a812915a41c0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.lbk_example
+  module:
+    - text
+id: node.lbk_example.body
+field_name: body
+entity_type: node
+bundle: lbk_example
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary

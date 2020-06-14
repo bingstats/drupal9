@@ -1,0 +1,107 @@
+/**
+ * @file
+ * LBK Video Component CSS file.
+ *
+ * Custom styles for LBK Video Component.
+ */
+.video-container {
+  align-items: flex-start;
+  display: flex;
+  flex-flow: row;
+  justify-content: flex-start;
+}
+.video-container .video-radios--options .form-item-settings-video-radio-options {
+  display: flex;
+  flex-flow: row;
+}
+.video-container .video-radios--options .form-item-settings-video-radio-options label.option {
+  font-size: 0 !important;
+}
+
+/* LBK Video styles for the form into Layout Builder. */
+.layout-builder-configure-block .video-radios--options {
+  flex: 0 0 15%;
+  max-width: 15%;
+}
+.layout-builder-configure-block .video-fields--options {
+  flex: 0 0 85%;
+  max-width: 85%;
+}
+#drupal-off-canvas .layout-builder-configure-block .video-fields--options .form-item {
+  margin-top: 0;
+}
+.layout-builder-configure-block .video-container .video-radios--options .form-item-settings-video-radio-options input.form-radio {
+  cursor: pointer;
+  height: 40px;
+  width: 20px;
+}
+.layout-builder-configure-block .video-container .video-radios--options .form-item-settings-video-radio-options.radio input.form-radio {
+  height: 55px;
+  width: 0;
+}
+.layout-builder-configure-block .lbk-header--component .form-item-settings-display-title label.control-label {
+  padding-left: 27px !important;
+}
+.layout-builder-configure-block .lbk-header--component .form-item-settings-display-title input.form-checkbox {
+  height: 10px;
+  width: 10px;
+}
+
+/* LBK Video styles for the form into Block system. */
+.block-form .video-radios--options {
+  flex: 0 0 5%;
+  max-width: 5%;
+}
+.block-form .video-fields--options {
+  flex: 0 0 95%;
+  max-width: 95%;
+}
+.block-form .video-container .video-radios--options .form-item-settings-video-radio-options input.form-radio {
+  height: 55px;
+  width: 20px;
+}
+.block-form .lbk-header--component .form-item-settings-display-title label.control-label {
+  padding-left: 27px !important;
+}
+
+/* Layout Builder Canvas dialog on OS */
+#drupal-off-canvas .layout-builder-remove-block .card {
+  box-shadow: none;
+}
+
+#drupal-off-canvas .layout-builder-remove-block .form-actions {
+  display: flex;
+  flex-direction: column;
+}
+
+#drupal-off-canvas .layout-builder-remove-block button,
+#drupal-off-canvas .layout-builder-block-move button.button {
+  background: #277abd;
+  padding: 4px 20px;
+  width: 100%;
+}
+
+.js-off-canvas-dialog-open .ui-dialog.ui-dialog-off-canvas .ui-dialog-title {
+  position: relative;
+}
+
+.js-off-canvas-dialog-open .ui-dialog.ui-dialog-off-canvas .ui-dialog-title:before {
+  left: 0;
+}
+
+.js-off-canvas-dialog-open .ui-dialog.ui-dialog-off-canvas button.ui-dialog-titlebar-close {
+  position: relative;
+}
+
+.js-off-canvas-dialog-open .ui-dialog.ui-dialog-off-canvas button.ui-dialog-titlebar-close:before {
+  content: '';
+}
+
+.js-off-canvas-dialog-open .layout-builder-block-move .responsive-enabled tr td {
+  padding-left: 45px !important;
+}
+
+.js-off-canvas-dialog-open .layout-builder-block-move .responsive-enabled tr td a.tabledrag-handle {
+  left: 0;
+  width: 20px;
+}

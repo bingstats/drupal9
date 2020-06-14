@@ -1,0 +1,45 @@
+services:
+  layout_builder_kit.event_subscriber_lbk_icon_text:
+    class: Drupal\layout_builder_kit\Plugin\Block\LBKIconText\LBKIconTextEventSubscriber
+    arguments: ['@logger.factory']
+    tags:
+      - { name: 'event_subscriber' }
+
+  layout_builder_kit.link_provider:
+      class: Drupal\layout_builder_kit\LinkProvider
+
+  layout_builder_kit.event_subscriber_lbk_image:
+    class: Drupal\layout_builder_kit\Plugin\Block\LBKImage\LBKImageEventSubscriber
+    arguments: ['@logger.factory']
+    tags:
+      - { name: 'event_subscriber' }
+
+  layout_builder_kit.event_subscriber_lbk_rich_text:
+    class: Drupal\layout_builder_kit\Plugin\Block\LBKRichText\LBKRichTextEventSubscriber
+    arguments: ['@logger.factory']
+    tags:
+      - { name: 'event_subscriber' }
+
+  layout_builder_kit.event_subscriber_lbk_tab:
+    class: Drupal\layout_builder_kit\Plugin\Block\LBKTab\LBKTabEventSubscriber
+    arguments: ['@logger.factory']
+    tags:
+      - { name: 'event_subscriber' }
+
+  layout_builder_kit.event_subscriber_lbk_video:
+    class: Drupal\layout_builder_kit\Plugin\Block\LBKVideo\LBKVideoEventSubscriber
+    arguments: ['@logger.factory']
+    tags:
+      - { name: 'event_subscriber' }
+
+  layout_builder_kit.event_subscriber_lbk_book_navigation:
+    class: Drupal\layout_builder_kit\Plugin\Block\LBKBookNavigation\LBKBookNavigationEventSubscriber
+    arguments: ['@logger.factory']
+    tags:
+      - { name: 'event_subscriber' }
+
+  layout_builder_kit.event_subscriber_lbk_render:
+    class: Drupal\layout_builder_kit\Plugin\Block\LBKRender\LBKRenderEventSubscriber
+    arguments: ['@logger.factory']
+    tags:
+      - { name: 'event_subscriber' }

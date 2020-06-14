@@ -63,6 +63,8 @@ return array(
     'Egulias\\EmailValidator\\' => array($vendorDir . '/egulias/email-validator/EmailValidator'),
     'Drush\\Internal\\' => array($vendorDir . '/drush/drush/src/internal-forks'),
     'Drush\\' => array($vendorDir . '/drush/drush/src'),
+    'Drupal\\webform_event_dispatcher\\' => array($baseDir . '/web/modules/contrib/hook_event_dispatcher/modules/webform_event_dispatcher/src'),
+    'Drupal\\hook_event_dispatcher\\' => array($baseDir . '/web/modules/contrib/hook_event_dispatcher/src'),
     'Drupal\\Driver\\' => array($baseDir . '/web/drivers/lib/Drupal/Driver'),
     'Drupal\\Core\\' => array($baseDir . '/web/core/lib/Drupal/Core'),
     'Drupal\\Composer\\Plugin\\Scaffold\\' => array($vendorDir . '/drupal/core-composer-scaffold'),

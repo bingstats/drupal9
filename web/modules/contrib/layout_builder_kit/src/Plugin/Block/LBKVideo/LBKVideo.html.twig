@@ -1,0 +1,74 @@
+{#
+/**
+ * @file
+ * LBKVideo Component Template.
+ *
+ * Available variables:
+ * - title: The block title.
+ * - display_title: Display the title (boolean).
+ * - video_url: Video URL.
+ * - video_field: The field from which to get the URL.
+ * - field_type: The type of source video field (text (plain), file, etc.).
+ * - video_radio_options: Source of video URL.
+ * - classes: Classes to be added to component (array).
+ */
+#}
+
+<div class="lbk-video-component {{ classes }}">
+  {% if display_title %}
+    <h2 class="lbk-block--title">{{ title }}</h2>
+  {% endif %}
+
+  {% if video_radio_options == '0' %}
+    {% if video_url %}
+      <div class="video-section video-section--url">
+        <iframe width="100%" height="600" frameborder="0"
+                src="{{ video_url }}">
+        </iframe>
+      </div>
+    {% else %}
+      <p>Video URL is empty or not valid. Please add a valid video URL.</p>
+    {% endif %}
+  {% endif %}
+
+  {% if video_radio_options == '1' %}
+    {% if video %}
+      <div class="main-video--section">
+        <video width="100%" height="600" src="{{ (' " ' ~ video ~ ' " ') }}" type="video/mp4" id="player1"
+             controls="controls"
+             preload="none">
+        </video>
+        </div>
+    {% endif %}
+  {% endif %}
+
+  {% if video_radio_options == '2' %}
+    {% if video_field.value %}
+      <div class="video-section video-section--field">
+        {% if field_type == 'string' or field_type == 'string_long' or field_type == 'link' or field_type == 'text' %}
+          <iframe width="100%" height="600" frameborder="0"
+                src = "{{ video_field.value }}">
+          </iframe>
+        {% endif %}
+        {% if field_type == 'video_embed_field' %}
+          {{ video_field.value }}
+        {% endif %}
+        {% if field_type == 'file' %}
+          <video width="100%" height="600" src="{{ video_field.value }}" type="video/mp4" id="player1"
+               controls = "controls"
+               preload = "auto">
+          </video>
+        {% endif %}
+
+      </div>
+    {% else %}
+      <div>
+        {{ video_field.text }}
+      </div>
+    {% endif %}
+  {% endif %}
+
+  {% if video_radio_options|trim is empty %}
+    <p>Please select one of the options.</p>
+  {% endif %}
+</div>

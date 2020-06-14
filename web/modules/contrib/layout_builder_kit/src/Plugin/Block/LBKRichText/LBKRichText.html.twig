@@ -1,0 +1,24 @@
+{#
+/**
+ * @file
+ * LBK Rich Text Component Template.
+ *
+ * Available variables:
+ * - title: The block title.
+ * - display_title: Display the title (boolean).
+ * - rich_text: The text.
+ * - classes: Classes to be added to component (array).
+ */
+#}
+
+<div class="lbk-rich-text-component {{ classes }}">
+  {% if display_title %}
+    <h2 class="lbk-block--title">{{ title }}</h2>
+  {% endif %}
+  {% set complete_text = {
+    '#type': 'processed_text',
+    '#text': rich_text,
+    '#format': rich_text_format,
+  } %}
+  {{ complete_text }}
+</div>

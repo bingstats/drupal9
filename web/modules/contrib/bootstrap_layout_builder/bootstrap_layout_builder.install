@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * Installation and updating routines.
+ */
+
+use Drupal\Core\Config\FileStorage;
+
+/**
+ * Creates the new Bootstrap Layout Builder settings.
+ */
+function bootstrap_layout_builder_update_8001() {
+  $path = drupal_get_path('module', 'bootstrap_layout_builder') . '/config/install';
+  $source = new FileStorage($path);
+  $config_name = 'bootstrap_layout_builder.settings';
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+  $active_storage->write($config_name, $source->read($config_name));
+}

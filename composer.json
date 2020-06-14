@@ -16,6 +16,7 @@
     ],
     "require": {
         "composer/installers": "^1.2",
+        "drupal/bootstrap_layout_builder": "^1.1",
         "drupal/bootstrap_layouts": "^5.2",
         "drupal/bootstrap_library": "^1.13",
         "drupal/core-composer-scaffold": "^9",

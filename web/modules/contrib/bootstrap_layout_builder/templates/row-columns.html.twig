@@ -1,0 +1,45 @@
+{#
+/**
+ * @file
+ * Default theme implementation for a bootstrap columns layout.
+ *
+ * Available variables:
+ * - content: The content for this layout.
+ * - attributes: HTML attributes for the layout <div>.
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+  set classes = [
+    'layout',
+    'row',
+  ]
+%}
+
+{% if content %}
+  {% if content['container'] %}
+    {% if content['container_wrapper'] %}
+      <div {{ container_wrapper_attributes }}>
+    {% endif %}
+      <div {{ container_attributes }}>
+  {% endif %}
+
+    <div {{ attributes.addClass(classes) }}>
+      {% for i in 1..12 %}
+        {% set region = "blb_region_col_" ~ i %}
+        {% if content[region] %}
+        <div {{ region_attributes[region] }}>
+          {{ content[region] }}
+        </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+  {% if content['container'] %}
+    {% if content['container_wrapper'] %}
+      </div>
+    {% endif %}
+    </div>
+  {% endif %}
+{% endif %}

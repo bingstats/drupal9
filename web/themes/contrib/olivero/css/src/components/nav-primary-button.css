@@ -11,6 +11,7 @@
   width: var(--sp2);
   height: var(--sp2);
   margin-top: 2px; /* Visually align button with menu link text. */
+  margin-right: auto; /* Necessary for proper alignment with always-on-mobile in IE11. */
   padding: 0;
   cursor: pointer;
   text-indent: -999px;

@@ -5,107 +5,169 @@
 
 @import "../base/variables.css";
 
-.primary-nav {
-  ul {
-    list-style: none;
+.primary-nav__menu {
+  list-style: none;
+}
+
+.primary-nav__menu-item {
+  margin-bottom: var(--sp0-5);
+
+  &:last-child {
+    margin-bottom: 0;
   }
 
-  li {
-    margin-bottom: var(--sp0-5);
+  &.primary-nav__menu-item--has-children {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 
-    &:last-child {
-      margin-bottom: 0;
-    }
-
-    &.has-children {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-
-      a {
-        /* Ensure that long text doesn't make the mobile expand button wrap. */
-        max-width: calc(100% - var(--sp3));
-
-        @media (--nav) {
-          body:not(.is-always-mobile-nav) & {
-            max-width: none;
-          }
-        }
-      }
+    .primary-nav__menu-link--link,
+    .primary-nav__menu-link--nolink {
+      /* Ensure that long text doesn't make the mobile expand button wrap. */
+      max-width: calc(100% - var(--sp3));
 
       @media (--nav) {
         body:not(.is-always-mobile-nav) & {
-          flex-wrap: nowrap; /* Ensure that subnav toggle button doesn't wrap underneath link. */
+          max-width: none;
         }
       }
     }
-  }
-
-  a {
-    flex-grow: 1;
-    text-decoration: none;
-    letter-spacing: -1px;
-    color: var(--black-1);
-    font-size: 28px;
-    font-weight: bold;
-    line-height: var(--sp2);
 
     @media (--nav) {
       body:not(.is-always-mobile-nav) & {
-        letter-spacing: 0.02em;
-        font-size: 16px;
-        line-height: var(--sp1-5);
+        flex-wrap: nowrap; /* Ensure that subnav toggle button doesn't wrap underneath link. */
       }
     }
   }
 }
 
-.primary-nav--level-1 {
-  margin: 0;
+.primary-nav__menu-link {
+  flex-grow: 1;
+  text-decoration: none;
+  letter-spacing: -1px;
+  color: var(--black-1);
+  font-size: 28px;
+  font-weight: bold;
+  line-height: var(--sp2);
+
+  @media (--nav) {
+    body:not(.is-always-mobile-nav) & {
+      letter-spacing: 0.02em;
+      font-size: 16px;
+      line-height: var(--sp1-5);
+    }
+  }
+}
+
+.primary-nav__menu-link--nolink {
+  padding: var(--sp0-5) 0;
+  color: var(--color--gray-20);
+  font-weight: normal;
+}
+
+.primary-nav__menu-link--button {
+  position: relative;
   padding: 0;
+  cursor: pointer;
+  border: 0;
+  background: transparent;
 
-  a {
-    position: relative;
-    display: flex;
-
-    &:hover,
-    &:focus {
-      outline: 0;
-
-      span:after {
-        transform: scaleX(1);
-      }
+  /* Plus icon for mobile navigation. */
+  &.primary-nav__menu-link--has-children {
+    &:before,
+    &:after {
+      position: absolute;
+      top: 20px;
+      right: 9px;
+      width: 18px;
+      height: 0;
+      content: "";
+      border-top: solid 3px var(--color--blue-50);
     }
 
-    span {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      padding: var(--sp0-5) 0;
+    &:after {
+      transition: opacity 0.2s;
+      transform: rotate(90deg);
+    }
 
-      &:after {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 0;
-        content: "";
-        transition: transform 0.2s;
-        transform: scaleX(0);
-        transform-origin: left;
-        border-top: solid 5px var(--color--blue-50);
-
-        @media (--nav) {
-          body:not(.is-always-mobile-nav) & {
-            transform-origin: center;
-            border-top-width: var(--sp0-5);
-          }
-        }
-      }
+    &[aria-expanded="true"]:after {
+      opacity: 0;
 
       @media (--nav) {
         body:not(.is-always-mobile-nav) & {
-          padding: var(--sp2) 0;
+          opacity: 1;
+        }
+      }
+    }
+
+    @media (--nav) {
+      body:not(.is-always-mobile-nav) & {
+        padding-right: 9px;
+
+        &:before {
+          content: none;
+        }
+
+        /* Chevron icon for desktop navigation. */
+        &:after {
+          position: absolute;
+          top: 50%;
+          left: 100%;
+          width: 8px;
+          height: 8px;
+          transform: translateY(-50%) rotate(45deg);
+          border-top: 0;
+          border-right: solid 2px currentColor;
+          border-bottom: solid 2px currentColor;
+        }
+      }
+    }
+  }
+}
+
+.primary-nav__menu-link-inner {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: var(--sp0-5) 0;
+
+  &:after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    content: "";
+    transition: transform 0.2s;
+    transform: scaleX(0);
+    transform-origin: left;
+    border-top: solid 5px var(--color--blue-50);
+
+    @media (--nav) {
+      body:not(.is-always-mobile-nav) & {
+        transform-origin: center;
+        border-top-width: var(--sp0-5);
+      }
+    }
+  }
+
+  &:hover,
+  &:focus {
+    outline: 0;
+
+    &:after {
+      transform: scaleX(1);
+    }
+  }
+
+  .primary-nav__menu-link--level-2 & {
+    @media (--nav) {
+      body:not(.is-always-mobile-nav) & {
+        padding: var(--sp0-5) 0;
+
+        &:after {
+          transform-origin: left;
+          border-top-width: 3px;
         }
       }
     }
@@ -113,47 +175,73 @@
 
   @media (--nav) {
     body:not(.is-always-mobile-nav) & {
+      padding: var(--sp2) 0;
+    }
+  }
+}
+
+/*
+  Top level specific styles.
+*/
+.primary-nav__menu--level-1 {
+  margin: 0;
+  padding: 0;
+
+  @media (--nav) {
+    body:not(.is-always-mobile-nav) & {
+      display: flex;
+      align-items: stretch;
+      margin-right: var(--sp);
+    }
+  }
+}
+
+.primary-nav__menu-item--level-1 {
+  @media (--nav) {
+    body:not(.is-always-mobile-nav) & {
+      position: relative; /* Anchor secondary menu */
       display: flex;
       align-items: center;
+      width: max-content;
+      max-width: 200px;
+      margin: 0;
 
-      > li {
-        position: relative; /* Anchor secondary menu */
-        display: flex;
-        align-items: center;
-        width: max-content;
-        max-width: 200px;
-        margin: 0;
+      &:not(:last-child) {
+        margin-right: var(--sp2);
+      }
 
-        &:not(:last-child) {
-          margin-right: var(--sp2);
+      html:not(.js) &:hover {
+        .primary-nav__menu--level-2 {
+          visibility: visible;
+          transform: translate(-50%, 0);
+          opacity: 1;
         }
+      }
 
-        html:not(.js) &:hover {
-          .primary-nav--level-2 {
-            visibility: visible;
-            transform: translate(-50%, 0);
-            opacity: 1;
-          }
-        }
-
-        /*
-          Cannot combine the focus-within pseudoselector with other selectors,
-          because it will break IE11 and MS Edge.
-        */
-        html:not(.js) &:focus-within {
-          .primary-nav--level-2 {
-            visibility: visible;
-            transform: translate(-50%, 0);
-            opacity: 1;
-          }
+      /*
+        Cannot combine the focus-within pseudoselector with other selectors,
+        because it will break IE11 and MS Edge.
+      */
+      html:not(.js) &:focus-within {
+        .primary-nav__menu--level-2 {
+          visibility: visible;
+          transform: translate(-50%, 0);
+          opacity: 1;
         }
       }
     }
   }
 }
 
-/* Dropdown nav <ul> */
-.primary-nav--level-2 {
+.primary-nav__menu-link--level-1 {
+  position: relative;
+  display: flex;
+}
+
+/*
+  Secondary menu specific styles.
+*/
+.primary-nav__menu--level-2 {
   visibility: hidden;
   overflow: hidden;
   flex-basis: 100%;
@@ -179,27 +267,6 @@
     @media (--nav) {
       body:not(.is-always-mobile-nav) & {
         margin-top: 0;
-      }
-    }
-  }
-
-  a {
-    font-size: 16px;
-    font-weight: normal;
-    line-height: var(--sp);
-
-    @media (--nav) {
-      body:not(.is-always-mobile-nav) & {
-        display: block;
-
-        span {
-          padding: var(--sp0-5) 0;
-
-          &:after {
-            transform-origin: left;
-            border-top-width: 3px;
-          }
-        }
       }
     }
   }
@@ -260,6 +327,18 @@
       html.js & {
         transition: visibility 0.2s, transform 0.2s, opacity 0.2s;
       }
+    }
+  }
+}
+
+.primary-nav__menu-link--level-2 {
+  font-size: 16px;
+  font-weight: normal;
+  line-height: var(--sp);
+
+  @media (--nav) {
+    body:not(.is-always-mobile-nav) & {
+      display: block;
     }
   }
 }

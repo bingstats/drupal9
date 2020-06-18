@@ -11,6 +11,20 @@
   width: 100%;
 
   @media (--grid-md) {
+    grid-column: 2 / 14;
+
+    /*
+      If .layout--content-medium is nested within itself, or an element that's inheriting the
+      layout--content-medium styles from its parent region, go full width within it's
+      parent .grid-full.
+    */
+    .layout--pass--content-medium > * &,
+    .layout--content-medium & {
+      grid-column: 1 / 13;
+    }
+  }
+
+  @media (--lg) {
     grid-column: 3 / 13;
 
     /*

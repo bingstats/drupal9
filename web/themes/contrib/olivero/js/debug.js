@@ -8,18 +8,20 @@
 (function () {
   function toggleLogo(isChecked) {
     var headerInner = document.querySelector('.site-branding__inner');
-    var currentLogo = headerInner.querySelector('.site-branding__logo');
+    if (headerInner) {
+      var currentLogo = headerInner.querySelector('.site-branding__logo');
 
-    if (isChecked) {
-      var logoHTML = '\n        <a href="/" rel="home" class="site-branding__logo">\n          <img src="/themes/contrib/olivero/logo.svg" alt="Home">\n        </a>';
+      if (isChecked) {
+        var logoHTML = '\n        <a href="/" rel="home" class="site-branding__logo">\n          <img src="/themes/contrib/olivero/logo.svg" alt="Home">\n        </a>';
 
-      if (currentLogo) {
+        if (currentLogo) {
+          headerInner.removeChild(currentLogo);
+        }
+
+        headerInner.innerHTML = logoHTML + headerInner.innerHTML;
+      } else if (currentLogo) {
         headerInner.removeChild(currentLogo);
       }
-
-      headerInner.innerHTML = logoHTML + headerInner.innerHTML;
-    } else if (currentLogo) {
-      headerInner.removeChild(currentLogo);
     }
 
     sessionStorage.setItem('olivero.debug.toggleLogo', isChecked);
@@ -45,13 +47,15 @@
 
   function toggleEditableSiteName(isChecked) {
     var siteNameText = document.querySelector('.site-branding__name a');
-    siteNameText.contentEditable = isChecked;
+    if (siteNameText) {
+      siteNameText.contentEditable = isChecked;
 
-    if (isChecked) {
-      siteNameText.dataset.origtext = siteNameText.textContent;
-      siteNameText.textContent = 'Edit Me!';
-    } else if (siteNameText.dataset.origtext) {
-      siteNameText.textContent = siteNameText.dataset.origtext;
+      if (isChecked) {
+        siteNameText.dataset.origtext = siteNameText.textContent;
+        siteNameText.textContent = 'Edit Me!';
+      } else if (siteNameText.dataset.origtext) {
+        siteNameText.textContent = siteNameText.dataset.origtext;
+      }
     }
 
     sessionStorage.setItem('olivero.debug.toggleEditableSiteName', isChecked);
@@ -136,7 +140,7 @@
       document.getElementById('required-toggle').checked = true;
     }
 
-    if (document.querySelector('.site-branding__name a').contentEditable === 'true') {
+    if (document.querySelector('.site-branding__name a') && document.querySelector('.site-branding__name a').contentEditable === 'true') {
       document.getElementById('edit-name-toggle').checked = true;
     }
 

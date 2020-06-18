@@ -11,6 +11,10 @@
   cursor:pointer;
   border:0;
   background:transparent;
+}[dir=ltr] .primary-nav__button-toggle{
+  margin-right:auto;
+}[dir=rtl] .primary-nav__button-toggle{
+  margin-left:auto;
 }
 
 .primary-nav__button-toggle .icon--menu-toggle{

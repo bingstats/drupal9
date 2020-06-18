@@ -75,6 +75,11 @@
   }
 }
 
+.button--small {
+  height: var(--sp2-5);
+  padding: calc((var(--sp2-5) - var(--line-height-s)) / 2) var(--sp1-5);
+}
+
 .button--primary {
   color: var(--color--white);
   background-color: var(--color--blue-20);
@@ -94,5 +99,18 @@
   &.is-disabled {
     color: var(--color--white);
     background-color: var(--color--gray-70);
+  }
+}
+
+.button--icon-back {
+  &:before {
+    display: block;
+    width: 0.5em;
+    height: 0.5em;
+    margin-right: 0.5em;
+    content: "";
+    transform: rotate(45deg);
+    border-bottom: solid 2px currentColor;
+    border-left: solid 2px currentColor;
   }
 }

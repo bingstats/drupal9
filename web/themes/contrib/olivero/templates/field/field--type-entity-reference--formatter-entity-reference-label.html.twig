@@ -26,25 +26,25 @@
     'field--name-' ~ field_name|clean_class,
     'field--type-' ~ field_type|clean_class,
     'field--label-' ~ label_display,
-    'field-tags',
-    label_display == 'inline' ? 'clearfix',
+    'field--tag-ref',
   ]
 %}
 {%
   set title_classes = [
     'field__label',
-    'field-tags__label',
+    'field--tag-ref__label',
     label_display == 'visually_hidden' ? 'visually-hidden',
   ]
 %}
+
 {{ attach_library('olivero/tags') }}
 <div{{ attributes.addClass(classes) }}>
   {% if not label_hidden %}
     <h3{{ title_attributes.addClass(title_classes) }}>{{ label }}</h3>
   {% endif %}
-  <ul class="links field__items field-tags__items">
+  <ul class="links field__items field--tag-ref__items">
     {% for item in items %}
-      <li{{ item.attributes.addClass('field-tags__item') }}>{{ item.content }}</li>
+      <li{{ item.attributes.addClass('field--tag-ref__item') }}>{{ item.content }}</li>
     {% endfor %}
   </ul>
 </div>

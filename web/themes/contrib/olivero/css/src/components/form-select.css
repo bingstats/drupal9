@@ -13,7 +13,6 @@
   --form-element-select-bg--highlight: url("../../../images/select-chevron-bg-highlight.svg");
   --form-element-select-bg--error: url("../../../images/select-chevron-bg-error.svg");
   --form-element-select-border-size-right: var(--sp3);
-  --form-element-select-border-size-right--small: var(--sp2-5);
 }
 
 select {
@@ -47,7 +46,7 @@ select {
     left -48px top calc(-1 * var(--form-element-border-size-base));
   font-family: inherit;
   font-size: var(--font-size-base);
-  line-height: calc(var(--form-element-select-height) - var(--form-element-border-size-base));
+  line-height: calc(var(--form-element-select-height) - 2 * var(--form-element-border-size-base));
   appearance: none;
 
   &:hover,
@@ -78,6 +77,38 @@ select {
     opacity: 0.6;
   }
 
+  &[multiple] {
+    height: auto;
+    padding: var(--sp0-5);
+    border-top: 0;
+    border-right: solid 2px transparent;
+    border-bottom: 0;
+    border-left: solid 6px var(--color--gray-30);
+    background-image: none;
+    background-repeat: repeat-y;
+    background-position: left -48px top calc(-1 * var(--form-element-border-size-base));
+    line-height: 1; /* Needed by non-Chromium based MS Edge browsers. */
+
+    option {
+      padding: var(--sp0-5);
+    }
+
+    &:hover,
+    &:focus {
+      border-color: var(--color--blue-70);
+      box-shadow:
+        0 -2px 0 var(--color--blue-70),
+        0 2px 0 var(--color--blue-70);
+    }
+
+    &:focus {
+      box-shadow:
+        0 -2px 0 var(--color--blue-70),
+        0 2px 0 var(--color--blue-70),
+        var(--shadow-focusable);
+    }
+  }
+
   &.error {
     background-image:
       var(--form-element-select-icon),
@@ -95,9 +126,10 @@ select {
 
   &.form-element--small {
     height: var(--form-element-select-height--small);
-    padding-right: var(--form-element-select-border-size-right--small);
-    background-position: right var(--sp0-75) center, right -10px top 0, left -48px top 0;
-    line-height: calc(var(--form-element-select-height--small) - var(--form-element-border-size-base));
+    padding-right: calc(var(--form-element-select-height--small) + var(--sp0-75));
+    padding-left: calc(var(--sp0-75) + var(--form-element-border-size-left));
+    background-position: right var(--sp0-75) center, right -10px top -2px, left -48px top -2px;
+    line-height: calc(var(--form-element-select-height--small) - 2 * var(--form-element-border-size-base));
   }
 
   /* Necessary for IE11 to show chevron. */

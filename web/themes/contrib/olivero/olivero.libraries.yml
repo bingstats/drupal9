@@ -11,9 +11,11 @@ global-styling:
       css/dist/layout/grid.css: {}
       css/dist/layout/layout-content-narrow.css: {}
       css/dist/layout/layout-content-medium.css: {}
+      css/dist/layout/layout-footer.css: {}
       css/dist/layout/region.css: {}
       css/dist/layout/views.css: {}
     component:
+      css/dist/components/block.css: {}
       css/dist/components/breadcrumb.css: {}
       css/dist/components/embedded-media.css: {}
       css/dist/components/featured-bottom.css: {}
@@ -30,8 +32,6 @@ global-styling:
       css/dist/components/header.css: {}
       css/dist/components/header-buttons-mobile.css: {}
       css/dist/components/header-navigation.css: {}
-      css/dist/components/header-search-narrow.css: {}
-      css/dist/components/header-search-wide.css: {}
       css/dist/components/header-site-branding.css: {}
       css/dist/components/hero.css: {}
       css/dist/components/nav-button-mobile.css: {}
@@ -54,7 +54,6 @@ global-styling:
     js/scripts.js: {}
     js/navigation.js: {}
     js/second-level-navigation.js: {}
-    js/search.js: {}
   dependencies:
     - core/drupal
 
@@ -75,6 +74,32 @@ details:
     theme:
       css/dist/components/details.css: {}
 
+layout_discovery_section:
+  css:
+    layout:
+      css/dist/layout/layout-discovery-section-layout.css: {}
+
+layout_builder_twocol_section:
+  css:
+    layout:
+      css/dist/layout/layout-builder-twocol-section.css: {}
+  dependencies:
+    - olivero/layout_discovery_section
+
+layout_builder_threecol_section:
+  css:
+    layout:
+      css/dist/layout/layout-builder-threecol-section.css: {}
+  dependencies:
+    - olivero/layout_discovery_section
+
+layout_builder_fourcol_section:
+  css:
+    layout:
+      css/dist/layout/layout-builder-fourcol-section.css: {}
+  dependencies:
+    - olivero/layout_discovery_section
+
 messages:
   css:
     component:
@@ -84,6 +109,8 @@ messages:
 
 sidebar:
   css:
+    component:
+      css/dist/components/sidebar.css: {}
     layout:
       css/dist/layout/layout-sidebar.css: {}
 
@@ -106,8 +133,44 @@ debug:
   js:
     js/debug.js: {}
 
+search-narrow:
+  css:
+    component:
+      css/dist/components/header-search-narrow.css: {}
+
+search-wide:
+  css:
+    component:
+      css/dist/components/header-search-wide.css: {}
+  js:
+    js/search.js: {}
 
 search-results:
   css:
     theme:
       css/dist/components/search-results.css: {}
+
+drupal.node.preview:
+  css:
+    theme:
+      css/dist/components/node-preview-container.css: {}
+
+powered-by-block:
+  css:
+    theme:
+      css/dist/components/powered-by-block.css: {}
+
+layout-views-grid-horizontal:
+  css:
+    layout:
+      css/dist/layout/layout-views-grid-horizontal.css: {}
+
+layout-views-grid-vertical:
+  css:
+    layout:
+      css/dist/layout/layout-views-grid-vertical.css: {}
+
+cke-dialog:
+  css:
+    component:
+      css/dist/components/cke-dialog.css: {}

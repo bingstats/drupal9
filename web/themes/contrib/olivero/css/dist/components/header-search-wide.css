@@ -120,6 +120,7 @@ html:not(.js) .search-block-form:focus-within .search-wide__wrapper{
     -ms-grid-row-align:stretch;
     align-self:stretch;
     width:100px;
+    height:auto;
   }
 
 [dir] .search-wide__wrapper .search-form__submit{
@@ -264,16 +265,6 @@ html:not(.js) .search-block-form:focus-within .search-wide__wrapper{
   cursor:pointer;
   border:0;
   background:transparent;
-}
-
-[dir=ltr] .header-nav__search-button{
-  margin-right:9px;
-  margin-left:18px;
-}
-
-[dir=rtl] .header-nav__search-button{
-  margin-left:9px;
-  margin-right:18px;
 }
 
 .header-nav__search-button:focus{

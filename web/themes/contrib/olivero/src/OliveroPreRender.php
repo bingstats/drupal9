@@ -15,9 +15,7 @@ class OliveroPreRender implements TrustedCallbackInterface {
    * Prerender callback for text_format elements.
    */
   public static function textFormat($element) {
-    // Add clearfix for filter wrapper.
     $element['format']['#attributes']['class'][] = 'filter-wrapper';
-    $element['format']['#attributes']['class'][] = 'clearfix';
     $element['format']['format']['#wrapper_attributes']['class'][] = 'form-item--editor-format';
     $element['format']['format']['#attributes']['class'][] = 'filter-list';
     $element['format']['format']['#attributes']['class'][] = 'form-element--small';

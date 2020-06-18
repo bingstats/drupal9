@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_layout_bg_content
+    - paragraphs.paragraphs_type.layout_bg_paragraph
+  module:
+    - entity_reference_revisions
+  enforced:
+    module:
+      - layout_bg_paragraph
+id: paragraph.layout_bg_paragraph.field_layout_bg_content
+field_name: field_layout_bg_content
+entity_type: paragraph
+bundle: layout_bg_paragraph
+label: Content
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles: null
+    target_bundles_drag_drop:
+      layout_bg_paragraph:
+        weight: 3
+        enabled: false
+field_type: entity_reference_revisions

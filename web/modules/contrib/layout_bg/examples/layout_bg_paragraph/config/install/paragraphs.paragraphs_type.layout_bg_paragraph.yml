@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - layout_bg_paragraph
+id: layout_bg_paragraph
+label: 'Paragraph with BG'
+icon_uuid: null
+icon_default: null
+description: 'Example of using Layout BG.'
+behavior_plugins: {  }

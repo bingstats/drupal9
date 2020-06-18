@@ -24,6 +24,7 @@ figcaption {
 }
 
 .align-right {
+  float: none; /* Override core's align.module.css. */
   max-width: 100%;
   margin: var(--sp3) 0;
 
@@ -31,7 +32,7 @@ figcaption {
   .layout--content-narrow &,
   .layout--pass--content-narrow > * & {
     @media (--grid-md) {
-      margin-right: calc(-2 * ((var(--grid-col-width--md) + var(--grid-gap--md))));
+      margin-right: calc(-1 * ((var(--grid-col-width--md) + var(--grid-gap--md))));
     }
 
     @media (--lg) {
@@ -49,11 +50,13 @@ figcaption {
 
   @media (--grid-md) {
     float: right;
+    max-width: 50%;
     margin: var(--sp) 0 var(--sp) var(--sp);
   }
 }
 
 .align-left {
+  float: none; /* Override core's align.module.css. */
   max-width: 100%;
   margin: var(--sp3) 0;
 
@@ -61,7 +64,7 @@ figcaption {
   .layout--content-narrow &,
   .layout--pass--content-narrow > * & {
     @media (--grid-md) {
-      margin-left: calc(-2 * ((var(--grid-col-width--md) + var(--grid-gap--md))));
+      margin-left: calc(-1 * ((var(--grid-col-width--md) + var(--grid-gap--md))));
     }
 
     @media (--lg) {
@@ -79,7 +82,8 @@ figcaption {
 
   @media (--grid-md) {
     float: left;
-    margin: var(--sp) var(--sp) var(--sp) 0;
+    max-width: 50%;
+    margin: var(--sp) var(--sp2) var(--sp) 0; /* Extra right margins in case of aligning next to lists. */
   }
 }
 

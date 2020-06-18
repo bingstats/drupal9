@@ -86,6 +86,7 @@
     -ms-grid-row-align:stretch;
     align-self:stretch;
     width:54px;
+    height:auto;
   }
 
 [dir] .search-narrow__wrapper .search-form__submit{

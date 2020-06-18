@@ -42,6 +42,14 @@
   margin-bottom:9px;
 }
 
+[dir=ltr] .container-inline .form-item__label{
+  margin-right:1em;
+  }
+
+[dir=rtl] .container-inline .form-item__label{
+    margin-left:1em;
+  }
+
 .form-item__label--multiple-value-form{
   font-size:inherit;
   font-weight:inherit;

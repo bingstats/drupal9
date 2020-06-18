@@ -151,7 +151,7 @@
   }
     }
 
-[dir] .node--view-mode-teaser .field-tags{
+[dir] .node--view-mode-teaser .field--tag-ref{
     margin:18px 0 0;
     padding:0;
     background-color:transparent;
@@ -159,7 +159,7 @@
 
 @media (min-width: 1000px){
 
-[dir] .node--view-mode-teaser .field-tags{
+[dir] .node--view-mode-teaser .field--tag-ref{
       margin:36px 0 0
   }
     }

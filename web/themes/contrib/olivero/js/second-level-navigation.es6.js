@@ -1,7 +1,7 @@
 (() => {
   const { isDesktopNav } = drupalSettings.olivero;
   const secondLevelNavMenus = document.querySelectorAll(
-    '.primary-nav--level-1 .has-children',
+    '.primary-nav__menu-item--has-children',
   );
 
   /**
@@ -12,7 +12,7 @@
    */
   function toggleSubNav(topLevelMenuITem, toState) {
     const button = topLevelMenuITem.querySelector(
-      '.primary-nav__button-toggle',
+      '.primary-nav__button-toggle, .primary-nav__menu-link--button',
     );
     const state =
       toState !== undefined
@@ -22,12 +22,12 @@
     if (state) {
       button.setAttribute('aria-expanded', 'true');
       topLevelMenuITem
-        .querySelector('.primary-nav--level-2')
+        .querySelector('.primary-nav__menu--level-2')
         .classList.add('is-active');
     } else {
       button.setAttribute('aria-expanded', 'false');
       topLevelMenuITem
-        .querySelector('.primary-nav--level-2')
+        .querySelector('.primary-nav__menu--level-2')
         .classList.remove('is-active');
     }
   }
@@ -36,7 +36,9 @@
 
   // Add hover and click event listeners onto each subnav parent and it's button.
   secondLevelNavMenus.forEach(el => {
-    const button = el.querySelector('.primary-nav__button-toggle');
+    const button = el.querySelector(
+      '.primary-nav__button-toggle, .primary-nav__menu-link--button',
+    );
 
     button.removeAttribute('aria-hidden');
     button.removeAttribute('tabindex');

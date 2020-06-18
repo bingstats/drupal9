@@ -92,7 +92,7 @@
 
   .site-branding--bg-gray &,
   .site-branding--bg-white & {
-    color: var(--color--gray-0);
+    color: var(--color--blue-50);
   }
 
   .site-branding__logo + & {

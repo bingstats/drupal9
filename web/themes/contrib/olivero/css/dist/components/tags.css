@@ -1,15 +1,15 @@
-.field-tags{
+.field--tag-ref{
   display:flex;
   font-family:"metropolis"
 ,
 sans-serif;
-}[dir] .field-tags{
+}[dir] .field--tag-ref{
   margin:72px 0;
   padding:27px 36px;
   background-color:#f7f9fa;
 }
 
-.field-tags__label{
+.field--tag-ref__label{
   letter-spacing:0.2em;
   text-transform:uppercase;
   color:#6e7172;
@@ -18,49 +18,49 @@ sans-serif;
   line-height:2;
 }
 
-[dir=ltr] .field-tags__label{
+[dir=ltr] .field--tag-ref__label{
   margin:0 22.5px 0 0;
 }
 
-[dir=rtl] .field-tags__label{
+[dir=rtl] .field--tag-ref__label{
   margin:0 0 0 22.5px;
 }
 
-.field-tags__label:after{
+.field--tag-ref__label:after{
     content:":";
   }
 
-[dir] .field--label-inline .field-tags__label{
+[dir] .field--label-inline .field--tag-ref__label{
   padding:0;
 }
 
-.field-tags__items{
+.field--tag-ref__items{
   display:flex;
   flex-wrap:wrap;
   list-style:none;
 }
 
-[dir] .field-tags__items{
+[dir] .field--tag-ref__items{
   margin:-4.5px;
   padding:0;
 }
 
-.field-tags__item{
+.field--tag-ref__item{
   display:flex;
 }
 
-[dir] .field-tags__item{
+[dir] .field--tag-ref__item{
   margin:4.5px;
 }
 
-.field-tags__item:nth-last-child(n+2):after{
+.field--tag-ref__item:nth-last-child(n+2):after{
   content:",";
   color:#0d77b5;
   font-size:16px;
   line-height:1.5;
 }
 
-.field-tags__item a{
+.field--tag-ref__item a{
   position:relative;
   display:flex;
   align-items:center;

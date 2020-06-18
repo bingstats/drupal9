@@ -1,11 +1,12 @@
 /**
  * @file
- * Tags.
+ * Tag styling for entity references that have entity reference
+ * label formatting.
  */
 
 @import "../base/variables.css";
 
-.field-tags {
+.field--tag-ref {
   display: flex;
   margin: var(--sp4) 0;
   padding: var(--sp1-5) var(--sp2);
@@ -13,7 +14,7 @@
   font-family: var(--font-sans);
 }
 
-.field-tags__label {
+.field--tag-ref__label {
   margin: 0 calc(var(--sp1-5) - (var(--sp0-5) / 2)) 0 0;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -27,11 +28,11 @@
   }
 }
 
-.field--label-inline .field-tags__label {
+.field--label-inline .field--tag-ref__label {
   padding: 0;
 }
 
-.field-tags__items {
+.field--tag-ref__items {
   display: flex;
   flex-wrap: wrap;
   margin: calc((var(--sp0-5) / 2) * -1);
@@ -39,19 +40,19 @@
   list-style: none;
 }
 
-.field-tags__item {
+.field--tag-ref__item {
   display: flex;
   margin: calc(var(--sp0-5) / 2);
 }
 
-.field-tags__item:nth-last-child(n+2):after {
+.field--tag-ref__item:nth-last-child(n+2):after {
   content: ",";
   color: var(--color--blue-20);
   font-size: var(--font-size-base);
   line-height: 1.5;
 }
 
-.field-tags__item a {
+.field--tag-ref__item a {
   position: relative;
   display: flex;
   align-items: center;

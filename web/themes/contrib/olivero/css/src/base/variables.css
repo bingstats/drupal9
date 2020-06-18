@@ -42,9 +42,10 @@
   --container-padding: var(--sp);
   --container-padding-nav: var(--sp2);
 
-  /* Drupal administrative toolbar height */
+  /* Drupal administrative toolbar heights and width. */
   --toolbar-height: 39px;
   --toolbar-tray-height: 40px;
+  --toolbar-tray-vertical-width: 239px;
 
   /*
     Grid helpers.

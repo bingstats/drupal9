@@ -7,7 +7,7 @@ solid
 transparent;
   font-family:inherit;
   font-size:16px;
-  line-height:52px;
+  line-height:50px;
   -webkit-appearance:none;
   -moz-appearance:none;
   appearance:none;
@@ -68,6 +68,50 @@ select[disabled]{
     opacity:0.6;
   }
 
+select[multiple]{
+    height:auto;
+    line-height:1;
+  }
+
+[dir] select[multiple]{
+    padding:9px;
+    border-top:0;
+    border-bottom:0;
+    background-image:none;
+    background-repeat:repeat-y;
+  }
+
+[dir=ltr] select[multiple]{
+  border-right:solid 2px transparent;
+  border-left:solid 6px #7e96a7;
+  background-position:left -48px top -2px;
+  }
+
+[dir=rtl] select[multiple]{
+    border-left:solid 2px transparent;
+    border-right:solid 6px #7e96a7;
+    background-position:right -48px top -2px;
+  }
+
+[dir] select[multiple] option{
+      padding:9px;
+    }
+
+[dir] select[multiple]:hover, [dir] select[multiple]:focus{
+      border-color:#53b0eb;
+      box-shadow:0 -2px 0 #53b0eb,
+        0 2px 0 #53b0eb;
+    }
+
+[dir] select[multiple]:focus{
+      box-shadow:0 -2px 0 #53b0eb,
+        0 2px 0 #53b0eb,
+        0
+        0
+        36px
+        rgba(83, 176, 235, 0.25);
+    }
+
 [dir] select.error{
     background-image:url("../../../images/chevron-down.svg"),
       url("../../../images/select-chevron-bg-error.svg"),
@@ -82,17 +126,19 @@ select[disabled]{
 
 select.form-element--small{
     height:45px;
-    line-height:43px;
+    line-height:41px;
   }
 
 [dir=ltr] select.form-element--small{
-  padding-right:45px;
-  background-position:right 13.5px center, right -10px top 0, left -48px top 0;
+  padding-right:58.5px;
+  padding-left:19.5px;
+  background-position:right 13.5px center, right -10px top -2px, left -48px top -2px;
   }
 
 [dir=rtl] select.form-element--small{
-    padding-left:45px;
-    background-position:left 13.5px center, left -10px top 0, right -48px top 0;
+    padding-left:58.5px;
+    padding-right:19.5px;
+    background-position:left 13.5px center, left -10px top -2px, right -48px top -2px;
   }
 
 @media screen and (-ms-high-contrast: active){

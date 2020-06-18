@@ -17,18 +17,21 @@ INTRODUCTION
  Provides Layout plugins that feature a background region. The background
  region can accept any number of blocks. The first block that is not empty
  will be rendered and the magic of object-fit is used to make the image
- (assuming the block contains an image!) behave like a background image. 
+ (assuming the block contains an image!) behave like a background image.
+ The background also works ok with video tags as long as they autoplay. 
  
  Since it's not really a background image and is instead an actual img
  tag, there's a ridiculous amount of flexibility! Most likely, you will
  be adding a field block to the background region, where the field is an
  image field or a media reference field. You can use any field formatter
  that renders the field as an img tag. It works with just about anything!
-   1. Image ans Media Thumbnails
+   1. Image and Media Thumbnails
    2. Image styles
    3. Responsive Images
    4. Blazy (lazy loading)
    5. Images in a WYSIWYG
+   6. Some autoplay slideshows
+   7. Autoplay videos
 
  And none of it takes any more configuration than you are used to! It's
  all thanks to the magic of object-fit.

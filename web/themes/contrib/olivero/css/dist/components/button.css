@@ -96,6 +96,14 @@ rgba(83, 176, 235, 0.25)
 }
   }
 
+.button--small{
+  height:45px;
+}
+
+[dir] .button--small{
+  padding:13.5px 27px;
+}
+
 .button--primary{
   color:#fff;
 }
@@ -128,4 +136,27 @@ rgba(83, 176, 235, 0.25)
 
 [dir] .button--primary:disabled, [dir] .button--primary.is-disabled{
     background-color:#d7e1e8;
+  }
+
+.button--icon-back:before{
+    display:block;
+    width:0.5em;
+    height:0.5em;
+    content:"";
+  }
+
+[dir] .button--icon-back:before{
+    border-bottom:solid 2px currentColor;
+  }
+
+[dir=ltr] .button--icon-back:before{
+  margin-right:0.5em;
+  transform:rotate(45deg);
+  border-left:solid 2px currentColor;
+  }
+
+[dir=rtl] .button--icon-back:before{
+    margin-left:0.5em;
+    transform:rotate(-45deg);
+    border-right:solid 2px currentColor;
   }

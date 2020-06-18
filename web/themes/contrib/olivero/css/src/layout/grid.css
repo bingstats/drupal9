@@ -29,17 +29,25 @@
     .layout--content-narrow &,
     .layout--content-medium &,
     .layout--pass--content-medium > * & {
-      grid-template-columns: repeat(calc(var(--grid-col-count--md) - 4), minmax(0, 1fr));
+      grid-template-columns: repeat(calc(var(--grid-col-count--md) - 2), minmax(0, 1fr));
     }
   }
 
-  /*
-    If the .grid-full is nested within an element that has a class of .layout--content-narrow,
-    apply the appropriate number of columns.
-  */
   @media (--lg) {
-    .layout--content-narrow & {
+    /*
+      If the .grid-full is nested within the following, apply the appropriate number of columns.
+        - .layout--content-narrow class.
+        - .layout--content-medium class.
+        - Element that's inheriting the layout--content-medium styles from its parent region.
+    */
+    .layout--content-narrow &,
+    .layout--pass--content-narrow > * & {
       grid-template-columns: repeat(calc(var(--grid-col-count--lg) - 6), minmax(0, 1fr));
+    }
+
+    .layout--content-medium &,
+    .layout--pass--content-medium > * & {
+      grid-template-columns: repeat(calc(var(--grid-col-count--md) - 4), minmax(0, 1fr));
     }
   }
 }

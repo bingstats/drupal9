@@ -84,7 +84,7 @@
     body:not(.is-always-mobile-nav) & {
       position: relative;
       display: flex;
-      margin-left: var(--sp0-5);
+      margin-left: var(--sp);
       padding-left: var(--sp2);
 
       &:before {
@@ -97,6 +97,11 @@
         transform: translateY(-50%);
         background-color: var(--color--gray-70);
       }
+    }
+
+    /* If the secondary nav is the first item within the header, it does not need left separator. */
+    body:not(.is-always-mobile-nav) .secondary-nav__wrapper:first-child &:before {
+      content: none;
     }
   }
 }

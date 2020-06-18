@@ -69,6 +69,7 @@
     overflow: hidden;
     align-self: stretch;
     width: var(--sp3);
+    height: auto;
     margin: 0;
     padding: 0;
     cursor: pointer;

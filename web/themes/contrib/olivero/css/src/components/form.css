@@ -50,6 +50,10 @@ tr .form-item,
   margin-bottom: var(--sp0-5);
   font-size: var(--font-size-l);
   font-weight: 700;
+
+  .container-inline & {
+    margin-right: 1em;
+  }
 }
 
 .form-item__label--multiple-value-form {

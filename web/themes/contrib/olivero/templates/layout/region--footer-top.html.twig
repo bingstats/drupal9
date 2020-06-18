@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * Olivero's theme override to display the footer region.
+ * Olivero's theme override to display the footer top region.
  *
  * Available variables:
  * - content: The content for this region, typically blocks.
@@ -25,6 +25,8 @@
 
 {% if content %}
   <div{{ attributes.addClass(classes) }}>
-    {{ content }}
+    <div class="region--{{ region }}__inner">
+      {{ content }}
+    </div>
   </div>
 {% endif %}

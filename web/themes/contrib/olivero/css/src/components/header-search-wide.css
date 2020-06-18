@@ -95,6 +95,7 @@
     overflow: hidden;
     align-self: stretch;
     width: 100px;
+    height: auto;
     margin: 0;
     padding: 0;
     cursor: pointer;
@@ -200,8 +201,6 @@
   display: none;
   width: var(--sp3);
   height: var(--sp6);
-  margin-right: var(--sp0-5);
-  margin-left: var(--sp);
   cursor: pointer;
   border: 0;
   background: transparent;

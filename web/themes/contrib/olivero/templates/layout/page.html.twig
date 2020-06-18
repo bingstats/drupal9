@@ -129,18 +129,9 @@
       </div>
     {% endif %}
     <footer class="site-footer">
-      <div class="site-footer__inner">
-        {% if page.footer_first or page.footer_second %}
-          <div class="site-footer__top">
-            {{ page.footer_first }}
-            {{ page.footer_second }}
-          </div>
-        {% endif %}
-        {% if page.footer %}
-          <div class="site-footer__bottom">
-            {{ page.footer }}
-          </div>
-        {% endif %}
+      <div class="site-footer__inner container">
+        {{ page.footer_top }}
+        {{ page.footer_bottom }}
       </div>
     </footer>
 

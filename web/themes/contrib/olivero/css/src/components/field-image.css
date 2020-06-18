@@ -13,7 +13,7 @@
       width: calc(14 * var(--grid-col-width--md) + 13 * var(--grid-gap--md));
       margin-top: var(--sp2);
       margin-bottom: var(--sp4);
-      margin-left: calc(-2 * ((var(--grid-col-width--md) + var(--grid-gap--md))));
+      margin-left: calc(-1 * ((var(--grid-col-width--md) + var(--grid-gap--md))));
     }
 
     @media (--lg) {

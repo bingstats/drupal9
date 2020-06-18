@@ -24,17 +24,14 @@ regions:
   header: Header
   primary_menu: 'Primary menu'
   secondary_menu: 'Secondary menu'
-  page_top: 'Page top'
-  page_bottom: 'Page bottom'
   highlighted: Highlighted
   breadcrumb: Breadcrumb
   content_above: Content Above
   content: Content
   sidebar: 'Sidebar'
   featured_bottom: 'Featured bottom'
-  footer: 'Footer'
-  footer_first: 'Footer first'
-  footer_second: 'Footer second'
+  footer_top: 'Footer Top'
+  footer_bottom: 'Footer Bottom'
 libraries-override:
   system/base:
     css:
@@ -46,11 +43,28 @@ libraries-override:
       component:
         misc/vertical-tabs.css: css/dist/components/vertical-tabs.css
   media/oembed.formatter: false
+  layout_builder/twocol_section: olivero/layout_builder_twocol_section
+  layout_builder/threecol_section: olivero/layout_builder_threecol_section
+  layout_builder/fourcol_section: olivero/layout_builder_fourcol_section
 libraries-extend:
   core/drupal.message:
     - olivero/messages
   core/drupal.collapse:
     - olivero/details
+  layout_discovery/onecol:
+    - olivero/layout_discovery_section
+  layout_discovery/twocol_bricks:
+    - olivero/layout_discovery_section
+  layout_discovery/twocol:
+    - olivero/layout_discovery_section
+  layout_discovery/threecol_25_50_25:
+    - olivero/layout_discovery_section
+  layout_discovery/threecol_33_34_33:
+    - olivero/layout_discovery_section
+  node/drupal.node.preview:
+    - olivero/drupal.node.preview
+  core/ckeditor:
+    - olivero/cke-dialog
 ckeditor_stylesheets:
   - css/dist/base/fonts.css
   - css/dist/base/base.css
@@ -59,7 +73,7 @@ ckeditor_stylesheets:
   - css/dist/components/text-content.css
   - css/dist/theme/ckeditor-frame.css
 
-# Information added by Drupal.org packaging script on 2020-06-02
-version: '8.x-1.0-alpha2'
+# Information added by Drupal.org packaging script on 2020-06-16
+version: '8.x-1.0-alpha3'
 project: 'olivero'
-datestamp: 1591106479
+datestamp: 1592335657

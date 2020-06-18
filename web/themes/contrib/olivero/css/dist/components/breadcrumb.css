@@ -59,6 +59,8 @@
 
 .breadcrumb__list{
   overflow-x:auto;
+  width:-webkit-max-content;
+  width:max-content;
   list-style:none;
   white-space:nowrap;
 }

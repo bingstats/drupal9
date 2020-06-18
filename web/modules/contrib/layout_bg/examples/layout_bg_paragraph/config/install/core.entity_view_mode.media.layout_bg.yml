@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+  enforced:
+    module:
+      - layout_bg_paragraph
+id: media.layout_bg
+label: 'Layout BG'
+targetEntityType: media
+cache: true

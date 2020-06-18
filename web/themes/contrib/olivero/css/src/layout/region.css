@@ -8,7 +8,11 @@
 .region > * {
   margin-bottom: var(--sp);
 
-  @media (--lg) {
+  @media (--md) {
     margin-bottom: var(--sp2);
+  }
+
+  @media (--lg) {
+    margin-bottom: var(--sp3);
   }
 }

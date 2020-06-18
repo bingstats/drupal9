@@ -1,21 +1,23 @@
 (() => {
   function toggleLogo(isChecked) {
     const headerInner = document.querySelector('.site-branding__inner');
-    const currentLogo = headerInner.querySelector('.site-branding__logo');
+    if (headerInner) {
+      const currentLogo = headerInner.querySelector('.site-branding__logo');
 
-    if (isChecked) {
-      const logoHTML = `
+      if (isChecked) {
+        const logoHTML = `
         <a href="/" rel="home" class="site-branding__logo">
           <img src="/themes/contrib/olivero/logo.svg" alt="Home">
         </a>`;
 
-      if (currentLogo) {
+        if (currentLogo) {
+          headerInner.removeChild(currentLogo);
+        }
+
+        headerInner.innerHTML = logoHTML + headerInner.innerHTML;
+      } else if (currentLogo) {
         headerInner.removeChild(currentLogo);
       }
-
-      headerInner.innerHTML = logoHTML + headerInner.innerHTML;
-    } else if (currentLogo) {
-      headerInner.removeChild(currentLogo);
     }
 
     sessionStorage.setItem('olivero.debug.toggleLogo', isChecked);
@@ -36,21 +38,20 @@
       });
     }
 
-    sessionStorage.setItem(
-      'olivero.debug.toggleRequiredAttr',
-      isChecked,
-    );
+    sessionStorage.setItem('olivero.debug.toggleRequiredAttr', isChecked);
   }
 
   function toggleEditableSiteName(isChecked) {
     const siteNameText = document.querySelector('.site-branding__name a');
-    siteNameText.contentEditable = isChecked;
+    if (siteNameText) {
+      siteNameText.contentEditable = isChecked;
 
-    if (isChecked) {
-      siteNameText.dataset.origtext = siteNameText.textContent;
-      siteNameText.textContent = 'Edit Me!';
-    } else if (siteNameText.dataset.origtext) {
-      siteNameText.textContent = siteNameText.dataset.origtext;
+      if (isChecked) {
+        siteNameText.dataset.origtext = siteNameText.textContent;
+        siteNameText.textContent = 'Edit Me!';
+      } else if (siteNameText.dataset.origtext) {
+        siteNameText.textContent = siteNameText.dataset.origtext;
+      }
     }
 
     sessionStorage.setItem('olivero.debug.toggleEditableSiteName', isChecked);
@@ -160,8 +161,9 @@
     }
 
     if (
+      document.querySelector('.site-branding__name a') &&
       document.querySelector('.site-branding__name a').contentEditable ===
-      'true'
+        'true'
     ) {
       document.getElementById('edit-name-toggle').checked = true;
     }

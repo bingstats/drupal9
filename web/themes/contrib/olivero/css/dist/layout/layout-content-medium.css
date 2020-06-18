@@ -10,6 +10,24 @@
 
 .layout--content-medium,
 .layout--pass--content-medium > *{
+    -ms-grid-column:2;
+    -ms-grid-column-span:12;
+    grid-column:2 / 14
+}
+    .layout--pass--content-medium > * .layout--content-medium,
+    .layout--content-medium .layout--content-medium,
+    .layout--pass--content-medium > * .layout--pass--content-medium > *,
+    .layout--content-medium .layout--pass--content-medium > *{
+      -ms-grid-column:1;
+      -ms-grid-column-span:12;
+      grid-column:1 / 13;
+    }
+  }
+
+@media (min-width: 1000px){
+
+.layout--content-medium,
+.layout--pass--content-medium > *{
     -ms-grid-column:3;
     -ms-grid-column-span:10;
     grid-column:3 / 13

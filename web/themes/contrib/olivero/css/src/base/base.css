@@ -29,10 +29,7 @@ body {
   &.js-fixed {
     position: fixed;
     overflow: hidden;
-
-    &.is-always-mobile-nav {
-      width: 100%; /* Prevent width from collapsing. */
-    }
+    width: 100%;
   }
 }
 

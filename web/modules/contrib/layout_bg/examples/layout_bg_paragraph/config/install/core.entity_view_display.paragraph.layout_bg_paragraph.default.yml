@@ -1,0 +1,95 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.layout_bg_paragraph.field_layout_bg_content
+    - field.field.paragraph.layout_bg_paragraph.field_layout_bg_media
+    - paragraphs.paragraphs_type.layout_bg_paragraph
+  module:
+    - entity_reference_revisions
+    - layout_bg
+    - layout_builder
+  enforced:
+    module:
+      - layout_bg_paragraph
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: true
+    sections:
+      -
+        layout_id: layout_bg_onecol
+        layout_settings:
+          label: Paragraph
+          background_color: '#aaaaaa'
+          static_image: false
+          center_content: false
+          add_overlay: true
+          overlay_color: '#000000'
+          overlay_opacity: '0.3'
+          set_text_color: true
+          text_color: '#ffffff'
+        components:
+          2296bfdc-80a5-4577-bbd5-ce5c4e11c5bc:
+            uuid: 2296bfdc-80a5-4577-bbd5-ce5c4e11c5bc
+            region: content
+            configuration:
+              id: 'field_block:paragraph:layout_bg_paragraph:field_layout_bg_content'
+              label: Content
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: entity_reference_revisions_entity_view
+                settings:
+                  view_mode: default
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 2
+          9a1948ae-523a-4c63-b766-daea4a856ea3:
+            uuid: 9a1948ae-523a-4c63-b766-daea4a856ea3
+            region: background
+            configuration:
+              id: 'field_block:paragraph:layout_bg_paragraph:field_layout_bg_media'
+              label: 'Background Media'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: entity_reference_entity_view
+                settings:
+                  view_mode: layout_bg
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 0
+        third_party_settings: {  }
+id: paragraph.layout_bg_paragraph.default
+targetEntityType: paragraph
+bundle: layout_bg_paragraph
+mode: default
+content:
+  field_layout_bg_content:
+    type: entity_reference_revisions_entity_view
+    weight: 1
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_layout_bg_media:
+    type: entity_reference_entity_view
+    weight: 0
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    region: content
+hidden: {  }

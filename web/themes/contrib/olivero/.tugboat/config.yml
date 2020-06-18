@@ -82,6 +82,8 @@ services:
       build: |
         set -eux
         export COMPOSER_MEMORY_LIMIT=-1
+        # Delete and recheck out the branch so that Composer uses this code.
+        git branch -D $TUGBOAT_REPO_ID && git checkout -b $TUGBOAT_REPO_ID || true
         cd $DRUPAL_COMPOSER_ROOT
         composer install --optimize-autoloader
         # Update this module, including all dependencies.

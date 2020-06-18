@@ -28,6 +28,9 @@ function olivero_preprocess_html(&$variables) {
   if (theme_get_setting('debug') === 1) {
     $variables['#attached']['library'][] =  'olivero/debug';
   }
+
+  // So fonts can be preloaded from base theme in the event Olivero is subthemed.
+  $variables['olivero_path'] = drupal_get_path('theme', 'olivero');
 }
 
 /**
@@ -40,7 +43,7 @@ function olivero_preprocess_page_title(&$variables) {
     // Add a wrapper div using the title_prefix and title_suffix render
     // elements.
     $variables['title_prefix']['shortcut_wrapper'] = [
-      '#markup' => '<div class="shortcut-wrapper clearfix">',
+      '#markup' => '<div class="shortcut-wrapper">',
       '#weight' => 100,
     ];
     $variables['title_suffix']['shortcut_wrapper'] = [
@@ -103,26 +106,27 @@ function olivero_preprocess_block(&$variables) {
     if ($block) {
       $region = $block->getRegion();
 
-      if ($region == 'primary_menu' && $variables['base_plugin_id'] == 'system_menu_block') {
-        $variables['content']['#attributes']['region'] = $region;
+      if ($region == 'primary_menu') {
+        if ($variables['base_plugin_id'] == 'system_menu_block') {
+          $variables['content']['#attributes']['region'] = $region;
+        }
+        elseif ($variables['base_plugin_id'] == 'search_form_block') {
+          //Attaching library for search block if present at primary menu region.
+          $variables['#attached']['library'][] = 'olivero/search-narrow';
+        }
+      }
+      elseif ($region == 'secondary_menu' && $variables['base_plugin_id'] == 'search_form_block') {
+        // Attaching library for search block if present at secondary menu region.
+        $variables['#attached']['library'][] = 'olivero/search-wide';
       }
     }
   }
 
-  // Add a clearfix class to system branding blocks.
   if ($variables['plugin_id'] == 'system_branding_block') {
-    $variables['attributes']['class'][] = 'clearfix';
     if (theme_get_setting('site_branding_bg_color') && theme_get_setting('site_branding_bg_color') !== 'default') {
       $variables['attributes']['class'][] = 'site-branding--bg-' . theme_get_setting('site_branding_bg_color');
     }
   }
-}
-
-/**
- * Implements hook_preprocess_HOOK() for menu.html.twig.
- */
-function olivero_preprocess_menu(&$variables) {
-  $variables['attributes']['class'][] = 'clearfix';
 }
 
 /**
@@ -144,9 +148,22 @@ function olivero_theme_suggestions_form_alter(array &$suggestions, array $variab
 }
 
 /**
+ * Implements hook_theme_suggestions_HOOK_alter() for field templates.
+ */
+function olivero_theme_suggestions_field_alter(array &$suggestions, array $variables) {
+   if ($variables["element"]["#field_type"] == 'entity_reference' && $variables["element"]["#formatter"] == "entity_reference_label") {
+    $suggestions[] = 'field__type_entity_reference__formatter_entity_reference_label';
+  }
+}
+
+/**
  * Implements hook_form_alter() to add classes and placeholder text to the search forms.
  */
 function olivero_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if (isset($form['actions']) && (count($form['actions'])) <= 2) {
+    $form['actions']['submit']['#attributes']['class'][] = 'button--primary';
+  }
+
   switch ($form_id) {
     case 'search_block_form':
       // Add placeholder text to keys input.
@@ -158,8 +175,9 @@ function olivero_form_alter(&$form, FormStateInterface $form_state, $form_id) {
       break;
 
     case 'search_form':
-      // Add placeholder text to keys input.
       $form['basic']['keys']['#attributes']['placeholder'] = t('Search by keyword or phrase.');
+      $form['basic']['submit']['#attributes']['class'][] = 'button--primary';
+      $form['advanced']['submit']['#attributes']['class'][] = 'button--primary';
       break;
   }
 }
@@ -480,6 +498,18 @@ function olivero_form_comment_form_alter(&$form, FormStateInterface $form_state,
     $form['actions']['submit']['#value'] = t('Post comment');
   }
 }
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function olivero_form_node_preview_form_select_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form['backlink']['#options']['attributes']['class'][] = 'button';
+  $form['backlink']['#options']['attributes']['class'][] = 'button--small';
+  $form['backlink']['#options']['attributes']['class'][] = 'button--icon-back';
+  $form['backlink']['#options']['attributes']['class'][] = 'button--primary';
+  $form['view_mode']['#attributes']['class'][] = 'form-element--small';
+}
+
 
 /**
  * Implements hook_preprocess_HOOK() for comment.html.twig.

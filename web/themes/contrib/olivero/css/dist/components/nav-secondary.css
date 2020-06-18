@@ -98,11 +98,11 @@
       display:flex;
     }
     [dir=ltr] body:not(.is-always-mobile-nav) .secondary-nav{
-    margin-left:9px;
+    margin-left:18px;
     padding-left:36px;
     }
     [dir=rtl] body:not(.is-always-mobile-nav) .secondary-nav{
-      margin-right:9px;
+      margin-right:18px;
       padding-right:36px;
     }
 
@@ -126,4 +126,7 @@
       [dir=rtl] body:not(.is-always-mobile-nav) .secondary-nav:before{
         right:0;
       }
+    body:not(.is-always-mobile-nav) .secondary-nav__wrapper:first-child .secondary-nav:before{
+      content:none;
+    }
   }

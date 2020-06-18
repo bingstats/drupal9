@@ -14,11 +14,11 @@
   }
 
 [dir=ltr] .page-node-type-article .field--name-field-image{
-        margin-left:calc(-2*((100vw - 504px)/14 + 36px))
+        margin-left:calc(-1*((100vw - 504px)/14 + 36px))
   }
 
 [dir=rtl] .page-node-type-article .field--name-field-image{
-      margin-right:calc(-2*((100vw - 504px)/14 + 36px))
+      margin-right:calc(-1*((100vw - 504px)/14 + 36px))
   }
     }
 

@@ -21,7 +21,7 @@
         "drupal/bootstrap_library": "^1.13",
         "drupal/core-composer-scaffold": "^9",
         "drupal/core-project-message": "^9",
-        "drupal/core-recommended": "9.0.0",
+        "drupal/core-recommended": "9.0.1",
         "drupal/field_group": "^3.0",
         "drupal/layout_bg": "^1.0",
         "drupal/layout_builder_bgcolor": "^1.0",

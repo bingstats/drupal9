@@ -19,9 +19,17 @@
 
 {% if content %}
   {% if content['container'] %}
-    {% if content['container_wrapper'] %}
-      <div {{ container_wrapper_attributes }}>
+
+    {% if video_background_url %}
+      {{ attach_library('bootstrap_layout_builder/background-media-local-video') }}
+      <div class="background-local-video {{video_wrapper_classes}}">
+        <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+          <source src="{{ video_background_url }}" type="video/mp4">
+        </video>
+        <div class="video-content">
     {% endif %}
+
+    <div {{ container_wrapper_attributes }}>
       <div {{ container_attributes }}>
   {% endif %}
 
@@ -37,9 +45,12 @@
     </div>
 
   {% if content['container'] %}
-    {% if content['container_wrapper'] %}
+        {% if video_background_url %}
+            </div>
+          </div>
+        {% endif %}
+
       </div>
-    {% endif %}
     </div>
   {% endif %}
 {% endif %}

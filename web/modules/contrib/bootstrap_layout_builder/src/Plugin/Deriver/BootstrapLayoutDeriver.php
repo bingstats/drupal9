@@ -6,31 +6,61 @@ use Drupal\Component\Plugin\Derivative\DeriverBase;
 use Drupal\Core\Layout\LayoutDefinition;
 use Drupal\bootstrap_layout_builder\Plugin\Layout\BootstrapLayout;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\Core\Plugin\Discovery\ContainerDeriverInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Makes a bootstrap layout for each layout config entity.
  */
-class BootstrapLayoutDeriver extends DeriverBase {
+class BootstrapLayoutDeriver extends DeriverBase implements ContainerDeriverInterface {
 
   use StringTranslationTrait;
+
+  /**
+   * The entity type manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
+
+  /**
+   * Constructs a new BootstrapLayoutDeriver object.
+   *
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   The entity type manager.
+   */
+  public function __construct(EntityTypeManagerInterface $entity_type_manager) {
+    $this->entityTypeManager = $entity_type_manager;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, $base_plugin_id) {
+    return new static(
+      $container->get('entity_type.manager')
+    );
+  }
 
   /**
    * {@inheritdoc}
    */
   public function getDerivativeDefinitions($base_plugin_definition) {
-
-    for ($i = 1; $i <= 12; $i++) {
-      $label = $this->t('Bootstrap') . ' ' . $i . ' ';
-      $label .= $i == 1 ? $this->t('Col') : $this->t('Cols');
-
-      $this->derivatives['blb_col_' . $i] = new LayoutDefinition([
-        'class' => BootstrapLayout::class,
-        'label' => $label,
-        'category' => 'Bootstrap',
-        'regions' => $this->getRegions($i),
-        'theme_hook' => 'row_columns',
-        'icon_map' => $this->getIconMap($i),
-      ]);
+    $layouts = $this->entityTypeManager->getStorage('blb_layout')->getQuery()->sort('number_of_columns', 'ASC')->execute();
+    if ($layouts) {
+      foreach ($layouts as $layout_id) {
+        $layout = $this->entityTypeManager->getStorage('blb_layout')->load($layout_id);
+        $this->derivatives[$layout->id()] = new LayoutDefinition([
+          'class' => BootstrapLayout::class,
+          'label' => $layout->label(),
+          'id' => $layout->id(),
+          'category' => 'Bootstrap',
+          'regions' => $this->getRegions($layout->getNumberOfColumns()),
+          'theme_hook' => 'row_columns',
+          'icon_map' => $this->getIconMap($layout->getNumberOfColumns()),
+        ]);
+      }
     }
 
     return $this->derivatives;

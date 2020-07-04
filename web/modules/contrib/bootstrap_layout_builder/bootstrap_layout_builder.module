@@ -48,9 +48,23 @@ function bootstrap_layout_builder_preprocess_row_columns(&$variables) {
     'container',
   ];
 
+  $variables['video_background_url'] = NULL;
+
   foreach (Element::children($variables['content']) as $name) {
     if (in_array($name, $direct_attributes_mapping)) {
-      $variables[$name . '_attributes'] = new Attribute($variables['content'][$name]['#attributes']);
+      if (isset($variables['content'][$name]['#attributes'])) {
+        $variables[$name . '_attributes'] = new Attribute($variables['content'][$name]['#attributes']);
+      }
+      // video_background_url var.
+      if ($name == 'container_wrapper') {
+        if (isset($variables['content']['container_wrapper']['#video_background_url'])) {
+          $variables['video_background_url'] = $variables['content']['container_wrapper']['#video_background_url'];
+        }
+
+        if (isset($variables['content']['container_wrapper']['#video_wrapper_classes'])) {
+          $variables['video_wrapper_classes'] = $variables['content']['container_wrapper']['#video_wrapper_classes'];
+        }
+      }
     }
 
     if (!isset($variables['content'][$name]['#attributes'])) {

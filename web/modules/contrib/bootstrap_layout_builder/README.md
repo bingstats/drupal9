@@ -7,6 +7,7 @@ CONTENTS OF THIS FILE
  * Recommended modules
  * Installation
  * Configuration
+ * Credits
  * Maintainers
 
 INTRODUCTION
@@ -53,6 +54,11 @@ CONFIGURATION
    -> Layouts available for sections 
    -> then enable bootstrap_layout_builder Layouts (Cols from 1 to 12).
 
+CREDITS
+-------------
+
+Icons made by Royyan Wijaya from thenounproject.com
+https://thenounproject.com/roywj/collection/gradak-revamp-interface/
 
 MAINTAINERS
 -----------
@@ -60,3 +66,4 @@ MAINTAINERS
 Current maintainers:
 
  * Mahmoud Zayed (https://www.drupal.org/u/mahmoud-zayed)
+ * Aaron Christian (https://www.drupal.org/u/aaronchristian)

@@ -7,8 +7,10 @@ configure: bootstrap_layout_builder.settings
 package: 'Layout Builder'
 dependencies:
   - drupal:layout_builder
+  - media_library_form_element
+  - media_library_theme_reset
 
-# Information added by Drupal.org packaging script on 2020-05-28
-version: '1.1.2'
+# Information added by Drupal.org packaging script on 2020-07-01
+version: '1.2.1'
 project: 'bootstrap_layout_builder'
-datestamp: 1590637462
+datestamp: 1593638646

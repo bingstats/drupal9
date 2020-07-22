@@ -10,7 +10,7 @@ dependencies:
   - media_library_form_element
   - media_library_theme_reset
 
-# Information added by Drupal.org packaging script on 2020-07-01
-version: '1.2.1'
+# Information added by Drupal.org packaging script on 2020-07-09
+version: '1.3.1'
 project: 'bootstrap_layout_builder'
-datestamp: 1593638646
+datestamp: 1594307663

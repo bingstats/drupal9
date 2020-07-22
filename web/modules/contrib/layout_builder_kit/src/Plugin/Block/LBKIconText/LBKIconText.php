@@ -9,6 +9,7 @@ use Drupal\Core\Entity\EntityTypeBundleInfo;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\Url;
 use Drupal\Core\Routing\CurrentRouteMatch;
 use Drupal\file\Entity\File;
 use Drupal\layout_builder_kit\Plugin\Block\LBKBaseComponent;
@@ -145,7 +146,7 @@ class LBKIconText extends LBKBaseComponent implements ContainerFactoryPluginInte
       '#multiple' => FALSE,
       '#default_value' => $this->configuration['icon_text_component_fields']['image'],
       '#upload_validators' => [
-        'file_validate_extensions' => ['gif png jpg jpeg'],
+        'file_validate_extensions' => [$locationFolderConfig->get('layout_builder_kit.image_extensions')],
       ],
       '#weight' => 30,
     ];
@@ -176,8 +177,8 @@ class LBKIconText extends LBKBaseComponent implements ContainerFactoryPluginInte
     $form['link'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Link URL'),
-      '#description' => $this->t('URL for title and icon.'),
-      '#maxlength' => 64,
+      '#description' => $this->t('URL for title and icon. For relative link please use internal:/my-url'),
+      '#maxlength' => 200,
       '#default_value' => $this->configuration['icon_text_component_fields']['link'],
       '#weight' => 60,
     ];
@@ -203,11 +204,7 @@ class LBKIconText extends LBKBaseComponent implements ContainerFactoryPluginInte
   public function blockValidate($form, FormStateInterface $form_state) {
     parent::blockValidate($form, $form_state);
 
-    $link = $form_state->getValue('link');
-    if (isset($link)) {
-      $isValid = UrlHelper::isValid($link, TRUE);
-      if (!$isValid) $form_state->setErrorByName('link', $this->t('URL must be in form of http://www.url.com.'));
-    }
+    // For now, accept all strings as valid. When the field is converted to a Link, we will inherit its validation.
   }
 
   /**

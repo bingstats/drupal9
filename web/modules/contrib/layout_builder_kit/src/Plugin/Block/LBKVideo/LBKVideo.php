@@ -6,6 +6,7 @@ use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Config\ConfigManagerInterface;
 use Drupal\Core\Entity\EntityFieldManager;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Field\FieldItemList;
 use Drupal\Core\Field\TypedData\FieldItemDataDefinitionInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
@@ -18,6 +19,7 @@ use Drupal\field\FieldConfigInterface;
 use Drupal\file\Entity\File;
 use Drupal\layout_builder_kit\Plugin\Block\LBKBaseComponent;
 use Drupal\node\Entity\Node;
+use Drupal\taxonomy\Entity\Term;
 use Drupal\Tests\Core\Entity\EntityTypeBundleInfoTest;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -229,6 +231,7 @@ class LBKVideo extends LBKBaseComponent implements ContainerFactoryPluginInterfa
     $build['#theme'] = 'LBKVideo';
     $build['#attached']['library'] = ['layout_builder_kit/video-styling'];
 
+    // TODO: Remove this block in the future, it does nothing.
     if (!empty($this->configuration['video_component_fields']['video'])) {
       $imageFileId = implode($this->configuration['video_component_fields']['video']);
       $image = File::load($imageFileId);
@@ -238,21 +241,30 @@ class LBKVideo extends LBKBaseComponent implements ContainerFactoryPluginInterfa
       }
     }
 
-    $node = NULL;
+    // Get bundle type.
+    //$bundle = $this->getEntityType();
+    $entityType = $this->getEntityType();
+
+    //$node = NULL;
+    $entity = NULL;
     $fieldOutput = [];
     // Render fields.
-    $field = $this->getField($this->configuration['video_component_fields']['video_field']);
+    // TODO: Add function for all kind of fields.
+    //$field = $this->getField($this->configuration['video_component_fields']['video_field']);
+    $field = $this->getBundleField($this->configuration['video_component_fields']['video_field'], $entityType);
+    //$field = $this->configuration['video_component_fields']['video_field'];
 
-    if (isset($field) && $field !== "") {
-      $entityType = 'node';
+    if (isset($field) && $field !== "" && $entityType !== "") {
+      //$entityType = 'node';
       // Fields to render.
       $fields = [
         $field,
       ];
 
       // Get the Node entity object.
-      if ($this->currentRouteMatch->getParameter('node')) {
-        $node = $this->currentRouteMatch->getParameter('node');
+      if ($this->currentRouteMatch->getParameter($entityType)) {
+        //$node = $this->currentRouteMatch->getParameter($entityType);
+        $entity = $this->currentRouteMatch->getParameter($entityType);
       }
       else {
         $currentRoute = $this->currentRouteMatch;
@@ -262,7 +274,8 @@ class LBKVideo extends LBKBaseComponent implements ContainerFactoryPluginInterfa
           if ($context instanceof EntityContext) {
             $contextData = $context->getContextData();
             if ($contextData instanceof EntityAdapter) {
-              $node = $contextData->getEntity();
+              //$node = $contextData->getEntity();
+              $entity = $contextData->getEntity();
             }
           }
         }
@@ -273,31 +286,54 @@ class LBKVideo extends LBKBaseComponent implements ContainerFactoryPluginInterfa
 
       // Build the Node array to render.
       foreach ($fields as $field_name) {
-        if ($node instanceof Node) {
-          if ($node->hasField($field_name) && $node->access('view')) {
-            $value = $node->get($field_name);
-            $fieldOutput['value'] = $viewBuilder->viewField($value, ["label" => "hidden"]);
-            $fieldOutput['value']['#cache']['tags'] = $node->getCacheTags();
+        if ($entity instanceof Node) {
+          if ($entity->hasField($field_name) && $entity->access('view')) {
+            $value = $entity->get($field_name);
+            if ($value instanceof FieldItemList) {
+              if (!empty($value->getValue())) {
+                $fieldOutput['value'] = $viewBuilder->viewField($value, ["label" => "hidden"]);
+                $fieldOutput['value']['#cache']['tags'] = $entity->getCacheTags();
+              } else {
+                $fieldOutput['text'] = $this->t('This field is empty.');
+              }
+            }
           }
           else {
             $fieldOutput['text'] = $this->t('This field is not available for this content.');
           }
         }
         else {
-          $fieldOutput['text'] = $this->t('Render this inside a node page that has this field.');
+          if ($entity instanceof Term) {
+            if ($entity->hasField($field_name) && $entity->access('view')) {
+              $value = $entity->get($field_name);
+              if ($value instanceof FieldItemList) {
+                if (!empty($value->getValue())) {
+                  $fieldOutput['value'] = $viewBuilder->viewField($value, ["label" => "hidden"]);
+                  $fieldOutput['value']['#cache']['tags'] = $entity->getCacheTags();
+                } else {
+                  $fieldOutput['text'] = $this->t('This field is empty.');
+                }
+              }
+            }
+            else {
+              $fieldOutput['text'] = $this->t('This field is not available for this content.');
+            }
+          }
         }
       }
+    } else {
+      $fieldOutput['text'] = $this->t('Place this component inside a node page');
     }
 
     // Basic response at least handles tags.
     $build['#video_field'] = $fieldOutput;
 
-    if (isset($this->configuration['video_component_fields']['video_field'])) {
+    if (isset($build['#video_field']) && $entityType !== "") {
       //$test = $this->getField($field);
-      $currentVideoFieldType = $this->getVideoFieldType($field);
+      $currentVideoFieldType = $this->getVideoFieldType($field, $entityType);
       $build['#field_type'] = $currentVideoFieldType;
 
-      if ($node instanceof Node) {
+      if ($entity instanceof Node) {
         switch ($currentVideoFieldType) {
           case "string":
           case "string_long":
@@ -332,6 +368,45 @@ class LBKVideo extends LBKBaseComponent implements ContainerFactoryPluginInterfa
 
           case "video_embed_field":
             break;
+        }
+      }
+      else {
+        if ($entity instanceof Term) {
+          switch ($currentVideoFieldType) {
+            case "string":
+            case "string_long":
+              if (isset($fieldOutput['value'][0]['#context']['value'])) {
+                $videoFieldPath = trim($fieldOutput['value'][0]['#context']['value']);
+                if ($videoFieldPath) $build['#video_field']['value'] = $this->getVideoEmbedUrl($videoFieldPath);
+              }
+              break;
+
+            case "text":
+              if (isset($fieldOutput['value'][0]['#text'])) {
+                $videoFieldPath = trim($fieldOutput['value'][0]['#text']);
+                if ($videoFieldPath) $build['#video_field']['value'] = $this->getVideoEmbedUrl($videoFieldPath);
+              }
+              break;
+
+            case "link":
+              if (isset($fieldOutput['value'][0]['#url'])) {
+                $videoFieldPath = $fieldOutput['value'][0]['#url']->getUri();
+                $build['#video_field']['value'] = $this->getVideoEmbedUrl($videoFieldPath);
+              }
+              break;
+
+            case "file":
+              $filePath = $fieldOutput['value'][0]['#file'];
+              if ($filePath) {
+                $videoFieldUri = $filePath->getFileUri();
+                $videoFieldPath = file_create_url($videoFieldUri);
+                $build['#video_field']['value'] = $videoFieldPath;
+              }
+              break;
+
+            case "video_embed_field":
+              break;
+          }
         }
       }
     }
@@ -378,7 +453,7 @@ class LBKVideo extends LBKBaseComponent implements ContainerFactoryPluginInterfa
     $currentRoute = $this->currentRouteMatch;
     if ($currentRoute instanceof CurrentRouteMatch) {
       $sectionStorage = $currentRoute->getParameters()->get('section_storage');
-      // Content Type page.
+      // For content types without bundles.
       if ($sectionStorage instanceof DefaultsSectionStorage) {
         $availableContexts = $sectionStorage->getContexts();
         $contextDisplay = $availableContexts['display'];
@@ -412,29 +487,30 @@ class LBKVideo extends LBKBaseComponent implements ContainerFactoryPluginInterfa
         }
       }
       else {
-        // Bundle page.
+        // For bundles (Layout Builder overrides).
         if ($sectionStorage instanceof OverridesSectionStorage) {
           $context = $sectionStorage->getContext('entity');
           if ($context instanceof EntityContext) {
             $contextData = $context->getContextData();
             if ($contextData instanceof EntityAdapter) {
-              $node = $contextData->getEntity();
-              if ($node instanceof Node) {
-                $bundle = $node->bundle();
+              $entity = $contextData->getEntity();
 
-                $definitions = $this->entityFieldManager->getFieldDefinitions('node', $bundle);
-                foreach ($definitions as $fieldName => $fieldDefinition) {
-                  if (!empty($fieldDefinition->getTargetBundle()) && $fieldName !== 'layout_builder__layout') {
-                    switch ($fieldDefinition->getType()) {
-                      case "string":
-                      case "string_long":
-                      case "text":
-                      case "link":
-                      case "file":
-                      case "video_embed_field":
-                        $allFields[$bundle][$fieldName] = $fieldDefinition->getLabel();
-                        break;
-                    }
+              $entity_type = 'taxonomy_term';
+              if ($entity instanceof Node) $entity_type = 'node';
+              $bundle = $entity->bundle();
+
+              $definitions = $this->entityFieldManager->getFieldDefinitions($entity_type, $bundle);
+              foreach ($definitions as $fieldName => $fieldDefinition) {
+                if (!empty($fieldDefinition->getTargetBundle()) && $fieldName !== 'layout_builder__layout') {
+                  switch ($fieldDefinition->getType()) {
+                    case "string":
+                    case "string_long":
+                    case "text":
+                    case "link":
+                    case "file":
+                    case "video_embed_field":
+                      $allFields[$bundle][$fieldName] = $fieldDefinition->getLabel();
+                      break;
                   }
                 }
               }
@@ -442,7 +518,7 @@ class LBKVideo extends LBKBaseComponent implements ContainerFactoryPluginInterfa
           }
         }
         else {
-          // Get fields for all bundles.
+          // Get fields for all bundles(Block Layout).
           $entityType = "node";
 
           $contentTypes = $this->entityTypeBundleInfo->getBundleInfo($entityType);
@@ -531,14 +607,88 @@ class LBKVideo extends LBKBaseComponent implements ContainerFactoryPluginInterfa
    * @return string
    *   The video field type.
    */
-  public function getVideoFieldType($fieldName) {
-
+  public function getVideoFieldType($fieldName, $entityType) {
     $fieldType = '';
-    if (isset($fieldName) and !empty($fieldName)) {
-      $fieldConfig = FieldStorageConfig::loadByName('node', $fieldName);
+    if (isset($fieldName) && !empty($fieldName)) {
+      $fieldConfig = FieldStorageConfig::loadByName($entityType, $fieldName);
       $fieldType = $fieldConfig->getType();
     }
     return $fieldType;
+  }
+
+  public function getEntityType() {
+    $entityType = '';
+    $currentRoute = $this->currentRouteMatch;
+    if ($currentRoute instanceof CurrentRouteMatch) {
+      $sectionStorage = $currentRoute->getParameters()->get('section_storage');
+      // For content types without bundles.
+      if ($sectionStorage instanceof DefaultsSectionStorage) {
+        $availableContexts = $sectionStorage->getContexts();
+        $contextDisplay = $availableContexts['display'];
+        if ($contextDisplay instanceof EntityContext) {
+          $contextData = $contextDisplay->getContextData();
+          if ($contextData instanceof ConfigEntityAdapter) {
+            $contentInfo = $contextData->getEntity();
+            if ($contentInfo instanceof LayoutBuilderEntityViewDisplay) {
+              // Bundle 'page'.
+              //$entityType = $contentInfo->getEntityTypeId();
+              $entityType = $contentInfo->getTargetEntityTypeId();
+            }
+          }
+        }
+      }
+      else {
+        // For bundles (Layout Builder overrides).
+        if ($sectionStorage instanceof OverridesSectionStorage) {
+          $context = $sectionStorage->getContext('entity');
+          if ($context instanceof EntityContext) {
+            $contextData = $context->getContextData();
+            if ($contextData instanceof EntityAdapter) {
+              $entity = $contextData->getEntity();
+
+              if ($entity instanceof Node) {
+                $entityType = $entity->getEntityTypeId();
+              }
+              else {
+                if ($entity instanceof Term) {
+                  $entityType = $entity->getEntityTypeId();
+                }
+              }
+            }
+          }
+        }
+        else {
+          // Content page is built.
+          if ($currentRoute->getParameters()->get('node')) {
+            $entityType = $currentRoute->getParameters()->get('node')->getEntityTypeId();
+          }
+          else if($currentRoute->getParameters()->get('taxonomy_term')) {
+            $entityType = $currentRoute->getParameters()->get('taxonomy_term')->getEntityTypeId();
+          }
+        }
+      }
+    }
+
+    return $entityType;
+  }
+
+  public function getBundleField($fieldName, $entityType) {
+    $machineName = '';
+    // Get fields for all bundles.
+    //$entityType = "node";
+    $contentTypes = $this->entityTypeBundleInfo->getBundleInfo($entityType);
+
+    // TODO: Refactor this for all contexts.
+
+    foreach ($contentTypes as $key => $value) {
+      if (strpos($fieldName, $key . '_') !== FALSE) {
+        $machineName = str_replace($key . '_', '', $fieldName);
+      }
+    }
+    if ($machineName === '')
+      $machineName = $fieldName;
+
+    return $machineName;
   }
 
 }

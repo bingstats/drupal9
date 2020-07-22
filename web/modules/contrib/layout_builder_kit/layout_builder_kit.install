@@ -21,11 +21,21 @@ use Drupal\Core\Url;
 function layout_builder_kit_requirements($phase) {
   $requirements = [];
   if ($phase == 'runtime') {
-    // Check if Book module is enabled for Layout Builder Kit module, specially for Book Navigation Component.
+    // Check if Book component is enabled for Layout Builder Kit module, specially for Book Navigation Component.
     if (!Drupal::moduleHandler()->moduleExists('book')) {
       $requirements['book'] = [
         'title' => t('Layout Builder Kit'),
         'description' => t('Book Navigation component requires Book module to be enabled. Enable it <a href="/admin/modules">here</a>.'),
+        'severity' => REQUIREMENT_INFO,
+        'weight' => 1,
+      ];
+    }
+
+    // Check if Render component is enabled for Layout Builder Kit module, specially for Render Component.
+    if (!Drupal::moduleHandler()->moduleExists('media')) {
+      $requirements['render'] = [
+        'title' => t('Layout Builder Kit'),
+        'description' => t('Render component requires Media module to be enabled. Enable it <a href="/admin/modules">here</a>.'),
         'severity' => REQUIREMENT_INFO,
         'weight' => 1,
       ];

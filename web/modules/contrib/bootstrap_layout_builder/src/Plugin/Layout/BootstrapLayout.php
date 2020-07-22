@@ -192,7 +192,7 @@ class BootstrapLayout extends LayoutDefault implements ContainerFactoryPluginInt
   public function buildBackgroundMediaImage($media_entity, $field_name) {
     $fid = $media_entity->get($field_name)->target_id;
     $file = File::load($fid);
-    $background_url = $file->url();
+    $background_url = $file->createFileUrl();
 
     $style = 'background-image: url(' . $background_url . '); background-repeat: no-repeat; background-size: cover;';
     return $style;
@@ -212,7 +212,7 @@ class BootstrapLayout extends LayoutDefault implements ContainerFactoryPluginInt
   public function buildBackgroundMediaLocalVideo($media_entity, $field_name) {
     $fid = $media_entity->get($field_name)->target_id;
     $file = File::load($fid);
-    return $file->url();
+    return $file->createFileUrl();
   }
 
   /**
@@ -267,7 +267,7 @@ class BootstrapLayout extends LayoutDefault implements ContainerFactoryPluginInt
       '#type' => 'container',
       '#weight' => -100,
       '#attributes' => [
-        'class' => 'blb_ui',
+        'id' => 'blb_ui',
       ],
     ];
 
@@ -349,7 +349,8 @@ class BootstrapLayout extends LayoutDefault implements ContainerFactoryPluginInt
 
     $container_types = [
       'container' => $this->t('Boxed'),
-      'container-fluid' => $this->t('Full Width'),
+      'container-fluid' => $this->t('Full'),
+      'w-100' => $this->t('Flush'),
     ];
 
     $form['ui']['tab_content']['layout']['container_type'] = [
@@ -366,6 +367,12 @@ class BootstrapLayout extends LayoutDefault implements ContainerFactoryPluginInt
           ':input[name="layout_settings[ui][tab_content][layout][has_container]"]' => ['checked' => TRUE],
         ],
       ],
+    ];
+
+    $form['ui']['tab_content']['layout']['remove_gutters'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('No Gutters'),
+      '#default_value' => (int) !empty($this->configuration['remove_gutters']) ? TRUE : FALSE,
     ];
 
     $layout_id = $this->getPluginDefinition()->id();
@@ -541,6 +548,7 @@ class BootstrapLayout extends LayoutDefault implements ContainerFactoryPluginInt
     $this->configuration['container'] = '';
     if ($form_state->getValue(array_merge($layout_tab, ['has_container']))) {
       $this->configuration['container'] = $form_state->getValue(array_merge($layout_tab, ['container_type']));
+
       // Container wrapper.
       $this->configuration['container_wrapper_bg_color_class'] = $form_state->getValue(array_merge($style_tab, ['container_wrapper_bg_color_class']));
       $this->configuration['container_wrapper_bg_media'] = $form_state->getValue(array_merge($style_tab, ['container_wrapper_bg_media']));
@@ -549,6 +557,9 @@ class BootstrapLayout extends LayoutDefault implements ContainerFactoryPluginInt
         $this->configuration['container_wrapper_classes'] = $form_state->getValue(array_merge($settings_tab, ['container', 'container_wrapper_classes']));
       }
     }
+
+    // Gutter Classes
+    $this->configuration['remove_gutters'] = $form_state->getValue(array_merge($layout_tab, ['remove_gutters']));
 
     // Row classes from advanced mode.
     if (!$this->sectionSettingsIsHidden()) {

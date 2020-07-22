@@ -4,3 +4,6 @@
  *
  * Custom styles for LBK Render Component.
  */
+.warning-entity {
+  color: red !important;
+}

@@ -16,6 +16,35 @@
     target.addClass('is-active').attr("aria-selected", true).attr('tabindex', "0").focus();
   }
 
+  // Attach roles and other accessibility-related attributes.
+  $('.layout-tabs').attr('role', 'tablist');
+  $('.layout-tabs > li.tabs__tab').attr('role', 'presentation');
+  $('.layout-tabs > li.tabs__tab > a.nav-link').attr('role', 'tab').each(function() {
+    var thisId = $(this).attr('id');
+    $(this).attr('aria-controls', thisId.replace('tab', 'panel'));
+    var isActive = $(this).hasClass('is-active');
+    if (isActive) {
+      $(this).attr('aria-selected', 'true');
+    }
+    else {
+      $(this).attr('aria-selected', 'false');
+      $(this).attr('tabindex', '-1');
+    }
+  });
+  $('.tab-content .tab-pane').attr('role', 'tabpanel').each(function() {
+    var thisId = $(this).attr('id');
+    $(this).attr('aria-labelledby', thisId.replace('panel', 'tab'));
+    var isActive = $(this).hasClass('active');
+    if (isActive) {
+      $(this).attr('aria-hidden', 'false');
+      $(this).attr('aria-expanded', 'true');
+    }
+    else {
+      $(this).attr('aria-hidden', 'true');
+      $(this).attr('aria-expanded', 'false');
+    }
+  });
+
   // event handlers to toggle accordions
   $('.layout-tabs a').on('click', showTab);
   $('.layout-tabs a').on('keyup', function(e) {

@@ -21,7 +21,7 @@ default_content:
 
 # version: '8.x-1.0-beta3'
 
-# Information added by Drupal.org packaging script on 2020-03-27
-version: '8.x-1.0-beta3'
+# Information added by Drupal.org packaging script on 2020-07-10
+version: '8.x-1.0-beta4'
 project: 'layout_builder_kit'
-datestamp: 1585329944
+datestamp: 1594407330

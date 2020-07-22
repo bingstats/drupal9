@@ -51,3 +51,8 @@ render-styling:
   css:
     component:
       src/Plugin/Block/LBKRender/LBKRender.css: {}
+  js:
+    src/Plugin/Block/LBKRender/LBKRender.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal

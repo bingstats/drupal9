@@ -63,12 +63,6 @@ class LayoutBuilderKitSettingsForm extends ConfigFormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $config = $this->config('layout_builder_kit.image_component');
 
-    $a = $config->get('layout_builder_kit.image_location');
-    $a2 = $config->get('layout_builder_kit');
-    $b = $config->get('image_location');
-    $c = $config->get('image_extensions');
-
-
     $form['image_location'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Image Location'),

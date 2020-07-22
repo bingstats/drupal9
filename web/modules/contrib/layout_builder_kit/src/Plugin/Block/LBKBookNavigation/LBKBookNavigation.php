@@ -145,7 +145,7 @@ class LBKBookNavigation extends LBKBaseComponent implements ContainerFactoryPlug
     $form['toc_url'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Table of Contents URL'),
-      '#maxlength' => 255,
+      '#maxlength' => 200,
       '#default_value' => $this->configuration['book_navigation_component_fields']['toc_url'],
       '#required' => FALSE,
       '#weight' => 40,
@@ -193,84 +193,86 @@ class LBKBookNavigation extends LBKBaseComponent implements ContainerFactoryPlug
     $content = [];
     $message = $this->t("Place Book Navigation on individual Book node layout or Book content type layout.");
 
-    if ($node instanceof Node) {
-      // Check if Node is 'book' type.
-      if ($node->getType() == 'book') {
-        // Determine the book.
-        $nid = $node->id();
-        $book = $this->bookOutlineStorage->getBooks([$nid]);
-        $book = $this->bookOutlineStorage
-          ->loadBookChildren($book[0]);
+    if(isset($node)) {
+      if ($node instanceof Node) {
+        // Check if Node is 'book' type.
+        if ($node->getType() == 'book') {
+          // Determine the book.
+          $nid = $node->id();
+          $book = $this->bookOutlineStorage->getBooks([$nid]);
+          $book = $this->bookOutlineStorage
+            ->loadBookChildren($book[0]);
 
-        // Identify the active parent.
-        $nidParentActive = 0;
-        foreach ($book as $keyParent => $data) {
-          $bookChild = $this->bookOutlineStorage
-            ->loadBookChildren($keyParent);
-          if ($keyParent == $nid) {
-            $nidParentActive = $keyParent;
-          }
-          foreach ($bookChild as $key => $child) {
-            if ($key == $nid) {
+          // Identify the active parent.
+          $nidParentActive = 0;
+          foreach ($book as $keyParent => $data) {
+            $bookChild = $this->bookOutlineStorage
+              ->loadBookChildren($keyParent);
+            if ($keyParent == $nid) {
               $nidParentActive = $keyParent;
             }
+            foreach ($bookChild as $key => $child) {
+              if ($key == $nid) {
+                $nidParentActive = $keyParent;
+              }
+            }
           }
-        }
 
-        // Determine the section we are in.
-        $node_parent = $this->entityTypeManager
-          ->getStorage('node')
-          ->load($nidParentActive);
-
-        $titleKeyParent = '';
-        if ($node_parent) {
-          $titleKeyParent = $node_parent->title->value;
-        }
-
-        $content['parent_title'] = $titleKeyParent;
-
-        // List book children.
-        $bookChild = $this->bookOutlineStorage
-          ->loadBookChildren($nidParentActive);
-        $x = 0;
-        foreach ($bookChild as $key => $child) {
-
-          if ($key == $node->id()) {
-            $content['class'][$x] = 'active';
-          }
-          $childNode = $this->entityTypeManager
+          // Determine the section we are in.
+          $node_parent = $this->entityTypeManager
             ->getStorage('node')
-            ->load($key);
-          $content['child_link'][$x] = $childNode->toLink($childNode->get('title')->value);
-          $x++;
+            ->load($nidParentActive);
+
+          $titleKeyParent = '';
+          if ($node_parent) {
+            $titleKeyParent = $node_parent->title->value;
+          }
+
+          $content['parent_title'] = $titleKeyParent;
+
+          // List book children.
+          $bookChild = $this->bookOutlineStorage
+            ->loadBookChildren($nidParentActive);
+          $x = 0;
+          foreach ($bookChild as $key => $child) {
+
+            if ($key == $node->id()) {
+              $content['class'][$x] = 'active';
+            }
+            $childNode = $this->entityTypeManager
+              ->getStorage('node')
+              ->load($key);
+            $content['child_link'][$x] = $childNode->toLink($childNode->get('title')->value);
+            $x++;
+          }
+
+          // Next section.
+          $keys = array_keys($book);
+          $nextSection = $keys[array_search($nidParentActive, $keys) + 1];
+          $nextSectionNode = $this->entityTypeManager
+            ->getStorage('node')
+            ->load($nextSection);
+
+          $link = trim($this->configuration['book_navigation_component_fields']['toc_url']);
+          if ($link) {
+            $url = Url::fromUri($link);
+            $content['table_of_contents'] = $this->linkProvider->renderLink($url, '','Table of Contents');
+          }
+
+          if (isset($nextSectionNode)) {
+            $content['next_link'] = $nextSectionNode->toLink($nextSectionNode->get('title')->value);
+          }
         }
-
-        // Next section.
-        $keys = array_keys($book);
-        $nextSection = $keys[array_search($nidParentActive, $keys) + 1];
-        $nextSectionNode = $this->entityTypeManager
-          ->getStorage('node')
-          ->load($nextSection);
-
-        $link = trim($this->configuration['book_navigation_component_fields']['toc_url']);
-        if ($link) {
-          $url = Url::fromUri($link);
-          $content['table_of_contents'] = $this->linkProvider->renderLink($url, '','Table of Contents');
-        }
-
-        if (isset($nextSectionNode)) {
-          $content['next_link'] = $nextSectionNode->toLink($nextSectionNode->get('title')->value);
+        else {
+          if ($entity['source'] == 'individual_layout') {
+            $content['lbk_book_navigation_block'] = $message;
+          }
         }
       }
       else {
-        if ($entity['source'] == 'individual_layout') {
+        if ($entity['bundle'] != 'book') {
           $content['lbk_book_navigation_block'] = $message;
         }
-      }
-    }
-    else {
-      if ($entity['bundle'] != 'book') {
-        $content['lbk_book_navigation_block'] = $message;
       }
     }
 

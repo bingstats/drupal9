@@ -30,7 +30,7 @@
     <div class="lbk-icon-text--content {{ image|render is not empty ? 'has-image' : 'has-no--image' }}">
       {% if display_title %}
         {% if link %}
-          <h3 class="lbk-icon-text--title">{{ link(title, link, {'class': ['title-link']}) }}</h3>
+          <h3 class="lbk-icon-text--title"><a href="{{ link }}">{{ title }}</a></h3>
         {% else %}
           <h3 class="lbk-icon-text--title">{{ title }}</h3>
         {% endif %}

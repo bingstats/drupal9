@@ -14,26 +14,23 @@
 
 {% set blocks = content[region]|sortbyweight %}
 <!-- Nav tabs -->
-<nav class="nav layout-tabs" role="navigation" aria-label="{{ 'Please use the left and right arrow keys to move between tabs'|trans }}">
-  <ul class="tabs tab--primary" role="tablist">
-  {% for block_id, block_data in blocks if content[region][block_id] %}
-  {% set block_label = content[region][block_id]['content']['#title']['#markup'] %}
-  {% if block_label is empty %}
-    {% set block_label = content[region][block_id]['#configuration']['label'] %}
-  {% endif %}
-  <li class="tabs__tab" role="presentation"><a class="nav-item nav-link {{ loop.first ? 'is-active' }}"
-    href="#panel-{{ block_id }}" id="tab-{{ block_id }}" role="tab" data-toggle="tab"
-    aria-controls="panel-{{ block_id }}" aria-selected="{{ loop.first ? 'true' : 'false' }}"{% if not loop.first %} tabindex="-1"{% endif %}>
-   <div class="label"> {{ block_label }}</div>
-  </a></li>
-  {% endfor %}
-  </ul>
-</nav>
+<ul class="tabs tab--primary layout-tabs">
+{% for block_id, block_data in blocks if content[region][block_id] %}
+{% set block_label = content[region][block_id]['content']['#title']['#markup'] %}
+{% if block_label is empty %}
+  {% set block_label = content[region][block_id]['#configuration']['label'] %}
+{% endif %}
+<li class="tabs__tab"><a class="nav-item nav-link {{ loop.first ? 'is-active' }}"
+  href="#panel-{{ block_id }}" id="tab-{{ block_id }}">
+  <div class="label"> {{ block_label }}</div>
+</a></li>
+{% endfor %}
+</ul>
 
 <!-- Tab panes -->
 <div class="tab-content">
   {% for block_id, block_data in blocks if content[region][block_id] %}
-  <div class="tab-pane {{ loop.first ? 'active' }}" id="panel-{{ block_id }}" role="tabpanel" aria-labelledby="tab-{{ block_id }}" aria-hidden="{{ loop.first ? 'false' : 'true' }}" aria-expanded="{{ loop.first ? 'true' : 'false' }}">
+  <div class="tab-pane {{ loop.first ? 'active' }}" id="panel-{{ block_id }}">
     {{ content[region][block_id] }}
   </div>
   {% endfor %}

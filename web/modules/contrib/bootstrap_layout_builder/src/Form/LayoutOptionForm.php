@@ -129,7 +129,13 @@ class LayoutOptionForm extends EntityForm implements ContainerInjectionInterface
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    $layout = $this->entity->getLayout();
+    $layout_id = $this->routeMatch->getParameter('blb_layout');
+    if ($layout_id) {
+      $layout = $this->entity->getLayoutById($layout_id);
+    } else {
+      $layout = $this->entity->getLayout();
+    }
+
     $structure = $form_state->getValue('structure');
     $structure = explode(' ', $structure);
     $invalid_structure = FALSE;

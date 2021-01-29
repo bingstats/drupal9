@@ -20,10 +20,6 @@
         "drupal/core-project-message": "^9.2",
         "drupal/core-recommended": "^9.2"
     },
-    "require-dev": {
-        "drupal/core": "^9.2",
-        "drupal/core-dev": "^9.2"
-    },
     "conflict": {
         "drupal/drupal": "*"
     },

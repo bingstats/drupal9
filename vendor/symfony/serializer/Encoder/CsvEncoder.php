@@ -96,7 +96,7 @@ class CsvEncoder implements EncoderInterface, DecoderInterface
             }
         }
 
-        [$delimiter, $enclosure, $escapeChar, $keySeparator, $headers, $escapeFormulas, $outputBom] = $this->getCsvOptions($context);
+        list($delimiter, $enclosure, $escapeChar, $keySeparator, $headers, $escapeFormulas, $outputBom) = $this->getCsvOptions($context);
 
         foreach ($data as &$value) {
             $flattened = [];
@@ -157,7 +157,7 @@ class CsvEncoder implements EncoderInterface, DecoderInterface
         $headerCount = [];
         $result = [];
 
-        [$delimiter, $enclosure, $escapeChar, $keySeparator] = $this->getCsvOptions($context);
+        list($delimiter, $enclosure, $escapeChar, $keySeparator) = $this->getCsvOptions($context);
 
         while (false !== ($cols = fgetcsv($handle, 0, $delimiter, $enclosure, $escapeChar))) {
             $nbCols = \count($cols);

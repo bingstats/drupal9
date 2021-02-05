@@ -180,7 +180,25 @@ class PhpDumper extends Dumper
             }
         }
 
-        $this->analyzeReferences();
+        (new AnalyzeServiceReferencesPass(false, !$this->getProxyDumper() instanceof NullDumper))->process($this->container);
+        $checkedNodes = [];
+        $this->circularReferences = [];
+        $this->singleUsePrivateIds = [];
+        foreach ($this->container->getCompiler()->getServiceReferenceGraph()->getNodes() as $id => $node) {
+            if (!$node->getValue() instanceof Definition) {
+                continue;
+            }
+            if (!isset($checkedNodes[$id])) {
+                $this->analyzeCircularReferences($id, $node->getOutEdges(), $checkedNodes);
+            }
+            if ($this->isSingleUsePrivateNode($node)) {
+                $this->singleUsePrivateIds[$id] = $id;
+            }
+        }
+        $this->container->getCompiler()->getServiceReferenceGraph()->clear();
+        $checkedNodes = [];
+        $this->singleUsePrivateIds = array_diff_key($this->singleUsePrivateIds, $this->circularReferences);
+
         $this->docStar = $options['debug'] ? '*' : '';
 
         if (!empty($options['file']) && is_dir($dir = \dirname($options['file']))) {
@@ -391,99 +409,58 @@ EOF;
         return $this->proxyDumper;
     }
 
-    private function analyzeReferences()
+    private function analyzeCircularReferences(string $sourceId, array $edges, array &$checkedNodes, array &$currentPath = [], bool $byConstructor = true)
     {
-        (new AnalyzeServiceReferencesPass(false, !$this->getProxyDumper() instanceof NullDumper))->process($this->container);
-        $checkedNodes = [];
-        $this->circularReferences = [];
-        $this->singleUsePrivateIds = [];
-        foreach ($this->container->getCompiler()->getServiceReferenceGraph()->getNodes() as $id => $node) {
-            if (!$node->getValue() instanceof Definition) {
-                continue;
-            }
-
-            if ($this->isSingleUsePrivateNode($node)) {
-                $this->singleUsePrivateIds[$id] = $id;
-            }
-
-            $this->collectCircularReferences($id, $node->getOutEdges(), $checkedNodes);
-        }
-
-        $this->container->getCompiler()->getServiceReferenceGraph()->clear();
-        $this->singleUsePrivateIds = array_diff_key($this->singleUsePrivateIds, $this->circularReferences);
-    }
-
-    private function collectCircularReferences(string $sourceId, array $edges, array &$checkedNodes, array &$loops = [], array $path = [], bool $byConstructor = true): void
-    {
-        $path[$sourceId] = $byConstructor;
         $checkedNodes[$sourceId] = true;
+        $currentPath[$sourceId] = $byConstructor;
+
         foreach ($edges as $edge) {
             $node = $edge->getDestNode();
             $id = $node->getId();
-            if ($sourceId === $id || !$node->getValue() instanceof Definition || $edge->isLazy() || $edge->isWeak()) {
-                continue;
-            }
 
-            if (isset($path[$id])) {
-                $loop = null;
-                $loopByConstructor = $edge->isReferencedByConstructor();
-                $pathInLoop = [$id, []];
-                foreach ($path as $k => $pathByConstructor) {
-                    if (null !== $loop) {
-                        $loop[] = $k;
-                        $pathInLoop[1][$k] = $pathByConstructor;
-                        $loops[$k][] = &$pathInLoop;
-                        $loopByConstructor = $loopByConstructor && $pathByConstructor;
-                    } elseif ($k === $id) {
-                        $loop = [];
-                    }
-                }
-                $this->addCircularReferences($id, $loop, $loopByConstructor);
+            if (!$node->getValue() instanceof Definition || $sourceId === $id || $edge->isLazy() || $edge->isWeak()) {
+                // no-op
+            } elseif (isset($currentPath[$id])) {
+                $this->addCircularReferences($id, $currentPath, $edge->isReferencedByConstructor());
             } elseif (!isset($checkedNodes[$id])) {
-                $this->collectCircularReferences($id, $node->getOutEdges(), $checkedNodes, $loops, $path, $edge->isReferencedByConstructor());
-            } elseif (isset($loops[$id])) {
-                // we already had detected loops for this edge
-                // let's check if we have a common ancestor in one of the detected loops
-                foreach ($loops[$id] as [$first, $loopPath]) {
-                    if (!isset($path[$first])) {
-                        continue;
-                    }
-                    // We have a common ancestor, let's fill the current path
-                    $fillPath = null;
-                    foreach ($loopPath as $k => $pathByConstructor) {
-                        if (null !== $fillPath) {
-                            $fillPath[$k] = $pathByConstructor;
-                        } elseif ($k === $id) {
-                            $fillPath = $path;
-                            $fillPath[$k] = $pathByConstructor;
-                        }
-                    }
-
-                    // we can now build the loop
-                    $loop = null;
-                    $loopByConstructor = $edge->isReferencedByConstructor();
-                    foreach ($fillPath as $k => $pathByConstructor) {
-                        if (null !== $loop) {
-                            $loop[] = $k;
-                            $loopByConstructor = $loopByConstructor && $pathByConstructor;
-                        } elseif ($k === $first) {
-                            $loop = [];
-                        }
-                    }
-                    $this->addCircularReferences($first, $loop, true);
-                    break;
-                }
+                $this->analyzeCircularReferences($id, $node->getOutEdges(), $checkedNodes, $currentPath, $edge->isReferencedByConstructor());
+            } elseif (isset($this->circularReferences[$id])) {
+                $this->connectCircularReferences($id, $currentPath, $edge->isReferencedByConstructor());
             }
         }
-        unset($path[$sourceId]);
+        unset($currentPath[$sourceId]);
     }
 
-    private function addCircularReferences(string $sourceId, array $currentPath, bool $byConstructor)
+    private function connectCircularReferences(string $sourceId, array &$currentPath, bool $byConstructor, array &$subPath = [])
     {
-        $currentId = $sourceId;
-        $currentPath = array_reverse($currentPath);
-        $currentPath[] = $currentId;
-        foreach ($currentPath as $parentId) {
+        $currentPath[$sourceId] = $subPath[$sourceId] = $byConstructor;
+
+        foreach ($this->circularReferences[$sourceId] as $id => $byConstructor) {
+            if (isset($currentPath[$id])) {
+                $this->addCircularReferences($id, $currentPath, $byConstructor);
+            } elseif (!isset($subPath[$id]) && isset($this->circularReferences[$id])) {
+                $this->connectCircularReferences($id, $currentPath, $byConstructor, $subPath);
+            }
+        }
+        unset($currentPath[$sourceId], $subPath[$sourceId]);
+    }
+
+    private function addCircularReferences(string $id, array $currentPath, bool $byConstructor)
+    {
+        $currentPath[$id] = $byConstructor;
+        $circularRefs = [];
+
+        foreach (array_reverse($currentPath) as $parentId => $v) {
+            $byConstructor = $byConstructor && $v;
+            $circularRefs[] = $parentId;
+
+            if ($parentId === $id) {
+                break;
+            }
+        }
+
+        $currentId = $id;
+        foreach ($circularRefs as $parentId) {
             if (empty($this->circularReferences[$parentId][$currentId])) {
                 $this->circularReferences[$parentId][$currentId] = $byConstructor;
             }
@@ -591,7 +568,7 @@ EOF;
                 }
             }
 
-            foreach ($this->serviceCalls as $id => [$callCount, $behavior]) {
+            foreach ($this->serviceCalls as $id => list($callCount, $behavior)) {
                 if ('service_container' !== $id && $id !== $cId
                     && ContainerInterface::IGNORE_ON_UNINITIALIZED_REFERENCE !== $behavior
                     && $this->container->has($id)
@@ -901,7 +878,7 @@ EOF;
             $targetId = (string) $this->container->getAlias($targetId);
         }
 
-        [$callCount, $behavior] = $this->serviceCalls[$targetId];
+        list($callCount, $behavior) = $this->serviceCalls[$targetId];
 
         if ($id === $targetId) {
             return $this->addInlineService($id, $definition, $definition);
@@ -957,7 +934,7 @@ EOTXT
         $code = '';
 
         if ($isSimpleInstance = $isRootInstance = null === $inlineDef) {
-            foreach ($this->serviceCalls as $targetId => [$callCount, $behavior, $byConstructor]) {
+            foreach ($this->serviceCalls as $targetId => list($callCount, $behavior, $byConstructor)) {
                 if ($byConstructor && isset($this->circularReferences[$id][$targetId]) && !$this->circularReferences[$id][$targetId]) {
                     $code .= $this->addInlineReference($id, $definition, $targetId, $forConstructor);
                 }
@@ -1027,7 +1004,7 @@ EOTXT
         }
 
         foreach ($definitions as $id => $definition) {
-            if (!([$file, $code] = $services[$id]) || null !== $file) {
+            if (!(list($file, $code) = $services[$id]) || null !== $file) {
                 continue;
             }
             if ($definition->isPublic()) {
@@ -1045,7 +1022,7 @@ EOTXT
         $definitions = $this->container->getDefinitions();
         ksort($definitions);
         foreach ($definitions as $id => $definition) {
-            if (([$file, $code] = $services[$id]) && null !== $file && ($definition->isPublic() || !$this->isTrivialInstance($definition) || isset($this->locatedIds[$id]))) {
+            if ((list($file, $code) = $services[$id]) && null !== $file && ($definition->isPublic() || !$this->isTrivialInstance($definition) || isset($this->locatedIds[$id]))) {
                 if (!$definition->isShared()) {
                     $i = strpos($code, "\n\ninclude_once ");
                     if (false !== $i && false !== $i = strpos($code, "\n\n", 2 + $i)) {
@@ -1755,7 +1732,7 @@ EOF;
                     return sprintf('new \%s($this->getService, [%s%s], [%s%s])', ServiceLocator::class, $serviceMap, $serviceMap ? "\n        " : '', $serviceTypes, $serviceTypes ? "\n        " : '');
                 }
             } finally {
-                [$this->definitionVariables, $this->referenceVariables] = $scope;
+                list($this->definitionVariables, $this->referenceVariables) = $scope;
             }
         } elseif ($value instanceof Definition) {
             if ($value->hasErrors() && $e = $value->getErrors()) {

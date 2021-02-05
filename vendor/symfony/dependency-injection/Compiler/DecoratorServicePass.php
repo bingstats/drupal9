@@ -39,9 +39,9 @@ class DecoratorServicePass implements CompilerPassInterface
         }
         $decoratingDefinitions = [];
 
-        foreach ($definitions as [$id, $definition]) {
+        foreach ($definitions as list($id, $definition)) {
             $decoratedService = $definition->getDecoratedService();
-            [$inner, $renamedId] = $decoratedService;
+            list($inner, $renamedId) = $decoratedService;
             $invalidBehavior = $decoratedService[3] ?? ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE;
 
             $definition->setDecoratedService(null);

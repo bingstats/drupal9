@@ -117,7 +117,7 @@ class XmlDumper extends Dumper
             $service->setAttribute('lazy', 'true');
         }
         if (null !== $decoratedService = $definition->getDecoratedService()) {
-            [$decorated, $renamedId, $priority] = $decoratedService;
+            list($decorated, $renamedId, $priority) = $decoratedService;
             $service->setAttribute('decorates', $decorated);
 
             $decorationOnInvalid = $decoratedService[3] ?? ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE;

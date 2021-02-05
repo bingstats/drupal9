@@ -1,0 +1,89 @@
+uuid: 7a55ffb9-9043-4f2d-b515-01695b1ab9b5
+langcode: zh-hans
+status: true
+dependencies:
+  config:
+    - field.field.node.page.body
+    - field.field.node.page.layout_builder__layout
+    - node.type.page
+  module:
+    - layout_builder
+    - layout_builder_restrictions
+    - layout_discovery
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    allow_custom: true
+    enabled: true
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          1d1df7a3-06e1-4ba4-a531-7b453605b7ee:
+            uuid: 1d1df7a3-06e1-4ba4-a531-7b453605b7ee
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:page:body'
+              formatter:
+                label: hidden
+                type: text_default
+                settings: {  }
+                third_party_settings: {  }
+            additional: {  }
+            weight: 0
+          0bd93de9-6790-4304-9478-06689c822c2a:
+            uuid: 0bd93de9-6790-4304-9478-06689c822c2a
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'extra_field_block:node:page:links'
+            additional: {  }
+            weight: 1
+        third_party_settings: {  }
+  layout_builder_restrictions:
+    allowed_block_categories: {  }
+    entity_view_mode_restriction:
+      whitelisted_blocks:
+        'Content fields': {  }
+        'Custom block types': {  }
+        Forms: {  }
+        Help: {  }
+        'Inline blocks': {  }
+        'Lists (Views)': {  }
+        Menus: {  }
+        System: {  }
+        core: {  }
+        列表（视图）: {  }
+        用户: {  }
+      blacklisted_blocks: {  }
+      allowed_layouts: {  }
+_core:
+  default_config_hash: g1S3_GLaxq4l3I9RIca5Mlz02MxI2KmOquZpHw59akM
+id: node.page.default
+targetEntityType: node
+bundle: page
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  links:
+    weight: 101
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  langcode: true
+  layout_builder__layout: true

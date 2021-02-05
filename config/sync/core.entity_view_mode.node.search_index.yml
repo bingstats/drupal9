@@ -1,0 +1,12 @@
+uuid: 6b13c66f-ac1f-46ac-b03e-9766404cfdfa
+langcode: zh-hans
+status: false
+dependencies:
+  module:
+    - node
+_core:
+  default_config_hash: fVFfJv_GzBRE-wpRHbfD5a3VjnhbEOXG6lvRd3uaccY
+id: node.search_index
+label: 'Search index'
+targetEntityType: node
+cache: true

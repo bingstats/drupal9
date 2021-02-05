@@ -1,0 +1,14 @@
+uuid: f3ce2951-43b9-4ba9-a3a6-71600d5f0986
+name: 淄博大鱼信息科技有限公司
+mail: bigfish@bingstats.com
+slogan: ''
+page:
+  403: ''
+  404: ''
+  front: /node
+admin_compact_mode: false
+weight_select_max: 100
+langcode: zh-hans
+default_langcode: en
+_core:
+  default_config_hash: yTxtFqBHnEWxQswuWvkjE8mKw2t8oKuCL1q8KnfHuGE

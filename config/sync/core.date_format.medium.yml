@@ -1,0 +1,10 @@
+uuid: eef50026-3676-45ab-8a5a-5f19b10854f8
+langcode: zh-hans
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: nzL5d024NjXIX_8TlT6uFAu973lmfkmHklJC-2i9rAE
+id: medium
+label: 'Default medium date'
+locked: false
+pattern: 'D, m/d/Y - H:i'

@@ -1,0 +1,10 @@
+uuid: 5e5a89c5-4d2f-48ea-a054-c66ce35ff971
+langcode: zh-hans
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: 7klS5IWXrwzVaPpYZFAs6wcx8U2FF1X73OfrtTsvuvE
+id: fallback
+label: 'Fallback date format'
+locked: true
+pattern: 'D, m/d/Y - H:i'

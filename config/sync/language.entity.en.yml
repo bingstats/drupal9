@@ -1,0 +1,11 @@
+uuid: fadcd0f8-47d5-4e9e-a57d-f4c6fa34d557
+langcode: zh-hans
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: lBXDpdDPXQtrfTJQhr6MjRJJEEyYSoRJ0acdvHLsWeA
+id: en
+label: English
+direction: ltr
+weight: 0
+locked: false

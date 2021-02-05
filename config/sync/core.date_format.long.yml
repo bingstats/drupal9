@@ -1,0 +1,10 @@
+uuid: d847cbb2-f0c5-40fa-8d18-d6107722fa47
+langcode: zh-hans
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: og8sWXhBuHbLMw3CoiBEZjgqSyhFBFmcbUW_wLcfNbo
+id: long
+label: 'Default long date'
+locked: false
+pattern: 'l, F j, Y - H:i'
